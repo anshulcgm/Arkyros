@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: distMat
+  m_Shader: {fileID: 4800000, guid: e9a31ce2da651354fafa8745a2787db4, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _bwBlend: 0
+    - _distEffectMaximized: 0.3
+    - _intensityEndObscureBlend: 1.5
+    - _minDistEffect: 0.2
+    m_Colors:
+    - _skyColor: {r: 0.01164085, g: 0.019383721, b: 0.024927884, a: 0}
+    - _sunColor: {r: 1, g: 0, b: 0, a: 0}
