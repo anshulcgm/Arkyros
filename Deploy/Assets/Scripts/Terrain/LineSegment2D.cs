@@ -16,7 +16,7 @@ public class LineSegment2D
         this.start = start;
         this.finish = finish;
         A = finish.y - start.y;
-        B = finish.x - start.x;
+        B = start.x - finish.x;
         C = A * start.x + B * start.y;
     }
 
@@ -46,8 +46,8 @@ public class LineSegment2D
      */
     public bool Intersects(Vector2 point)
     {
-        return Mathf.Abs(A * point.x + B * point.y - C) < Mathf.Epsilon && (Vector2.SqrMagnitude(finish - start) - 
-                                                                            Vector2.SqrMagnitude(point - start) - 
-                                                                            Vector2.SqrMagnitude(point - finish)) < Mathf.Epsilon;
+        return Mathf.Abs(A * point.x + B * point.y - C) < Mathf.Epsilon && (Vector2.Distance(finish, start) - 
+                                                                            Vector2.Distance(point, start) - 
+                                                                            Vector2.Distance(point, finish)) < Mathf.Epsilon;
     }
 }
