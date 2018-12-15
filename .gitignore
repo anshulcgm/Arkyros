@@ -41,3 +41,9 @@ Assets/StreamingAssets/crashlytics-build.properties
 !Deploy/Packages/MSTest.TestAdapter.1.2.0/build
 Assembly-CSharpTests/bin
 
+# ignoring all the .csproj's in the Deploy folder, but not in the testing folder
+# these .csproj's should autogenerate when unity is run on /Deploy or when Deploy.sln is opened in Visual Studio
+Deploy/Assembly-CSharp.csproj
+Deploy/Assembly-CSharp-Editor-firstpass.csproj
+Deploy/Assembly-CSharp-firstpass.csproj
+
