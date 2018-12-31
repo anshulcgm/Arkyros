@@ -21,7 +21,7 @@ public class Server
     ///required by the UnityHandler.Create function.
     public void Create(GameObject g, string resourcePath)
     {
-        udp.SendBroadcastOnLAN(resourcePath + "|" + g.transform.position.ToString() + "|" + g.transform.rotation.ToString()); //first the resource path given, then g's position then rotation all compiled into a string seperated by a "|", see UnityHandler.cs for more info
+        udp.SendBroadcastOnLAN("{" + "C" + "|" + resourcePath + "|" + g.transform.position.ToString() + "|" + g.transform.rotation.ToString() + "}"); //first the resource path given, then g's position then rotation all compiled into a string seperated by a "|", see UnityHandler.cs for more info
         
         
         //add the new object to the list of objects that need to be updated.
@@ -33,8 +33,8 @@ public class Server
     public void UpdateGameObjects()
     {
         //loops through each gameObject in the list of game objects to update and sends a broadcast for updating them to the clients
-        foreach (gameObject g in gameObjectsToUpdate) {
-            udp.SendBroadcastOnLAN(Array.IndexOf(gameObjectsToUpdate, g).ToString() + "|" + g.transform.position.ToString() + "|" + g.transform.rotation.ToString());
+        for (int g = 0; g < gameObjectsToUpdate.Count(); g += 1) {
+            udp.SendBroadcastOnLAN("{" + "U" + "|" + g.ToString() + "|" + gameObjectsToUpdate[g].transform.position.ToString() + "|" + gameObjectsToUpdate[g].transform.rotation.ToString() +"}");
         }
         
         
