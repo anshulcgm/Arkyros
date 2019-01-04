@@ -13,6 +13,7 @@ public class Server
     public Server()
     {
         udp = new UDP();
+        udp.StartUDP();
         players = new List<Player>();
         gameObjectsToUpdate = new List<GameObject>();
     }
