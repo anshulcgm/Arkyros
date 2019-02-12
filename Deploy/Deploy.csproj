@@ -314,6 +314,8 @@
     <Compile Include="Assets\Scripts\Enemies\Behavior\KamikazeEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Navigation\GridNode.cs" />
     <Compile Include="Assets\Scripts\Enemies\Navigation\MapCreator.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Navigation\Pathfinder.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Navigation\PathfindMaster.cs" />
     <Compile Include="Assets\Scripts\Framework\Event.cs" />
     <Compile Include="Assets\Scripts\Framework\EventSystem.cs" />
     <Compile Include="Assets\Scripts\Framework\EventSystemMono.cs" />
