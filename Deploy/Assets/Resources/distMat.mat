@@ -28,5 +28,5 @@ Material:
     - _intensityEndObscureBlend: 1.5
     - _minDistEffect: 0.2
     m_Colors:
-    - _skyColor: {r: 0.01164085, g: 0.019383721, b: 0.024927884, a: 0}
+    - _skyColor: {r: 0.25551796, g: 0.42547482, b: 0.5471698, a: 0}
     - _sunColor: {r: 1, g: 0, b: 0, a: 0}
