@@ -401,6 +401,7 @@ GameObject:
   - component: {fileID: 1726305239}
   - component: {fileID: 1726305238}
   - component: {fileID: 1726305237}
+  - component: {fileID: 1726305242}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -419,8 +420,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7552f3c4ee29564db1b6f8b302c259e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Projectile: {fileID: 1136677087986642, guid: b337fc6052ae7304f9fb38b41fec8ecf, type: 2}
-  timer: 0.5
 --- !u!65 &1726305238
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -488,3 +487,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1726305242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1726305236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbffb4626af9d9f449ecc393a04c1167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Projectile: {fileID: 1136677087986642, guid: fb4400072dbc5df4397a06bae019914a, type: 2}
+  timer: 1
