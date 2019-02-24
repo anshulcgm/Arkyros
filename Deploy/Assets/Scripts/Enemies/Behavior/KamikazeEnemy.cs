@@ -8,7 +8,7 @@ public class KamikazeEnemy : Enemy {
     private int stealthField;
     private int abilities;
 
-    public KamikazeEnemy(string name, int hp, string faction, int ms, int bDmg, int IQ, int stealthField) : base(name, hp, faction, ms, bDmg)
+    public KamikazeEnemy( float hp, int ms, GameObject referenceObject, int IQ, int stealthField) : base( hp, ms, referenceObject)
     {
         this.IQ = IQ;
         this.stealthField = stealthField;

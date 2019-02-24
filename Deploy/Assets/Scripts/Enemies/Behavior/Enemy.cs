@@ -1,91 +1,83 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 //James Joko
-public class Enemy {
+public class Enemy: IClass {
 
-    private string name; //Enemy name
-    private int hp; //could be double, base hp
-    private string faction; //Faction enemy belongs to
-    //private Weapon weapon; //Weapon currently equiped, can be null meaning no weapon
+    public static List<Enemy> enemyList = new List<Enemy>();
+
+    private EnemyType type;
+    private float hp; //could be double, base hp
     private int ms; //Movement speed
-    private int bDmg; // Base damage without a weapon
-    private Vector3 position; // Current position in the environment
+    private GameObject referenceObject;
+
+    private ObjectUpdate o;
+    public Type MonoScript
+    {
+        get
+        {
+            return typeof(EnemyMono);
+        }
+    }
 
     //Constructor enemy with no weapon
-    public Enemy(string name, int hp, string faction, int ms, int bDmg)
+    public Enemy(EnemyType type, float hp, int ms, GameObject referenceObject)
     {
-        this.name = name;
+        this.type = type;
         this.hp = hp;
-        this.faction = faction;
-        //this.weapon = null;
         this.ms = ms;
-        this.bDmg = bDmg;
+        this.referenceObject = referenceObject;
+        o = new ObjectUpdate();
     }
-
-
-    //Everything below is accessor
-    public string getName()
+    public Enemy(float hp, int ms, GameObject referenceObject)
     {
-        return name;
+        this.hp = hp;
+        this.ms = ms;
+        this.referenceObject = referenceObject;
+        o = new ObjectUpdate();
     }
 
-    public int getHp()
+    //Accessors 
+    public EnemyType getType()
+    {
+        return type;
+    }
+
+    public float getHp()
     {
         return hp;
     }
-
-    public string getFaction()
-    {
-        return faction;
-    }
-
-    //public String getWeapon()
-    //{
-    //    return weapon.toString();
-    //}
 
     public int getMS()
     {
         return ms;
     }
-
-    public int getBDmg()
-    {
-        return bDmg;
-    }
     //Everything above is accessor
 
     //HP mutator
-    public void incrementHP(int r)
+    public void changeHealth(float adjustment)
     {
-        this.hp += r;
+        //For health, have player create empty gameobject in the enemy collider when some sort of damage occurs with a tag such as "AOE"
+        //Then in the OnCollisionEnter() in this class, check if the gameObject has certain tag such as "AOE" and adjust health accordingly
+        hp += adjustment;
     }
-
-    //get damage enemy deals
-    //public int Damage()
-    //{
-    //    if (this.weapon != null)
-    //    {
-    //        return bDmg;
-    //    }
-    //    else
-    //    {
-    //        return weapon.Damage();
-    //    }
-    //}
-
-    public void move()
+    public void changePosition(Vector3 newPos)
     {
-        //Mutate position, needs to account for bounds
+        referenceObject.transform.position = newPos;
+        o.SetPosition(newPos);
+        ObjectHandler.Update(o, referenceObject);
     }
-
-    //info
-    public string toString()
+    public void changeRotation(Quaternion newRot)
     {
-        return "Enemy Name: " + this.name + "\nCurrent HP: " + this.hp + "\nFaction: " + this.faction 
-            + "\nMovement Speed: " + this.ms + "\nBase Damage: " + this.bDmg;
-
+        referenceObject.transform.rotation = newRot;
+        o.SetRotation(newRot);
+        ObjectHandler.Update(o, referenceObject);
     }
 }
-
+public enum EnemyType
+{
+    FlyingKamikaze,
+    Brawler,
+    IrradiatedEnemy
+}

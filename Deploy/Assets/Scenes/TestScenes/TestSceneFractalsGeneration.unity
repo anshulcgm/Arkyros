@@ -552,12 +552,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 931854088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97c866f5ae25773449be6655e89a82c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 148ab64790e66ab4a95b325d1d499a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyToInstanstiate: {fileID: 100006, guid: a5ad927aa04f01248b8e03306f844384, type: 3}
-  enemiesPerSpawn: 5
-  numberOfSwarms: 3
+  enemyToInstanstiate: {fileID: 1213010047605092, guid: 2ce7f43c8af10264abfeee6ecf38fad5,
+    type: 2}
 --- !u!4 &931854090
 Transform:
   m_ObjectHideFlags: 0

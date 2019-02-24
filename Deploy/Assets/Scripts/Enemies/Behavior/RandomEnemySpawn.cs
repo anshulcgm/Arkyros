@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 //Anshul Ahluwalia 
-public class RandomEnemySpawn : MonoBehaviour {
+public class RandomEnemySpawn: MonoBehaviour {
 
     private GameObject planet;
     public GameObject enemyToInstanstiate;
-    public int enemiesPerSpawn = 5;
-    public int numberOfSwarms = 3;
+    private int enemiesPerSpawn = 5;
+    private int numberOfSwarms = 3;
     private Vector3 planetCenter;
     private float planetRadius;
 
     private List<Vector3> enemyInstantiationPoints; 
-
-    [RuntimeInitializeOnLoadMethod]
-    private void Start()
+    public void Start()
     {
         planet = GameObject.FindGameObjectWithTag("planet");
         enemyInstantiationPoints = new List<Vector3>();
@@ -30,7 +28,7 @@ public class RandomEnemySpawn : MonoBehaviour {
             }
             enemyInstantiationPoints.Add(instantiationPoint);
         }
-
+        ObjectUpdate o = new ObjectUpdate();
         foreach(Vector3 point in enemyInstantiationPoints)
         {
             Quaternion randomRotation = Random.rotation;
@@ -38,8 +36,14 @@ public class RandomEnemySpawn : MonoBehaviour {
             {
                 Vector3 randomInstanPoint = Random.insideUnitSphere * 4.5f + point; //Instantiates enemies within 4.5 meter radius of original instantiation Point 
                 GameObject enemy = (GameObject)Instantiate(enemyToInstanstiate, randomInstanPoint, randomRotation);
+                Enemy e = new Enemy(EnemyType.FlyingKamikaze, 50, 10, enemy);
+                Enemy.enemyList.Add(e);
+                InstantiationRequest instanRequest = new InstantiationRequest("KamikaziBird", randomInstanPoint, randomRotation);
+                o.AddInstantiationRequest(instanRequest);
+               
             }
         }
+        ObjectHandler.Update(o, this.gameObject);
 
 
     }
