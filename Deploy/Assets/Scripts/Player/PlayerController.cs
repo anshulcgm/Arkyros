@@ -10,15 +10,16 @@ public class PlayerController : MonoBehaviour
 
     private float speed_Multiplier;
     private bool isSprinting;
-    private bool onGround;
     private Rigidbody rb;
     void Start()
     {
         speed_Multiplier = 1.0f;
-        onGround = true;
         isSprinting = false;
         rb = GetComponent<Rigidbody>();
     }
+	bool isGrounded(){
+		return rb.position.y < 1.0;
+	}
     void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
@@ -35,22 +36,20 @@ public class PlayerController : MonoBehaviour
             speed_Multiplier /= sprint_Speed;
             isSprinting = false;
         }
-        if (onGround && Input.GetKeyDown(KeyCode.Space))
+        if (isGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
-            onGround = false;
         }
-        Vector3 movement = new Vector3(moveHorizontal * getSpeed(), moveUp, moveVertical * getSpeed());
-        rb.AddForce(movement);
+		Vector3 targetDirection = new Vector3(moveHorizontal * getSpeed(), moveUp, moveVertical*getSpeed());
+		targetDirection = Camera.main.transform.TransformDirection(targetDirection);
+		targetDirection.y = 0.0f;
+        rb.AddForce(targetDirection);
     }
-    float getSpeed()
-    {
+    float getSpeed() {
         return speed * speed_Multiplier;
     }
-    void Jump()
-    {
+    void Jump() {
         rb.AddForce(new Vector3(0, jump_Force, 0), ForceMode.Impulse);
-        onGround = true;
     }
-
+  
 }
