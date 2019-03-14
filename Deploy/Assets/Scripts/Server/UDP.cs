@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-
+using UnityEngine;
 
 public class UDP
 {
@@ -62,6 +62,9 @@ public class UDP
         IPEndPoint ip = new IPEndPoint(IPAddress.Any, PORT_NUMBER);
         byte[] bytes = udp.EndReceive(ar, ref ip);
         mostRecentMessage = Encoding.ASCII.GetString(bytes);
+        string concat = mostRecentMessage + " that's the message";
+        Debug.Log(concat);
+        Debug.Log("hello");
         allMessages.Add(mostRecentMessage);
         StartListening();
     }

@@ -9,21 +9,31 @@ public class Server
     private UDP udp;
     private List<Player> players;
     private List<GameObject> gameObjectsToUpdate;
-
-    public Server()
+    public bool debug = true;
+    
+    public Server(UDP udp)
     {
-        udp = new UDP();
+        this.udp = udp;
         players = new List<Player>();
         gameObjectsToUpdate = new List<GameObject>();
+        if (debug == true)
+        {
+           // Debug.Log("SERVER: new istance was created");
+        }
     }
     
     ///@TODO this function needs to be finished. It should send a broadcast on the LAN with all the things
     ///required by the UnityHandler.Create function.
     public void Create(GameObject g, string resourcePath)
     {
-        udp.SendBroadcastOnLAN("C{" + resourcePath + "|" + g.transform.position.ToString() + "|" + g.transform.rotation.ToString() + "}"); //first the resource path given, then g's position then rotation all compiled into a string seperated by a "|", see UnityHandler.cs for more info
-        
-        
+        string send = "C{" + resourcePath + "|" + g.transform.position.ToString() + "|" + g.transform.rotation.ToString() + "}";
+        if (debug == true)
+        {
+            Debug.Log("SERVER: sent out a create statement: ");
+            Debug.Log(send);
+        }
+
+        udp.Send(send,"127.0.0.1"); //first the resource path given, then g's position then rotation all compiled into a string seperated by a "|", see UnityHandler.cs for more info
         //add the new object to the list of objects that need to be updated.
         gameObjectsToUpdate.Add(g);
     }
@@ -34,10 +44,13 @@ public class Server
     {
         //loops through each gameObject in the list of game objects to update and sends a broadcast for updating them to the clients
         for (int g = 0; g < gameObjectsToUpdate.Count(); g += 1) {
-            udp.SendBroadcastOnLAN("U{" + g.ToString() + "|" + gameObjectsToUpdate[g].transform.position.ToString() + "|" + gameObjectsToUpdate[g].transform.rotation.ToString() +"}");
+            udp.Send("U{" + g.ToString() + "|" + gameObjectsToUpdate[g].transform.position.ToString() + "|" + gameObjectsToUpdate[g].transform.rotation.ToString() +"}", "127.0.0.1");
         }
-        
-        
+        if (debug == true)
+        {
+            Debug.Log("SEVER: Updated " + gameObjectsToUpdate.Count().ToString() + " Objects");
+        }
+
     }
 
     ///@TODO this function needs to be finished. It should take all of the data recieved by players and move them accordingly.

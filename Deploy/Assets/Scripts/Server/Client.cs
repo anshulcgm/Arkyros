@@ -10,13 +10,17 @@ public class Client
     UDP udp;
     GameObject player;
     string serverIP;
+    public bool debug = true;
 
-    public Client(string serverIP, GameObject player)
+    public Client(string serverIP, GameObject player, UDP udp)
     {
-        udp = new UDP();
-        udp.StartUDP();
+        this.udp = udp;
         this.player = player;
         this.serverIP = serverIP;
+        if (debug == true)
+        {
+           // Debug.Log("CLIENT: new instance created");
+        }
     }
 
     //sends player input to the serverIP
@@ -35,17 +39,27 @@ public class Client
         string rotationStr = player.transform.rotation.ToString();
         string formattedInput = DataParserAndFormatter.GetClientInputFormatted(allKeysPressed, rotationStr);
         udp.Send(formattedInput, serverIP);
+        if (debug == true)
+        {
+           // Debug.Log("Sent player input to " + serverIP);
+        }
     }
 
     //reads in server output and does what the server says
     public void HandleServerOutput()
     {
         List<string> serverOutput = udp.ReadMessages();
+       
         //get the whole output in one string, from oldest to newest messages
         string fullOutput = "";
         foreach (string s in serverOutput)
         {
             fullOutput += s;
+        }
+
+        if (debug == true)
+        {
+            Debug.Log("CLIENT: recieved stuff from server: \n" + fullOutput);
         }
 
         //turn the string into a nice list of messages
@@ -55,6 +69,10 @@ public class Client
         foreach (Message message in messages)
         {
             UnityHandler.HandleMessage(message);
+            if (debug == true)
+            {
+              //  Debug.Log("CLIENT: Sent message to Unity Handler");
+            }
         }
     }
 }

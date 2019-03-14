@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class ObjectHandler
 {
+    public static Server server;
     /* Parameters: 
      * o: list of changes to make to the gameObject, as well as new gameObjects to instantiate and behaviors to attatch to the new gameObjects.
      * gameObject: the gameObject to change
@@ -36,7 +37,12 @@ public class ObjectHandler
                 comp.SetMainClass(c);
             }
             //instantiating the new gameobject with the behaviors added above
-            UnityEngine.Object.Instantiate(resource, i.position, i.orientation);
+            GameObject gameObj = GameObject.Instantiate(resource, i.position, i.orientation) as GameObject;
+            if(gameObj == null)
+            {
+                Debug.Log("gameObject is NULL!!!");
+            }
+            server.Create(gameObj, i.resourcePath);
         }
 
         //setting all of the values here

@@ -8,7 +8,7 @@ public class DataParserAndFormatter
     static string endKeyInput = "}}";
     static string beginOrientationInput = "[[";
     static string endOrientationInput = "]]";
-    
+
     //these are for the server outputs to the client
     static string beginServerMessageOutput = "{";
     static string endServerMessageOutput = "}";
@@ -19,7 +19,7 @@ public class DataParserAndFormatter
         //get rid of parantheses
         if (vector.StartsWith("(") && vector.EndsWith(")"))
         {
-            vector = vector.Substring(1, vector.Length - 1);
+            vector = vector.Substring(1, vector.Length - 2);
         }
 
         string[] array = vector.Split(','); //sperate with each ","
@@ -40,12 +40,11 @@ public class DataParserAndFormatter
         //identify parantheses and get rid of them
         if (quat.StartsWith("(") && quat.EndsWith(")"))
         {
-
-            quat = quat.Substring(1, quat.Length - 1);
+            quat = quat.Substring(1, quat.Length - 2);
         }
 
         string[] array = quat.Split(','); //split in every , then store in array
-        
+
         // add it all to a quat
         Quaternion result = new Quaternion(
             float.Parse(array[0]),
@@ -74,12 +73,16 @@ public class DataParserAndFormatter
     {
         List<Message> messages = new List<Message>();
 
-        int indexStart = serverOutput.IndexOf(beginServerMessageOutput);
-        int indexEnd = serverOutput.IndexOf(endServerMessageOutput);
-        while (indexEnd != -1)
+        string[] messagesStrs = serverOutput.Split('}');
+
+        foreach(string s in messagesStrs)
         {
-            string messageType = serverOutput.Substring(indexStart - 1, indexStart);
-            string messageText = serverOutput.Substring(indexStart + 1, indexEnd);
+            if(s.Length == 0)
+            {
+                continue;
+            }
+            string messageType = s.Substring(0, 1);
+            string messageText = s.Substring(1, s.Length -  1);
             Message m = null;
             if (messageType.Equals("U"))
             {
@@ -90,13 +93,6 @@ public class DataParserAndFormatter
                 m = new Message(MessageType.CREATE, messageText);
             }
             messages.Add(m);
-
-            //cut out this message that we've already analyzed
-            serverOutput = serverOutput.Substring(indexEnd + 1, serverOutput.Length);
-
-            //get the new message start and end indexes
-            indexStart = serverOutput.IndexOf(beginServerMessageOutput);
-            indexEnd = serverOutput.IndexOf(endServerMessageOutput);
         }
         return messages;
     }
