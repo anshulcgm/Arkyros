@@ -24,9 +24,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _bwBlend: 0
-    - _distEffectMaximized: 0.3
-    - _intensityEndObscureBlend: 1.5
-    - _minDistEffect: 0.2
+    - _distEffectMaximized: 0.01
+    - _intensityEndObscureBlend: 5
+    - _minDistEffect: 0
     m_Colors:
-    - _skyColor: {r: 0.01164085, g: 0.019383721, b: 0.024927884, a: 0}
-    - _sunColor: {r: 1, g: 0, b: 0, a: 0}
+    - _skyColor: {r: 0.5141517, g: 0.13051543, b: 0, a: 0}
+    - _sunColor: {r: 1, g: 0.11764706, b: 0, a: 0}
+    - _waterColor: {r: 0, g: 0.78431374, b: 0.92156863, a: 0}

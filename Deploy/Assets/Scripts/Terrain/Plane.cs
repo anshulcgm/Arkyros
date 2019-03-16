@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 //class that represents a plane in 3D space. Has useful functions for mesh making.
@@ -7,20 +8,20 @@ public class Plane
     public Vector3 normal;
     public float d;
     // x and y directions on the plane (for conversion of 3D points to 2D)
-    Vector3 xDir = Vector3.zero;
-    Vector3 yDir = Vector3.zero;
+    public Vector3 xDir = Vector3.zero;
+    public Vector3 yDir = Vector3.zero;
 
     public Plane(Vector3 normal, float d)
     {
-        this.normal = normal;
+        this.normal = normal.normalized;
         this.d = d;
         GetDirs();
     }
 
     public Plane(Vector3 normal, Vector3 point)
     {
-        this.normal = normal;
-        d = -Vector3.Dot(point, normal);
+        this.normal = normal.normalized;
+        d = Vector3.Dot(point, normal);
         GetDirs();
     }
 
@@ -29,8 +30,8 @@ public class Plane
         Vector3 v1, v2;
         v1 = f - e;
         v2 = g - f;
-        normal = Vector3.Cross(v1, v2);
-        d = -Vector3.Dot(e, normal);
+        normal = Vector3.Cross(v1, v2).normalized;
+        d = Vector3.Dot(e, normal.normalized);
         GetDirs();
     }
 
@@ -41,6 +42,8 @@ public class Plane
         Vector3 U = (point - GetArbitraryPointOnPlaneThatIsNot(point)).normalized;
         xDir = (U - Vector3.Dot(U, normal) * normal).normalized;
         yDir = Vector3.Cross(normal, xDir).normalized;
+        xDir = xDir.normalized;
+        yDir = yDir.normalized;
     }
 
     /* Returns:
@@ -96,8 +99,8 @@ public class Plane
     public Vector3 GetLineIntersect(Vector3 linePoint, Vector3 lineDirection)
     {
         Vector3 planePoint = GetArbitraryPointOnPlane();
-        float t = (Vector3.Dot(normal, planePoint) - Vector3.Dot(normal, linePoint)) / Vector3.Dot(normal, lineDirection);
-        return linePoint + lineDirection * t;
+        float t = (Vector3.Dot(normal.normalized, planePoint) - Vector3.Dot(normal.normalized, linePoint)) / Vector3.Dot(normal.normalized, lineDirection.normalized);
+        return linePoint + lineDirection.normalized * t;
     }
 
     /* Parameters:
@@ -108,7 +111,7 @@ public class Plane
      */
     public float GetDistToPlane(Vector3 point)
     {
-        return (Vector3.Dot(normal, GetArbitraryPointOnPlane()) - Vector3.Dot(normal, point)) / Vector3.Dot(normal, normal);
+        return Vector3.Dot(normal.normalized, point) - d;
     }
 
     /* Parameters:
@@ -158,11 +161,11 @@ public class Plane
      */
     public Vector2 GetMappedPoint(Vector3 unMappedPoint)
     {
-        Vector3 unMappedPointOnPlane = GetLineIntersect(unMappedPoint, normal);
+        Vector3 unMappedPointOnPlane = GetDistToPlane(unMappedPoint) * -normal + unMappedPoint;
         Vector2 posMapped = new Vector2(Vector3.Dot(unMappedPointOnPlane, xDir), Vector3.Dot(unMappedPointOnPlane, yDir));
         return posMapped;
     }
-    
+
     ///@TODO remove dependencies on this method
     public Vector3 GetParallelFrom(Vector3 v)
     {

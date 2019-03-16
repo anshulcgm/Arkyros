@@ -3,20 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EventSystemMono : MonoBehaviour, IMono {
-    private EventSystem eventSystem = new EventSystem();
+    public EventSystem EventSystem { get; set; }
+    public Camera playerCam;
+
 
     public IClass GetMainClass()
     {
-        return eventSystem;
+        return EventSystem;
     }
 
     public void SetMainClass(IClass ic)
     {
-        eventSystem = (EventSystem)ic;
+        EventSystem = (EventSystem)ic;
     }
 
+    public void Start()
+    {
+        playerCam = GameObject.FindGameObjectWithTag("playercam").GetComponent<Camera>();
+    }
+
+    int counter = 0;
     void LateUpdate()
     {
-        eventSystem.HandleEvents();
+        if(counter > 10)
+        {
+            ObjectHandler.HandleCachedObjects(playerCam);
+            counter = 0;
+        }
+        counter++;
     }
 }

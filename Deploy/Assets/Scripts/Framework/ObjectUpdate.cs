@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class ObjectUpdate
 {
@@ -72,8 +73,63 @@ public class ObjectUpdate
     }
     #endregion
 
-    ///@TODO: need to add SetMeshByFaces to make it less tedious to make meshes.
+    
     #region Mesh Setting
+
+    /// TODO: make this O(N^3) operation O(N^2)
+    public List<int[]> GetTrianglesFromConnections(List<Vector3> points, List<int[]> connections)
+    {
+        List<int[]> triangles = new List<int[]>();
+        for (int i = 0; i < connections.Count; i++)
+        {
+            for (int i1 = 0; i1 < connections.Count; i1++)
+            {
+                if(i == i1) { continue; }
+                for(int a = 0; a <= 1; a++)
+                {
+                    for (int b = 0; b <= 1; b++)
+                    {
+                        if (connections[i][a] == connections[i1][b])
+                        {
+                            int indexA = connections[i][(a + 1) % 2];
+                            int indexB = connections[i1][(b + 1) % 2];
+                            bool hasConnInDir = false;
+                            for (int h = 0; h < connections.Count; h++)
+                            {
+                                if ((connections[h][0] == indexA && connections[h][1] == indexB)||(connections[h][1] == indexA && connections[h][0] == indexB))
+                                {
+                                    hasConnInDir = true;
+                                    break;
+                                }
+                            }
+                            if(hasConnInDir)
+                            {
+                                int indexC = connections[i][a];
+                                int[] triangle = new int[] { indexA, indexB, indexC };
+                                Array.Sort(triangle);
+                                bool hasEqual = false;
+                                foreach (int[] t in triangles)
+                                {
+                                    if (triangle.SequenceEqual(t))
+                                    {
+                                        hasEqual = true;
+                                    }
+                                }
+                                if (!hasEqual)
+                                {
+                                    triangles.Add(triangle);
+                                }
+                            }                                                        
+                        }
+                    }
+                }
+            }
+        }
+        
+
+        return triangles;
+    }
+
     public void SetMeshByTriangles(List<Vector3> points, List<int[]> triangles)
     {
         meshPoints = new List<Vector3Wrapper>();
@@ -89,7 +145,7 @@ public class ObjectUpdate
             {
                 throw new Exception("Error: the number of indexes in the triangles array is not 3! Number of indexes: " + triangles[i].Length);
             }
-            triangles.Add(new int[3]);
+            this.triangles.Add(new int[3]);
             for (int i1 = 0; i1 < 3; i1++)
             {                
                 this.triangles[i][i1] = triangles[i][i1];
@@ -127,6 +183,7 @@ public class InstantiationRequest
     public Vector3 position;
     public Quaternion orientation;
     public List<IClass> behaviorsToAdd = new List<IClass>();
+    public bool isCache = false;
     public InstantiationRequest(string resourcePath, Vector3 position, Quaternion orientation, List<IClass> behaviorsToAdd)
     {
         this.resourcePath = resourcePath;
@@ -139,11 +196,12 @@ public class InstantiationRequest
         this.behaviorsToAdd.AddRange(behaviorsToAdd);
     }
 
-    public InstantiationRequest(string resourcePath, Vector3 position, Quaternion orientation)
+    public InstantiationRequest(string resourcePath, Vector3 position, Quaternion orientation, bool isCache)
     {
         this.resourcePath = resourcePath;
         this.orientation = orientation;
         this.position = position;
+        this.isCache = isCache;
     }
 }
 

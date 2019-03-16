@@ -15,6 +15,22 @@ namespace Tests
         }
 
         [TestMethod()]
+        public void IntersectsLineTest1()
+        {
+            LineSegment2D lineA = new LineSegment2D(new Vector2(0, 0), new Vector2(1, 1));
+            LineSegment2D lineB = new LineSegment2D(new Vector2(0, 0), new Vector2(0, 1));
+            Assert.IsTrue(lineA.Intersects(lineB));
+        }
+
+        [TestMethod()]
+        public void IntersectsLineTest2()
+        {
+            LineSegment2D lineA = new LineSegment2D(new Vector2(0, 0), new Vector2(1, 1));
+            LineSegment2D lineB = new LineSegment2D(new Vector2(1, 0), new Vector2(0, 1));
+            Assert.IsTrue(lineA.Intersects(lineB));
+        }
+
+        [TestMethod()]
         public void IntersectsPointTest()
         {
             LineSegment2D lineA = new LineSegment2D(new Vector2(0, 0), new Vector2(1, 1));

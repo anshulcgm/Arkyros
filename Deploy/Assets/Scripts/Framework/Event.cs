@@ -13,7 +13,7 @@ public interface IUnityEvent
 public interface IRadiusEvent : IUnityEvent
 {
     float Radius { get; }
-    Vector3 Position { get; }
+    Transform Position { get; }
 }
 
 public interface ILineOfSightEvent : IUnityEvent
