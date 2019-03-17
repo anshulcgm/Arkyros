@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
-    public float sprint_Speed;
-    public float jump_Force;
+    //public float sprint_Speed = 5;
+    public float jump_Force = 10;
 
-    private float speed_Multiplier;
+    private float speed_Multiplier = 1;
     private bool isSprinting;
     private Rigidbody rb;
     void Start()
@@ -22,26 +22,43 @@ public class PlayerController : MonoBehaviour
 	}
     void FixedUpdate()
     {
+        
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         float moveUp = 0.0f;
-
-        if (Input.GetKeyDown(KeyCode.W) && !isSprinting)
+        /*
+        if (Input.GetKeyDown(KeyCode.Q) && !isSprinting)
         {
             speed_Multiplier *= sprint_Speed;
             isSprinting = true;
         }
-        if (Input.GetKeyDown(KeyCode.W) && isSprinting)
+        if (Input.GetKeyDown(KeyCode.Q) && isSprinting)
         {
             speed_Multiplier /= sprint_Speed;
             isSprinting = false;
         }
+        */
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (!isSprinting)
+            {
+                speed_Multiplier = 2; //sprint speed
+                isSprinting = true;
+            }
+            else if (isSprinting)
+            {
+                speed_Multiplier = 1;
+                isSprinting = false;
+            }
+        }
+
         if (isGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
 		Vector3 targetDirection = new Vector3(moveHorizontal * getSpeed(), moveUp, moveVertical*getSpeed());
-		targetDirection = Camera.main.transform.TransformDirection(targetDirection);
+		targetDirection = Camera.current.transform.TransformDirection(targetDirection);
 		targetDirection.y = 0.0f;
         rb.AddForce(targetDirection);
     }
