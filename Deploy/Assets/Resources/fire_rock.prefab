@@ -101,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1767841174430248}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23308.736, y: 24313.836, z: 1.0145419}
+  m_LocalPosition: {x: 83.74144, y: 282.14825, z: 339.94464}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4151721863476678}
@@ -150,7 +150,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 75cf4dd67617b6943994b8fbd198c40b, type: 2}
+  - {fileID: 2100000, guid: 441053c9eb9d11542a3c13646ef78ef1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -220,8 +220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23aa17b853ca749239d42b9c97352de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oscilateLow: {r: 0.19607843, g: 0, b: 0, a: 0}
-  oscilateHigh: {r: 1, g: 0.11764706, b: 0.078431375, a: 0}
+  oscilateLow: {r: 0.3490566, g: 0.19495183, b: 0, a: 0}
+  oscilateHigh: {r: 1, g: 0.19158973, b: 0.15566039, a: 0}
 --- !u!198 &198587533958547870
 ParticleSystem:
   m_ObjectHideFlags: 1

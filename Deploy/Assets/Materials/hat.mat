@@ -90,6 +90,6 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.735849, g: 0.4126526, b: 0, a: 0}
-    - _Emission: {r: 1, g: 0.012983031, b: 0.00699541, a: 1}
+    - _Emission: {r: 1, g: 0.03071345, b: 0.02121901, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _WireframeColor: {r: 0.7372549, g: 0.41176474, b: 0, a: 1}
