@@ -52,6 +52,12 @@ public class Server
         }
 
     }
+    //the destroy function
+    public void Destroy(GameObject g)
+    {
+        int gindex = gameObjectsToUpdate.IndexOf(g);
+        gameObjectsToUpdate[gindex] = null; //sets the gameobject to null, then the client handles the destruction
+    }
 
     ///@TODO this function needs to be finished. It should take all of the data recieved by players and move them accordingly.
     public void HandlePlayerInputs()

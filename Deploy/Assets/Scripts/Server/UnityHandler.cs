@@ -51,6 +51,11 @@ public static class UnityHandler
 
         //get the object to update
         GameObject Object = gameObjects[int.Parse(data[index])];
+        //destroy if null
+        if (Object == null)
+        {
+            UnityEngine.Object.Destroy(Object);
+        }
 
         Object.transform.position = DataParserAndFormatter.StringToVector3(data[index + 1]); //parse and update position
         Object.transform.rotation = DataParserAndFormatter.StringToQuaternion(data[index + 2]); //parse and update rotation

@@ -20,9 +20,9 @@ public class TestingClientAndServer : MonoBehaviour {
             o.AddInstantiationRequest(new InstantiationRequest("cube", Vector3.zero, Quaternion.identity));
         ObjectHandler.Update(o, gameObject);
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         server.UpdateGameObjects();
         client.HandleServerOutput();
 	}
