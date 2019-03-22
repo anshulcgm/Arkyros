@@ -23,8 +23,7 @@ GameObject:
   - component: {fileID: 23218016808401322}
   - component: {fileID: 135323275989695704}
   - component: {fileID: 54681250688300688}
-  - component: {fileID: 114237954312984170}
-  - component: {fileID: 114271096711012062}
+  - component: {fileID: 114870935856368820}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -40,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1136677087986642}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -102,7 +101,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114237954312984170
+--- !u!114 &114870935856368820
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,23 +109,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1136677087986642}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b7d23da1cd1f1a4eacf4fddc90feb5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 899dd967bab4b344a897c811b7e79781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  speed: 10
---- !u!114 &114271096711012062
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1136677087986642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c981b46dc8ff5b438ef5a47f715e312, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
 --- !u!135 &135323275989695704
 SphereCollider:
   m_ObjectHideFlags: 1
