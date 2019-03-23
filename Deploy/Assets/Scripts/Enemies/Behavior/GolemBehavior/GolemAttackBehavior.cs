@@ -12,11 +12,8 @@ public class GolemAttackBehavior : MonoBehaviour {
     public float chargeSpeed;
     public float groundPoundRadius;
 
-    public float projectileSpeed;
-    public float projectileReloadTime;
-    private float projectilesPerBatch;
+  
 
-    private float initialReloadTime;
 
     private Rigidbody rb;
 
@@ -32,9 +29,8 @@ public class GolemAttackBehavior : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player");
         anim = transform.GetChild(0).GetComponent<Animator>();
-        projectilesPerBatch = 10f;
+     
         //projectileReloadTime = (2.49600f - 0.7072f)/(0.5f * projectilesPerBatch); //Reload time at which it makes sense to shoot based on the animation
-        initialReloadTime = projectileReloadTime;
         
         //transform.LookAt(player.transform);
 
@@ -98,10 +94,6 @@ public class GolemAttackBehavior : MonoBehaviour {
     public void setShootTrigger()
     {
         anim.SetTrigger("Shoot");
-        //Debug.Log("ShootTrigger set");
-        projectileReloadTime -= Time.deltaTime;
-        //Debug.Log("Projectile reload time is " + projectileReloadTime);
-        Debug.Log("Shooting Projectile");
     }
 
     private void OnCollisionEnter(Collision collision)
