@@ -49,7 +49,7 @@ public class RandomEnemySpawn: MonoBehaviour {
                 GameObject enemy = (GameObject)Instantiate(enemyToInstanstiate, randomInstanPoint, Quaternion.identity);
                 Enemy e = new Enemy(EnemyType.FlyingKamikaze, 50, 10, enemy);
                 Enemy.enemyList.Add(e);
-                InstantiationRequest instanRequest = new InstantiationRequest("KamikaziBird", randomInstanPoint, Quaternion.identity);
+                InstantiationRequest instanRequest = new InstantiationRequest("KamikaziBird", randomInstanPoint, Quaternion.identity, false);
                 o.AddInstantiationRequest(instanRequest);
 
             }
