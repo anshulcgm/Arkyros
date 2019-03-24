@@ -333,10 +333,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ProjectReference Include="Deploy.csproj">
       <Project>{B68C6660-7083-D5BB-7E8A-538E559014FC}</Project>
       <Name>Deploy</Name>
     </ProjectReference>
+=======
+>>>>>>> 3f022ea857630afe8659ec7f74338e666470b27f
     <ProjectReference Include="Deploy.Plugins.csproj">
       <Project>{B6E24E99-22A8-52D9-46B4-EFE05C2382B9}</Project>
       <Name>Deploy.Plugins</Name>
@@ -345,6 +348,13 @@
       <Project>{B68C6660-7083-D5BB-7E8A-538E559014FC}</Project>
       <Name>Deploy</Name>
     </ProjectReference>
+<<<<<<< HEAD
+=======
+    <ProjectReference Include="Deploy.csproj">
+      <Project>{B68C6660-7083-D5BB-7E8A-538E559014FC}</Project>
+      <Name>Deploy</Name>
+    </ProjectReference>
+>>>>>>> 3f022ea857630afe8659ec7f74338e666470b27f
     <ProjectReference Include="Deploy.Editor.Plugins.csproj">
       <Project>{A5369D7E-0C1B-759A-EEC5-AF202CA219B4}</Project>
       <Name>Deploy.Editor.Plugins</Name>
