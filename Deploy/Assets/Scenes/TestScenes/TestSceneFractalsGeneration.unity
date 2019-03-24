@@ -275,6 +275,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   depthShaderMat: {fileID: 2100000, guid: 51b35b46b8304a64bbdd2ad273a3fb15, type: 2}
   thresholdAtmosphereColorChangeToUpdate: 0
+--- !u!1 &723688942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 723688944}
+  - component: {fileID: 723688943}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &723688943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 723688942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a47c8ea7cda6f44caaf50d522d51665, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flyingKamikaze: {fileID: 1002896406898434, guid: eeafa16c9ad9c914e9896ec138cae6ca,
+    type: 2}
+  golem: {fileID: 1522681304276564, guid: 08dafb2b026d6844db007d38253f1a7e, type: 2}
+  testPlayer: {fileID: 1026736975}
+  testObject: {fileID: 1374880475713264, guid: c2d858e959c863644bd7944c7b8057f4, type: 2}
+  kamikazePerSpawn: 5
+  kamikazeSwarms: 1
+  golemPerSpawn: 1
+  golemSwarms: 1
+--- !u!4 &723688944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 723688942}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &908601210
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +336,7 @@ GameObject:
   - component: {fileID: 908601216}
   - component: {fileID: 908601213}
   - component: {fileID: 908601212}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Planet
   m_TagString: planet
   m_Icon: {fileID: 0}
@@ -388,7 +437,7 @@ GameObject:
   - component: {fileID: 1026736979}
   m_Layer: 0
   m_Name: Controller
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -595,7 +644,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1113884885}
   - component: {fileID: 1113884884}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Directional light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -882,7 +931,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1989158405}
   - component: {fileID: 1989158404}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: sunCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -932,7 +981,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2103971024}
   - component: {fileID: 2103971025}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Directional light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

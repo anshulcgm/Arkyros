@@ -53,10 +53,10 @@ public class GolemAttackBehavior : MonoBehaviour {
         {
             groundPound();
         }
-        else if (playerDist > groundPoundRange && playerDist < chargeRange)
-        {
-            charge();
-        }
+        //else if (playerDist > groundPoundRange && playerDist < chargeRange)
+        //{
+        //    //charge();
+        //}
         else if (playerDist > chargeRange && playerDist < shootRange)
         {
             setShootTrigger();

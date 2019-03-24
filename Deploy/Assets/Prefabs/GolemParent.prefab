@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 114750740368673868}
   - component: {fileID: 114369388953672176}
   - component: {fileID: 54295875629863764}
+  - component: {fileID: 135516192973308034}
   m_Layer: 0
   m_Name: GolemParent
   m_TagString: Enemy
@@ -318,7 +319,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1522681304276564}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19, y: 1562, z: 316}
+  m_LocalPosition: {x: -19, y: 6163, z: 316}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4860631050437038}
@@ -415,7 +416,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1361486965600354}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -424,7 +425,7 @@ Transform:
   - {fileID: 4727884857100234}
   m_Father: {fileID: 4567808929262780}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4904539176266044
 Transform:
   m_ObjectHideFlags: 1
@@ -540,8 +541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95648350da48a68429da10cb3a94699d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
-  player: {fileID: 0}
+  speed: 8
+  gravity: -10
 --- !u!114 &114581569393579014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -553,7 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05abcc94cd5bcd24d920a9127cfceaf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 1136677087986642, guid: 6a64b5fa871c77d49bc0c6afc739ea94, type: 2}
+  projectile: {fileID: 0}
   leftArmTip: {fileID: 1746733756491788}
   rightArmTip: {fileID: 1038331988832478}
   projSpeed: 300
@@ -574,9 +575,19 @@ MonoBehaviour:
   noActionRange: 0
   chargeSpeed: 200
   groundPoundRadius: 30
-  projectileSpeed: 500
-  projectileReloadTime: 0.833
-  projectile: {fileID: 1136677087986642, guid: 6a64b5fa871c77d49bc0c6afc739ea94, type: 2}
+  projectile: {fileID: 1136677087986642, guid: c67b7c392d411eb40923d187d89cacaa, type: 2}
+--- !u!135 &135516192973308034
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1522681304276564}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.3986943
+  m_Center: {x: -0.037186053, y: 0.44766846, z: -0.06816063}
 --- !u!137 &137329707976926556
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
