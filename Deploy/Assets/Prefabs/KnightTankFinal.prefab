@@ -408,12 +408,12 @@ GameObject:
   - component: {fileID: 453410390}
   - component: {fileID: 453410388}
   - component: {fileID: 453410389}
-  - component: {fileID: 453410386}
-  - component: {fileID: 453410387}
   - component: {fileID: 127882516006223827}
+  - component: {fileID: 5069760282892579741}
+  - component: {fileID: 302189376227944463}
   m_Layer: 0
   m_Name: KnightTankFinal
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -491,35 +491,6 @@ CapsuleCollider:
   m_Height: 19.76355
   m_Direction: 1
   m_Center: {x: 0.1161499, y: 9.913757, z: 0}
---- !u!114 &453410386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453410384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 003261ce75191e248b4af2aebe281fb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseSensitivityX: 1
-  mouseSensitivityY: 1
-  walkSpeed: 600
-  jumpForce: 220
-  finalSpeed: 0
---- !u!114 &453410387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453410384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9566ebb211c4ed1439ea9eb1189d2b32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &127882516006223827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,8 +504,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 100
-  damageDealt: {fileID: 8729664307952694584, guid: 638e869d72f35d54d821f03788f92ab5,
-    type: 3}
+  speed: 0
+  cooldown: 0
+--- !u!114 &5069760282892579741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453410384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bb23c534a3054647b92562bb37750fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &302189376227944463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453410384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92420125d43c90641a6449f3eeddc8ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivityX: 1
+  mouseSensitivityY: 1
+  walkSpeed: 6
+  jumpForce: 220
 --- !u!1 &456457502
 GameObject:
   m_ObjectHideFlags: 0
@@ -1610,7 +1609,7 @@ GameObject:
   - component: {fileID: 1240378056}
   - component: {fileID: 1240378055}
   - component: {fileID: 1240378054}
-  - component: {fileID: 1240378053}
+  - component: {fileID: 7345419974767887732}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1625,7 +1624,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240378052}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.000000059604645, y: -0.0000000079025355, z: 0.00000007639117,
+    w: 1}
   m_LocalPosition: {x: 0, y: 16, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1682,19 +1682,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240378052}
   m_Enabled: 1
---- !u!114 &1240378053
+--- !u!114 &7345419974767887732
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240378052}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 006bf247f5e136749a0b89848e7fbcff, type: 3}
+  m_Script: {fileID: 11500000, guid: d07703b1221e118418465b3968714b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 453410384}
   speedH: 4
   speedV: 4
 --- !u!1 &1344077194

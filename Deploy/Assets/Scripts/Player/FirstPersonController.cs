@@ -11,7 +11,7 @@ public class FirstPersonController : MonoBehaviour
     public float mouseSensitivityY = 1;
     public float walkSpeed = 6;
     public float jumpForce = 220;
-    public float finalSpeed;
+    private float finalSpeed;
     //public LayerMask groundedMask;
 
 
@@ -73,10 +73,19 @@ public class FirstPersonController : MonoBehaviour
                 if (isSprinting)
                 {
                     anim.SetTrigger("RunForward");
+                    speed_Multiplier = 2; //sprint speed
+                    Camera.main.transform.localPosition = new Vector3(0f, 16f, 8f);
                 }
-                else anim.SetTrigger("WalkForward");
+                else
+                {
+                    anim.SetTrigger("WalkForward");
+                    Camera.main.transform.localPosition = new Vector3(0f, 16f, 3.1f);
+                }
             }
-            else anim.SetTrigger("WalkBackwards");
+            else
+            {
+                anim.SetTrigger("WalkBackwards");
+            }
         }
         moveAmount = Vector3.SmoothDamp(moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
 
@@ -129,25 +138,25 @@ public class FirstPersonController : MonoBehaviour
         }
 
         //Sprint
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.CapsLock))
         {
             if (!isSprinting)
             {
-                speed_Multiplier = 2; //sprint speed
                 isSprinting = true;
             }
             else if (isSprinting)
             {
                 speed_Multiplier = 1;
+                
                 isSprinting = false;
             }
         }
 
         // Grounded check
         Ray ray = new Ray(transform.position + transform.up, -transform.up);
-        RaycastHit rayHit;
+        //RaycastHit rayHit;
 
-        if (Physics.Raycast(ray, out rayHit, 1 + .1f)) //1 is placeholder for model height
+        if (Physics.Raycast(ray, 2f)) //1 is placeholder for model height
         {
             grounded = true;
         }

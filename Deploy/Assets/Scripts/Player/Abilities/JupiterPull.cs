@@ -16,7 +16,7 @@ public class JupiterPull : MonoBehaviour
     private Animator anim;
 
     DateTime start;
-    public GameObject damageDealt;
+    //public GameObject damageDealt;
 
     // Start is called before the first frame update
     void Start()
