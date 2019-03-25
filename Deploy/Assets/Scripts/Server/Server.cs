@@ -56,7 +56,8 @@ public class Server
     public void Destroy(GameObject g)
     {
         int gindex = gameObjectsToUpdate.IndexOf(g);
-        gameObjectsToUpdate[gindex] = null; //sets the gameobject to null, then the client handles the destruction
+        gameObjectsToUpdate[gindex] = null; //sets the gameobject to null
+        udp.Send("D{" + gindex.ToString() + "}", "127.0.0.1"); //send the indexes to the clients
     }
 
     ///@TODO this function needs to be finished. It should take all of the data recieved by players and move them accordingly.
