@@ -12,4 +12,4 @@ public class Message
 }
 
 //enum for holding the types of messages
-public enum MessageType { UPDATE, CREATE };
+public enum MessageType { UPDATE, CREATE, DESTROY};
