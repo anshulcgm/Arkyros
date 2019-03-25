@@ -35,6 +35,10 @@ public static class UnityHandler
                 Debug.Log("UNITY HANDLER: Recieved Message of type Create");
             }
         }
+        else if (m.messageType == MessageType.DESTROY)
+        {
+            Destroy(m.messageText);
+        }
         
     }
 
@@ -51,17 +55,15 @@ public static class UnityHandler
 
         //get the object to update
         GameObject Object = gameObjects[int.Parse(data[index])];
-        //destroy if null
-        if (Object == null)
+        //ignore if null
+        if (Object != null)
         {
-            UnityEngine.Object.Destroy(Object);
-        }
-
         Object.transform.position = DataParserAndFormatter.StringToVector3(data[index + 1]); //parse and update position
         Object.transform.rotation = DataParserAndFormatter.StringToQuaternion(data[index + 2]); //parse and update rotation
         if (debug == true)
         {
             Debug.Log("UNITY HANDLER: Updated Object of name: " + Object.name.ToString() + "to position "+ data[index+1] + " and rotation " + data[index+2]);
+        }
         }
     }
 
@@ -85,5 +87,14 @@ public static class UnityHandler
         {
             Debug.Log("UNITY HANDLER: Created Object with resource path " + data[index] + "to position " + data[index+1] + " and rotation " + data[index+2]);
         }
+    }
+    
+    private static void Destroy(string message)
+    {
+        string data = message.Substring(1, message.Length - 2);
+        int index = Convert.ToInt32(data);
+        UnityEngine.Object.Destroy(gameObjects[index]); //destroy the object then set it to a null
+        gameObjects[index] = null;      
+    
     }
 }
