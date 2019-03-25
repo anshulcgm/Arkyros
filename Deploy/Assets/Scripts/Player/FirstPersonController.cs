@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 [RequireComponent(typeof(GravityBody))]
 public class FirstPersonController : MonoBehaviour
 {
@@ -12,7 +12,10 @@ public class FirstPersonController : MonoBehaviour
     public float walkSpeed = 6;
     public float jumpForce = 220;
     private float finalSpeed;
+
+    //public bool enemyInRange = false;
     //public LayerMask groundedMask;
+
 
 
     private float speed_Multiplier = 1;
@@ -24,6 +27,7 @@ public class FirstPersonController : MonoBehaviour
     DateTime attackStart;
 
     // System vars
+
     bool grounded;
     Vector3 moveAmount;
     Vector3 smoothMoveVelocity;
@@ -31,14 +35,22 @@ public class FirstPersonController : MonoBehaviour
     Transform cameraTransform;
     Rigidbody rigidbody;
 
+    cameraSoundManager sound;
+    legSound movementSound;
+    hammerSound attackSound;
+
 
     void Awake()
     {
+        //enemies = GameObject.FindGameObjectsWithTag("enemy");
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         cameraTransform = Camera.main.transform;
         rigidbody = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        sound = Camera.main.GetComponent<cameraSoundManager>();
+        movementSound = GameObject.Find("L_Foot_IK").GetComponent<legSound>();
+        attackSound = GameObject.Find("Hammer_Head").GetComponent<hammerSound>();
     }
 
     void Update()
@@ -72,12 +84,16 @@ public class FirstPersonController : MonoBehaviour
             {
                 if (isSprinting)
                 {
+                    movementSound.isWalking = false;
+                    movementSound.isSprinting = true;
                     anim.SetTrigger("RunForward");
                     speed_Multiplier = 2; //sprint speed
                     Camera.main.transform.localPosition = new Vector3(0f, 16f, 8f);
                 }
                 else
                 {
+                    movementSound.isWalking = true;
+                    movementSound.isSprinting = false;
                     anim.SetTrigger("WalkForward");
                     Camera.main.transform.localPosition = new Vector3(0f, 16f, 3.1f);
                 }
@@ -86,6 +102,11 @@ public class FirstPersonController : MonoBehaviour
             {
                 anim.SetTrigger("WalkBackwards");
             }
+        }
+        else
+        {
+            movementSound.isWalking = false;
+            movementSound.isSprinting = false;
         }
         moveAmount = Vector3.SmoothDamp(moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
 
@@ -101,6 +122,7 @@ public class FirstPersonController : MonoBehaviour
 
         if ((DateTime.Now - attackStart).TotalSeconds < 1)
         {
+            attackSound.isSwinging = true;
             Collider[] hits = Physics.OverlapSphere(transform.position + transform.forward * 20, 50);
             Debug.Log("REEEEEEEEE");
             foreach (Collider hit in hits)
@@ -115,6 +137,10 @@ public class FirstPersonController : MonoBehaviour
                     //Instantiate(damageDealt, hit.gameObject.transform.position, Quaternion.identity);
                 }
             }  
+        }
+        else
+        {
+            attackSound.isSwinging = false;
         }
 
         if (attackDelay > 0)
@@ -133,8 +159,12 @@ public class FirstPersonController : MonoBehaviour
                 //rigidbody.velocity = (transform.up * jumpForce);
                 anim.SetTrigger("Jump");
                 rigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-
+                sound.isJumping = true;
             }
+        }
+        else
+        {
+            sound.isJumping = false;
         }
 
         //Sprint

@@ -11,7 +11,7 @@ public class JupiterPull : MonoBehaviour
     public float speed;
     public float cooldown;
 
-
+    private GameObject camera;
 
     private Animator anim;
 
@@ -22,6 +22,7 @@ public class JupiterPull : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        camera = GameObject.FindGameObjectWithTag("MainCamera");
         
     }
 
@@ -50,6 +51,7 @@ public class JupiterPull : MonoBehaviour
         {
             Collider[] hits = Physics.OverlapSphere(transform.position, radius);
             Debug.Log("Gottem");
+            camera.GetComponent<cameraSoundManager>().jupiterPullCast = true;
             foreach (Collider hit in hits)
             {
                 // Detects if the object is an "enemy" and if so destroys it
@@ -62,6 +64,10 @@ public class JupiterPull : MonoBehaviour
                     //Instantiate(damageDealt, hit.gameObject.transform.position, Quaternion.identity);
                 }
             }
+        }
+        else
+        {
+            camera.GetComponent<cameraSoundManager>().jupiterPullCast = false;
         }
 
         if(cooldown > 0)

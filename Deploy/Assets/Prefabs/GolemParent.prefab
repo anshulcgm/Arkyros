@@ -288,7 +288,7 @@ MonoBehaviour:
   projectile: {fileID: 1136677087986642, guid: c67b7c392d411eb40923d187d89cacaa, type: 3}
   leftArmTip: {fileID: 1746733756491788}
   rightArmTip: {fileID: 1038331988832478}
-  projSpeed: 300
+  projSpeed: 20
 --- !u!1 &1365621429045608
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,12 +460,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78d6ffeea23bff4ab6c8171dac5f3ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundPoundRange: 200
-  chargeRange: 500
-  shootRange: 1000
+  groundPoundRange: 10
+  chargeRange: 40
+  shootRange: 100
   noActionRange: 0
-  chargeSpeed: 200
-  groundPoundRadius: 30
+  chargeSpeed: 80
+  groundPoundRadius: 5
   projectile: {fileID: 1136677087986642, guid: c67b7c392d411eb40923d187d89cacaa, type: 3}
 --- !u!114 &114369388953672176
 MonoBehaviour:
@@ -479,8 +479,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95648350da48a68429da10cb3a94699d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  gravity: -20
+  speed: 15
+  gravity: -10
 --- !u!54 &54295875629863764
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -504,12 +504,12 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522681304276564}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 52baaeb214519f347a35cf0edfd262ff, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.3986943
-  m_Center: {x: -0.037186053, y: 0.44766846, z: -0.06816063}
+  m_Radius: 6.9344273
+  m_Center: {x: 0.13583946, y: 3.867137, z: -0.068160534}
 --- !u!1 &1555681830148934
 GameObject:
   m_ObjectHideFlags: 0
