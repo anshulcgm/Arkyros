@@ -92,6 +92,10 @@ public class DataParserAndFormatter
             {
                 m = new Message(MessageType.CREATE, messageText);
             }
+            else if (messageType.Equals("D"))
+            {
+                m = new Message(MessageType.DESTROY, messageText);
+            }
             messages.Add(m);
         }
         return messages;
