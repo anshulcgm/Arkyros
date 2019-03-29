@@ -19,7 +19,7 @@ public static class UnityHandler
     public static void HandleMessage(Message m)
     {
            
-        if (m.messageType == MessageType.UPDATE)
+        if (m.messageType == ServerMessageType.UPDATE)
         {
             Update(m.messageText); //call update function
             if (debug == true)
@@ -27,7 +27,7 @@ public static class UnityHandler
                 Debug.Log("UNITY HANDLER: Recieved Message of type Update");
             }
         }
-        else if (m.messageType == MessageType.CREATE)
+        else if (m.messageType == ServerMessageType.CREATE)
         {
             Create(m.messageText); //call create function
             if (debug == true)
@@ -35,7 +35,7 @@ public static class UnityHandler
                 Debug.Log("UNITY HANDLER: Recieved Message of type Create");
             }
         }
-        else if (m.messageType == MessageType.DESTROY)
+        else if (m.messageType == ServerMessageType.DESTROY)
         {
             Destroy(m.messageText);
         }
@@ -91,8 +91,8 @@ public static class UnityHandler
     
     private static void Destroy(string message)
     {
-        string data = message.Substring(1, message.Length - 2);
-        int index = Convert.ToInt32(data);
+        string data = message.Substring(1, message.Length - 1);
+        int index = int.Parse(data);
         UnityEngine.Object.Destroy(gameObjects[index]); //destroy the object then set it to a null
         gameObjects[index] = null;      
     

@@ -2,9 +2,9 @@
 //class for holding messages
 public class Message
 {
-    public MessageType messageType;
+    public ServerMessageType messageType;
     public string messageText;
-    public Message(MessageType messageType, string messageText)
+    public Message(ServerMessageType messageType, string messageText)
     {
         this.messageType = messageType;
         this.messageText = messageText;
@@ -12,4 +12,4 @@ public class Message
 }
 
 //enum for holding the types of messages
-public enum MessageType { UPDATE, CREATE, DESTROY};
+public enum ServerMessageType { UPDATE, CREATE, DESTROY};

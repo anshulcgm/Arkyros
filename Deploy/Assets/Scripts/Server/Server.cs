@@ -44,6 +44,7 @@ public class Server
     {
         //loops through each gameObject in the list of game objects to update and sends a broadcast for updating them to the clients
         for (int g = 0; g < gameObjectsToUpdate.Count(); g += 1) {
+            if(gameObjectsToUpdate[g] == null) { continue; }
             udp.Send("U{" + g.ToString() + "|" + gameObjectsToUpdate[g].transform.position.ToString() + "|" + gameObjectsToUpdate[g].transform.rotation.ToString() +"}", "127.0.0.1");
         }
         if (debug == true)
