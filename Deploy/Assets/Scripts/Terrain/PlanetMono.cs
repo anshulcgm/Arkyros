@@ -6,20 +6,17 @@ using UnityEngine;
 
 public class PlanetMono : MonoBehaviour, IMono
 {
-    private Planet planet = new Planet(0, 1, 1.1f, 0.1f, 0.3f, 24, 25);
-    Map m;
-    
+    private Planet planet;    
 
-
-    public void Start()
+    public void Create(int seed)
     {
+        System.Random r = new System.Random(seed);
+        planet = new Planet(r, 1, 1.1f, 0.1f, 0.3f, 24, 25);
         //make the planet
         ObjectUpdate meshUpdate = planet.GeneratePlanet();
         ObjectHandler.Update(meshUpdate, gameObject);
 
-
-        System.Random r = new System.Random(1);
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < r.Next(5, 20); i++)
         {
             List<Vector3> points = new List<Vector3>();
             List<int[]> cons = new List<int[]>();
