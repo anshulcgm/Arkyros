@@ -6,6 +6,7 @@ TagManager:
   tags:
   - planet
   - moon
+  - playercam
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - planet
   - moon
   - sun
-  - 
+  - ocean
   - 
   - 
   - 

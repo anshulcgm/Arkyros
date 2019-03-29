@@ -86,11 +86,15 @@ public class DataParserAndFormatter
             Message m = null;
             if (messageType.Equals("U"))
             {
-                m = new Message(MessageType.UPDATE, messageText);
+                m = new Message(ServerMessageType.UPDATE, messageText);
             }
             else if (messageType.Equals("C"))
             {
-                m = new Message(MessageType.CREATE, messageText);
+                m = new Message(ServerMessageType.CREATE, messageText);
+            }
+            else if (messageType.Equals("D"))
+            {
+                m = new Message(ServerMessageType.DESTROY, messageText);
             }
             messages.Add(m);
         }

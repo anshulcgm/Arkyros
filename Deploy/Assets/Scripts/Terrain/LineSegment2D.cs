@@ -44,10 +44,11 @@ public class LineSegment2D
      * Returns:
      * whether this line segment passes through the point
      */
+     
     public bool Intersects(Vector2 point)
     {
-        return Mathf.Abs(A * point.x + B * point.y - C) < Mathf.Epsilon && (Vector2.Distance(finish, start) - 
-                                                                            Vector2.Distance(point, start) - 
-                                                                            Vector2.Distance(point, finish)) < Mathf.Epsilon;
+        return Mathf.Abs(A * point.x + B * point.y - C) < Mathf.Epsilon && Mathf.Abs(Vector2.Distance(finish, start) - 
+                                                                                     Vector2.Distance(point, start) - 
+                                                                                     Vector2.Distance(point, finish)) < Mathf.Epsilon;
     }
 }

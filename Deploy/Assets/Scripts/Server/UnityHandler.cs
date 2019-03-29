@@ -19,7 +19,7 @@ public static class UnityHandler
     public static void HandleMessage(Message m)
     {
            
-        if (m.messageType == MessageType.UPDATE)
+        if (m.messageType == ServerMessageType.UPDATE)
         {
             Update(m.messageText); //call update function
             if (debug == true)
@@ -27,13 +27,17 @@ public static class UnityHandler
                 Debug.Log("UNITY HANDLER: Recieved Message of type Update");
             }
         }
-        else if (m.messageType == MessageType.CREATE)
+        else if (m.messageType == ServerMessageType.CREATE)
         {
             Create(m.messageText); //call create function
             if (debug == true)
             {
                 Debug.Log("UNITY HANDLER: Recieved Message of type Create");
             }
+        }
+        else if (m.messageType == ServerMessageType.DESTROY)
+        {
+            Destroy(m.messageText);
         }
         
     }
@@ -51,12 +55,15 @@ public static class UnityHandler
 
         //get the object to update
         GameObject Object = gameObjects[int.Parse(data[index])];
-
+        //ignore if null
+        if (Object != null)
+        {
         Object.transform.position = DataParserAndFormatter.StringToVector3(data[index + 1]); //parse and update position
         Object.transform.rotation = DataParserAndFormatter.StringToQuaternion(data[index + 2]); //parse and update rotation
         if (debug == true)
         {
             Debug.Log("UNITY HANDLER: Updated Object of name: " + Object.name.ToString() + "to position "+ data[index+1] + " and rotation " + data[index+2]);
+        }
         }
     }
 
@@ -80,5 +87,14 @@ public static class UnityHandler
         {
             Debug.Log("UNITY HANDLER: Created Object with resource path " + data[index] + "to position " + data[index+1] + " and rotation " + data[index+2]);
         }
+    }
+    
+    private static void Destroy(string message)
+    {
+        string data = message.Substring(1, message.Length - 1);
+        int index = int.Parse(data);
+        UnityEngine.Object.Destroy(gameObjects[index]); //destroy the object then set it to a null
+        gameObjects[index] = null;      
+    
     }
 }

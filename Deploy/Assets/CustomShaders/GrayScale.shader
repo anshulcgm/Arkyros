@@ -4,6 +4,7 @@
 		 _bwBlend ("Black & White blend", Range (0, 1)) = 0		 
 		 _skyColor ("Sky Color", Color) = (0,0,0,0)
 		 _sunColor ("Sun Color", Color) = (0,0,0,0)
+		 _waterColor ("Water Color", Color) = (0,0,0,0)
 		 _minDistEffect ("Min Dist", Float) = 0.5
 		 _distEffectMaximized ("Dist Maximized", Float) = 1
 		 _intensityEndObscureBlend ("Intensity above sky intensity where color blending ends", Float) = 0
@@ -22,6 +23,7 @@
 
 			 half4 _skyColor;
 			 half4 _sunColor;
+			 half4 _waterColor;
 			 const float _minDistEffect;
 			 const float _distEffectMaximized;
 			 const float _intensityEndObscureBlend;
@@ -46,8 +48,12 @@
 				 //if the depth is less than the min dist, this is 0, so we don't obscure. 
 				 float lessThanMinDist = max(0,sign(depthValue - _minDistEffect));
 				 
+				 //to avoid obscuring the sun or water, we calculate whether the color of the pixel matches sun color or water color.
+				 float sunLerp = abs(sign(abs(col.rgb.r -_sunColor.r) + abs(col.rgb.g -_sunColor.g) * 10 + 100 * abs(col.rgb.b -_sunColor.b)));
+				 float waterLerp = abs(sign(abs(col.rgb.r -_waterColor.r) + abs(col.rgb.g -_waterColor.g) * 10 + 100 * abs(col.rgb.b -_waterColor.b)));
+				 
 				 //if the pixel intensity is greater than the sky intensity, this is 0, so we don't obscure.
-				 float greaterThanMaxBlendIntensity = max(0,sign(_intensityEndObscureBlend + skyIntensity - (pixelIntensity))) * abs(sign(abs(col.rgb.r -_sunColor.r) + abs(col.rgb.g -_sunColor.g) * 10 + 100 * abs(col.rgb.b -_sunColor.b))) ;
+				 float greaterThanMaxBlendIntensity = max(0,sign(_intensityEndObscureBlend + skyIntensity - (pixelIntensity))) * sunLerp * waterLerp;
 
 				 //
 				 float intensityInterpVal =  1 - max(0, ((pixelIntensity - skyIntensity)/(_intensityEndObscureBlend)));

@@ -23,57 +23,20 @@ public class Fly : MonoBehaviour {
     public float deAccel;
 	// Update is called once per frame
 	void Update () {
-
-
-        if (!inAir)
-        {
+        Vector3 vel = Vector3.zero;
             if (Input.GetKey(KeyCode.Space))
             {
-                characterAnimator.SetBool("isJumping", true);
-                characterAnimator.SetBool("isMoving", false);
-                characterAnimator.SetBool("isSprinting", false);
-                inAir = true;
-                r.velocity -= character.forward * jumpSpeed;
-                return;
+                vel += -character.forward * jumpSpeed;
             }
-
-            characterAnimator.SetBool("isJumping", false);
-            if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.Q))
+            if (Input.GetKey(KeyCode.W))
             {
-                if (r.velocity.magnitude > sprintSpeed)
-                {
-                    Debug.Log("running counter spr " + r.velocity.magnitude);
-                    r.AddForce(-r.velocity.normalized * deAccel);
-                }
-
-                r.AddForce(-character.up * accel);
-                characterAnimator.SetBool("isMoving", true);
-                characterAnimator.SetBool("isSprinting", true);
-
+                vel += -character.up * moveSpeed;
             }
-            else if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.S))
             {
-                if (r.velocity.magnitude > moveSpeed)
-                {
-                    Debug.Log("running counter mov " + r.velocity.magnitude);
-                    r.AddForce(-r.velocity.normalized * deAccel);
-                }
-                r.AddForce(-character.up * accel);
-                characterAnimator.SetBool("isMoving", true);
-                characterAnimator.SetBool("isSprinting", false);
+                vel += character.forward * jumpSpeed;
             }
-            else
-            {
-                characterAnimator.SetBool("isMoving", false);
-                characterAnimator.SetBool("isSprinting", false);
-                r.AddForce(-r.velocity.normalized);
-            }            
-        }
-        r.AddForce(character.forward * gravForce);
+        r.velocity = vel;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        inAir = false;
-    }
 }

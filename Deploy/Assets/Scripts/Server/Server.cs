@@ -44,6 +44,7 @@ public class Server
     {
         //loops through each gameObject in the list of game objects to update and sends a broadcast for updating them to the clients
         for (int g = 0; g < gameObjectsToUpdate.Count(); g += 1) {
+            if(gameObjectsToUpdate[g] == null) { continue; }
             udp.Send("U{" + g.ToString() + "|" + gameObjectsToUpdate[g].transform.position.ToString() + "|" + gameObjectsToUpdate[g].transform.rotation.ToString() +"}", "127.0.0.1");
         }
         if (debug == true)
@@ -51,6 +52,13 @@ public class Server
             Debug.Log("SEVER: Updated " + gameObjectsToUpdate.Count().ToString() + " Objects");
         }
 
+    }
+    //the destroy function
+    public void Destroy(GameObject g)
+    {
+        int gindex = gameObjectsToUpdate.IndexOf(g);
+        gameObjectsToUpdate[gindex] = null; //sets the gameobject to null
+        udp.Send("D{" + gindex.ToString() + "}", "127.0.0.1"); //send the indexes to the clients
     }
 
     ///@TODO this function needs to be finished. It should take all of the data recieved by players and move them accordingly.
