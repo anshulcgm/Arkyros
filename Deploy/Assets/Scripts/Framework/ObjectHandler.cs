@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class ObjectHandler
 {
+    public static Server server;
     private class CacheObject
     {         
         public static float maxTimeHandlingCache = 5.0f;
@@ -116,7 +117,12 @@ public class ObjectHandler
                 comp.SetMainClass(c);
             }
             //instantiating the new gameobject with the behaviors added above
-            GameObject.Instantiate(resource, i.position, i.orientation);
+            GameObject gameObj = GameObject.Instantiate(resource, i.position, i.orientation) as GameObject;
+            if(gameObj == null)
+            {
+                Debug.Log("gameObject is NULL!!!");
+            }
+            server.Create(gameObj, i.resourcePath);
         }
 
         //setting all of the values here

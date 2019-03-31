@@ -19,7 +19,7 @@ public class EventSystemMono : MonoBehaviour, IMono {
 
     public void Start()
     {
-        playerCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        //playerCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
     int counter = 0;

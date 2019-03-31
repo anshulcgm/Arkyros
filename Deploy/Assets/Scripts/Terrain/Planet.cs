@@ -29,12 +29,9 @@ public class Planet : IClass
      * new Planet object
      * description: does all the math to make the planet, stores the representation of the planet by altering 'points' and 'connections'.
      */
-    public Planet(int seed, float minRad, float maxRad, float minVariance, float maxVariance, int minNumPts, int maxNumPts)
+    public Planet(System.Random r, float minRad, float maxRad, float minVariance, float maxVariance, int minNumPts, int maxNumPts)
     {
-        //set seed, get random object
-        this.seed = seed;
-        r = new System.Random(seed);
-
+        this.r = r;
         //get random values from the seed
         radius = (float)(r.NextDouble() * (maxRad - minRad) + minRad);
         variance = (float)(r.NextDouble() * (maxVariance - minVariance) + minVariance);
