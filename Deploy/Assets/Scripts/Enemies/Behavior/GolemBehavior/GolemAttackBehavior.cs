@@ -47,10 +47,11 @@ public class GolemAttackBehavior : MonoBehaviour {
             mainCamera.GetComponent<cameraSoundManager>().enemyInRange = true;
             groundPound();
         }
-        //else if (playerDist > groundPoundRange && playerDist < chargeRange)
-        //{
-        //    //charge();
-        //}
+        else if (playerDist > groundPoundRange && playerDist < chargeRange)
+        {
+            mainCamera.GetComponent<cameraSoundManager>().enemyInRange = true;
+            charge();
+        }
         else if (playerDist > chargeRange && playerDist < shootRange)
         {
             mainCamera.GetComponent<cameraSoundManager>().enemyInRange = true;

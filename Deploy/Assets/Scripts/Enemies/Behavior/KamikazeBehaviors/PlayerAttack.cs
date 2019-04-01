@@ -21,6 +21,7 @@ public class PlayerAttack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        transform.LookAt(player.transform);
         Vector3 playerPos = player.transform.position;
         Vector3 enemyPos = this.gameObject.transform.position;
         if (Vector3.Distance(playerPos, enemyPos) < distance){
@@ -35,8 +36,11 @@ public class PlayerAttack : MonoBehaviour {
     }
     private void OnCollisionEnter(Collision collision)
     {
-        GameObject particleEffect = Instantiate(explosion, transform.position, Quaternion.identity);
-        Destroy(collision.gameObject);
-        Destroy(gameObject);
+        if(collision.gameObject.tag != "Enemy")
+        {
+            GameObject particleEffect = Instantiate(explosion, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+       
     }
 }

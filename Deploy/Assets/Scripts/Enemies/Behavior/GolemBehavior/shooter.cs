@@ -7,11 +7,12 @@ public class shooter : MonoBehaviour {
     //private GameObject Player;
     //private GameObject Enemy;
     //public float ArcHeight;
-
+    private Vector3 initialPosition;
     //public float speed;
     // Use this for initialization
-    //void Start()
-    //{
+    void Start()
+    {
+        initialPosition = transform.position;
     //    Enemy = GameObject.Find("Golem");
     //    Player = GameObject.Find("TestPlayer");
     //    Debug.Log("Player Location = " + Player.transform.position);
@@ -23,11 +24,15 @@ public class shooter : MonoBehaviour {
     //    Physics.IgnoreCollision(GetComponent<Collider>(), GameObject.Find("Planet").GetComponent<Collider>());
     //    //Physics.IgnoreCollision(GetComponent<Collider>(), GameObject.Find("Projectile(Clone)").GetComponent<Collider>());
     //    rb.velocity = (Player.transform.position - transform.position).normalized * speed;
-    //}
+    }
 
     // Update is called once per frame
-    //void Update()
-    //{
+    void Update()
+    {
+          if(Vector3.Distance(transform.position, initialPosition) >= 100f)
+          {
+            Destroy(gameObject);
+          }
     //    float xint = Enemy.transform.position.x;
     //    float xfinal = Player.transform.position.x;
 
@@ -56,7 +61,7 @@ public class shooter : MonoBehaviour {
     //    }
     //    transform.position = nextPos;
 
-    //}
+    }
 
     void OnCollisionEnter(Collision collision)
     {

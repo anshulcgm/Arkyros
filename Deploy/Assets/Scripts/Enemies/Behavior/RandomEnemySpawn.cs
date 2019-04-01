@@ -7,7 +7,7 @@ public class RandomEnemySpawn: MonoBehaviour {
     private GameObject planet;
     public GameObject flyingKamikaze;
     public GameObject golem;
-    public GameObject testPlayer;
+    public GameObject Player;
     //public GameObject testObject;
 
     public int kamikazePerSpawn = 5;
@@ -37,7 +37,8 @@ public class RandomEnemySpawn: MonoBehaviour {
     {
         if (instantiateGolem)
         {
-            instantiateGolems();
+            instantiateGolems(true);
+            InstantiateKamikazeNearPlayer(flyingKamikaze, 1, 3);
             instantiateGolem = false;
         }   
     }
@@ -75,13 +76,20 @@ public class RandomEnemySpawn: MonoBehaviour {
         }
         ObjectHandler.Update(o, this.gameObject);
     }
-    public void instantiateGolems()
+    public void instantiateGolems(bool instantiateNearPlayer)
     {
         golemInstantiationPoints = new List<Vector3>();
         for(int i = 0; i < golemSwarms; i++)
         {
-
-            Vector3 basePoint = GetRandomInstantiationPointOnSphere(); 
+            Vector3 basePoint = Vector3.zero;
+            if (instantiateNearPlayer)
+            {
+                basePoint = Player.transform.position + Random.insideUnitSphere * 5f + new Vector3(0, 10f, 0);
+            }
+            else
+            {
+                basePoint = GetRandomInstantiationPointOnSphere();
+            }
             //Instantiate(testObject, basePoint, Quaternion.identity);
          
             //Debug.Log("Base Point is " + basePoint);
@@ -124,22 +132,24 @@ public class RandomEnemySpawn: MonoBehaviour {
         return null;
         
     }
-    public void InstantiationNearPlayer()
+    public void InstantiateKamikazeNearPlayer(GameObject toInstantiate, int swarms, int numPerSwarm)
     {
-        kamikazeInstantiationPoints = new List<Vector3>();
-        for(int i = 0; i < golemSwarms; i++)
+        List<Vector3> InstantiationPoints = new List<Vector3>();
+        for(int i = 0; i < swarms; i++)
         {
-            Vector3 instantiationPoint = testPlayer.transform.position + Random.insideUnitSphere * 100f + new Vector3(500f, 200f, 500f);
-            kamikazeInstantiationPoints.Add(instantiationPoint);
+            Vector3 instantiationPoint = Player.transform.position + Random.insideUnitSphere * 500f;
+            InstantiationPoints.Add(instantiationPoint);
         }
-        foreach(Vector3 point in kamikazeInstantiationPoints)
+        foreach(Vector3 point in InstantiationPoints)
         {
-            for(int i = 0; i < golemPerSpawn; i++)
+            for(int i = 0; i < numPerSwarm; i++)
             {
-                Vector3 randomPoint = Random.insideUnitSphere * 15.0f + point;
-                GameObject enemy = (GameObject)Instantiate(golem, randomPoint, Quaternion.identity);
-                //enemy.transform.LookAt(testPlayer.transform);
+                Vector3 randomPoint = Random.insideUnitSphere * 5.0f + point;
+                Instantiate(toInstantiate, randomPoint, Quaternion.identity);
+            
             }
         }
     }
+
+  
 }

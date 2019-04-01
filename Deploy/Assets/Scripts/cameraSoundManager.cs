@@ -47,7 +47,7 @@ public class cameraSoundManager : MonoBehaviour
            
             if (wasEnemyInRange)
             {
-                srcTrack.Stop();
+                //srcTrack.Stop();
                 srcTrack.clip = worldTrack;
                 srcTrack.Play();
             }
