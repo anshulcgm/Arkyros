@@ -96,6 +96,10 @@ public class DataParserAndFormatter
             {
                 m = new Message(ServerMessageType.DESTROY, messageText);
             }
+            else if (messageType.Equals("T"))
+            {
+                m = new Message(ServerMessageType.TERRAIN, messageText);
+            }
             messages.Add(m);
         }
         return messages;
