@@ -39,6 +39,10 @@ public static class UnityHandler
         {
             Destroy(m.messageText);
         }
+        else if (m.messageType == ServerMessageType.TERRAIN)
+        {
+            Terrain(m.messageText);
+        }
         
     }
 
@@ -96,5 +100,12 @@ public static class UnityHandler
         UnityEngine.Object.Destroy(gameObjects[index]); //destroy the object then set it to a null
         gameObjects[index] = null;      
     
+    }
+    
+    private static void Terrain(string message)
+    {
+        string seed = message.Substring(1, message.Length - 1);
+        int seed = int.Parse(seed);
+        //then do something with the seed
     }
 }
