@@ -182,7 +182,7 @@ public class Rectangle
 
 public class Tessellations
 {
-    public const int LINE_MAX = 10000;
+    public const int LINE_MAX = 1000;
     public const int LINE_SIZE_MAX = 10;
 
     public static List<Rectangle> GetTesselation()
@@ -192,7 +192,7 @@ public class Tessellations
         List<Rectangle> squares = new List<Rectangle>();
 
         System.Random r = new System.Random();
-        squares.Add(new Rectangle(0, 0, 400, 400));
+        squares.Add(new Rectangle(0, 0, 200, 200));
 
         int x1 = (int)squares[0].getX(), y1 = (int)squares[0].getY();
         int x2 = x1 + (int)squares[0].getWidth(), y2 = y1 + (int)squares[0].getHeight();

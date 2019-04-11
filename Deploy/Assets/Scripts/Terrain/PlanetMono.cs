@@ -13,7 +13,7 @@ public class PlanetMono : MonoBehaviour, IMono
     public void Create(int seed)
     {
         System.Random r = new System.Random(seed);
-        planet = new Planet(r, 1, 1.1f, 0.01f, 0.03f, 81, 81);
+        planet = new Planet(r, 1, 1.1f, 0.01f, 0.03f, 71, 71);
         //make the planet
         Mesh me = planet.GeneratePlanet();
 
@@ -61,6 +61,7 @@ public class PlanetMono : MonoBehaviour, IMono
 
         for(int i = 0; i < 10; i++)
         {
+            Debug.Log("iusaghpugihgoiha0[gh09qhg0hq09hg09qh09gqheg[oihg09[h09q[hg0[9qrh0]9ghq09hg09hg09hqr09g");
             List<Rectangle> rects = Tessellations.GetTesselation();
             Vector4 randomQuat = new Vector4((float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f).normalized;
             Quaternion randomQuaternion = new Quaternion(randomQuat.x, randomQuat.y, randomQuat.z, randomQuat.w);
