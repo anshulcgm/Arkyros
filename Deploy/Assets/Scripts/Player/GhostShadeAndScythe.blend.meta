@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: 8da898d24ba127b44bdc28a504b4437b
-=======
-guid: aba548511c395fe49b34905636c7dfc1
->>>>>>> 9907e08e05888cca1a633fbcbf58e46ec798fd95
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -128,10 +124,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-<<<<<<< HEAD
     useSRGBMaterialColor: 1
-=======
->>>>>>> 9907e08e05888cca1a633fbcbf58e46ec798fd95
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -156,12 +149,9 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-<<<<<<< HEAD
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-=======
->>>>>>> 9907e08e05888cca1a633fbcbf58e46ec798fd95
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -176,10 +166,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-<<<<<<< HEAD
-=======
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
->>>>>>> 9907e08e05888cca1a633fbcbf58e46ec798fd95
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

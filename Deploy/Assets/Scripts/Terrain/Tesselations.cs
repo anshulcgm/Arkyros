@@ -185,14 +185,14 @@ public class Tessellations
     public const int LINE_MAX = 1000;
     public const int LINE_SIZE_MAX = 10;
 
-    public static List<Rectangle> GetTesselation()
+    public static List<Rectangle> GetTesselation(int seed)
     {
         List<Primary> primary = new List<Primary>();
         List<Secondary> secondary = new List<Secondary>();
         List<Rectangle> squares = new List<Rectangle>();
 
-        System.Random r = new System.Random();
-        squares.Add(new Rectangle(0, 0, 200, 200));
+        System.Random r = new System.Random(seed);
+        squares.Add(new Rectangle(-100, -100, 100, 100));
 
         int x1 = (int)squares[0].getX(), y1 = (int)squares[0].getY();
         int x2 = x1 + (int)squares[0].getWidth(), y2 = y1 + (int)squares[0].getHeight();
@@ -209,7 +209,7 @@ public class Tessellations
     public static void Algo(List<Primary> primary, System.Random r, List<Secondary> secondary, List<Rectangle> squares)
     {
         int i = 0;
-        while (i < LINE_MAX)
+        while (i < LINE_MAX && primary.Count > 0)
         {
             int x1 = (int)primary[0].getX1();
             int y1 = (int)primary[0].getY1();

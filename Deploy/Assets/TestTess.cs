@@ -7,7 +7,7 @@ public class TestTess : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        List<Rectangle> rects = Tessellations.GetTesselation();
+        List<Rectangle> rects = Tessellations.GetTesselation(0);
         foreach(Rectangle r in rects)
         {
             if(r.getWidth() < 0 || r.getHeight() < 0)

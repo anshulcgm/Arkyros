@@ -62,7 +62,7 @@ public class PlanetMono : MonoBehaviour, IMono
         for(int i = 0; i < 10; i++)
         {
             Debug.Log("iusaghpugihgoiha0[gh09qhg0hq09hg09qh09gqheg[oihg09[h09q[hg0[9qrh0]9ghq09hg09hg09hqr09g");
-            List<Rectangle> rects = Tessellations.GetTesselation();
+            List<Rectangle> rects = Tessellations.GetTesselation(r.Next());
             Vector4 randomQuat = new Vector4((float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f).normalized;
             Quaternion randomQuaternion = new Quaternion(randomQuat.x, randomQuat.y, randomQuat.z, randomQuat.w);
 
