@@ -165,9 +165,9 @@ public class ObjectHandler
             }
             if (o.triangles != null)
             {
-                Mesh newMesh = MeshBuilder3D.GetMeshFrom(meshPointsUnwrapped, o.triangles);
+                /*Mesh newMesh = MeshBuilder3D.GetMeshFrom(meshPointsUnwrapped, o.triangles);
                 gameObject.GetComponent<MeshFilter>().mesh = newMesh;
-                gameObject.GetComponent<MeshCollider>().sharedMesh = newMesh;
+                gameObject.GetComponent<MeshCollider>().sharedMesh = newMesh;*/
             }
         }
     }

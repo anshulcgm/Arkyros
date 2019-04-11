@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material
+  m_Name: building
   m_Shader: {fileID: 4800000, guid: 5966ff59647d59e42880ecd1d6e1762c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
@@ -76,6 +76,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Glow: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -87,10 +88,10 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _WireframeSmoothing: 1
-    - _WireframeThickness: 0
+    - _WireframeThickness: 1
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.7176471, g: 0.40000004, b: 0, a: 0}
-    - _Emission: {r: 0.26415092, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.6509434, g: 0.635591, b: 0.635591, a: 1}
+    - _Emission: {r: 0.41509432, g: 0.17376041, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _WireframeColor: {r: 1, g: 0.6892445, b: 0.2971698, a: 1}
+    - _WireframeColor: {r: 0.6509804, g: 0.63529414, b: 0.63529414, a: 1}

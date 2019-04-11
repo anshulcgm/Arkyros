@@ -13,7 +13,7 @@ public class TestMeshBuilder : MonoBehaviour {
         {
             trianglesList.Add(new int[] { triangles[i].p1, triangles[i].p2, triangles[i].p3 });
         }
-        Mesh mesh = MeshBuilder3D.GetMeshFrom(points, trianglesList);
+        Mesh mesh = null;
         //set the mesh in the meshFilter component so that we can see it.
         MeshFilter filter = GetComponent<MeshFilter>();
         filter.mesh = mesh;

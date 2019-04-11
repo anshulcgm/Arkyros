@@ -19,84 +19,100 @@ public class PlanetGenerator
         cons = new List<int[]>();
         System.Random rand = new System.Random(varianceSeed);
 
+        double theta = -Mathf.PI / 2 + Math.PI / (numPointsLat);
+        double rot = 0;
         //making points
-        for (double theta = -Math.PI / 2; theta <= Math.PI / 2; theta += Math.PI / (numPointsLong + 1))
-        {
-            for (double rot = 0; rot <= 2 * Math.PI; rot += 2 * Math.PI / (numPointsLat + 1))
-            {
+        for (int i = 0; i < numPointsLat - 1; i++)
+        {            
+            for (int i1 = 0; i1 < numPointsLong; i1++)
+            {                
                 double rad = radius + rand.NextDouble() * variance;
                 float x = (float)(Math.Cos(rot) * Math.Cos(theta) * (rad));
                 float y = (float)(Math.Sin(theta) * (rad));
                 float z = (float)(Math.Sin(rot) * Math.Cos(theta) * (rad));
                 points.Add(new Vector3(x, y, z));
+                rot += 2 * Math.PI / (numPointsLong);
             }
-        }
-        //remove copies of points
-        for (int i = 0; i < numPointsLong; i++)
-        {
-            points.RemoveAt(0);
+            theta += Math.PI / (numPointsLat);
         }
 
-        for (int i = 0; i < numPointsLong - 2; i++)
-        {
-            points.RemoveAt(points.Count - 1);
-        }
 
-        //making cons
-        //connect 0 up (bottom point)                   --connect range [next point, numPointsLat]
-        for (int i = 1; i <= numPointsLat; i++)
+        for(int i = 0; i < points.Count - numPointsLong; i++)
         {
-            cons.Add(new int[] { 0, i });
-        }
-        bool first = true;
-        //run through all but bottom point and top cirlce
-        for (int i = 1; i < (points.Count - numPointsLat - 1); i++)
-        {
-            if (i % numPointsLat == 0) //if last in rot
-            //connect all but top cricle last in rot        --connect +numPointsLat and +1-numPointsLat
+            if((i + 1) % numPointsLong == 0)
             {
-                cons.Add(new int[] { i, i + numPointsLat + 1 });
-                cons.Add(new int[] { i, i + numPointsLat });
-                cons.Add(new int[] { i, i + 1});
-                if (first) {
-                    shownCons.Add(new int[] { i, i + numPointsLat + 1 });
-                    shownCons.Add(new int[] { i, i + 1 });
-                    shownCons.Add(new int[] { i, i + numPointsLat });
-                    first = false;
-                }
+                cons.Add(new int[] { i, i + 1 - numPointsLong});
+                cons.Add(new int[] { i, i + numPointsLong });
+                cons.Add(new int[] { i, i + 1 });
             }
-            else //connect all but top circle and last in rot    --connect next point and +numPointsLat and +numPointsLat+1
+            else
             {
                 cons.Add(new int[] { i, i + 1 });
-                cons.Add(new int[] { i, i + numPointsLat });
-                cons.Add(new int[] { i, i + numPointsLat + 1 });
+                cons.Add(new int[] { i, i + numPointsLong });
+                cons.Add(new int[] { i, i + 1 + numPointsLong});
             }
         }
-        //connect top circle and but not last in rot            --connect last and next point
-        for (int i = (points.Count - numPointsLat - 1); i < (points.Count - 1) - 1; i++)
+        int count = points.Count;
+        points.Add(new Vector3(0, radius, 0));
+        points.Add(new Vector3(0, -radius, 0));
+
+        for(int i = 0; i < numPointsLong; i++)
         {
             cons.Add(new int[] { i, points.Count - 1 });
-            cons.Add(new int[] { i, i + 1 });
+            cons.Add(new int[] { i + count - numPointsLong, points.Count - 2 });
+            if(i != numPointsLong - 1)
+                cons.Add(new int[] { i + count - numPointsLong, i + count - numPointsLong + 1 });
         }
-        //connect top circle last in rot                --connect last and +1-numPointsLat
-        cons.Add(new int[] { points.Count - 2, points.Count - 1 });
-        cons.Add(new int[] { points.Count - 2, points.Count - numPointsLat });
+        cons.Add(new int[] { count - 1, count - numPointsLong });
+        
         List<int>[] map = GetMap(cons);
-        int num = rand.Next(2, 8);
+
+        
+        //valley
+        int num = rand.Next(10, 15);
         for (int i = 0; i < num; i++)
         {
             int index = rand.Next(0, points.Count);
             points[index] = points[index].normalized * radius * 0.75f;
-            points = Smooth(index, 10, 0.5f, map, points);
-        }
+            points = Smooth(index, 5, 0.6f, map, points);
+        }        
 
-        num = rand.Next(2, 6);
+        //hill
+        num = rand.Next(5, 8);
         for (int i = 0; i < num; i++)
         {
             int index = rand.Next(0, points.Count);
-            points[index] = points[index].normalized * radius * 1.4f;
-            points = Smooth(index, 10, 0.5f, map, points);
+            points[index] = points[index].normalized * radius * 1.2f;
+            points = Smooth(index, 5, 0.65f, map, points);
         }
+
+        //plateau
+        num = rand.Next(5, 8);
+        for (int i = 0; i < num; i++)
+        {
+            int index = rand.Next(0, points.Count);
+            points[index] = points[index].normalized * radius * 1.2f;
+            points = Smooth(index, 2, 1f, map, points);
+        }
+
+        //flat
+        num = rand.Next(1, 3);
+        for (int i = 0; i < num; i++)
+        {
+            int index = rand.Next(0, points.Count);
+            points[index] = points[index].normalized * radius * 1.1f;
+            points = Smooth(index, 5, 0.95f, map, points);
+        }
+
+        //rolling hill
+        num = rand.Next(5, 8);
+        for (int i = 0; i < num; i++)
+        {
+            int index = rand.Next(0, points.Count);
+            points[index] = points[index].normalized * radius * 1f;
+            points = Smooth(index, 5, 0.3f, map, points);
+        }
+
     }
 
     private struct Tuple

@@ -21,7 +21,7 @@ public class Plane
     public Plane(Vector3 normal, Vector3 point)
     {
         this.normal = normal.normalized;
-        d = Vector3.Dot(point, normal);
+        d = -Vector3.Dot(point, normal);
         GetDirs();
     }
 

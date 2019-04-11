@@ -29,28 +29,26 @@ public class Planet : IClass
      * new Planet object
      * description: does all the math to make the planet, stores the representation of the planet by altering 'points' and 'connections'.
      */
-    public Planet(System.Random r, float minRad, float maxRad, float minVariance, float maxVariance, int minNumPts, int maxNumPts)
+    public Planet(System.Random r, float minRad, float maxRad, float minVariance, float maxVariance, int latPoints, int longPoints)
     {
         this.r = r;
         //get random values from the seed
         radius = (float)(r.NextDouble() * (maxRad - minRad) + minRad);
         variance = (float)(r.NextDouble() * (maxVariance - minVariance) + minVariance);
-        int numpts = r.Next(minNumPts, maxNumPts);
         int varianceSeed = r.Next(int.MinValue, int.MaxValue);
 
         //make the planet, store results in points and connections.
-        PlanetGenerator.MakePlanet(radius, variance, varianceSeed, numpts, numpts, out points, out connections);
+        PlanetGenerator.MakePlanet(radius, variance, varianceSeed, latPoints, longPoints, out points, out connections);
     }
 
     /* parameters: None
      * returns: ObjectUpdate with information neccesary to actually make the planet in unity.
      */
-    public ObjectUpdate GeneratePlanet()
+    public Mesh GeneratePlanet()
     {
-        ObjectUpdate o = new ObjectUpdate();
-        triangles = o.GetTrianglesFromConnections(points, connections);
-        o.SetMeshByTriangles(points, triangles);
-        return o;
+        List<Triangle>[,] trianglesHash;
+        List<Triangle> triangles = new ObjectUpdate().GetTrianglesFromConnections(points, connections, out trianglesHash);
+        return MeshBuilder3D.GetMeshFrom(points, triangles, trianglesHash);
     }
 
     public ObjectUpdate MakeObjectsOnSurface(Vector3 planetCenter, string pathToObject, int numObjs, float scale, ObjectPlacementDirection placeDir, bool isCache)

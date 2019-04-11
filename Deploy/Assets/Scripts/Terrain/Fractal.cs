@@ -36,7 +36,7 @@ public class Fractal
             //create the mesh in the world
             GameObject child = GameObject.Instantiate(fractalChild, Vector3.zero, Quaternion.identity);
             List<Vector3> normals = null;
-            Mesh mesh = MeshBuilder3D.GetMeshFrom(fractals[0].f.points, fractals[0].f.triangles, out normals);
+            Mesh mesh = null; //MeshBuilder3D.GetMeshFrom(fractals[0].f.points, fractals[0].f.triangles, out normals);
             child.GetComponent<MeshFilter>().mesh = mesh;
             child.GetComponent<MeshCollider>().sharedMesh = mesh;
 

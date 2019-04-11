@@ -76,56 +76,82 @@ public class ObjectUpdate
     
     #region Mesh Setting
 
-    /// TODO: make this O(N^3) operation O(N^2)
-    public List<int[]> GetTrianglesFromConnections(List<Vector3> points, List<int[]> connections)
+    public bool CheckIfTriExists(List<int>[,] trianglesStored, int a, int b, int c)
     {
-        List<int[]> triangles = new List<int[]>();
-        for (int i = 0; i < connections.Count; i++)
+        return (trianglesStored[a, b] != null && trianglesStored[a, b].Contains(c)) || (trianglesStored[b, a] != null && trianglesStored[b, a].Contains(c))
+            || (trianglesStored[a, c] != null && trianglesStored[a, c].Contains(b)) || (trianglesStored[c, a] != null && trianglesStored[c, a].Contains(b))
+            || (trianglesStored[c, b] != null && trianglesStored[c, b].Contains(a)) || (trianglesStored[b, c] != null && trianglesStored[b, c].Contains(a));
+    }
+    
+    public List<Triangle> GetTrianglesFromConnections(List<Vector3> points, List<int[]> connections, out List<Triangle>[,] trianglesHash)
+    {
+        DateTime start = DateTime.Now;
+        List<int>[] map = GetMap(connections);
+        List<int>[,] trianglesStored = new List<int>[points.Count, points.Count];
+        trianglesHash = new List<Triangle>[points.Count, points.Count];
+        List<Triangle> triangles = new List<Triangle>();
+
+        for (int i = 0; i < map.Length; i++)
         {
-            for (int i1 = 0; i1 < connections.Count; i1++)
+            foreach(int conn1 in map[i])
             {
-                if(i == i1) { continue; }
-                for(int a = 0; a <= 1; a++)
+                foreach (int conn2 in map[i])
                 {
-                    for (int b = 0; b <= 1; b++)
+                    if(conn1 == conn2)
                     {
-                        if (connections[i][a] == connections[i1][b])
+                        continue;
+                    }
+                    if (map[conn1].Contains(conn2) && !CheckIfTriExists(trianglesStored, i, conn1, conn2))
+                    {
+                        Plane plane = new Plane(points[i], points[conn1], points[conn2]);
+                        Triangle t = new Triangle(new int[] { i, conn1, conn2 }, plane.normal, BlockingDirection.NONE);
+
+                        if(trianglesHash[i, conn1] == null)
                         {
-                            int indexA = connections[i][(a + 1) % 2];
-                            int indexB = connections[i1][(b + 1) % 2];
-                            bool hasConnInDir = false;
-                            for (int h = 0; h < connections.Count; h++)
-                            {
-                                if ((connections[h][0] == indexA && connections[h][1] == indexB)||(connections[h][1] == indexA && connections[h][0] == indexB))
-                                {
-                                    hasConnInDir = true;
-                                    break;
-                                }
-                            }
-                            if(hasConnInDir)
-                            {
-                                int indexC = connections[i][a];
-                                int[] triangle = new int[] { indexA, indexB, indexC };
-                                Array.Sort(triangle);
-                                bool hasEqual = false;
-                                foreach (int[] t in triangles)
-                                {
-                                    if (triangle.SequenceEqual(t))
-                                    {
-                                        hasEqual = true;
-                                    }
-                                }
-                                if (!hasEqual)
-                                {
-                                    triangles.Add(triangle);
-                                }
-                            }                                                        
+                            trianglesHash[i, conn1] = new List<Triangle>();
                         }
+                        if (trianglesHash[conn1, i] == null)
+                        {
+                            trianglesHash[conn1, i] = new List<Triangle>();
+                        }
+
+                        if (trianglesHash[i, conn2] == null)
+                        {
+                            trianglesHash[i, conn2] = new List<Triangle>();
+                        }
+                        if (trianglesHash[conn2, i] == null)
+                        {
+                            trianglesHash[conn2, i] = new List<Triangle>();
+                        }
+
+                        if (trianglesHash[conn1, conn2] == null)
+                        {
+                            trianglesHash[conn1, conn2] = new List<Triangle>();
+                        }
+                        if (trianglesHash[conn2, conn1] == null)
+                        {
+                            trianglesHash[conn2, conn1] = new List<Triangle>();
+                        }
+
+                        trianglesHash[i, conn1].Add(t);
+                        trianglesHash[i, conn2].Add(t);
+                        trianglesHash[conn1, conn2].Add(t);
+
+                        trianglesHash[conn1, i].Add(t);
+                        trianglesHash[conn2, i].Add(t);
+                        trianglesHash[conn2, conn1].Add(t);
+
+                        triangles.Add(t);
+                        if(trianglesStored[i,conn1] == null)
+                        {
+                            trianglesStored[i, conn1] = new List<int>();
+                        }
+                        trianglesStored[i, conn1].Add(conn2);
                     }
                 }
             }
         }
-        
+        Debug.Log("tri from con: " + (DateTime.Now - start).TotalSeconds);
 
         return triangles;
     }
@@ -151,6 +177,40 @@ public class ObjectUpdate
                 this.triangles[i][i1] = triangles[i][i1];
             }
         }
+    }
+
+    private static List<int>[] GetMap(List<int[]> cons)
+    {
+        int max = 0;
+        foreach (int[] con in cons)
+        {
+            if (con[0] > max)
+            {
+                max = con[0];
+            }
+            if (con[1] > max)
+            {
+                max = con[1];
+            }
+        }
+
+        List<int>[] map = new List<int>[max + 1];
+        for (int i = 0; i < map.Length; i++)
+        {
+            map[i] = new List<int>();
+            foreach (int[] con in cons)
+            {
+                if (con[0] == i)
+                {
+                    map[i].Add(con[1]);
+                }
+                if (con[1] == i)
+                {
+                    map[i].Add(con[0]);
+                }
+            }
+        }
+        return map;
     }
     #endregion
 
