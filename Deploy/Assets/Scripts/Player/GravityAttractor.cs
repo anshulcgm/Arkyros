@@ -4,7 +4,7 @@ using System.Collections;
 public class GravityAttractor : MonoBehaviour
 {
 
-    public float gravity = -980f;
+    public float gravity;
 
 
     public void Attract(Rigidbody body)

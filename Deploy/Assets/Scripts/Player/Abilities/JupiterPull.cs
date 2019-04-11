@@ -32,7 +32,7 @@ public class JupiterPull : MonoBehaviour
         if (Input.GetKey("e") && cooldown == 0)
         {
             start = DateTime.Now;
-            anim.SetTrigger("JupiterPull");
+            anim.SetBool("JupiterPullBool", true);
             cooldown = 240; // divide by 60 for cooldown in seconds
 
             Collider[] hits = Physics.OverlapSphere(transform.position, radius);
@@ -68,6 +68,7 @@ public class JupiterPull : MonoBehaviour
         else
         {
             camera.GetComponent<cameraSoundManager>().jupiterPullCast = false;
+
         }
 
         if(cooldown > 0)

@@ -464,7 +464,7 @@ MonoBehaviour:
   chargeRange: 40
   shootRange: 100
   noActionRange: 0
-  chargeSpeed: 80
+  chargeSpeed: 25
   groundPoundRadius: 5
   projectile: {fileID: 1136677087986642, guid: c67b7c392d411eb40923d187d89cacaa, type: 3}
 --- !u!114 &114369388953672176
@@ -479,8 +479,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95648350da48a68429da10cb3a94699d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  gravity: -10
+  speed: 30
+  gravity: -20
 --- !u!54 &54295875629863764
 Rigidbody:
   m_ObjectHideFlags: 0

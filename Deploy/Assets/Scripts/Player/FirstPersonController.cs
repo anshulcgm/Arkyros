@@ -57,6 +57,7 @@ public class FirstPersonController : MonoBehaviour
     {
 
         // Look rotation:
+        
         transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivityX);
         verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
         verticalLookRotation = Mathf.Clamp(verticalLookRotation, -60, 60);
@@ -71,40 +72,61 @@ public class FirstPersonController : MonoBehaviour
         Vector3 targetMoveAmount = moveDir * finalSpeed;
         if (Math.Abs(moveDir.x) > Math.Abs(moveDir.z))
         {
-            if (moveDir.x > 0)
+            if (!Input.GetButtonDown("Jump"))
             {
-                anim.SetTrigger("WalkRight");
-            }
-            else anim.SetTrigger("WalkLeft");
-
-        }
-        else if (Math.Abs(moveDir.x) < Math.Abs(moveDir.z))
-        {
-            if (moveDir.z > 0)
-            {
-                if (isSprinting)
+                if (moveDir.x > 0)
                 {
-                    movementSound.isWalking = false;
-                    movementSound.isSprinting = true;
-                    anim.SetTrigger("RunForward");
-                    speed_Multiplier = 2; //sprint speed
-                    Camera.main.transform.localPosition = new Vector3(0f, 16f, 8f);
+                    setAllTriggersFalse();
+                    anim.SetBool("WalkRightBool", true);
                 }
                 else
                 {
-                    movementSound.isWalking = true;
-                    movementSound.isSprinting = false;
-                    anim.SetTrigger("WalkForward");
-                    Camera.main.transform.localPosition = new Vector3(0f, 16f, 3.1f);
+                    setAllTriggersFalse();
+                    anim.SetBool("WalkLeftBool", true);
                 }
             }
-            else
-            {
-                anim.SetTrigger("WalkBackwards");
-            }
         }
-        else
+        else if (Math.Abs(moveDir.x) < Math.Abs(moveDir.z))
         {
+            if (!Input.GetButtonDown("Jump"))
+            {
+                if (moveDir.z > 0)
+                {
+                    if (isSprinting)
+                    {
+                        movementSound.isWalking = false;
+                        movementSound.isSprinting = true;
+                        setAllTriggersFalse();
+                        anim.SetBool("RunForwardBool", true);
+                        speed_Multiplier = 2; //sprint speed
+                        Camera.main.transform.localPosition = new Vector3(0f, 16f, 8f);
+                    }
+                    else
+                    {
+                        movementSound.isWalking = true;
+                        movementSound.isSprinting = false;
+                        anim.SetBool("RunForwardBool", false);
+                        anim.SetBool("WalkForwardBool", true);
+                        Camera.main.transform.localPosition = new Vector3(0f, 16f, 3.1f);
+                    }
+                }
+                else
+                {
+                    setAllTriggersFalse();
+                    anim.SetBool("WalkBackwardsBool", true);
+                }
+            }
+            
+        }
+       
+        if(moveDir.x <= 0.01f && moveDir.z <= 0.01f)
+        {
+            anim.SetBool("RunForwardBool", false);
+            anim.SetBool("WalkBackwardsBool", false);
+            anim.SetBool("WalkRightBool", false);
+            anim.SetBool("WalkLeftBool", false);
+            anim.SetBool("WalkForwardBool", false);
+
             movementSound.isWalking = false;
             movementSound.isSprinting = false;
         }
@@ -114,7 +136,8 @@ public class FirstPersonController : MonoBehaviour
         if (Input.GetMouseButton(0) && attackDelay == 0)
         {
             //Debug.Log("Attack was pressed");
-            anim.SetTrigger("Swing_Heavy");
+            setAllTriggersFalse();
+            anim.SetBool("Swing_HeavyBool", true);
             attackStart = DateTime.Now;
             attackDelay = 60; //can attack 60 frames later
 
@@ -122,6 +145,7 @@ public class FirstPersonController : MonoBehaviour
 
         if ((DateTime.Now - attackStart).TotalSeconds < 1)
         {
+            
             attackSound.isSwinging = true;
             Collider[] hits = Physics.OverlapSphere(transform.position + transform.forward * 20, 50);
             Debug.Log("REEEEEEEEE");
@@ -140,6 +164,7 @@ public class FirstPersonController : MonoBehaviour
         }
         else
         {
+            anim.SetBool("Swing_HeavyBool", false);
             attackSound.isSwinging = false;
         }
 
@@ -157,7 +182,8 @@ public class FirstPersonController : MonoBehaviour
             {
                 //Debug.Log("Jump was pressed");
                 //rigidbody.velocity = (transform.up * jumpForce);
-                anim.SetTrigger("Jump");
+                setAllTriggersFalse();
+                anim.SetBool("JumpBool", true);
                 rigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
                 sound.isJumping = true;
             }
@@ -188,6 +214,7 @@ public class FirstPersonController : MonoBehaviour
 
         if (Physics.Raycast(ray, 2f)) //1 is placeholder for model height
         {
+            anim.SetBool("JumpBool", false);
             grounded = true;
         }
         else
@@ -197,7 +224,13 @@ public class FirstPersonController : MonoBehaviour
 
         
     }
-
+    public void setAllTriggersFalse()
+    {
+        foreach(AnimatorControllerParameter parameter in anim.parameters)
+        {
+            anim.SetBool(parameter.name, false);
+        }
+    }
     void FixedUpdate()
     {
         // Apply movement to rigidbody

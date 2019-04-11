@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Deploy/Assets/CameraSwitch.cs.meta
 guid: 9b726b616e93ccb49b69295e540ed817
+=======
+guid: 480f662d3fb2cfa45826886e4fe7b129
+>>>>>>> 9907e08e05888cca1a633fbcbf58e46ec798fd95:Deploy/Assets/CameraSwitch.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
