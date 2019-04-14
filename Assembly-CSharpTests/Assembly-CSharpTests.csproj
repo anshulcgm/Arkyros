@@ -60,6 +60,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Terrain\LineSegment2DTests.cs" />
+    <Compile Include="Assets\Scripts\Terrain\MeshBuilder3DTests.cs" />
+    <Compile Include="Assets\Scripts\Terrain\PlaneTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,68 +6,65 @@ using UnityEngine;
 // this class builds meshes given edges and points as input
 public class MeshBuilder3D
 {
-    /* Parameters: 
-     * points: List of Vector3 objects containing points that represent the verticies of the mesh
-     * triangles: List of int[]'s that contain 3 indexes per int[]. Each int[] represents one triangle of the mesh. Indexes within each int[] do not need to be sorted in any order
-     * 
-     * Returns:
-     * Mesh object that can be assigned to a GameObject to display the mesh.
-     */
-    public static Mesh GetMeshFrom(List<Vector3> points, List<int[]> trianglesIndexes)
-    {
-        // gets all the triangles
-        List<Triangle> allTriangles = GetKnownTriangles(points, trianglesIndexes);
-        List<Triangle> trianglesWithKnownDirection = new List<Triangle>();
-        for(int i = 0; i < allTriangles.Count; i++)
-        {
-            if(allTriangles[i].direction != 0)
-            {
-                trianglesWithKnownDirection.Add(allTriangles[i]);
-            }
-        }
 
-        int index = 0;
-        int iterations = 0;
-        while(trianglesWithKnownDirection.Count < allTriangles.Count && iterations < 1000)
+    public static Mesh GetMeshFrom(List<Vector3> points, List<Triangle> allTriangles, List<Triangle>[,] trianglesHash, out List<Vector3> normals)
+    {
+        normals = new List<Vector3>();
+        BlockingDirection dir;
+        DateTime start = DateTime.Now;
+        int ind = GetFirstKnownTriangle(points, allTriangles, out dir);
+
+        Debug.Log("first known tri: " + (DateTime.Now - start).TotalSeconds);
+        allTriangles[ind].direction = dir;
+        List<Triangle> trianglesWithKnownDirection = new List<Triangle> { allTriangles[ind] };
+        start = DateTime.Now;        
+
+        while (trianglesWithKnownDirection.Count > 0)
         {
-            Triangle t = trianglesWithKnownDirection[index];
-            List<Triangle> neighbors = GetNeighboringTriangles(t, allTriangles);
-            for(int i1 = 0; i1 < neighbors.Count; i1++)
+            Triangle t = trianglesWithKnownDirection[0];
+            Plane tPlane = new Plane(t.normal * t.GetDirInt(), points[t.points[0]]);
+            List<Triangle> neighbors = GetNeighboringTriangles(t, trianglesHash);
+            for (int i1 = 0; i1 < neighbors.Count; i1++)
             {
                 Triangle neighbor = neighbors[i1];
-                if(neighbor.direction == 0)
+                Plane neighborPlane = new Plane(neighbor.normal, points[neighbor.points[0]]);
+                if (neighbor.GetDirInt() == 0)
                 {
                     Vector3 centerA = GetCentroid(t, points);
                     Vector3 centerB = GetCentroid(neighbor, points);
-                    float angleA = Vector3.Angle(t.direction * t.normal, centerB - centerA);
-                    float angleB = Vector3.Angle(neighbor.normal, centerA - centerB);
-                    float angleC = Vector3.Angle(-neighbor.normal, centerA - centerB);
-                    if(Mathf.Abs(angleA - angleB) < Mathf.Abs(angleA - angleC))
+                    float distA = tPlane.GetDistToPlane(centerB);
+                    float distB = neighborPlane.GetDistToPlane(centerA);
+
+                    bool a = Math.Sign(distA) == Math.Sign(distB);
+                    if (a)
                     {
-                        neighbor.direction = 1;
+                        neighbor.direction = BlockingDirection.AWAY_FROM_NORMAL;
+                        Vector3 center = GetCentroid(neighbor, points);
+                        Debug.DrawLine(center * 4000, center * 4000 + neighbor.normal * neighbor.GetDirInt() * 100, Color.red, 100000.0f);
                     }
                     else
                     {
-                        neighbor.direction = -1;
+                        neighbor.direction = BlockingDirection.TOWARDS_NORMAL;                      
+                        Vector3 center = GetCentroid(neighbor, points);
+                        Debug.DrawLine(center * 4000, center * 4000 + neighbor.normal * neighbor.GetDirInt() * 100, Color.cyan, 100000.0f);
                     }
                     trianglesWithKnownDirection.Add(neighbor);
                 }
             }
-            if (index < trianglesWithKnownDirection.Count - 1)
-            {
-                index++;
-            }            
-            iterations++;
+            trianglesWithKnownDirection.RemoveAt(0);
         }
 
+        Debug.Log("fill: " + (DateTime.Now - start).TotalSeconds);
         int[][] faces = new int[allTriangles.Count][];
-        for(int i = 0; i < allTriangles.Count; i++)
+        for (int i = 0; i < allTriangles.Count; i++)
         {
+            Array.Sort(allTriangles[i].points);
             Vector3 a = points[allTriangles[i].points[0]];
             Vector3 b = points[allTriangles[i].points[1]];
             Vector3 c = points[allTriangles[i].points[2]];
+            normals.Add(allTriangles[i].normal * allTriangles[i].GetDirInt());
             int[] triangle = new int[3];
-            if (!IsClockwise(b - a, c - b, allTriangles[i].normal * allTriangles[i].direction))
+            if (!IsClockwise(b - a, c - a, allTriangles[i].normal * allTriangles[i].GetDirInt()))
             {
                 triangle[0] = allTriangles[i].points[2];
                 triangle[1] = allTriangles[i].points[1];
@@ -81,9 +78,23 @@ public class MeshBuilder3D
             }
             faces[i] = triangle;
 
-            Debug.DrawLine(GetCentroid(allTriangles[i], points), GetCentroid(allTriangles[i], points) + allTriangles[i].normal * allTriangles[i].direction, Color.red, 1000);
+            //Debug.DrawLine(GetCentroid(allTriangles[i], points) * 1000, GetCentroid(allTriangles[i], points) * 1000 + allTriangles[i].normal * allTriangles[i].direction * 1000, Color.red, 1000);
         }
         return GetMesh(points.ToArray(), faces);
+    }
+
+
+    /* Parameters: 
+     * points: List of Vector3 objects containing points that represent the verticies of the mesh
+     * triangles: List of int[]'s that contain 3 indexes per int[]. Each int[] represents one triangle of the mesh. Indexes within each int[] do not need to be sorted in any order
+     * 
+     * Returns:
+     * Mesh object that can be assigned to a GameObject to display the mesh.
+     */
+    public static Mesh GetMeshFrom(List<Vector3> points, List<Triangle> trianglesIndexes, List<Triangle>[,] trianglesHash)
+    {
+        List<Vector3> normals = null;
+        return GetMeshFrom(points, trianglesIndexes, trianglesHash, out normals);
     }
 
     #region Helper Functions
@@ -99,7 +110,7 @@ public class MeshBuilder3D
     static bool IsClockwise(Vector3 a, Vector3 b, Vector3 normal)
     {
         Vector3 crossProd = Vector3.Cross(a, b);
-        return (normal.normalized - crossProd.normalized).magnitude < Mathf.Epsilon;
+        return Vector3.Dot(crossProd, normal) > 0;
     }
 
     
@@ -139,7 +150,7 @@ public class MeshBuilder3D
     {
         //get mesh and coll
         Mesh mesh = new Mesh();
-
+        /*
         for (int i = 0; i < faces.Length; i++)
         {
             String s = "{";
@@ -150,7 +161,7 @@ public class MeshBuilder3D
             s += "}";
             Debug.Log(s);
         }
-
+        */
         mesh.vertices = points;
         //get triangles
         List<int> triangles = new List<int>();
@@ -176,6 +187,182 @@ public class MeshBuilder3D
         return mesh;
     }
 
+    private static int GetFirstKnownTriangle(List<Vector3> points, List<Triangle> trianglesList, out BlockingDirection dir)
+    {
+
+        List<int[]> edges = new List<int[]>();
+        for (int i = 0; i < trianglesList.Count; i++)
+        {
+            edges.Add(new int[] { trianglesList[i].points[0], trianglesList[i].points[1] });
+            edges.Add(new int[] { trianglesList[i].points[0], trianglesList[i].points[2] });
+            edges.Add(new int[] { trianglesList[i].points[1], trianglesList[i].points[2] });
+        }
+
+        for (int i = 0; i < trianglesList.Count; i++)
+        {
+            Plane trianglePlane = new Plane(points[trianglesList[i].points[0]], points[trianglesList[i].points[1]], points[trianglesList[i].points[2]]);
+            List<Vector2> mappedTriangle = trianglePlane.GetMappedPoints(new List<Vector3>() { points[trianglesList[i].points[0]], points[trianglesList[i].points[1]], points[trianglesList[i].points[2]] });
+            BlockingDirection blockedFaces = BlockingDirection.NONE;
+            for (int i1 = 0; i1 < points.Count; i1++)
+            {
+                if (i1 == trianglesList[i].points[0] || i1 == trianglesList[i].points[1] || i1 == trianglesList[i].points[2])
+                {
+                    //ignore this point if it's one of the triangle's points
+                    continue;
+                }
+                Vector2 mappedPoint = trianglePlane.GetMappedPoint(points[i1]);
+                if (!PointInTriangle(mappedPoint, mappedTriangle[0], mappedTriangle[1], mappedTriangle[2]))
+                {
+                    //ignore this point if it's not behind the triangle
+                    continue;
+                }
+                //rounding accuracy to hundredths place to 
+                int pointSign = Math.Sign(Math.Round(trianglePlane.GetDistToPlane(points[i1]), 2));
+                if (pointSign == 0)
+                {
+                    //ignore this point if it's on the same plane
+                    continue;
+                }
+
+                if (pointSign == 1)
+                {
+                    if (blockedFaces == BlockingDirection.AWAY_FROM_NORMAL)
+                    {
+                        blockedFaces = BlockingDirection.BOTH;
+                        break;
+                    }
+                    else
+                    {
+                        if (drawTriangles > 0)
+                        {
+
+                        }
+                        blockedFaces = BlockingDirection.TOWARDS_NORMAL;
+                    }
+                }
+                else
+                {
+                    if (blockedFaces == BlockingDirection.TOWARDS_NORMAL)
+                    {
+                        blockedFaces = BlockingDirection.BOTH;
+                        break;
+                    }
+                    else
+                    {
+                        if (drawTriangles > 0)
+                        {
+                        }
+                        blockedFaces = BlockingDirection.AWAY_FROM_NORMAL;
+                    }
+                }
+            }
+            Triangle t = new Triangle(trianglesList[i].points, trianglePlane.normal, blockedFaces);
+            t.direction = GetBlockingDir(points, trianglesList, edges, i, t.direction, t);
+            if(t.GetDirInt() != 0)
+            {
+                dir = t.direction;
+                return i;
+            }
+        }
+        dir = BlockingDirection.NONE;
+        return -1;
+    }
+
+    private static BlockingDirection GetBlockingDir(List<Vector3> points, List<Triangle> trianglesList, List<int[]> edges, int i, BlockingDirection blockedFaces, Triangle t)
+    {
+        Plane trianglePlane = new Plane(points[trianglesList[i].points[0]], points[trianglesList[i].points[1]], points[trianglesList[i].points[2]]);
+        List<Vector2> mappedTriangle = trianglePlane.GetMappedPoints(new List<Vector3>() { points[trianglesList[i].points[0]], points[trianglesList[i].points[1]], points[trianglesList[i].points[2]] });
+
+        //if this triangle is already blocked in both directions, ignore this triangle.
+        if (blockedFaces == BlockingDirection.BOTH)
+        {
+            return blockedFaces;
+        }
+        for (int i1 = 0; i1 < edges.Count; i1++)
+        {
+            // if any of the indexes match, ignore this edge
+            bool indexesMatch = false;
+            for (int i2 = 0; i2 < 3; i2++)
+            {
+                for (int i3 = 0; i3 < 2; i3++)
+                {
+                    if (t.points[i2] == edges[i1][i3])
+                    {
+                        indexesMatch = true;
+                        break;
+                    }
+                }
+                if (indexesMatch) { break; }
+            }
+            if (indexesMatch)
+            {
+                continue;
+            }
+
+            // if this line doesn't intersect with the triangle, ignore this edge.
+            Vector2 mappedPointA = trianglePlane.GetMappedPoint(points[edges[i1][0]]);
+            Vector2 mappedPointB = trianglePlane.GetMappedPoint(points[edges[i1][1]]);
+
+
+            bool lineIntersectsTriangle = false;
+            for (int i2 = 0; i2 < 3; i2++)
+            {
+                Vector2 triangleA = trianglePlane.GetMappedPoint(points[t.points[i2]]);
+                Vector2 triangleB = trianglePlane.GetMappedPoint(points[t.points[(i2 + 1) % 3]]);
+
+
+                if (AreLinesIntersecting(mappedPointA, mappedPointB, triangleA, triangleB, false))
+                {
+                    lineIntersectsTriangle = true;
+                    break;
+                }
+            }
+            if (!lineIntersectsTriangle)
+            {
+                continue;
+            }
+
+            int signA = Math.Sign(Math.Round(trianglePlane.GetDistToPlane(points[edges[i1][0]]), 2));
+            int signB = Math.Sign(Math.Round(trianglePlane.GetDistToPlane(points[edges[i1][1]]), 2));
+
+            // if sign A is not the same as sign B, or if sign A or sign B is 0, ignore this edge.
+            if (signA != signB || signA == 0 || signB == 0)
+            {
+                continue;
+            }
+
+            if (signA == 1)
+            {
+                if (blockedFaces == BlockingDirection.AWAY_FROM_NORMAL)
+                {
+                    blockedFaces = BlockingDirection.BOTH;
+                    break;
+                }
+                else
+                {
+                    blockedFaces = BlockingDirection.TOWARDS_NORMAL;
+                }
+            }
+            else
+            {
+                if (blockedFaces == BlockingDirection.TOWARDS_NORMAL)
+                {
+                    blockedFaces = BlockingDirection.BOTH;
+                    break;
+                }
+                else
+                {
+                    blockedFaces = BlockingDirection.AWAY_FROM_NORMAL;
+                }
+            }
+        }
+        drawTriangles--;
+        return blockedFaces;
+    }
+
+
+
+    static int drawTriangles = -1;
     /* Parameters: 
      * points: points of the mesh
      * faces: indexes of points that make up the triangles of the 3D mesh
@@ -186,87 +373,173 @@ public class MeshBuilder3D
     private static List<Triangle> GetKnownTriangles(List<Vector3> points, List<int[]> triangles)
     {
         List<Triangle> trianglesList = new List<Triangle>();
-        for (int i = 0; i < triangles.Count; i++)
+        for(int i = 0; i < triangles.Count; i++)
         {
-            // get points of triangle from points list.
-            Vector3 p0 = points[triangles[i][0]];
-            Vector3 p1 = points[triangles[i][1]];
-            Vector3 p2 = points[triangles[i][2]];
+            Array.Sort(triangles[i]);
+        }
+        List<int[]> edges = new List<int[]>();
+        
+        // go through all the points for each triangle, find points that are either in front of or behind those triangles.
+        for(int i = 0; i < triangles.Count; i++)
+        {
+            edges.Add(new int[] { triangles[i][0], triangles[i][1] });
+            edges.Add(new int[] { triangles[i][0], triangles[i][2] });
+            edges.Add(new int[] { triangles[i][1], triangles[i][2] });
 
-            // make a plane
-            Plane trianglePlane = new Plane(p0, p1, p2);
-
-
+            Plane trianglePlane = new Plane(points[triangles[i][0]], points[triangles[i][1]], points[triangles[i][2]]);
+            List<Vector2> mappedTriangle = trianglePlane.GetMappedPoints(new List<Vector3>() { points[triangles[i][0]], points[triangles[i][1]], points[triangles[i][2]] });
             BlockingDirection blockedFaces = BlockingDirection.NONE;
             for (int i1 = 0; i1 < points.Count; i1++)
-            {
-                // if the index matches one of the points of the above triangle, skip the point.
-                if (i1 == triangles[i][0] || i1 == triangles[i][1] || i1 == triangles[i][2]) { continue; }
-
-                Vector3 point = points[i1];
-
-                // get signed distance to the plane and the closest point on the plane.
-                float distToPlane = trianglePlane.GetDistToPlane(point);
-                Vector3 closestPointOnPlane = trianglePlane.GetLineIntersect(point, trianglePlane.normal);
-
-                // get 2D representation of triangle and of the point relative to the plane
-                List<Vector3> triangle = new List<Vector3> { p0, p1, p2 };
-                Vector3 origin = p0;
-                
-                List<Vector2> mappedTriangle = trianglePlane.GetMappedPoints(triangle);
-                Vector2 mappedPoint = trianglePlane.GetMappedPoint(closestPointOnPlane);
-
-                // if point is inside triangle, but not on the lines of the triangle.
-                if (PointInTriangle(mappedPoint, mappedTriangle[0], mappedTriangle[1], mappedTriangle[2]))
+            {                
+                if(i1 == triangles[i][0] || i1 == triangles[i][1] || i1 == triangles[i][2])
                 {
-                    if (distToPlane < 0)
+                    //ignore this point if it's one of the triangle's points
+                    continue;
+                }
+                Vector2 mappedPoint = trianglePlane.GetMappedPoint(points[i1]);
+                if(!PointInTriangle(mappedPoint, mappedTriangle[0], mappedTriangle[1], mappedTriangle[2]))
+                {
+                    //ignore this point if it's not behind the triangle
+                    continue;
+                }
+                //rounding accuracy to hundredths place to 
+                int pointSign = Math.Sign(Math.Round(trianglePlane.GetDistToPlane(points[i1]), 2));
+                if(pointSign == 0)
+                {
+                    //ignore this point if it's on the same plane
+                    continue;
+                }
+
+                if (pointSign == 1)
+                {
+                    if (blockedFaces == BlockingDirection.AWAY_FROM_NORMAL)
                     {
-                        if (blockedFaces == BlockingDirection.AWAY_FROM_NORMAL)
-                        {
-                            blockedFaces = BlockingDirection.BOTH;
-                            break;
-                        }
-                        else
-                        {
-                            blockedFaces = BlockingDirection.TOWARDS_NORMAL;
-                        }
+                        blockedFaces = BlockingDirection.BOTH;
+                        break;
                     }
-                    else if (distToPlane > 0)
+                    else
                     {
-                        if (blockedFaces == BlockingDirection.TOWARDS_NORMAL)
+                        if(drawTriangles > 0)
                         {
-                            blockedFaces = BlockingDirection.BOTH;
-                            break;
+                           
                         }
-                        else
-                        {
-                            blockedFaces = BlockingDirection.AWAY_FROM_NORMAL;
+                        blockedFaces = BlockingDirection.TOWARDS_NORMAL;
+                    }
+                }
+                else
+                {
+                    if (blockedFaces == BlockingDirection.TOWARDS_NORMAL)
+                    {
+                        blockedFaces = BlockingDirection.BOTH;
+                        break;
+                    }
+                    else
+                    {
+                        if (drawTriangles > 0)
+                        {                          
                         }
+                        blockedFaces = BlockingDirection.AWAY_FROM_NORMAL;
                     }
                 }
             }
-
-            if (blockedFaces == BlockingDirection.NONE)
-            {
-                Triangle t = new Triangle { points = triangles[i], normal = trianglePlane.normal, direction = 0 };
-                trianglesList.Add(t);
-            }
-            else if (blockedFaces == BlockingDirection.TOWARDS_NORMAL)
-            {
-                Triangle t = new Triangle { points = triangles[i], normal = trianglePlane.normal, direction = 1};
-                trianglesList.Add(t);
-            }
-            else if (blockedFaces == BlockingDirection.AWAY_FROM_NORMAL)
-            {
-                Triangle t = new Triangle { points = triangles[i], normal = trianglePlane.normal, direction = -1};
-                trianglesList.Add(t);
-            }
-            else if (blockedFaces == BlockingDirection.BOTH)
-            {
-                Triangle t = new Triangle { points = triangles[i], normal = trianglePlane.normal, direction = 0};
-                trianglesList.Add(t);
-            }
+            trianglesList.Add(new Triangle (triangles[i], trianglePlane.normal, blockedFaces));
         }
+
+        drawTriangles = 1;
+        // go through all the connections for each triangle, find lines that are either in front of or behind those triangles.
+        for (int i = 0; i < trianglesList.Count; i++)
+        {
+            Plane trianglePlane = new Plane(points[triangles[i][0]], points[triangles[i][1]], points[triangles[i][2]]);
+            List<Vector2> mappedTriangle = trianglePlane.GetMappedPoints(new List<Vector3>() { points[triangles[i][0]], points[triangles[i][1]], points[triangles[i][2]] });
+            BlockingDirection blockedFaces = trianglesList[i].direction;
+            
+            //if this triangle is already blocked in both directions, ignore this triangle.
+            if (blockedFaces == BlockingDirection.BOTH)
+            {
+                continue;
+            }
+            for (int i1 = 0; i1 < edges.Count; i1++)
+            {
+                // if any of the indexes match, ignore this edge
+                bool indexesMatch = false;
+                for (int i2 = 0; i2 < 3; i2++)
+                {
+                    for (int i3 = 0; i3 < 2; i3++)
+                    {
+                        if (trianglesList[i].points[i2] == edges[i1][i3])
+                        {
+                            indexesMatch = true;
+                            break;
+                        }
+                    }
+                    if (indexesMatch) { break; }
+                }
+                if (indexesMatch)
+                {
+                    continue;
+                }
+
+                // if this line doesn't intersect with the triangle, ignore this edge.
+                Vector2 mappedPointA = trianglePlane.GetMappedPoint(points[edges[i1][0]]);
+                Vector2 mappedPointB = trianglePlane.GetMappedPoint(points[edges[i1][1]]);
+                
+                
+                bool lineIntersectsTriangle = false;
+                for (int i2 = 0; i2 < 3; i2++)
+                {
+                    Vector2 triangleA = trianglePlane.GetMappedPoint(points[trianglesList[i].points[i2]]);
+                    Vector2 triangleB = trianglePlane.GetMappedPoint(points[trianglesList[i].points[(i2 + 1) % 3]]);
+                    
+
+                    if (AreLinesIntersecting(mappedPointA, mappedPointB, triangleA, triangleB, false))
+                    {
+                        lineIntersectsTriangle = true;
+                        break;
+                    }
+                }
+                if (!lineIntersectsTriangle)
+                {
+                    continue;
+                }
+
+                int signA = Math.Sign(Math.Round(trianglePlane.GetDistToPlane(points[edges[i1][0]]), 2));
+                int signB = Math.Sign(Math.Round(trianglePlane.GetDistToPlane(points[edges[i1][1]]), 2));
+
+                // if sign A is not the same as sign B, or if sign A or sign B is 0, ignore this edge.
+                if (signA != signB || signA == 0 || signB == 0)
+                {
+                    continue;
+                }
+
+                if (signA == 1)
+                {
+                    if (blockedFaces == BlockingDirection.AWAY_FROM_NORMAL)
+                    {
+                        blockedFaces = BlockingDirection.BOTH;
+                        break;
+                    }
+                    else
+                    {
+                        blockedFaces = BlockingDirection.TOWARDS_NORMAL;
+                    }
+                }
+                else
+                {
+                    if (blockedFaces == BlockingDirection.TOWARDS_NORMAL)
+                    {
+                        blockedFaces = BlockingDirection.BOTH;
+                        break;
+                    }
+                    else
+                    {
+                        blockedFaces = BlockingDirection.AWAY_FROM_NORMAL;
+                    }
+                }
+            }
+            drawTriangles--;
+            trianglesList[i].direction = blockedFaces;
+        }
+        
         return trianglesList;
     }
 
@@ -277,31 +550,20 @@ public class MeshBuilder3D
      * Returns:
      * List of all the triangles that are next to the one passed in
      */
-    private static List<Triangle> GetNeighboringTriangles(Triangle triangle, List<Triangle> allTriangles)
+    private static List<Triangle> GetNeighboringTriangles(Triangle triangle, List<Triangle>[,] trianglesHash)
     {
         List<Triangle> neighbors = new List<Triangle>();
-        foreach(Triangle t in allTriangles)
+        for(int i = 0; i < 3; i++)
         {
-            if(t.points.Contains(triangle.points[0]) && t.points.Contains(triangle.points[1]) && t.points.Contains(triangle.points[2]))
+            int index1 = triangle.points[i];
+            int index2 = triangle.points[(i + 1) % 3];
+            List<Triangle> possibleNeighbors = trianglesHash[index1, index2];
+            foreach(Triangle t in possibleNeighbors)
             {
-                continue;
-            }
-            for (int i = 0; i < triangle.points.Length; i++)
-            {
-                for (int i1 = 0; i1 < t.points.Length; i1++)
-                {                    
-                    int p0 = triangle.points[i];
-                    int p1 = t.points[i1];
-                    int p2 = triangle.points[(i + 1) % triangle.points.Length];
-                    int p3 = t.points[(i1 + 1) % t.points.Length];
-                    if ((p0 == p1 && p2 == p3) || (p0 == p2 && p1 == p3))
-                    {
-                        neighbors.Add(t);
-                        if (neighbors.Count > 3)
-                        {
-                            throw new Exception("The number of neighboring triangles per triangle should not exceed 3.");
-                        }
-                    }
+                if (!t.Equals(triangle) && !neighbors.Contains(t) && 
+                    !(t.points.Contains(triangle.points[0]) && t.points.Contains(triangle.points[1]) && t.points.Contains(triangle.points[2])))
+                {
+                    neighbors.Add(t);                        
                 }
             }
         }
@@ -320,8 +582,12 @@ public class MeshBuilder3D
      * Returns:
      * Mesh object that can be attatched to a GameObject to display the 3D mesh/shape
      */
-    private static bool PointInTriangle(Vector2 pt, Vector2 v1, Vector2 v2, Vector2 v3)
+    public static bool PointInTriangle(Vector2 pt, Vector2 v1, Vector2 v2, Vector2 v3)
     {
+        if(pt.Equals(v1) || pt.Equals(v2) || pt.Equals(v3))
+        {
+            return false;
+        }
         float d1, d2, d3;
         bool has_neg, has_pos;
 
@@ -372,13 +638,91 @@ public class MeshBuilder3D
         float z = (points[t.points[0]].z + points[t.points[1]].z + points[t.points[2]].z)/3;
         return new Vector3(x, y, z);
     }
+
+
+    private static Vector3 GetCentroid(Vector3 a, Vector3 b, Vector3 c)
+    {
+        float x = (a.x + b.x + c.x) / 3;
+        float y = (a.y + b.y + c.y) / 3;
+        float z = (a.z + b.z + c.z) / 3;
+        return new Vector3(x, y, z);
+    }
     #endregion
 
-    private class Triangle
+    
+
+    public static bool AreLinesIntersecting(Vector2 l1_p1, Vector2 l1_p2, Vector2 l2_p1, Vector2 l2_p2, bool shouldIncludeEndPoints)
     {
-        public int[] points;
-        public Vector3 normal;
-        public int direction;
+        //To avoid floating point precision issues we can add a small value
+        float epsilon = 0.00001f;
+
+        bool isIntersecting = false;
+
+        float denominator = (l2_p2.y - l2_p1.y) * (l1_p2.x - l1_p1.x) - (l2_p2.x - l2_p1.x) * (l1_p2.y - l1_p1.y);
+
+        //Make sure the denominator is > 0, if not the lines are parallel
+        if (denominator != 0f)
+        {
+            float u_a = ((l2_p2.x - l2_p1.x) * (l1_p1.y - l2_p1.y) - (l2_p2.y - l2_p1.y) * (l1_p1.x - l2_p1.x)) / denominator;
+            float u_b = ((l1_p2.x - l1_p1.x) * (l1_p1.y - l2_p1.y) - (l1_p2.y - l1_p1.y) * (l1_p1.x - l2_p1.x)) / denominator;
+
+            //Are the line segments intersecting if the end points are the same
+            if (shouldIncludeEndPoints)
+            {
+                //Is intersecting if u_a and u_b are between 0 and 1 or exactly 0 or 1
+                if (u_a >= 0f + epsilon && u_a <= 1f - epsilon && u_b >= 0f + epsilon && u_b <= 1f - epsilon)
+                {
+                    isIntersecting = true;
+                }
+            }
+            else
+            {
+                //Is intersecting if u_a and u_b are between 0 and 1
+                if (u_a > 0f + epsilon && u_a < 1f - epsilon && u_b > 0f + epsilon && u_b < 1f - epsilon)
+                {
+                    isIntersecting = true;
+                }
+            }
+        }
+
+        return isIntersecting;
     }
-    private enum BlockingDirection {NONE, TOWARDS_NORMAL, AWAY_FROM_NORMAL, BOTH}
+
+    public static float AngleBetweenPlanes(Vector3 n1, Vector3 n2)
+    {
+        return Mathf.Acos((n1.x * n2.x + n1.y * n2.y + n1.z * n2.z) / (n1.magnitude * n2.magnitude)) * Mathf.Rad2Deg;
+    }
+
+    
+}
+public enum BlockingDirection { NONE, TOWARDS_NORMAL, AWAY_FROM_NORMAL, BOTH }
+
+public class Triangle
+{
+    public int[] points;
+    public Vector3 normal;
+    public BlockingDirection direction;
+
+    public Triangle(int[] points, Vector3 normal, BlockingDirection direction)
+    {
+        this.points = points;
+        this.normal = normal;
+        this.direction = direction;
+    }
+
+    public int GetDirInt()
+    {
+        if (direction == BlockingDirection.TOWARDS_NORMAL)
+        {
+            return -1;
+        }
+        else if (direction == BlockingDirection.AWAY_FROM_NORMAL)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 }

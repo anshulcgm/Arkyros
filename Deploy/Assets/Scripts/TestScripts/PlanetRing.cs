@@ -41,7 +41,7 @@ public class PlanetRing : MonoBehaviour {
         }
         outerRing.AddRange(innerRingA);
         outerRing.AddRange(innerRingB);
-        Mesh mesh = MeshBuilder3D.GetMeshFrom(outerRing, triangles);
+        Mesh mesh = null;
         //set the mesh in the meshFilter component so that we can see it.
         MeshFilter filter = GetComponent<MeshFilter>();
         filter.mesh = mesh;

@@ -12,7 +12,6 @@ public class SeedBuilder : MonoBehaviour
     public float normalfactorRangeHigh;
 
     public Vector3 center;
-    public Transform planet;
     public float minsize;
     public float maxsize;
     public bool showWireFrame;
@@ -23,8 +22,7 @@ public class SeedBuilder : MonoBehaviour
     
     public void Start()
     {
-        planet = GameObject.FindGameObjectWithTag("planet").transform;
-        isSpiky = UnityEngine.Random.value <= 0.005;
+        isSpiky = true;
         //0.5% spiky
         if (isSpiky)
         {
@@ -54,7 +52,6 @@ public class SeedBuilder : MonoBehaviour
                 ShapeBuilder3D sh = g.GetComponent<ShapeBuilder3D>();
                 sh.Initialize(shape.points.ToArray(), shape.triangles);
             }
-            transform.position -= (transform.position - planet.position).normalized * 1000;
         }
           
     }
@@ -183,11 +180,7 @@ public class SeedBuilder : MonoBehaviour
     {
         List<int[]> triangles = new List<int[]>();
         buildFaces = new List<int[]>();
-        Vector3 normal = UnityEngine.Random.onUnitSphere; 
-        if(isSpiky)
-        {
-            normal += (center - planet.position).normalized * 3;
-        }
+        Vector3 normal = UnityEngine.Random.onUnitSphere;
         Vector3 polygonCenter = normal.normalized * UnityEngine.Random.Range(minsize, maxsize) + center;
         //get the polygon
         List<Vector3> polygon = GetRandomPolygon(normal, polygonCenter, minsize, maxsize, numpts);

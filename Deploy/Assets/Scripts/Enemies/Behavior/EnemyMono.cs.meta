@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Deploy/Assets/Scripts/Enemies/Behavior/EnemyMono.cs.meta
+guid: 2d9ef12971f93a443aa8e9491b6361cd
+=======
+guid: 47d5ab0e1897a0d438480a45fc73c2f2
+>>>>>>> 9907e08e05888cca1a633fbcbf58e46ec798fd95:Deploy/Assets/Scripts/Enemies/Behavior/EnemyMono.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
