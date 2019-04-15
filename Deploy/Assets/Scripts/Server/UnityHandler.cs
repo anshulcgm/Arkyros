@@ -104,8 +104,11 @@ public static class UnityHandler
     
     private static void Terrain(string message)
     {
-        string seed = message.Substring(1, message.Length - 1);
-        int seed = int.Parse(seed);
-        //then do something with the seed
+        string seed = message.Substring(1, message.Length - 1); // retrieve seed from string
+        int seed = int.Parse(seed); //parse into an integar
+        //find the planet, activate it, set the seed then generate
+        GameObject planet = GameObject.FindGameObjectWithTag("planet");
+        planet.SetActive(true);
+        planet.GetComponent<PlanetMono>().Create(seed);
     }
 }
