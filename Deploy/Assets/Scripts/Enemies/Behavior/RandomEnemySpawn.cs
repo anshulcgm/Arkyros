@@ -67,8 +67,6 @@ public class RandomEnemySpawn: MonoBehaviour {
             {
                 Vector3 randomInstanPoint = Random.insideUnitSphere * 30.0f + point; //Instantiates enemies within 30 meter radius of original instantiation Point 
                 GameObject enemy = (GameObject)Instantiate(flyingKamikaze, randomInstanPoint, Quaternion.identity);
-                Enemy e = new Enemy(EnemyType.FlyingKamikaze, 50, 10, enemy);
-                Enemy.enemyList.Add(e);
                 InstantiationRequest instanRequest = new InstantiationRequest("KamikaziBird", randomInstanPoint, Quaternion.identity, false);
                 o.AddInstantiationRequest(instanRequest);
 

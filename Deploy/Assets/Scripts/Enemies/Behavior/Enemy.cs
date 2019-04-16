@@ -8,9 +8,10 @@ public class Enemy: IClass {
     public static List<Enemy> enemyList = new List<Enemy>();
 
     private EnemyType type;
-    private float hp; //could be double, base hp
-    private int ms; //Movement speed
-    private GameObject referenceObject;
+
+    public StatSystem enemyStats;
+
+    public GameObject referenceObject;
 
     private ObjectUpdate o;
     public Type MonoScript
@@ -22,18 +23,9 @@ public class Enemy: IClass {
     }
 
     //Constructor enemy with no weapon
-    public Enemy(EnemyType type, float hp, int ms, GameObject referenceObject)
+    public Enemy(float maxhp, int ms, float defense, GameObject referenceObject)
     {
-        this.type = type;
-        this.hp = hp;
-        this.ms = ms;
-        this.referenceObject = referenceObject;
-        o = new ObjectUpdate();
-    }
-    public Enemy(float hp, int ms, GameObject referenceObject)
-    {
-        this.hp = hp;
-        this.ms = ms;
+        enemyStats = new StatSystem(maxhp, ms, defense);
         this.referenceObject = referenceObject;
         o = new ObjectUpdate();
     }
@@ -44,24 +36,10 @@ public class Enemy: IClass {
         return type;
     }
 
-    public float getHp()
-    {
-        return hp;
-    }
 
-    public int getMS()
-    {
-        return ms;
-    }
     //Everything above is accessor
 
     //HP mutator
-    public void changeHealth(float adjustment)
-    {
-        //For health, have player create empty gameobject in the enemy collider when some sort of damage occurs with a tag such as "AOE"
-        //Then in the OnCollisionEnter() in this class, check if the gameObject has certain tag such as "AOE" and adjust health accordingly
-        hp += adjustment;
-    }
     public void changePosition(Vector3 newPos)
     {
         referenceObject.transform.position = newPos;

@@ -8,7 +8,7 @@ public class Golem : Enemy {
 	private float boulderSpeed;
 	private float weight;
 	
-	public Golem(float hp, int ms, GameObject referenceObject, float weight, float boulderSpeed, float groundPoundSpeed, float knockbackSpeed) : base(hp,ms,referenceObject) {
+	public Golem(float hp, int ms, float defense, GameObject referenceObject, float weight, float boulderSpeed, float groundPoundSpeed, float knockbackSpeed) : base(hp,ms,defense, referenceObject) {
 		this.weight = weight;
 		this.boulderSpeed = boulderSpeed;
 		this.groundPoundSpeed = groundPoundSpeed;
