@@ -7,29 +7,35 @@ public class IrradiatedEnemies: Enemy
 
         private float radius;
         private float speedBuff;
-        private float maxhpBuff;
+        private float hpBuff;
         private float attackBuff;
-        private float reloadBuff;
+    //private float reloadBuff;
 
-        
+ 
     
 
         //Constructor
-        public IrradiatedEnemies(float maxhp, int ms, float defense, GameObject referenceObject, float radius, float speedBuff, float maxhpBuff, float attackBuff, float reloadBuff) : base(maxhp, ms, defense,referenceObject)
+        public IrradiatedEnemies(float maxhp, int ms, float defense, GameObject referenceObject, float radius, float speedBuff, float hpBuff, float attackBuff) : base(maxhp, ms, defense,referenceObject)
         {
             this.radius = radius;
             this.speedBuff = speedBuff;
-            this.maxhpBuff = maxhpBuff;
+            this.hpBuff = hpBuff;
             this.attackBuff = attackBuff;
-            this.reloadBuff = reloadBuff;
+       
         }
 
 
-        public void spawnEnemy()
+        public void spawnEnemy(Dictionary<GameObject, int> enemiesToSpawn, float radius)
         {
             if (enemyStats.getHealth() < enemyStats.getMaxHealth() * 0.1)
             {
-              //Spawn code for other enemies 
+               foreach(KeyValuePair<GameObject, int> kvp in enemiesToSpawn)
+               {
+                   for(int i = 0; i < kvp.Value; i++)
+                   {
+                       RandomEnemySpawn.spawnEnemyWithinRadius(kvp.Key, radius, referenceObject.transform.position);
+                   }
+               }
             }
         }
 
@@ -42,6 +48,7 @@ public class IrradiatedEnemies: Enemy
                 if (hitColliders[i].CompareTag("Enemy"))
                 {
                     //hitColliders[i].gameObject.attack += attackBuff;
+                    //Will write code for this when we can change specialized values of enemy classes
 
                 }
                 i++;
@@ -56,9 +63,10 @@ public class IrradiatedEnemies: Enemy
             {
                 if (hitColliders[i].CompareTag("Enemy"))
                 {
-                    if (maxhpBuff != 0)
+                    if (hpBuff != 0)
                     {
-                        //hitColliders[i].gameObject.maxhp *= maxhpBuff;
+                      //hitColliders[i].gameObject.maxhp *= maxhpBuff;
+                      hitColliders[i].gameObject.GetComponent<StatManager>().changeHealth(hpBuff);
                     }
 
                 }
@@ -66,19 +74,6 @@ public class IrradiatedEnemies: Enemy
             }
         }
 
-        public void updateEnemiesReload()
-        {
-            Collider[] hitColliders = Physics.OverlapSphere(referenceObject.transform.position, radius);
-            int i = 0;
-            while (i < hitColliders.Length)
-            {
-                if (hitColliders[i].CompareTag("Enemy"))
-                {
-                    //hitColliders[i].gameObject.reload -= reloadBuff;
-                }
-                i++;
-            }
-        }
 
         public void updateEnemiesSpeed()
         {
@@ -88,7 +83,7 @@ public class IrradiatedEnemies: Enemy
             {
                 if (hitColliders[i].CompareTag("Enemy"))
                 {
-                    //hitColliders[i].gameObject.speed += speedBuff;
+                   hitColliders[i].gameObject.GetComponent<StatManager>().enemyMultiplySpeed(speedBuff);
                 }
                 i++;
             }
@@ -104,9 +99,9 @@ public class IrradiatedEnemies: Enemy
             radius = radius * factor;
         }
 
-        public float getMaxHpBuff()
+        public float geHpBuff()
         {
-            return maxhpBuff;
+            return hpBuff;
         }
         public float getSpeedBuff()
         {
@@ -116,10 +111,7 @@ public class IrradiatedEnemies: Enemy
         {
             return attackBuff;
         }
-        public float getReloadBuff()
-        {
-            return reloadBuff;
-        }
+    
 
 }
 

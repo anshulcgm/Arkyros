@@ -36,6 +36,13 @@ public class Enemy: IClass {
         return type;
     }
 
+    public void destroyEnemy()
+    {
+        if(enemyStats.getHealth() <= 0)
+        {
+            GameObject.Destroy(referenceObject);
+        }
+    }
 
     //Everything above is accessor
 

@@ -9,7 +9,7 @@ public class GolemAttackBehavior : MonoBehaviour {
     public float shootRange;
     public float noActionRange;
 
-    public float chargeSpeed;
+    private float chargeSpeed;
     public float groundPoundRadius;
 
     private GameObject mainCamera;
@@ -27,6 +27,7 @@ public class GolemAttackBehavior : MonoBehaviour {
 	void Start () {
 
         rb = GetComponent<Rigidbody>();
+        chargeSpeed = GetComponent<StatManager>().golemChargeSpeed;
         player = GameObject.FindGameObjectWithTag("Player");
         anim = transform.GetChild(0).GetComponent<Animator>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");

@@ -6,7 +6,7 @@ public class PlayerAttack : MonoBehaviour {
 
     private GameObject player;
     private Rigidbody r;
-    public float speed;
+    private float speed;
     public float distance;
     public GameObject explosion;
 
@@ -14,6 +14,7 @@ public class PlayerAttack : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        speed = GetComponent<StatManager>().kamikazeMovementSpeed;
         r = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();

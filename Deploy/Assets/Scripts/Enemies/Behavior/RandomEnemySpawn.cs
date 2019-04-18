@@ -148,6 +148,31 @@ public class RandomEnemySpawn: MonoBehaviour {
             }
         }
     }
-
-  
+    public static void spawnEnemyWithinRadius(GameObject enemy, float radius, Vector3 spawnPos)
+    {
+        if(enemy.name == "KamikaziBirdShort")
+        {
+           Vector3 instantiationPoint = Random.insideUnitSphere * radius + spawnPos + new Vector3(0, 30f, 0);
+           ObjectUpdate o = new ObjectUpdate();
+           Instantiate(enemy, instantiationPoint, Quaternion.identity);
+            InstantiationRequest instanRequest = new InstantiationRequest("KamikaziBird", instantiationPoint, Quaternion.identity, false);
+            o.AddInstantiationRequest(instanRequest);
+        }
+        else if(enemy.name == "GolemParent")
+        {
+            Vector3 basePoint = Random.insideUnitSphere * radius + spawnPos;
+            Vector3 instanPoint = Vector3.zero;
+            Vector3 raycastDirection = (- basePoint).normalized;
+            RaycastHit hit;
+            if (Physics.Raycast(basePoint, raycastDirection, out hit, Mathf.Infinity))
+            {
+                instanPoint = hit.point;
+            }
+            else
+            {
+                Debug.Log("Raycast hit not detected");
+            }
+            Instantiate(enemy, instanPoint, Quaternion.identity);
+        }
+    }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 114745375724791258}
   - component: {fileID: 54883796390546080}
   - component: {fileID: 65593059741827472}
+  - component: {fileID: 6396872423448316767}
   m_Layer: 0
   m_Name: KamakaziBirdShort
   m_TagString: Enemy
@@ -79,7 +80,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84af4c255455597418aaf738392248e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 60
   distance: 200
   explosion: {fileID: 1742013225946848, guid: b3d8264aa7d2d824a8a503e45291ddf4, type: 3}
 --- !u!54 &54883796390546080
@@ -111,6 +111,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 17.56165, y: 2.3900635, z: 15.866533}
   m_Center: {x: -0.013350678, y: 2.1012146, z: 1.8051323}
+--- !u!114 &6396872423448316767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002896406898434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa1fc3738f7d924c9ab633b27a7da06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kamikazeMaxHP: 0
+  kamikazeDefense: 0
+  kamikazeMovementSpeed: 0
+  kamikazeIQ: 0
+  golemMaxHp: 0
+  golemDefense: 0
+  golemMovementSpeed: 0
+  golemChargeSpeed: 0
+  golemProjectileSpeed: 0
+  IRMaxHp: 0
+  IRDefense: 0
+  IRMovementSpeed: 0
+  IRRadiusAffect: 0
+  IRSpeedBuff: 0
+  IRMaxHpBuff: 0
+  IRAttackBuff: 0
 --- !u!1 &1045979456465860
 GameObject:
   m_ObjectHideFlags: 0
