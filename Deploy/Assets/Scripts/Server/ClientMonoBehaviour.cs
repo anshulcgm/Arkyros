@@ -5,12 +5,12 @@ using UnityEngine;
 public class ClientMonoBehaviour : MonoBehaviour {
     Client client;
     UDP udp;
-    string server_ipaddr;
+    public string server_ipaddr;
 	// Use this for initialization
 	void Start () {
 		udp = new UDP();
         udp.StartUDP();
-        server_ipaddr = ""; //find way to get ip addr
+        server_ipaddr = ""; //have the user enter the server_ipaddr for now
         client = new Client(server_ipaddr, gameObject, udp);
 	}
 	
