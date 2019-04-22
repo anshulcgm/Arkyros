@@ -22,27 +22,12 @@ public class Client
            // Debug.Log("CLIENT: new instance created");
         }
     }
-
-    //sends player input to the serverIP
-    public void SendPlayerInput()
+    public void SendPositionAndOrientation()
     {
-        string allKeysPressed = "";
-        //loop through all ASCII chars, if the char is pressed, add it to string of keys pressed.
-        for (int i = 0; i < 128; i++)
-        {
-            string keyPressed = Convert.ToChar(i) + "";
-            if (Input.GetKeyDown(keyPressed))
-            {
-                allKeysPressed += keyPressed;
-            }
-        }
-        string rotationStr = player.transform.rotation.ToString();
-        string formattedInput = DataParserAndFormatter.GetClientInputFormatted(allKeysPressed, rotationStr);
-        udp.Send(formattedInput, serverIP);
-        if (debug == true)
-        {
-           // Debug.Log("Sent player input to " + serverIP);
-        }
+        string position = player.transform.position.ToString();
+        string orientation = player.transform.rotation.ToString();
+        string client_ipaddr = udp.GetLocalIPAddress();
+        udp.Send("{U|" + position + "|" + orientation + "|" + client_ipaddr + "}");
     }
 
     //reads in server output and does what the server says
