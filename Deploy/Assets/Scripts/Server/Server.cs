@@ -105,11 +105,7 @@ public class Server
         }        
     }
 
-    ///@TODO this function needs to be finished. It should take all of the data recieved by players and move them accordingly.
-    public void HandlePlayerInputs()
-    {
 
-    }
 
     //private because we only want to access it from here
     private class Player
