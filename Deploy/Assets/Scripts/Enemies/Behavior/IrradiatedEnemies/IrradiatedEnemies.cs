@@ -5,55 +5,64 @@ using UnityEngine;
 public class IrradiatedEnemies: Enemy
 {
 
-        private float radius;
-        private float speedBuff;
-        private float hpBuff;
-        private float attackBuff;
+    private float radius;
+    private float speedBuff;
+    private float hpBuff;
+    private float attackBuff;
+
+    private float pAttackDebuff; //Possible Value: .9
+    private float pSpeedDebuff; //Possible Value: .9
+
     //private float reloadBuff;
 
- 
-    
 
-        //Constructor
-        public IrradiatedEnemies(float maxhp, int ms, float defense, GameObject referenceObject, float radius, float speedBuff, float hpBuff, float attackBuff) : base(maxhp, ms, defense,referenceObject)
-        {
+
+
+    //Constructor
+    public IrradiatedEnemies(float maxhp, int ms, float defense, GameObject referenceObject, float radius, float speedBuff, float hpBuff, float attackBuff, float pAttackDebuff, float pSpeedDebuff) : base(maxhp, ms, defense,referenceObject)
+    {
             this.radius = radius;
             this.speedBuff = speedBuff;
             this.hpBuff = hpBuff;
             this.attackBuff = attackBuff;
-       
-        }
+            this.pAttackDebuff = pAttackDebuff;
+            this.pSpeedDebuff = pSpeedDebuff;
+    }
 
 
-        public void spawnEnemy(Dictionary<GameObject, int> enemiesToSpawn, float radius)
+    public void spawnEnemy(Dictionary<GameObject, int> enemiesToSpawn, float radius)
+    {
+             
+        if (enemyStats.getHealth() < enemyStats.getMaxHealth() * 0.1)
         {
-            if (enemyStats.getHealth() < enemyStats.getMaxHealth() * 0.1)
+        //Spawn code for other enemies - Anshul Task 6
+        float maxHPProportion = Random.Range(1, 101) * 0.01f; 
+                
+        foreach (KeyValuePair<GameObject, int> kvp in enemiesToSpawn)
             {
-               foreach(KeyValuePair<GameObject, int> kvp in enemiesToSpawn)
-               {
-                   for(int i = 0; i < kvp.Value; i++)
-                   {
-                       RandomEnemySpawn.spawnEnemyWithinRadius(kvp.Key, radius, referenceObject.transform.position);
-                   }
-               }
-            }
-        }
-
-        public void updateEnemiesAttack()
-        {
-            Collider[] hitColliders = Physics.OverlapSphere(referenceObject.transform.position, radius);
-            int i = 0;
-            while (i < hitColliders.Length)
-            {
-                if (hitColliders[i].CompareTag("Enemy"))
+                for(int i = 0; i < kvp.Value; i++)
                 {
-                    //hitColliders[i].gameObject.attack += attackBuff;
-                    //Will write code for this when we can change specialized values of enemy classes
-
+                    RandomEnemySpawn.spawnEnemyWithinRadius(kvp.Key, radius, referenceObject.transform.position, maxHPProportion);
                 }
-                i++;
             }
         }
+    }
+
+    public void updateEnemiesAttack()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(referenceObject.transform.position, radius);
+        int i = 0;
+        while (i < hitColliders.Length)
+        {
+            if (hitColliders[i].CompareTag("Enemy"))
+            {
+                //hitColliders[i].gameObject.attack += attackBuff;
+                //Will write code for this when we can change specialized values of enemy classes
+
+            }
+            i++;
+        }
+    }
 
         public void updateEnemiesHP()
         {

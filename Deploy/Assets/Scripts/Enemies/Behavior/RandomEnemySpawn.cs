@@ -148,13 +148,14 @@ public class RandomEnemySpawn: MonoBehaviour {
             }
         }
     }
-    public static void spawnEnemyWithinRadius(GameObject enemy, float radius, Vector3 spawnPos)
+    public static void spawnEnemyWithinRadius(GameObject enemy, float radius, Vector3 spawnPos, float maxHPProportion)
     {
         if(enemy.name == "KamikaziBirdShort")
         {
            Vector3 instantiationPoint = Random.insideUnitSphere * radius + spawnPos + new Vector3(0, 30f, 0);
            ObjectUpdate o = new ObjectUpdate();
-           Instantiate(enemy, instantiationPoint, Quaternion.identity);
+           GameObject bird = Instantiate(enemy, instantiationPoint, Quaternion.identity);
+            bird.GetComponent<StatManager>().kamikazeMaxHP *= maxHPProportion;
             InstantiationRequest instanRequest = new InstantiationRequest("KamikaziBird", instantiationPoint, Quaternion.identity, false);
             o.AddInstantiationRequest(instanRequest);
         }
@@ -172,7 +173,8 @@ public class RandomEnemySpawn: MonoBehaviour {
             {
                 Debug.Log("Raycast hit not detected");
             }
-            Instantiate(enemy, instanPoint, Quaternion.identity);
+            GameObject golem = Instantiate(enemy, instanPoint, Quaternion.identity);
+            golem.GetComponent<StatManager>().golemMaxHp *= maxHPProportion;
         }
     }
 }

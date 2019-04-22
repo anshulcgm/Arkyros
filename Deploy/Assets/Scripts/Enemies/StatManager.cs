@@ -14,6 +14,9 @@ public class StatManager : MonoBehaviour
     public float golemMovementSpeed;
     public float golemChargeSpeed;
     public float golemProjectileSpeed;
+    public float golemKnockbackDmg;
+    public float golemGroundPoundDmg;
+    public float golemProjectileDmg;
 
     public float IRMaxHp;
     public float IRDefense;
@@ -22,6 +25,8 @@ public class StatManager : MonoBehaviour
     public float IRSpeedBuff;
     public float IRMaxHpBuff;
     public float IRAttackBuff;
+    public float IRPlayerAttackDebuff; 
+    public float IRPlayerSpeedDebuff;
 
     private KamikazeEnemy flyingKam;
     private Golem golem;
@@ -38,12 +43,12 @@ public class StatManager : MonoBehaviour
         }
         else if(gameObject.name == "GolemParent")
         {
-            golem = new Golem(golemMaxHp, (int)golemMovementSpeed, golemDefense, gameObject, golemProjectileSpeed, golemChargeSpeed);
+            golem = new Golem(golemMaxHp, (int)golemMovementSpeed, golemDefense, gameObject, golemProjectileSpeed, golemChargeSpeed, golemKnockbackDmg, golemGroundPoundDmg, golemProjectileDmg);
             type = EnemyType.Brawler;
         }
         else if(gameObject.name == "IREnemy")
         {
-            IREnemy = new IrradiatedEnemies(IRMaxHp, (int)IRMovementSpeed, IRDefense, gameObject, IRRadiusAffect, IRSpeedBuff, IRMaxHpBuff, IRAttackBuff);
+            IREnemy = new IrradiatedEnemies(IRMaxHp, (int)IRMovementSpeed, IRDefense, gameObject, IRRadiusAffect, IRSpeedBuff, IRMaxHpBuff, IRAttackBuff, IRPlayerAttackDebuff, IRPlayerSpeedDebuff);
             type = EnemyType.IrradiatedEnemy;
         }
         //Change values in Enemy Behavior scripts to align with these values
