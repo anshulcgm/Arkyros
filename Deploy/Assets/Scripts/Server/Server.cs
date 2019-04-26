@@ -50,7 +50,7 @@ public class Server
     {
         //loops through each gameObject in the list of game objects to update and sends a broadcast for updating them to the clients
         for (int g = 0; g < gameObjectsToUpdate.Count(); g += 1) {
-            if(gameObjectsToUpdate[g] == null) { continue; }
+            if(gameObjectsToUpdate[g] == null) { continue; } //skip if it has been destroyed
             string message = "U{" + g.ToString() + "|" + gameObjectsToUpdate[g].transform.position.ToString() + "|" + gameObjectsToUpdate[g].transform.rotation.ToString() + "}";
 
             //sending to all clients
@@ -90,6 +90,20 @@ public class Server
         }
     }
 
+    public void SendAnimation(GameObject Object, string animation_name, bool isAnimating)
+    {
+        string boolchar = "F";
+        if (isAnimating)
+        {
+            boolchar = "T";
+        }
+        string message = "A{" + gameObjectsToUpdate.IndexOf(Object).ToString() + "|" + animation_name + "|" + boolchar + "}");
+        foreach (string clientIP in clientIPs)
+        {
+            udp.Send(message, clientIP);
+        }
+    }
+
     public List<string> clientIPs = new List<string>();
     public void GetClients()
     {
@@ -103,12 +117,6 @@ public class Server
                 clientIPs.Add(message);
             }
         }        
-    }
-
-    ///@TODO this function needs to be finished. It should take all of the data recieved by players and move them accordingly.
-    public void HandlePlayerInputs()
-    {
-
     }
 
     //private because we only want to access it from here

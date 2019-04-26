@@ -100,6 +100,10 @@ public class DataParserAndFormatter
             {
                 m = new Message(ServerMessageType.TERRAIN, messageText);
             }
+            else if (messageType.Equals("A"))
+            {
+                m = new Message(ServerMessageType.ANIMATION, messageText);
+            }
             messages.Add(m);
         }
         return messages;

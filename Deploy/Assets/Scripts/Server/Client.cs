@@ -26,8 +26,8 @@ public class Client
     {
         string position = player.transform.position.ToString();
         string orientation = player.transform.rotation.ToString();
-        string client_ipaddr = udp.GetLocalIPAddress();
-        udp.Send("{U|" + position + "|" + orientation + "|" + client_ipaddr + "}");
+        string client_ipaddr = UDP.GetLocalIPAddress();
+        udp.Send("{U|" + position + "|" + orientation + "|" + client_ipaddr + "}", serverIP); //send position and orientation and ipaddr of client to server for update
     }
 
     //reads in server output and does what the server says

@@ -43,6 +43,10 @@ public static class UnityHandler
         {
             Terrain(m.messageText);
         }
+        else if (m.messageType == ServerMessageType.ANIMATION)
+        {
+            Animate(m.messageText);
+        }
         
     }
 
@@ -53,7 +57,7 @@ public static class UnityHandler
             return;
         }
         //all the vars we'll need 
-        string[] data = message.Substring(1, message.Length - 1).Split('|');  // for splitting string
+        string[] data = message.Substring(1, message.Length - 2).Split('|');  // for splitting string
         int index = 0; // will be easier when mostRecentMessage gets larger
         Debug.Log(data[index] + " jjjjkklkkf " + gameObjects.Count);
 
@@ -95,7 +99,7 @@ public static class UnityHandler
     
     private static void Destroy(string message)
     {
-        string data = message.Substring(1, message.Length - 1);
+        string data = message.Substring(1, message.Length - 2);
         int index = int.Parse(data);
         UnityEngine.Object.Destroy(gameObjects[index]); //destroy the object then set it to a null
         gameObjects[index] = null;      
@@ -104,11 +108,29 @@ public static class UnityHandler
     
     private static void Terrain(string message)
     {
-        string seed = message.Substring(1, message.Length - 1); // retrieve seed from string
-        int seed = int.Parse(seed); //parse into an integar
+        string string_seed = message.Substring(1, message.Length - 2); // retrieve seed from string
+        int seed = int.Parse(string_seed); //parse into an integar
         //find the planet, activate it, set the seed then generate
         GameObject planet = GameObject.FindGameObjectWithTag("planet");
         planet.SetActive(true);
         planet.GetComponent<PlanetMono>().Create(seed);
+    }
+    private static void Animate(string message)
+    {
+        string[] data;
+        int index = 0;
+        bool isAnimating;
+        data = message.Substring(1, message.Length - 2).Split('|'); //split the message
+        //set the bool to true if the last entry in the str is T or false if it is F
+        if (data[index + 2] == "T")
+        {
+            isAnimating = true;
+        }
+        else
+        {
+            isAnimating = false;
+        }        
+        gameObjects[int.Parse(data[index])].GetComponent<Animator>().SetBool(data[index+1], isAnimating); //get the gameobj from the index, change the animation to true or false
+
     }
 }
