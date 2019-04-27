@@ -10,7 +10,7 @@ public class Client
     UDP udp;
     GameObject player;
     string serverIP;
-    public bool debug = true;
+    public bool debug = false;
 
     public Client(string serverIP, GameObject player, UDP udp)
     {

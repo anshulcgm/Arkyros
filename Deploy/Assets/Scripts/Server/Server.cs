@@ -10,7 +10,7 @@ public class Server
     private UDP udp;
     private List<Player> players;
     private List<GameObject> gameObjectsToUpdate;
-    public bool debug = true;
+    public bool debug = false;
     
     public Server(UDP udp)
     {
@@ -23,8 +23,7 @@ public class Server
         }
     }
     
-    ///@TODO this function needs to be finished. It should send a broadcast on the LAN with all the things
-    ///required by the UnityHandler.Create function.
+    // this function sends a broadcast on the LAN with all the things necessary for client to creat the new object
     public void Create(GameObject g, string resourcePath)
     {
         string message = "C{" + resourcePath + "|" + g.transform.position.ToString() + "|" + g.transform.rotation.ToString() + "}";
@@ -44,8 +43,7 @@ public class Server
         gameObjectsToUpdate.Add(g);
     }
 
-    ///@TODO this function needs to be finished. It should send a broadcast on the LAN for 
-    ///each gameObject in gameObjectsToUpdate with all the things required by the UnityHandler.Update function.
+    //this function sends all the necessary things for the clinet to update the objrct
     public void UpdateGameObjects()
     {
         //loops through each gameObject in the list of game objects to update and sends a broadcast for updating them to the clients
@@ -97,7 +95,7 @@ public class Server
         {
             boolchar = "T";
         }
-        string message = "A{" + gameObjectsToUpdate.IndexOf(Object).ToString() + "|" + animation_name + "|" + boolchar + "}");
+        string message = ("A{" + gameObjectsToUpdate.IndexOf(Object).ToString() + "|" + animation_name + "|" + boolchar + "}"); // gameobject index with animation and true/false char
         foreach (string clientIP in clientIPs)
         {
             udp.Send(message, clientIP);

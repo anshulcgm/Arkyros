@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DataParserAndFormatter
 {
-    //these are for the client inputs to the server
+    //these are for the client inputs to the server, not used for now
     static string beginKeyInput = "{{";
     static string endKeyInput = "}}";
     static string beginOrientationInput = "[[";
