@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 23581065862720710}
   - component: {fileID: 1262042915742738782}
   - component: {fileID: 1401434301}
-  - component: {fileID: 1401434305}
-  - component: {fileID: 1401434306}
+  - component: {fileID: 3964492238729989579}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -110,7 +109,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1401434305
+--- !u!114 &3964492238729989579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,22 +118,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1536539931531146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f72b4232a0d934449af3608d64310796, type: 3}
+  m_Script: {fileID: 11500000, guid: 149b6f573de243946a0c0a8fa3c8717b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 0
   jump_Force: 10
---- !u!114 &1401434306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1536539931531146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3789f0f84b93df64aa246925cb656457, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraOne: {fileID: 0}
-  cameraTwo: {fileID: 0}
