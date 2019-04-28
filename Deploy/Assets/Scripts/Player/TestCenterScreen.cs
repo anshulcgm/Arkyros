@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestCenterScreen : MonoBehaviour
 {
-    public GameObject[] onScreen;
+    //public GameObject[] onScreen;
     public List<GameObject> screenTargets = new List<GameObject>();
     public GameObject target;
 
@@ -17,7 +17,7 @@ public class TestCenterScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        onScreen = GameObject.FindGameObjectsWithTag("Enemy");
+        //onScreen = GameObject.FindGameObjectsWithTag("Enemy");
 
         //screenTargets = onScreen.ToList<GameObject>();
 

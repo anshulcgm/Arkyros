@@ -14,7 +14,7 @@ public class Template : MonoBehaviour
     Rigidbody rigidbody;
     Stats stats;
 
-    //DateTime start;
+    DateTime start;
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +31,18 @@ public class Template : MonoBehaviour
     {
         if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
         {
-            //start = DateTime.Now;
+            start = DateTime.Now;
             anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
 
+            //put any setup code here, before the ability is actually cast
 
 
+            
+        }
+
+        if ((DateTime.Now - start).TotalSeconds < 1)
+        {
             /*
              * All the code for the ability that you want to write
              * transform.forward for the direction the player is 
@@ -44,6 +50,7 @@ public class Template : MonoBehaviour
              * instantiating new objects
              * to damage enemy, EnemyGameObject.GetComponent<StatManager>().changeHealth(amount), amount can be positive or negative
              */
+
         }
 
 
