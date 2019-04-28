@@ -11,6 +11,9 @@ public class Template : MonoBehaviour
 
     private Animator anim;
 
+    Rigidbody rigidbody;
+    Stats stats;
+
     //DateTime start;
 
     // Start is called before the first frame update
@@ -18,6 +21,9 @@ public class Template : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
+        rigidbody = GetComponent<Rigidbody>();
+        stats = GetComponent<Stats>();
+
     }
 
     // Update is called once per frame

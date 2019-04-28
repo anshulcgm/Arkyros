@@ -13,7 +13,7 @@ using System;
 
 //For the following stat arrays, [0] is the base, [1] is the multiplier, and [2] is the flat
 public enum statModifier { Base, Multiplier, Flat };
-public enum stats { HealthRegen, ManaRegen, Speed, Attack, AttackSpeed, Defense };
+public enum stat { HealthRegen, /*ManaRegen*/ Speed, Attack, AttackSpeed, Defense };
 
 public class Stats : MonoBehaviour
 {
@@ -22,15 +22,15 @@ public class Stats : MonoBehaviour
 
     public float maxHealth;
     public float health;
-    public float maxMana;
-    public float mana;
+    //public float maxMana;
+    //public float mana;
 
 
     //Might be easier to use two enums and have a 2D array
 
 
 
-    public float[,] allStats = new float[6, 3]; //first column is base stats, second multiplier, third flat. Each 
+    public float[,] allStats = new float[5, 3]; //first column is base stats, second multiplier, third flat. Each 
 
     /*
     public float[] healthRegen = new float[2];

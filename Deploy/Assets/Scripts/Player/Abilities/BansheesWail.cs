@@ -30,7 +30,7 @@ public class BansheesWail : MonoBehaviour
             anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
             cooldown = 720;                          //placeholder time, divide by 60 for cooldown in seconds
 
-            Collider[] hits = Physics.OverlapSphere(transform.position, radius);
+            Collider[] hits = Physics.OverlapSphere(transform.position, 20);
             foreach (Collider hit in hits)
             {
                 // Detects if the object is an "enemy" and if so slows it
@@ -42,7 +42,7 @@ public class BansheesWail : MonoBehaviour
                     // animation will be something like a warcry, i can get footage of Merveil doing it
                     // cooldown = 12 seconds???
 
-                    hit.gameObject.GetComponent<StatManager>().enemyMultiplySpeed(0.4);
+                    //hit.gameObject.GetComponent<StatManager>().enemyMultiplySpeed(0.4);
 
                 }
             }
