@@ -11,12 +11,15 @@ public class NewBehaviourScript : MonoBehaviour
 
     private Animator anim;
 
+    Stats stats;
+
     DateTime start;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
+        stats = GetComponent<Stats>();
     }
 
     // Update is called once per frame
@@ -30,7 +33,7 @@ public class NewBehaviourScript : MonoBehaviour
             //allStats[(int)stats.Speed, (int)statModifier.Multiplier] * 2; //double speed
             if((DateTime.Now - start).TotalSeconds > 6) //when duration of ability is over, set back to original speed
             {
-                //allStats[(int)stats.Speed, (int)statModifier.Multiplier] / 2; //original speed
+                stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] /= 2; //original speed
             }
         }
         if (cooldown > 0)
