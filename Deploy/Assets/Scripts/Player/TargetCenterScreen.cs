@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestCenterScreen : MonoBehaviour
+public class TargetCenterScreen : MonoBehaviour
 {
-    //public GameObject[] onScreen;
     public List<GameObject> screenTargets = new List<GameObject>();
     public GameObject target;
+
+    public GameObject[] enemies;
 
     // Start is called before the first frame update
     void Start()
@@ -17,18 +18,28 @@ public class TestCenterScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //onScreen = GameObject.FindGameObjectsWithTag("Enemy");
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        //screenTargets = onScreen.ToList<GameObject>();
+        foreach(GameObject potentialEnemy in enemies)
+        {
+            Vector3 position = Camera.main.WorldToViewportPoint(potentialEnemy.transform.position);
+            if(position.x > 0 && position.y < 1)
+            {
+                if(position.y > 0 && position.y < 1)
+                {
+                    if(position.z > 0)
+                    {
+                        screenTargets.Add(potentialEnemy);
+                    }
+                }
+            }
+        }
+
 
         if (screenTargets.Count < 1)
             return;
 
         target = screenTargets[targetIndex()];
-        if (Input.GetKey("e"))
-        {
-            this.gameObject.transform.position = transform.position;
-        }
     }
 
     public int targetIndex()

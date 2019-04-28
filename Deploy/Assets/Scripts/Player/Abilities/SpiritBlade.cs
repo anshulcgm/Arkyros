@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Template : MonoBehaviour
+public class SpiritBlade : MonoBehaviour
 {
     public float cooldown = 0;
 
@@ -12,6 +12,8 @@ public class Template : MonoBehaviour
     private Animator anim;
 
     private bool buffActive;
+
+    public GameObject SpiritBladeEnergySlash;
 
     Rigidbody rigidbody;
     Stats stats;
@@ -42,18 +44,13 @@ public class Template : MonoBehaviour
             //put any setup code here, before the ability is actually cast
 
 
-            
+
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1)
         {
-            /*
-             * All the code for the ability that you want to write
-             * transform.forward for the direction the player is 
-             * maybe setting colliders
-             * instantiating new objects
-             * to damage enemy, EnemyGameObject.GetComponent<StatManager>().changeHealth(amount), amount can be positive or negative
-             */
+            Instantiate(SpiritBladeEnergySlash, transform.position + transform.forward, Quaternion.identity);
+
 
         }
 

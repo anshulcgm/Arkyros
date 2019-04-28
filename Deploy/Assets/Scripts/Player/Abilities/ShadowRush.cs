@@ -39,7 +39,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
         if ((DateTime.Now - start).TotalSeconds > 6) //when duration of ability is over, set back to original speed
         {
-            if(buffActive)
+            if (buffActive)
             {
                 //allStats[(int)stats.Speed, (int)statModifier.Multiplier] / 2; //original speed
                 buffActive = false;
