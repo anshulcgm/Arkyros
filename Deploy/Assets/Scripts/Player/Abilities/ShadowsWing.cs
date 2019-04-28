@@ -11,6 +11,8 @@ public class ShadowsWing : MonoBehaviour
 
     private Animator anim;
 
+    private bool buffActive;
+
     Rigidbody rigidbody;
     Stats stats;
 
@@ -36,12 +38,16 @@ public class ShadowsWing : MonoBehaviour
 
             //put any setup code here, before the ability is actually cast
             //allStats[(int)stats.Defense, (int)statModifier.Multiplier] * 3; //Triple Defense
+            buffActive = true;
         }
 
         if ((DateTime.Now - start).TotalSeconds > 5 || !Input.GetKey("e"))
         {
-            cooldown = (float)(DateTime.Now - start).TotalSeconds*60;
-            //allStats[(int)stats.Defense, (int)statModifier.Multiplier] / 3; //return to original Defense
+            if(buffActive)
+            {
+                cooldown = (float)(DateTime.Now - start).TotalSeconds * 60;
+                //allStats[(int)stats.Defense, (int)statModifier.Multiplier] / 3; //return to original Defense
+            }
         }
 
         if (cooldown > 0) //counts down for the cooldown
