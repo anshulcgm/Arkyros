@@ -11,6 +11,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     private Animator anim;
 
+    Rigidbody rigidbody;
     Stats stats;
 
     DateTime start;
@@ -19,6 +20,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
+        rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
     }
 
@@ -31,10 +33,10 @@ public class NewBehaviourScript : MonoBehaviour
             anim.SetBool("ShadowRush", true); //this tells the animator to play the right animation
             cooldown = 360;                   //placeholder time, divide by 60 for cooldown in seconds
             //allStats[(int)stats.Speed, (int)statModifier.Multiplier] * 2; //double speed
-            if((DateTime.Now - start).TotalSeconds > 6) //when duration of ability is over, set back to original speed
-            {
-                stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] /= 2; //original speed
-            }
+        }
+        if ((DateTime.Now - start).TotalSeconds > 6) //when duration of ability is over, set back to original speed
+        {
+            //allStats[(int)stats.Speed, (int)statModifier.Multiplier] / 2; //original speed
         }
         if (cooldown > 0)
         {
