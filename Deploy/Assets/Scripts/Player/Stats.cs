@@ -24,7 +24,7 @@ public class Stats : MonoBehaviour
     public float health;
     //public float maxMana;
     //public float mana;
-
+    public float damageMultiplier;
 
     //Might be easier to use two enums and have a 2D array
 
@@ -32,19 +32,7 @@ public class Stats : MonoBehaviour
 
     public float[,] allStats = new float[5, 3]; //first column is base stats, second multiplier, third flat. Each 
 
-    /*
-    public float[] healthRegen = new float[2];
 
-    public float[] manaRegen= new float[2];
-
-    public float[] speed = new float[2];
-
-    public float[] attack = new float[2];
-
-    public float[] attackSpead = new float[2];
-
-    public float[] defense = new float[2];
-    */
 
     /*
     public int[] statusAilments = new int[x] where x is the number of ailments
