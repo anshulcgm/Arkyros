@@ -4,25 +4,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Timers;
 //James Joko
-public class Enemy: IClass {
+public class Enemy : IClass
+{
 
-    public static List<Enemy> enemyList = new List<Enemy>();
+    public static List<Enemy> enemyList = new List<Enemy>(); //Enemy classification list
 
-    private EnemyType type;
+    private EnemyType type; //This enemy classification
 
-    public StatSystem enemyStats;
+    public StatSystem enemyStats; //Stat System
 
-    public GameObject referenceObject;
+    public GameObject referenceObject; //this.object
 
+    //booleans for boosters
     private bool attackIsBoosted = false;
     private bool speedIsBoosted = false;
     private bool maxHPIsBoosted = false;
     private bool reloadIsBoosted = false;
     private int boostTimerDelay = 1000;
+    //END booleans for boosters
+
+    //Duration of boosters (if any)
     private Timer attackBoostedTimer;
     private Timer speedBoostedTimer;
     private Timer maxHPBoostedTimer;
     private Timer reloadBoostedTimer;
+    //END Duration of boosters (if any)
 
     private ObjectUpdate o;
     public Type MonoScript
@@ -41,51 +47,38 @@ public class Enemy: IClass {
         o = new ObjectUpdate();
     }
 
-    //Accessors 
-    public EnemyType getType()
-    {
-        return type;
-    }
-
+    //If health drops to zero or lower, kill enemy
     public void destroyEnemy()
     {
-        if(enemyStats.getHealth() <= 0)
+        if (enemyStats.getHealth() <= 0)
         {
             GameObject.Destroy(referenceObject);
         }
     }
 
-    //Everything above is accessor
-
-    //HP mutator
-    public void changePosition(Vector3 newPos)
+    //Accessors 
+    //Get Enemy Classification
+    public EnemyType getType()
     {
-        referenceObject.transform.position = newPos;
-        o.SetPosition(newPos);
-        ObjectHandler.Update(o, referenceObject);
-    }
-    public void changeRotation(Quaternion newRot)
-    {
-        referenceObject.transform.rotation = newRot;
-        o.SetRotation(newRot);
-        ObjectHandler.Update(o, referenceObject);
+        return type;
     }
 
-    public bool isBoosted(string bType)
+    // Return if a certain booster is being applied to this enemy
+    public bool isBoosted(string boosterType)
     {
-        if (bType == "Attack")
+        if (boosterType == "Attack")
         {
             return attackIsBoosted;
         }
-        else if (bType == "Speed")
+        else if (boosterType == "Speed")
         {
             return speedIsBoosted;
         }
-        else if (bType == "MaxHP")
+        else if (boosterType == "MaxHP")
         {
             return maxHPIsBoosted;
         }
-        else if (bType == "Reload")
+        else if (boosterType == "Reload")
         {
             return reloadIsBoosted;
         }
@@ -93,6 +86,23 @@ public class Enemy: IClass {
         {
             return true;
         }
+    }
+    //END Accessors
+
+    //Mutate where this enemy is standing
+    public void changePosition(Vector3 newPos)
+    {
+        referenceObject.transform.position = newPos;
+        o.SetPosition(newPos);
+        ObjectHandler.Update(o, referenceObject);
+    }
+
+    //Mutate direction this enemy is facing
+    public void changeRotation(Quaternion newRot)
+    {
+        referenceObject.transform.rotation = newRot;
+        o.SetRotation(newRot);
+        ObjectHandler.Update(o, referenceObject);
     }
 
     //Starts Boost Timers
