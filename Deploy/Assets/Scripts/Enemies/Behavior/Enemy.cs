@@ -112,7 +112,11 @@ public class Enemy : IClass
         {
             attackIsBoosted = true;
             attackBoostedTimer = new Timer(boostTimerDelay);
-            attackBoostedTimer.Elapsed += (_, __) =>
+            //associates delegate with attackBoostTimer.Elapsed event
+            //creates an anonymous function which takes two required parameters for elapsed events
+            //but doesn't use them 
+            //stuff will run when the timer elapses
+            attackBoostedTimer.Elapsed += (sender, e) =>
             {
                 removeBoost("Attack", boost);
                 attackBoostedTimer.Stop();
@@ -123,7 +127,11 @@ public class Enemy : IClass
         {
             speedIsBoosted = true;
             speedBoostedTimer = new Timer(boostTimerDelay);
-            speedBoostedTimer.Elapsed += (_, __) =>
+            //associates delegate with speedBoostedTimer.Elapsed event
+            //creates an anonymous function which takes two required parameters for elapsed events
+            //but doesn't use them 
+            //stuff will run when the timer elapses
+            speedBoostedTimer.Elapsed += (sender, e) =>
             {
                 removeBoost("Speed", boost);
                 speedBoostedTimer.Stop();
@@ -134,7 +142,11 @@ public class Enemy : IClass
         {
             maxHPIsBoosted = true;
             maxHPBoostedTimer = new Timer(boostTimerDelay);
-            maxHPBoostedTimer.Elapsed += (_, __) =>
+            //associates delegate with maxHPBoostedTimer.Elapsed event
+            //creates an anonymous function which takes two required parameters for elapsed events
+            //but doesn't use them 
+            //stuff will run when the timer elapses
+            maxHPBoostedTimer.Elapsed += (sender, e) =>
             {
                 removeBoost("MaxHP", boost);
                 maxHPBoostedTimer.Stop();
@@ -145,7 +157,11 @@ public class Enemy : IClass
         {
             reloadIsBoosted = true;
             reloadBoostedTimer = new Timer(boostTimerDelay);
-            reloadBoostedTimer.Elapsed += (_, __) =>
+            //associates delegate with reloadBoostedTimer.Elapsed event
+            //creates an anonymous function which takes two required parameters for elapsed events
+            //but doesn't use them 
+            //stuff will run when the timer elapses
+            reloadBoostedTimer.Elapsed += (sender, e) =>
             {
                 removeBoost("Reload", boost);
                 reloadBoostedTimer.Stop();
