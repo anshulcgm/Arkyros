@@ -48,65 +48,95 @@ public class IrradiatedEnemies: Enemy
         }
     }
 
-    public void updateEnemiesAttack()
+    public void updateMovement()
     {
+        if (base.hp < base.maxhp * 0.2)
+        { //if IR enemy health is lower than 20% make it move
+            ms = 10; //place holder value
+        }
+        else
+        {
+            ms = 0;
+        } //add clause for when it is far from player
+    }
+
+
+    public void spawnEnemy()
+    {
+        if (base.hp < base.maxhp * 0.1)
+        { //if IR enemy health is lower than 10% spawn other enemies
+            //spawn function
+        }
+    }
+
+    public void updateEnemiesAttack()
+    { //determines whether an object is in the radius of irradiated enemy
         Collider[] hitColliders = Physics.OverlapSphere(referenceObject.transform.position, radius);
         int i = 0;
         while (i < hitColliders.Length)
         {
             if (hitColliders[i].CompareTag("Enemy"))
+            { //if the colliding object is "enemy" tagged
+                hitColliders[i].gameObject.attack += attackBuff; //increase attack stat
+            }
+            i++;
+        }
+    }
+
+    public void updateEnemiesHP()
+    {  //determines whether an object is in the radius of irradiated enemy
+        Collider[] hitColliders = Physics.OverlapSphere(referenceObject.transform.position, radius);
+        int i = 0;
+        while (i < hitColliders.Length)
+        {
+            if (hitColliders[i].CompareTag("Enemy"))  //if the colliding object is "enemy" tagged
             {
-                //hitColliders[i].gameObject.attack += attackBuff;
-                //Will write code for this when we can change specialized values of enemy classes
+                if (maxhpBuff != 0)
+                {
+                    hitColliders[i].gameObject.maxhp *= maxhpBuff;  //increase the max health of enemy
+                }
 
             }
             i++;
         }
     }
 
-        public void updateEnemiesHP()
+    public void updateEnemiesReload()
+    {  //determines whether an object is in the radius of irradiated enemy
+        Collider[] hitColliders = Physics.OverlapSphere(referenceObject.transform.position, radius);
+        int i = 0;
+        while (i < hitColliders.Length)
         {
-            Collider[] hitColliders = Physics.OverlapSphere(referenceObject.transform.position, radius);
-            int i = 0;
-            while (i < hitColliders.Length)
+            if (hitColliders[i].CompareTag("Enemy")) //if the colliding object is "enemy" tagged
             {
-                if (hitColliders[i].CompareTag("Enemy"))
-                {
-                    if (hpBuff != 0)
-                    {
-                      //hitColliders[i].gameObject.maxhp *= maxhpBuff;
-                      hitColliders[i].gameObject.GetComponent<StatManager>().changeHealth(hpBuff);
-                    }
-
-                }
-                i++;
+                hitColliders[i].gameObject.reload -= reloadBuff;  //decrease the reload speed
             }
+            i++;
         }
+    }
 
-
-        public void updateEnemiesSpeed()
+    public void updateEnemiesSpeed()
+    {  //determines whether an object is in the radius of irradiated enemy
+        Collider[] hitColliders = Physics.OverlapSphere(referenceObject.transform.position, radius);
+        int i = 0;
+        while (i < hitColliders.Length)
         {
-            Collider[] hitColliders = Physics.OverlapSphere(referenceObject.transform.position, radius);
-            int i = 0;
-            while (i < hitColliders.Length)
+            if (hitColliders[i].CompareTag("Enemy")) //if the colliding object is "enemy" tagged
             {
-                if (hitColliders[i].CompareTag("Enemy"))
-                {
-                   hitColliders[i].gameObject.GetComponent<StatManager>().enemyMultiplySpeed(speedBuff);
-                }
-                i++;
+                hitColliders[i].gameObject.speed += speedBuff; //increase speed of enemy
             }
+            i++;
         }
+    }
 
 
 
 
 
-        public void mutate(int factor)
-        {
-            //mutation of the irradiation area
-            radius = radius * factor;
-        }
+    public void mutate(int factor)
+    {
+        //mutation of the irradiation area
+        radius = radius * factor;
 
         public float geHpBuff()
         {
