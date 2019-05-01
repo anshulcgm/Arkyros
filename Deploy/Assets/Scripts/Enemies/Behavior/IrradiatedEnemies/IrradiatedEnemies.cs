@@ -137,20 +137,20 @@ public class IrradiatedEnemies: Enemy
     {
         //mutation of the irradiation area
         radius = radius * factor;
+    }
+    public float geHpBuff()
+    {
+        return hpBuff;
+    }
+    public float getSpeedBuff()
+    {
+        return speedBuff;
+    }
+    public float getAttackBuff()
+    {
+        return attackBuff;
+    }
 
-        public float geHpBuff()
-        {
-            return hpBuff;
-        }
-        public float getSpeedBuff()
-        {
-            return speedBuff;
-        }
-        public float getAttackBuff()
-        {
-            return attackBuff;
-        }
     
-
 }
 
