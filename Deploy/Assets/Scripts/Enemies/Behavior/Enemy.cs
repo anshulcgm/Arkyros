@@ -30,12 +30,6 @@ public class Enemy : IClass
     private Timer reloadBoostedTimer;
     //END Duration of boosters (if any)
 
-    protected float hp; //could be double, base hp
-    protected int ms; //Movement speed
-    protected GameObject referenceObject;
-    protected float maxhp;
-
-
     private ObjectUpdate o;
     public Type MonoScript
     {
@@ -50,13 +44,12 @@ public class Enemy : IClass
     public Enemy(EnemyType type, float hp, int ms, GameObject referenceObject)
     {
         this.type = type;
-        this.hp = hp;
-        this.ms = ms;
+    
         this.referenceObject = referenceObject;
         o = new ObjectUpdate();
-        this.maxhp = hp;
+  
     }
-    public Enemy(float hp, int ms, GameObject referenceObject)
+    public Enemy(float maxhp, int ms, float defense, GameObject referenceObject)
 
     {
         enemyStats = new StatSystem(maxhp, ms, defense);
@@ -80,33 +73,6 @@ public class Enemy : IClass
         return type;
     }
 
-
-    
-    // Return if a certain booster is being applied to this enemy
-    public bool isBoosted(string boosterType)
-
-    {
-        if (boosterType == "Attack")
-        {
-            return attackIsBoosted;
-        }
-        else if (boosterType == "Speed")
-        {
-            return speedIsBoosted;
-        }
-        else if (boosterType == "MaxHP")
-        {
-            return maxHPIsBoosted;
-        }
-        else if (boosterType == "Reload")
-        {
-            return reloadIsBoosted;
-        }
-        else
-        {
-            return true;
-        }
-    }
     //END Accessors
 
     //Mutate where this enemy is standing
@@ -125,6 +91,30 @@ public class Enemy : IClass
         ObjectHandler.Update(o, referenceObject);
     }
 
+    public bool isBoosted(string bType)
+    {
+        if (bType == "Attack")
+        {
+            return attackIsBoosted;
+        }
+        else if (bType == "Speed")
+        {
+            return speedIsBoosted;
+        }
+        else if (bType == "MaxHP")
+        {
+            return maxHPIsBoosted;
+        }
+        else if (bType == "Reload")
+        {
+            return reloadIsBoosted;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     //Starts Boost Timers
     public void startBoostTimer(string bType, float boost)
     {
@@ -136,12 +126,6 @@ public class Enemy : IClass
             //creates anonymous function which takes but doesn't use two parameters which the
             //.Elapsed event requires (object and ElapsedEventArgs)
             attackBoostedTimer.Elapsed += (source, e) =>
-
-            //associates delegate with attackBoostTimer.Elapsed event
-            //creates an anonymous function which takes two required parameters for elapsed events
-            //but doesn't use them 
-            //stuff will run when the timer elapses
-            attackBoostedTimer.Elapsed += (sender, e) =>
             {
                 removeBoost("Attack", boost);
                 attackBoostedTimer.Stop();
@@ -152,17 +136,10 @@ public class Enemy : IClass
         {
             speedIsBoosted = true;
             speedBoostedTimer = new Timer(boostTimerDelay);
-
             //Associates delegate with speedBoostedTimer.Elapsed event,
             //creates anonymous function which takes but doesn't use two parameters which the
             //.Elapsed event requires (object and ElapsedEventArgs)
             speedBoostedTimer.Elapsed += (source, e) =>
-
-            //associates delegate with speedBoostedTimer.Elapsed event
-            //creates an anonymous function which takes two required parameters for elapsed events
-            //but doesn't use them 
-            //stuff will run when the timer elapses
-            speedBoostedTimer.Elapsed += (sender, e) =>
             {
                 removeBoost("Speed", boost);
                 speedBoostedTimer.Stop();
@@ -177,13 +154,6 @@ public class Enemy : IClass
             //creates anonymous function which takes but doesn't use two parameters which the
             //.Elapsed event requires (object and ElapsedEventArgs)
             maxHPBoostedTimer.Elapsed += (source, e) =>
-
-            //associates delegate with maxHPBoostedTimer.Elapsed event
-            //creates an anonymous function which takes two required parameters for elapsed events
-            //but doesn't use them 
-            //stuff will run when the timer elapses
-            maxHPBoostedTimer.Elapsed += (sender, e) =>
-
             {
                 removeBoost("MaxHP", boost);
                 maxHPBoostedTimer.Stop();
@@ -194,17 +164,10 @@ public class Enemy : IClass
         {
             reloadIsBoosted = true;
             reloadBoostedTimer = new Timer(boostTimerDelay);
-
             //Associates delegate with reloadBoostedTimer.Elapsed event,
             //creates anonymous function which takes but doesn't use two parameters which the
             //.Elapsed event requires (object and ElapsedEventArgs)
             reloadBoostedTimer.Elapsed += (source, e) =>
-
-            //associates delegate with reloadBoostedTimer.Elapsed event
-            //creates an anonymous function which takes two required parameters for elapsed events
-            //but doesn't use them 
-            //stuff will run when the timer elapses
-            reloadBoostedTimer.Elapsed += (sender, e) =>
             {
                 removeBoost("Reload", boost);
                 reloadBoostedTimer.Stop();
