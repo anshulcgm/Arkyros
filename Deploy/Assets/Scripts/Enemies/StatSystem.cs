@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//The purpose of this class is to consolidate all the base stats into one object that will be instantiated whenever an enemy object is instantiated
 public class StatSystem
 {
     private float health;

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class StatManager : MonoBehaviour
 {
+
+    //Monobehavior class that is attached to every enemy gameobject, allows both player and enemy to make changes to all enemy stats
+
     public float kamikazeMaxHP;
     public float kamikazeDefense;
     public float kamikazeMovementSpeed;
@@ -34,6 +37,7 @@ public class StatManager : MonoBehaviour
 
     private EnemyType type;
     
+    //Start function sets enemytype for the script so that the right variables are changed
     void Start()
     {
         if(gameObject.name == "KamikaziBirdShort")
@@ -59,6 +63,7 @@ public class StatManager : MonoBehaviour
     {
         
     }
+
     //methods for adjusting and debuffing base stats
     public void changeHealth(float amount)
     {
@@ -76,6 +81,7 @@ public class StatManager : MonoBehaviour
         }
     }
 
+    //multiplies speed by a constant such as *0.5 
     public void enemyMultiplySpeed(float multiplier)
     {
         if (type == EnemyType.FlyingKamikaze)
@@ -92,6 +98,7 @@ public class StatManager : MonoBehaviour
         }
     }
 
+    //adds a flat amount to speed, such as +5
     public void enemyFlatSpeed(float amount)
     {
         if (type == EnemyType.FlyingKamikaze)
@@ -123,4 +130,6 @@ public class StatManager : MonoBehaviour
             IREnemy.enemyStats.multiplyDefense(multiplier);
         }
     }
+
+    //In the future we may have methods for adjusting class-specific stats
 }

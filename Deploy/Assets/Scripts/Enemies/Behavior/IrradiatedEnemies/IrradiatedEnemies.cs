@@ -32,11 +32,11 @@ public class IrradiatedEnemies: Enemy
 
     public void spawnEnemy(Dictionary<GameObject, int> enemiesToSpawn, float radius)
     {
-             
+        //The dictionary represents the various enemies that will be spawned and the key is how many of them will be spawned
         if (enemyStats.getHealth() < enemyStats.getMaxHealth() * 0.1)
         {
         //Spawn code for other enemies - Anshul Task 6
-        float maxHPProportion = Random.Range(1, 101) * 0.01f; 
+        float maxHPProportion = Random.Range(1, 101) * 0.01f; //Randomizes how much health they will have
                 
         foreach (KeyValuePair<GameObject, int> kvp in enemiesToSpawn)
             {
