@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Timers;
 //James Joko
-public class Enemy: IClass {
+public class Enemy : IClass
+{
 
     public static List<Enemy> enemyList = new List<Enemy>();
 
@@ -24,6 +25,12 @@ public class Enemy: IClass {
     private Timer maxHPBoostedTimer;
     private Timer reloadBoostedTimer;
 
+    protected float hp; //could be double, base hp
+    protected int ms; //Movement speed
+    protected GameObject referenceObject;
+    protected float maxhp;
+
+
     private ObjectUpdate o;
     public Type MonoScript
     {
@@ -34,7 +41,18 @@ public class Enemy: IClass {
     }
 
     //Constructor enemy with no weapon
-    public Enemy(float maxhp, int ms, float defense, GameObject referenceObject)
+
+    public Enemy(EnemyType type, float hp, int ms, GameObject referenceObject)
+    {
+        this.type = type;
+        this.hp = hp;
+        this.ms = ms;
+        this.referenceObject = referenceObject;
+        o = new ObjectUpdate();
+        this.maxhp = hp;
+    }
+    public Enemy(float hp, int ms, GameObject referenceObject)
+
     {
         enemyStats = new StatSystem(maxhp, ms, defense);
         this.referenceObject = referenceObject;
@@ -49,7 +67,7 @@ public class Enemy: IClass {
 
     public void destroyEnemy()
     {
-        if(enemyStats.getHealth() <= 0)
+        if (enemyStats.getHealth() <= 0)
         {
             GameObject.Destroy(referenceObject);
         }
@@ -70,6 +88,7 @@ public class Enemy: IClass {
         o.SetRotation(newRot);
         ObjectHandler.Update(o, referenceObject);
     }
+
 
     public bool isBoosted(string bType)
     {
@@ -102,7 +121,10 @@ public class Enemy: IClass {
         {
             attackIsBoosted = true;
             attackBoostedTimer = new Timer(boostTimerDelay);
-            attackBoostedTimer.Elapsed += (_, __) =>
+            //Associates delegate with attackBoostedTimer.Elapsed event,
+            //creates anonymous function which takes but doesn't use two parameters which the
+            //.Elapsed event requires (object and ElapsedEventArgs)
+            attackBoostedTimer.Elapsed += (source, e) =>
             {
                 removeBoost("Attack", boost);
                 attackBoostedTimer.Stop();
@@ -113,7 +135,10 @@ public class Enemy: IClass {
         {
             speedIsBoosted = true;
             speedBoostedTimer = new Timer(boostTimerDelay);
-            speedBoostedTimer.Elapsed += (_, __) =>
+            //Associates delegate with speedBoostedTimer.Elapsed event,
+            //creates anonymous function which takes but doesn't use two parameters which the
+            //.Elapsed event requires (object and ElapsedEventArgs)
+            speedBoostedTimer.Elapsed += (source, e) =>
             {
                 removeBoost("Speed", boost);
                 speedBoostedTimer.Stop();
@@ -124,7 +149,10 @@ public class Enemy: IClass {
         {
             maxHPIsBoosted = true;
             maxHPBoostedTimer = new Timer(boostTimerDelay);
-            maxHPBoostedTimer.Elapsed += (_, __) =>
+            //Associates delegate with maxHPBoostedTimer.Elapsed event,
+            //creates anonymous function which takes but doesn't use two parameters which the
+            //.Elapsed event requires (object and ElapsedEventArgs)
+            maxHPBoostedTimer.Elapsed += (source, e) =>
             {
                 removeBoost("MaxHP", boost);
                 maxHPBoostedTimer.Stop();
@@ -135,7 +163,10 @@ public class Enemy: IClass {
         {
             reloadIsBoosted = true;
             reloadBoostedTimer = new Timer(boostTimerDelay);
-            reloadBoostedTimer.Elapsed += (_, __) =>
+            //Associates delegate with reloadBoostedTimer.Elapsed event,
+            //creates anonymous function which takes but doesn't use two parameters which the
+            //.Elapsed event requires (object and ElapsedEventArgs)
+            reloadBoostedTimer.Elapsed += (source, e) =>
             {
                 removeBoost("Reload", boost);
                 reloadBoostedTimer.Stop();
