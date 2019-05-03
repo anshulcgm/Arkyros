@@ -13,6 +13,8 @@ public class CloakSlap : MonoBehaviour
 
     private bool buffActive;
 
+    private bool cast;
+
     Rigidbody rigidbody;
     Stats stats;
 
@@ -33,39 +35,34 @@ public class CloakSlap : MonoBehaviour
     {
         if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
         {
+            cast = false;
             start = DateTime.Now;
             anim.SetBool("CloakSlap", true); //this tells the animator to play the right animation
-
-
             //slow down while charging
             //allStats[(int)stats.Speed, (int)statModifier.Multiplier] / 3; //decrease speed
             buffActive = true;
         }
-        if ((DateTime.Now - start).TotalSeconds <= 4 || !Input.GetKey("e"))
+        if ((DateTime.Now - start).TotalSeconds >= 4 && Input.GetKey("e") && !cast)
         {
-            //whe key released, return to normal speed
-            if (buffActive)
-            {
-                //allStats[(int)stats.Speed, (int)statModifier.Multiplier] * 3; //return speed
-                buffActive = false;
-            }
-            //if charged for at least 4 seconds - set cooldown and do release
-            if ((DateTime.Now - start).TotalSeconds >= 4)
-            {
-                cooldown = 600;     //set cooldown, placeholder time
-                                    
-                //maybe set collider to scythe
+            //when charged for at least 4 seconds - set cooldown and do release
+            cooldown = 600;     //set cooldown, placeholder time
+            cast = true;
+            //maybe set collider to scythe
 
-                //damage enemy
-                //EnemyGameObject.GetComponent<StatManager>().changeHealth(amount);
-                //add knockback
-                //EnemyGameObject.GetComponent<StatManager>().RigidBody().addForce(amount);
-
-            }
-            if (cooldown > 0) //counts down for the cooldown
-            {
-                cooldown--;
-            }
+            //damage enemy
+            //EnemyGameObject.GetComponent<StatManager>().changeHealth(amount);
+            //add knockback
+            //EnemyGameObject.GetComponent<StatManager>().RigidBody().addForce(amount);
+        }
+        //when key released and the seconds held less than 4, return to normal speed
+        if ((DateTime.Now - start).TotalSeconds <= 4 && !Input.GetKey("e") && buffActive && !cast)
+        {
+            //allStats[(int)stats.Speed, (int)statModifier.Multiplier] * 3; //return speed
+            buffActive = false;
+        }
+        if (cooldown > 0) //counts down for the cooldown
+        {
+            cooldown--;
         }
     }
 }
