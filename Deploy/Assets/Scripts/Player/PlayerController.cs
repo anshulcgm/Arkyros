@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 		Vector3 targetDirection = new Vector3(moveHorizontal * getSpeed(), moveUp, moveVertical*getSpeed());
-		targetDirection = Camera.current.transform.TransformDirection(targetDirection);
+		targetDirection = Camera.main.transform.TransformDirection(targetDirection);
 		targetDirection.y = 0.0f;
         rb.AddForce(targetDirection);
     }

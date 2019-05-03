@@ -34,14 +34,14 @@ public class NewBehaviourScript : MonoBehaviour
             start = DateTime.Now;
             anim.SetBool("ShadowRush", true); //this tells the animator to play the right animation
             cooldown = 360;                   //placeholder time, divide by 60 for cooldown in seconds
-            //allStats[(int)stats.Speed, (int)statModifier.Multiplier] * 2; //double speed
+            stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] *= 2; //double speed
             buffActive = true;
         }
         if ((DateTime.Now - start).TotalSeconds > 6) //when duration of ability is over, set back to original speed
         {
-            if(buffActive)
+            if (buffActive)
             {
-                //allStats[(int)stats.Speed, (int)statModifier.Multiplier] / 2; //original speed
+                stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] /= 2; //original speed
                 buffActive = false;
             }
         }
