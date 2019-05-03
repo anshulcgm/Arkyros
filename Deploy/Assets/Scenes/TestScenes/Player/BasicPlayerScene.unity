@@ -471,13 +471,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1756083686}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1401434306 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4717565387713208, guid: fd525a0855637cc4fa8857884a5d6511,
-    type: 3}
-  m_PrefabInstance: {fileID: 1756083686}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1401434308
+--- !u!114 &1401434300
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -486,10 +480,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1401434299}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecdc3ceea80d5f499ae5088afa1f40f, type: 3}
+  m_Script: {fileID: 11500000, guid: 2520fb8792bf8c84aa0956e4316b395e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  SpiritBladeEnergySlash: {fileID: 5559208315928233343, guid: 1fbbf96edc8466744b86f0196250fc07,
+    type: 3}
+--- !u!4 &1401434306 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4717565387713208, guid: fd525a0855637cc4fa8857884a5d6511,
+    type: 3}
+  m_PrefabInstance: {fileID: 1756083686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1456034056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -628,6 +630,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1401434306, guid: fd525a0855637cc4fa8857884a5d6511, type: 3}
     - {fileID: 1401434305, guid: fd525a0855637cc4fa8857884a5d6511, type: 3}
+    - {fileID: 4393704401562751898, guid: fd525a0855637cc4fa8857884a5d6511, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fd525a0855637cc4fa8857884a5d6511, type: 3}
 --- !u!1 &2088088560
 GameObject:

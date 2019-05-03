@@ -5,19 +5,22 @@ using UnityEngine;
 
 public class Template : MonoBehaviour
 {
-    public float cooldown = 0;
+    public float cooldown;
 
     private GameObject camera;
 
     private Animator anim;
-
-    private bool buffActive;
+    DateTime start;
+    
 
     Rigidbody rigidbody;
     Stats stats;
 
-    DateTime start;
+    
     TargetCenterScreen tcs;
+
+    private bool buffActive;
+    private bool cast;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +31,8 @@ public class Template : MonoBehaviour
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
 
+        cooldown = 0;
+
     }
 
     // Update is called once per frame
@@ -35,18 +40,20 @@ public class Template : MonoBehaviour
     {
         if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
         {
+            cast = false; //ability not yet cast
             start = DateTime.Now;
             anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
-
+            
+            
             //put any setup code here, before the ability is actually cast
-
+             
 
             
         }
 
-        if ((DateTime.Now - start).TotalSeconds < 1)
+        if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
+
             /*
              * All the code for the ability that you want to write
              * transform.forward for the direction the player is 
@@ -54,6 +61,10 @@ public class Template : MonoBehaviour
              * instantiating new objects
              * to damage enemy, EnemyGameObject.GetComponent<StatManager>().changeHealth(amount), amount can be positive or negative
              */
+
+
+            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cast = true;
 
         }
 
