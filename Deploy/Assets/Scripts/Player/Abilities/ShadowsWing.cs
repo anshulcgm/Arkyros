@@ -13,6 +13,8 @@ public class ShadowsWing : MonoBehaviour
 
     private bool buffActive;
 
+    private bool cast;
+
     Rigidbody rigidbody;
     Stats stats;
 
@@ -33,21 +35,23 @@ public class ShadowsWing : MonoBehaviour
     {
         if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
         {
+            cast = false;
             start = DateTime.Now;
             anim.SetBool("ShadowsWing", true); //this tells the animator to play the right animation
 
-            //put any setup code here, before the ability is actually cast
-            //allStats[(int)stats.Defense, (int)statModifier.Multiplier] * 3; //Triple Defense
-            buffActive = true;
         }
 
-        if ((DateTime.Now - start).TotalSeconds > 5 || !Input.GetKey("e"))
+        if ((DateTime.Now - start).TotalSeconds < 5 && Input.GetKey("e") && !cast)
         {
-            if(buffActive)
-            {
-                cooldown = (float)(DateTime.Now - start).TotalSeconds * 60;
-                //allStats[(int)stats.Defense, (int)statModifier.Multiplier] / 3; //return to original Defense
-            }
+            //put any setup code here, before the ability is actually cast
+            //allStats[(int)stats.Defense, (int)statModifier.Multiplier] * 3; //Triple Defense
+            cast = true;
+            buffActive = true;
+        }
+        if(((DateTime.Now - start).TotalSeconds > 5) && !Input.GetKey("e") && cast && buffActive)
+        {
+            cooldown = (float)(DateTime.Now - start).TotalSeconds * 60;
+            //allStats[(int)stats.Defense, (int)statModifier.Multiplier] / 3; //return to original Defense
         }
 
         if (cooldown > 0) //counts down for the cooldown
