@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: 2520fb8792bf8c84aa0956e4316b395e
+guid: 660c48cce13400a489ca4c40a2985107
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - SpiritBladeEnergySlash: {fileID: 5559208315928233343, guid: 1fbbf96edc8466744b86f0196250fc07,
-      type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

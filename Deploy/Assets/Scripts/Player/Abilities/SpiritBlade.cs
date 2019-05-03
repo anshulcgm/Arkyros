@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpiritBlade : MonoBehaviour
 {
-    public float cooldown = 0;
+    public float cooldown;
 
     private GameObject camera;
 
@@ -21,6 +21,9 @@ public class SpiritBlade : MonoBehaviour
     DateTime start;
     TargetCenterScreen tcs;
 
+    private int projectileSpeed = 40;
+    private bool cast;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,8 @@ public class SpiritBlade : MonoBehaviour
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
 
+        cooldown = 0;
+
     }
 
     // Update is called once per frame
@@ -37,27 +42,32 @@ public class SpiritBlade : MonoBehaviour
     {
         if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
         {
+            cast = false;
             start = DateTime.Now;
             anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            
 
             //put any setup code here, before the ability is actually cast
-
-
+            
 
         }
 
-        if ((DateTime.Now - start).TotalSeconds < 1)
+        if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            Instantiate(SpiritBladeEnergySlash, transform.position + transform.forward, Quaternion.identity);
+            
+            GameObject clone = Instantiate(SpiritBladeEnergySlash, transform.position + transform.forward, Quaternion.identity);
 
+            float x = Screen.width / 2f;
+            float y = Screen.height / 2f;
+
+            var ray = Camera.main.ScreenPointToRay(new Vector3(x, y, 0));
+
+            clone.GetComponent<Rigidbody>().velocity = ray.direction * projectileSpeed;
+
+            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cast = true;
 
         }
-
-
-
-
-
 
         if (cooldown > 0) //counts down for the cooldown
         {
