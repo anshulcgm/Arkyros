@@ -44,7 +44,7 @@ public class Stats : MonoBehaviour
 
     */
 
-    public float getFinal(int statType) //
+    public float getFinal(int statType) //getFinal((int)stats.HealthRegen)
     {
         return allStats[statType, (int)statModifier.Base] * allStats[statType, (int)statModifier.Multiplier] + allStats[statType, (int)statModifier.Flat];
         // Stat[0] * Stat[1] + Stat[2] same thing

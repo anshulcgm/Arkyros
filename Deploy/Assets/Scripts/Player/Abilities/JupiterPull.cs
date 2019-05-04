@@ -17,7 +17,7 @@ public class JupiterPull : MonoBehaviour
 
     DateTime start;
     //public GameObject damageDealt;
-
+    private bool cast;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,9 +31,10 @@ public class JupiterPull : MonoBehaviour
     {
         if (Input.GetKey("e") && cooldown == 0)
         {
+            cast = false;
             start = DateTime.Now;
             anim.SetBool("JupiterPullBool", true);
-            cooldown = 240; // divide by 60 for cooldown in seconds
+            
 
             Collider[] hits = Physics.OverlapSphere(transform.position, radius);
             foreach (Collider hit in hits)
@@ -47,7 +48,7 @@ public class JupiterPull : MonoBehaviour
             }
         }
 
-        if((DateTime.Now - start).TotalSeconds < 1)
+        if((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
             Collider[] hits = Physics.OverlapSphere(transform.position, radius);
             Debug.Log("Gottem");
@@ -64,6 +65,9 @@ public class JupiterPull : MonoBehaviour
                     //Instantiate(damageDealt, hit.gameObject.transform.position, Quaternion.identity);
                 }
             }
+
+            cooldown = 240; // divide by 60 for cooldown in second
+            cast = true;
         }
         else
         {
@@ -71,7 +75,8 @@ public class JupiterPull : MonoBehaviour
 
         }
 
-        if(cooldown > 0)
+
+        if (cooldown > 0)
         {
             cooldown--;
         }

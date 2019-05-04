@@ -19,6 +19,8 @@ public class NothingPersonnelKid : MonoBehaviour
     DateTime start;
     TargetCenterScreen tcs;
 
+    private bool cast;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,9 +37,10 @@ public class NothingPersonnelKid : MonoBehaviour
     {
         if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
         {
+            cast = false;
             start = DateTime.Now;
             anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            
 
             //put any setup code here, before the ability is actually cast
 
@@ -45,12 +48,15 @@ public class NothingPersonnelKid : MonoBehaviour
 
         }
 
-        if ((DateTime.Now - start).TotalSeconds < 1)
+        if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
             if(Vector3.Distance(tcs.target.transform.position, transform.position) < 20)
             {
                 transform.position = Vector3.Lerp(transform.position, tcs.target.transform.position, 1);
             }
+
+            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cast = true;
         }
 
 
