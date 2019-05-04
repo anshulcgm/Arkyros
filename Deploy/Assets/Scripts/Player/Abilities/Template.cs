@@ -15,8 +15,6 @@ public class Template : MonoBehaviour
 
     Rigidbody rigidbody;
     Stats stats;
-
-    
     TargetCenterScreen tcs;
 
     private bool buffActive;
@@ -67,10 +65,6 @@ public class Template : MonoBehaviour
             cast = true;
 
         }
-
-
-
-
 
 
         if (cooldown > 0) //counts down for the cooldown
