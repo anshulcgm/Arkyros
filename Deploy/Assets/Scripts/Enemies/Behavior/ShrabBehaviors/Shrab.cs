@@ -10,6 +10,8 @@ public class Shrab : Enemy
     private float shurikenSpeed; // Ability: Water Shuriken
     private int numShrabs; // Number of shrabs in this chain
 
+    public static List<Shrab> shrabList = new List<Shrab>();
+
     //Shrab Constructor
     public Shrab(float hp, int ms, float defense, GameObject referenceObject, float chargeSpeed, float chargeDmg, float eruptionRadius, float shurikenSpeed, int numShrabs) : base(hp, ms, defense, referenceObject)
     {
