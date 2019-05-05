@@ -9,13 +9,17 @@ public class ShlyEnemy : Enemy {
 	private float speedDebuff; //the proportion of AOE speed debuff when player is under "sprain" effect
     private GameObject referenceObject; //rf
 
-    public ShlyEnemy(float hp, int ms, float defense, int aggregateNum, float bullChargeSpeed, float speedDebuff, GameObject rf, int intel) : base( hp, ms, defense, rf)
+    public static List<ShlyEnemy> shlyList;
+
+    public ShlyEnemy(float hp, int ms, float defense, int aNum, float bCS, float sD, GameObject rf, int intel) : base( hp, ms, defense, rf)
     {
 		this.referenceObject = rf;
 
-        this.aggregateNum = aggregateNum; //aggregate shlies come as 12 initially
-        this.bullChargeSpeed = bullChargeSpeed;
-        this.speedDebuff = speedDebuff;
+        shlyList = new List<ShlyEnemy>();
+
+        aggregateNum = aNum; //aggregate shlies come as 12 initially
+        bullChargeSpeed = bCS;
+        speedDebuff = sD;
     }
 
 
