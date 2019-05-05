@@ -6,22 +6,32 @@ public class StriaghtShooter : MonoBehaviour
 {
 	private Rigidbody rb;
 	private GameObject Player;
+	private Vector3 current;
+	private float oTime;
 
 	public float speed;
+	public float timer;
+	
 
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.Find("Player");
 		rb = GetComponent<Rigidbody>();
-
+		current = Player.transform.position - transform.position;
+		oTime = timer;
     }
 
     // Update is called once per frame
     void Update()
     {
-		
-        rb.velocity = (Player.transform.position - transform.position).normalized * speed;
+		rb.velocity = (current).normalized * speed;
+
+		timer -= Time.deltaTime;
+
+		if (timer < 0) {
+			Destroy(this.gameObject);
+		}
     }
 
 	void OnCollisionEnter(Collision collision) {

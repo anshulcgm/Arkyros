@@ -6,7 +6,7 @@ public class ShrabShootBalls : MonoBehaviour
 {
 	public GameObject Projectile;
 	public float timer;
-	public float variableTimer;
+	private float variableTimer;
     // Start is called before the first frame update
     void Start()
     {
