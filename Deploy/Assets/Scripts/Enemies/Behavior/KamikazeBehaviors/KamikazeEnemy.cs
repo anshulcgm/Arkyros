@@ -42,7 +42,10 @@ public class KamikazeEnemy : Enemy {
 
 	}
 
-
+    public void flatIQ(int amount)
+    {
+        IQ += amount;
+    }
 
 	public int getIQ() {
 		return IQ;

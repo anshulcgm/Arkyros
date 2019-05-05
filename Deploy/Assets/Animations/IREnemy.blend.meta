@@ -1,0 +1,185 @@
+fileFormatVersion: 2
+guid: 69e7c6041ca7eff4998ebc6cdcb4db8f
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Base
+    100002: Crystal
+    100004: Head
+    100006: //RootNode
+    100008: Tower_Head
+    100010: Waves
+    100012: Waves_001
+    100014: Waves_002
+    100016: Waves_003
+    100018: Waves_004
+    100020: Waves_005
+    100022: Waves_006
+    100024: Waves_007
+    100026: Waves_008
+    100028: Waves_009
+    100030: Waves_010
+    100032: Waves_011
+    100034: Waves_012
+    400000: Base
+    400002: Crystal
+    400004: Head
+    400006: //RootNode
+    400008: Tower_Head
+    400010: Waves
+    400012: Waves_001
+    400014: Waves_002
+    400016: Waves_003
+    400018: Waves_004
+    400020: Waves_005
+    400022: Waves_006
+    400024: Waves_007
+    400026: Waves_008
+    400028: Waves_009
+    400030: Waves_010
+    400032: Waves_011
+    400034: Waves_012
+    2100000: Material_002
+    2100002: unnamed
+    2100004: Material
+    2100006: Material_001
+    2300000: Base
+    2300002: Crystal
+    2300004: Head
+    2300006: Tower_Head
+    2300008: Waves
+    2300010: Waves_001
+    2300012: Waves_002
+    2300014: Waves_003
+    2300016: Waves_004
+    2300018: Waves_005
+    2300020: Waves_006
+    2300022: Waves_007
+    2300024: Waves_008
+    2300026: Waves_009
+    2300028: Waves_010
+    2300030: Waves_011
+    2300032: Waves_012
+    3300000: Base
+    3300002: Crystal
+    3300004: Head
+    3300006: Tower_Head
+    3300008: Waves
+    3300010: Waves_001
+    3300012: Waves_002
+    3300014: Waves_003
+    3300016: Waves_004
+    3300018: Waves_005
+    3300020: Waves_006
+    3300022: Waves_007
+    3300024: Waves_008
+    3300026: Waves_009
+    3300028: Waves_010
+    3300030: Waves_011
+    3300032: Waves_012
+    4300000: Waves
+    4300002: Base
+    4300004: Head
+    4300006: Tower_Head
+    4300008: Waves_004
+    4300010: Waves_006
+    4300012: Waves_005
+    4300014: Waves_009
+    4300016: Waves_007
+    4300018: Waves_008
+    4300020: Waves_010
+    4300022: Waves_012
+    4300024: Waves_011
+    4300026: Waves_003
+    4300028: Waves_002
+    4300030: Crystal
+    4300032: Waves_001
+    7400000: Default Take
+    9500000: //RootNode
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

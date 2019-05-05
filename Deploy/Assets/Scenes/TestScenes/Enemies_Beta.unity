@@ -261,13 +261,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb107c1e12a5284d9678b0797b61760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flyingKamikaze: {fileID: 0}
-  golem: {fileID: 0}
-  Player: {fileID: 0}
+  flyingKamikaze: {fileID: 1002896406898434, guid: 7177284d742bdb849941e3b6df07b34c,
+    type: 3}
+  golem: {fileID: 1522681304276564, guid: 3605bc12e430aa941ab7ba5f70748b8b, type: 3}
+  IREnemy: {fileID: 3662628610876272897, guid: 11d87475638fbe844904218cb84f438d, type: 3}
+  shrab: {fileID: 6004316977859840691, guid: fbc4341efcbc0ce45bff9b8a4f6f01ff, type: 3}
+  shly: {fileID: 6167622916773630156, guid: 7ccb3f4ff48b2e34a8b1636e896e1dfc, type: 3}
+  Player: {fileID: 432566713}
   kamikazePerSpawn: 5
   kamikazeSwarms: 1
   golemPerSpawn: 1
   golemSwarms: 1
+  numIREnemies: 1
 --- !u!4 &358685205
 Transform:
   m_ObjectHideFlags: 0

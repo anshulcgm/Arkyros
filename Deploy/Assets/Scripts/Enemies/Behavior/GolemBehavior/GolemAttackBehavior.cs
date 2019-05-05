@@ -42,22 +42,22 @@ public class GolemAttackBehavior : MonoBehaviour {
         float playerDist = Vector3.Distance(player.transform.position, transform.position);
         if (playerDist < groundPoundRange)
         {
-            mainCamera.GetComponent<cameraSoundManager>().enemyInRange = true;
+            //mainCamera.GetComponent<cameraSoundManager>().enemyInRange = true;
             groundPound();
         }
         else if (playerDist > groundPoundRange && playerDist < chargeRange)
         {
-            mainCamera.GetComponent<cameraSoundManager>().enemyInRange = true;
+            //mainCamera.GetComponent<cameraSoundManager>().enemyInRange = true;
             charge();
         }
         else if (playerDist > chargeRange && playerDist < shootRange)
         {
-            mainCamera.GetComponent<cameraSoundManager>().enemyInRange = true;
+            //mainCamera.GetComponent<cameraSoundManager>().enemyInRange = true;
             setShootTrigger();
         }
         else
         {
-            mainCamera.GetComponent<cameraSoundManager>().enemyInRange = false;
+            //mainCamera.GetComponent<cameraSoundManager>().enemyInRange = false;
             Debug.Log("Golem is too far from player to enact behavior");
         }
 	}

@@ -31,10 +31,10 @@ public class IrradiatedEnemies: Enemy
     }
 
 
-    public void spawnEnemy(Dictionary<GameObject, int> enemiesToSpawn, float radius)
+    public void spawnEnemy(EnemyType type, Dictionary<GameObject, int> enemiesToSpawn, float radius)
     {
-
-        if (enemyStats.getHealth() < enemyStats.getMaxHealth() * 0.1)
+        Debug.Log("In spawnEnemy function");
+        if (enemyStats.getHealth() <= enemyStats.getMaxHealth() * 0.1)
         {
             //Spawn code for other enemies - Anshul Task 6
             float maxHPProportion = Random.Range(1, 101) * 0.01f;
@@ -43,7 +43,7 @@ public class IrradiatedEnemies: Enemy
             {
                 for (int i = 0; i < kvp.Value; i++)
                 {
-                    RandomEnemySpawn.spawnEnemyWithinRadius(kvp.Key, radius, referenceObject.transform.position, maxHPProportion);
+                    RandomEnemySpawn.spawnEnemyWithinRadius(type, kvp.Key, radius, referenceObject.transform.position, maxHPProportion);
                 }
             }
         }

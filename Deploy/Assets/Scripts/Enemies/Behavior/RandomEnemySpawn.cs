@@ -5,16 +5,23 @@ using UnityEngine;
 public class RandomEnemySpawn: MonoBehaviour {
 
     private GameObject planet;
+
     public GameObject flyingKamikaze;
     public GameObject golem;
+    public GameObject IREnemy;
+    public GameObject shrab;
+    public GameObject shly; 
+
     public GameObject Player;
-   
+    
 
     public int kamikazePerSpawn = 5;
     public int kamikazeSwarms = 1;
 
     public int golemPerSpawn = 1;
     public int golemSwarms = 1;
+
+    public int numIREnemies;
 
     private Vector3 planetCenter;
     private float planetRadius;
@@ -24,6 +31,7 @@ public class RandomEnemySpawn: MonoBehaviour {
     //These instance variables keep track of the various instantiation points for the enemies
     private List<Vector3> kamikazeInstantiationPoints;
     private List<Vector3> golemInstantiationPoints;
+    private List<Vector3> IREnemies;
 
     public void Start()
     {
@@ -35,7 +43,7 @@ public class RandomEnemySpawn: MonoBehaviour {
         //Instantiates enemies
         instantiateGolems(false);
         InstantiateKamikazeNearPlayer(flyingKamikaze, 1, 3); //alternatively use kamikazeInstantiation()
-        //instantiateIREnemies() put this in play soon
+        instantiateIREnemy();
     }
     private void Update()
     {
@@ -124,6 +132,29 @@ public class RandomEnemySpawn: MonoBehaviour {
         }
     }
 
+    public void instantiateIREnemy()
+    {
+        IREnemies = new List<Vector3>();
+        for(int i = 0; i < numIREnemies; i++)
+        {
+            Vector3 basePoint = GetRandomInstantiationPointOnSphere();
+
+            Vector3 raycastDirection = (planetCenter - basePoint).normalized;
+            RaycastHit hit; 
+
+            if(Physics.Raycast(basePoint, raycastDirection, out hit, Mathf.Infinity))
+            {
+                Vector3 instantiationPoint = hit.point;
+                IREnemies.Add(instantiationPoint);
+            }
+        }
+
+        foreach(Vector3 point in IREnemies)
+        {
+            Instantiate(IREnemy, point, Quaternion.identity);
+        }
+    }
+
     //Method is not in use right now, but could be used in the future
     public GameObject findRaycastPointOnSphere(Vector3 startingPosition)
     {
@@ -159,18 +190,24 @@ public class RandomEnemySpawn: MonoBehaviour {
     }
 
     //This method is for IRenemies so that they can spawn squishy enemies to defend themselves, the squishy enemies will likely not be at full health
-    public static void spawnEnemyWithinRadius(GameObject enemy, float radius, Vector3 spawnPos, float maxHPProportion)
+    public static void spawnEnemyWithinRadius(EnemyType type,GameObject enemy, float radius, Vector3 spawnPos, float maxHPProportion)
     {
-        if(enemy.name == "KamikaziBirdShort")
+        //Add code to adjust shrab and shly health 
+        if(type == EnemyType.FlyingKamikaze || type == EnemyType.Shly)
         {
+            
            Vector3 instantiationPoint = Random.insideUnitSphere * radius + spawnPos + new Vector3(0, 30f, 0);
            ObjectUpdate o = new ObjectUpdate();
            GameObject bird = Instantiate(enemy, instantiationPoint, Quaternion.identity);
-            bird.GetComponent<StatManager>().kamikazeMaxHP *= maxHPProportion;
+            if(type == EnemyType.FlyingKamikaze)
+            {
+                bird.GetComponent<StatManager>().kamikazeMaxHP *= maxHPProportion;
+            }
+            
             InstantiationRequest instanRequest = new InstantiationRequest("KamikaziBird", instantiationPoint, Quaternion.identity, false);
             o.AddInstantiationRequest(instanRequest);
         }
-        else if(enemy.name == "GolemParent")
+        else if(type == EnemyType.Brawler || type == EnemyType.Shrab)
         {
             Vector3 basePoint = Random.insideUnitSphere * radius + spawnPos;
             Vector3 instanPoint = Vector3.zero;
@@ -187,5 +224,6 @@ public class RandomEnemySpawn: MonoBehaviour {
             GameObject golem = Instantiate(enemy, instanPoint, Quaternion.identity);
             golem.GetComponent<StatManager>().golemMaxHp *= maxHPProportion;
         }
+        
     }
 }

@@ -231,5 +231,7 @@ public enum EnemyType
 {
     FlyingKamikaze,
     Brawler,
-    IrradiatedEnemy
+    IrradiatedEnemy,
+    Shrab,
+    Shly
 }

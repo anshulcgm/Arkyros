@@ -33,27 +33,30 @@ public class StatManager : MonoBehaviour
 
     private KamikazeEnemy flyingKam;
     private Golem golem;
-    private IrradiatedEnemies IREnemy;
+    public IrradiatedEnemies IREnemy;
 
     private EnemyType type;
     
     //Start function sets enemytype for the script so that the right variables are changed
     void Start()
     {
-        if(gameObject.name == "KamikaziBirdShort")
+        if(gameObject.name == "KamakaziBirdShort(Clone)")
         {
             flyingKam = new KamikazeEnemy(kamikazeMaxHP, (int)kamikazeMovementSpeed, kamikazeDefense, gameObject, (int)kamikazeIQ);
             type = EnemyType.FlyingKamikaze;
+            Debug.Log("Instantiated flying kamikaze");
         }
-        else if(gameObject.name == "GolemParent")
+        else if(gameObject.name == "GolemParent(Clone)")
         {
             golem = new Golem(golemMaxHp, (int)golemMovementSpeed, golemDefense, gameObject, golemProjectileSpeed, golemChargeSpeed, golemKnockbackDmg, golemGroundPoundDmg, golemProjectileDmg);
             type = EnemyType.Brawler;
+            Debug.Log("Instantiated golem");
         }
-        else if(gameObject.name == "IREnemy")
+        else if(gameObject.name == "IREnemy(Clone)")
         {
             IREnemy = new IrradiatedEnemies(IRMaxHp, (int)IRMovementSpeed, IRDefense, gameObject, IRRadiusAffect, IRSpeedBuff, IRMaxHpBuff, IRAttackBuff, IRPlayerAttackDebuff, IRPlayerSpeedDebuff);
             type = EnemyType.IrradiatedEnemy;
+            Debug.Log("Instantiated IR enemy");
         }
         //Change values in Enemy Behavior scripts to align with these values
     }
@@ -132,4 +135,15 @@ public class StatManager : MonoBehaviour
     }
 
     //In the future we may have methods for adjusting class-specific stats
+    public void multiplyGolemDamage(float multiplier)
+    {
+        golem.setchargeDmg(multiplier);
+        golem.setBoulderDmg(multiplier);
+        golem.setGroundPoundDmg(multiplier);
+    }
+
+    public void modifyKamikazeIQ(int amount)
+    {
+        flyingKam.flatIQ(amount);
+    }
 }
