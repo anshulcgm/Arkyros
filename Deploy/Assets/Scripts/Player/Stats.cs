@@ -14,6 +14,7 @@ using System;
 //For the following stat arrays, [0] is the base, [1] is the multiplier, and [2] is the flat
 public enum statModifier { Base, Multiplier, Flat };
 public enum stat { HealthRegen, /*ManaRegen*/ Speed, Attack, AttackSpeed, Defense };
+public enum buff { Invisibility };
 
 public class Stats : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class Stats : MonoBehaviour
 
 
     public float[,] allStats = new float[5, 3]; //first column is base stats, second multiplier, third flat. Each 
+    public int[] buffs = new int[1];            //number changes with number of positive buffs
 
 
 
@@ -60,13 +62,10 @@ public class Stats : MonoBehaviour
     {
         //Regen should be every half second
         //Health Regen
-
-
-        //Mana Regen
         regenTimer++;
         if (regenTimer == 30) //half second
         {
-            //the regen stuff
+            heal(getFinal((int)stat.HealthRegen));
             regenTimer = 0;
         }
 
@@ -76,8 +75,13 @@ public class Stats : MonoBehaviour
             //die
         }
 
+        if(buffs[(int)buff.Invisibility] > 0)
+        {
+            //go transparent, invisible
+        }
+
     }
-    ///////////////
+    /////////////// 
     //INTERACTIONS
 
     public void takeDamage(float damage)
@@ -92,7 +96,15 @@ public class Stats : MonoBehaviour
         health = Mathf.Clamp(health, 0, maxHealth);
     }
 
-    //postive and negative may be separated
+
+
+
+    //postive and negative are be separated
+    public void addBuff(int buff, int duration)
+    {
+        buffs[buff] += duration;
+    }
+
     public void addStatus(int status, int duration)
     {
         //statusAilment[status] += duration;
