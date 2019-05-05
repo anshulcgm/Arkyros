@@ -121,6 +121,7 @@ public class Enemy : IClass
         if (bType == "Attack")
         {
             attackIsBoosted = true;
+            attackBoostedTimer.Enabled = true;
             attackBoostedTimer = new Timer(boostTimerDelay);
             //Associates delegate with attackBoostedTimer.Elapsed event,
             //creates anonymous function which takes but doesn't use two parameters which the
@@ -135,6 +136,7 @@ public class Enemy : IClass
         else if (bType == "Speed")
         {
             speedIsBoosted = true;
+            speedBoostedTimer.Enabled = true;
             speedBoostedTimer = new Timer(boostTimerDelay);
             //Associates delegate with speedBoostedTimer.Elapsed event,
             //creates anonymous function which takes but doesn't use two parameters which the
@@ -149,6 +151,7 @@ public class Enemy : IClass
         else if (bType == "MaxHP")
         {
             maxHPIsBoosted = true;
+            maxHPBoostedTimer.Enabled = true;
             maxHPBoostedTimer = new Timer(boostTimerDelay);
             //Associates delegate with maxHPBoostedTimer.Elapsed event,
             //creates anonymous function which takes but doesn't use two parameters which the
@@ -163,6 +166,7 @@ public class Enemy : IClass
         else if (bType == "Reload")
         {
             reloadIsBoosted = true;
+            reloadBoostedTimer.Enabled = true;
             reloadBoostedTimer = new Timer(boostTimerDelay);
             //Associates delegate with reloadBoostedTimer.Elapsed event,
             //creates anonymous function which takes but doesn't use two parameters which the
