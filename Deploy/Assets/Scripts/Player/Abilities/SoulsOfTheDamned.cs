@@ -53,7 +53,7 @@ public class SoulsOfTheDamned : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            int distance = 3;
+            int distance = 3; //spawns orbs in an square around you
             Instantiate(SoulsOfTheDamnedProjectile, transform.position + distance * transform.right + distance * transform.forward, Quaternion.identity);
             Instantiate(SoulsOfTheDamnedProjectile, transform.position + distance * transform.right - distance * transform.forward, Quaternion.identity);
             Instantiate(SoulsOfTheDamnedProjectile, transform.position - distance * transform.right + distance * transform.forward, Quaternion.identity);

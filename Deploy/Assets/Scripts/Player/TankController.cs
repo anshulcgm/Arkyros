@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 [RequireComponent(typeof(GravityBody))]
-public class FirstPersonController : MonoBehaviour
+public class TankController : MonoBehaviour
 {
 
     // public vars

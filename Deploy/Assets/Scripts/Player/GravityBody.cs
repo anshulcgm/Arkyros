@@ -21,6 +21,18 @@ public class GravityBody : MonoBehaviour
     void FixedUpdate()
     {
         // Allow this body to be influenced by planet's gravity
-        planet.Attract(rigidbody);
+        if(rigidbody.gameObject.tag == "Player")
+        {
+            if (rigidbody.gameObject.GetComponent<Stats>().buffs[(int)buff.Gravityless] == 0) //if you don't have the gravityless buff, gravity applies
+            {
+                planet.Attract(rigidbody);
+            }
+        }
+
+        else
+        {
+            planet.Attract(rigidbody); //all non players will face gravity
+        }
+        
     }
 }
