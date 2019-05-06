@@ -14,13 +14,16 @@ public class Darkflight : MonoBehaviour
     Rigidbody rigidbody;
 
     DateTime start;
-
+    Stats stats;
     private bool cast;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        stats = GetComponent<Stats>();
+
+        cooldown = 0;
     }
 
     // Update is called once per frame
@@ -40,7 +43,7 @@ public class Darkflight : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
             rigidbody.AddForce(transform.up * 1000, ForceMode.Impulse); //jumps super high
-            //reee flying code
+            stats.buffs[(int)buff.Gravityless] += 240; //lets you fly
             cooldown = 240;
             cast = true;
         }
