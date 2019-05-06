@@ -50,7 +50,6 @@ public class Enemy : IClass
   
     }
     public Enemy(float maxhp, int ms, float defense, GameObject referenceObject)
-
     {
         enemyStats = new StatSystem(maxhp, ms, defense);
         this.referenceObject = referenceObject;

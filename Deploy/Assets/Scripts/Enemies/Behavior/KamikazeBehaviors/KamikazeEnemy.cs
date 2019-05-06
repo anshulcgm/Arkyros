@@ -7,6 +7,7 @@ public class KamikazeEnemy : Enemy {
     private int IQ;
     private int stealthField;
 	private float diveSpeed;
+    
 
     public KamikazeEnemy( float hp, int ms, float defense, GameObject rf, int intel) : base( hp, ms, defense, rf)
     {

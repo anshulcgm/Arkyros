@@ -13,6 +13,7 @@ public class IrradiatedEnemies: Enemy
     private float pAttackDebuff; //Possible Value: .9
     private float pSpeedDebuff; //Possible Value: .9
 
+    
     //private float reloadBuff;
 
 
@@ -31,20 +32,22 @@ public class IrradiatedEnemies: Enemy
     }
 
 
-    public void spawnEnemy(EnemyType type, Dictionary<GameObject, int> enemiesToSpawn, float radius)
+    public void spawnEnemy(EnemyType[] types, Dictionary<GameObject, int> enemiesToSpawn, float radius)
     {
         Debug.Log("In spawnEnemy function");
         if (enemyStats.getHealth() <= enemyStats.getMaxHealth() * 0.1)
         {
             //Spawn code for other enemies - Anshul Task 6
             float maxHPProportion = Random.Range(1, 101) * 0.01f;
-
+            int j = 0;
             foreach (KeyValuePair<GameObject, int> kvp in enemiesToSpawn)
             {
+                EnemyType typeToPass = types[j];
                 for (int i = 0; i < kvp.Value; i++)
                 {
-                    RandomEnemySpawn.spawnEnemyWithinRadius(type, kvp.Key, radius, referenceObject.transform.position, maxHPProportion);
+                    RandomEnemySpawn.spawnEnemyWithinRadius(typeToPass, kvp.Key, radius, referenceObject.transform.position, maxHPProportion);
                 }
+                j++;
             }
         }
     }
@@ -61,7 +64,7 @@ public class IrradiatedEnemies: Enemy
             {
                 //hitColliders[i].gameObject.attack += attackBuff;
                 //Will write code for this when we can change specialized values of enemy classes
-
+                hitColliders[i].gameObject.GetComponent<StatManager>().multiplyAttack(attackBuff);
             }
             i++;
         }
@@ -124,7 +127,10 @@ public class IrradiatedEnemies: Enemy
         return attackBuff;
     }
 
-
+    public float getRadius()
+    {
+        return radius;
+    }
 
 }
 

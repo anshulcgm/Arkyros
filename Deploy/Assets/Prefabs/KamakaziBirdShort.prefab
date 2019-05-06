@@ -123,22 +123,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa1fc3738f7d924c9ab633b27a7da06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kamikazeMaxHP: 0
-  kamikazeDefense: 0
-  kamikazeMovementSpeed: 0
-  kamikazeIQ: 0
-  golemMaxHp: 0
-  golemDefense: 0
-  golemMovementSpeed: 0
-  golemChargeSpeed: 0
-  golemProjectileSpeed: 0
-  IRMaxHp: 0
-  IRDefense: 0
+  kamikazeMaxHP: 100
+  kamikazeDefense: 30
+  kamikazeMovementSpeed: 20
+  kamikazeIQ: 115
+  golemMaxHp: 300
+  golemDefense: 20
+  golemMovementSpeed: 10
+  golemChargeSpeed: 30
+  golemProjectileSpeed: 40
+  golemKnockbackDmg: 100
+  golemGroundPoundDmg: 30
+  golemProjectileDmg: 80
+  IRMaxHp: 200
+  IRDefense: 10
   IRMovementSpeed: 0
-  IRRadiusAffect: 0
-  IRSpeedBuff: 0
-  IRMaxHpBuff: 0
-  IRAttackBuff: 0
+  IRRadiusAffect: 20
+  IRSpeedBuff: 2
+  IRMaxHpBuff: 100
+  IRAttackBuff: 1.5
+  IRPlayerAttackDebuff: 0.5
+  IRPlayerSpeedDebuff: 0.5
 --- !u!1 &1045979456465860
 GameObject:
   m_ObjectHideFlags: 0
