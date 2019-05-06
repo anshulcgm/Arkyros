@@ -25,6 +25,7 @@ public class Template : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
+        
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
