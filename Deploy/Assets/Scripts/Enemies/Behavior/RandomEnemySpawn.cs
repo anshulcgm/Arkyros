@@ -45,12 +45,6 @@ public class RandomEnemySpawn: MonoBehaviour {
         InstantiateKamikazeNearPlayer(flyingKamikaze, 1, 3); //alternatively use kamikazeInstantiation()
         instantiateIREnemy();
     }
-    private void Update()
-    {
-
-        
-       
-    }
     public Vector3 GetRandomInstantiationPointOnSphere()
     {
         return (Random.onUnitSphere * planetRadius + planetCenter);
@@ -193,6 +187,7 @@ public class RandomEnemySpawn: MonoBehaviour {
     public static void spawnEnemyWithinRadius(EnemyType type,GameObject enemy, float radius, Vector3 spawnPos, float maxHPProportion)
     {
         //Add code to adjust shrab and shly health 
+          Debug.Log("In RandomEnemySpawn function");
         if(type == EnemyType.FlyingKamikaze || type == EnemyType.Shly)
         {
             
@@ -221,8 +216,11 @@ public class RandomEnemySpawn: MonoBehaviour {
             {
                 Debug.Log("Raycast hit not detected");
             }
-            GameObject golem = Instantiate(enemy, instanPoint, Quaternion.identity);
-            golem.GetComponent<StatManager>().golemMaxHp *= maxHPProportion;
+            if(type == EnemyType.Brawler)
+            {
+                GameObject golem = Instantiate(enemy, instanPoint, Quaternion.identity);
+                golem.GetComponent<StatManager>().golemMaxHp *= maxHPProportion;
+            }
         }
         
     }

@@ -43,18 +43,21 @@ public class StatManager : MonoBehaviour
         if(gameObject.name == "KamakaziBirdShort(Clone)")
         {
             flyingKam = new KamikazeEnemy(kamikazeMaxHP, (int)kamikazeMovementSpeed, kamikazeDefense, gameObject, (int)kamikazeIQ);
+            Enemy.enemyList.Add(flyingKam);
             type = EnemyType.FlyingKamikaze;
             Debug.Log("Instantiated flying kamikaze");
         }
         else if(gameObject.name == "GolemParent(Clone)")
         {
             golem = new Golem(golemMaxHp, (int)golemMovementSpeed, golemDefense, gameObject, golemProjectileSpeed, golemChargeSpeed, golemKnockbackDmg, golemGroundPoundDmg, golemProjectileDmg);
+            Enemy.enemyList.Add(golem);
             type = EnemyType.Brawler;
             Debug.Log("Instantiated golem");
         }
         else if(gameObject.name == "IREnemy(Clone)")
         {
             IREnemy = new IrradiatedEnemies(IRMaxHp, (int)IRMovementSpeed, IRDefense, gameObject, IRRadiusAffect, IRSpeedBuff, IRMaxHpBuff, IRAttackBuff, IRPlayerAttackDebuff, IRPlayerSpeedDebuff);
+            Enemy.enemyList.Add(IREnemy);
             type = EnemyType.IrradiatedEnemy;
             Debug.Log("Instantiated IR enemy");
         }
@@ -134,14 +137,19 @@ public class StatManager : MonoBehaviour
         }
     }
 
-    //In the future we may have methods for adjusting class-specific stats
-    public void multiplyGolemDamage(float multiplier)
+    public void multiplyAttack(float multiplier)
     {
-        golem.setchargeDmg(multiplier);
-        golem.setBoulderDmg(multiplier);
-        golem.setGroundPoundDmg(multiplier);
+        if(type == EnemyType.Brawler)
+        {
+            golem.setchargeDmg(multiplier);
+            golem.setBoulderDmg(multiplier);
+            golem.setGroundPoundDmg(multiplier);
+        }
+        if(type == EnemyType.FlyingKamikaze)
+        {
+            flyingKam.flatIQ((int)(multiplier * 10f));
+        }
     }
-
     public void modifyKamikazeIQ(int amount)
     {
         flyingKam.flatIQ(amount);
