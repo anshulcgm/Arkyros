@@ -45,7 +45,7 @@ public class PlayerAttack : MonoBehaviour {
             GameObject particleEffect = Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
-       
+		
     }
 
     //Need a method for Kamikaze movement at random times
