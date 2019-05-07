@@ -7,15 +7,18 @@ public class ShlyEnemy : Enemy {
     private int aggregateNum; //number of shlies that are aggregate
     private float bullChargeSpeed; //shly speed towards players
 	private float speedDebuff; //the proportion of AOE speed debuff when player is under "sprain" effect
-    private GameObject referenceObject; //rf
 
-    public ShlyEnemy(float hp, int ms, float defense, int aggregateNum, float bullChargeSpeed, float speedDebuff, GameObject rf, int intel) : base( hp, ms, defense, rf)
+    private float pelletDamage;
+    private float bullChargeDamage;
+    public static List<ShlyEnemy> shlyList = new List<ShlyEnemy>();
+
+    public ShlyEnemy(float hp, int ms, float defense, int aNum, float bCS, float sD, GameObject rf, float pelletDamage, float bullChargeDamage) : base( hp, ms, defense, rf)
     {
-		this.referenceObject = rf;
-
-        this.aggregateNum = aggregateNum; //aggregate shlies come as 12 initially
-        this.bullChargeSpeed = bullChargeSpeed;
-        this.speedDebuff = speedDebuff;
+        aggregateNum = aNum; //aggregate shlies come as 12 initially
+        bullChargeSpeed = bCS;
+        speedDebuff = sD;
+        this.pelletDamage = pelletDamage;
+        this.bullChargeDamage = bullChargeDamage;
     }
 
 
@@ -101,6 +104,13 @@ public class ShlyEnemy : Enemy {
         }
     }
 
+    //mutators
+    public void adjustDamage(float multiplier)
+    {
+        pelletDamage *= multiplier;
+        bullChargeDamage *= multiplier;
+    }
+
     //public accessors
 	public int getAggregateNum() {
 		return aggregateNum;
@@ -113,4 +123,14 @@ public class ShlyEnemy : Enemy {
 	public float getSpeedDebuff() {
 		return speedDebuff;
 	}
+
+    public float getPelletDamage()
+    {
+        return pelletDamage;
+    }
+    
+    public float getBullChargeDamage()
+    {
+        return bullChargeDamage;
+    }
 }
