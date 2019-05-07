@@ -9,6 +9,9 @@ public class ShlyEnemyBehavior : MonoBehaviour
     private Rigidbody r;
     private float speed;
 
+    public float searchRadius;
+    public float sprainEffectRadius;
+
     private Animator anim;
 
     // Start is called before the first frame update
@@ -31,18 +34,8 @@ public class ShlyEnemyBehavior : MonoBehaviour
         transform.LookAt(player.transform); //Ensures they're always looking at the player
         Vector3 playerPos = player.transform.position;
         Vector3 enemyPos = this.gameObject.transform.position;
-        
-        if (shly.getAggregateNum() > 1 && shly.getAggregateNum() <= 6)
-        {
-            r.velocity = (playerPos - enemyPos).normalized * speed;
-        }
-        else if (shly.getAggregateNum() == 1)
-        {
-            //Default attack is pellet drop
-        }
-        else
-        {
-            //move towards the player
-        }
+        shly.pelletDrop(searchRadius);
+        shly.bullCharge(searchRadius);
+        shly.sprain(sprainEffectRadius);
     }  
 }

@@ -7,12 +7,15 @@ public class ShlyEnemy : Enemy {
     private int aggregateNum; //number of shlies that are aggregate
     private float bullChargeSpeed; //shly speed towards players
 	private float speedDebuff; //the proportion of AOE speed debuff when player is under "sprain" effect
-
     private float pelletDamage;
     private float bullChargeDamage;
+
+    public int minSprainShlyCount = 12;
+    public float shlySprainRange = 10;
+    private bool sprainActive;
     public static List<ShlyEnemy> shlyList = new List<ShlyEnemy>();
 
-    public ShlyEnemy(float hp, int ms, float defense, int aNum, float bCS, float sD, GameObject rf, float pelletDamage, float bullChargeDamage) : base( hp, ms, defense, rf)
+    public ShlyEnemy(float hp, int ms, float defense, int aNum, float bCS, float sD, GameObject rf, float pelletDamage, float bullChargeDamage) : base(hp, ms, defense, rf)
     {
         aggregateNum = aNum; //aggregate shlies come as 12 initially
         bullChargeSpeed = bCS;
@@ -20,6 +23,7 @@ public class ShlyEnemy : Enemy {
         this.pelletDamage = pelletDamage;
         this.bullChargeDamage = bullChargeDamage;
     }
+
 
 
     public void pelletDrop(float radius) //basic attack where shly drops pellets
@@ -46,22 +50,39 @@ public class ShlyEnemy : Enemy {
 
     public void sprain(float x) //enemies within a radius of x will slow down
     {
-        if(aggregateNum >= 6) //must be aggregate shly of six or more
+        int i = 0;
+        int shlyCount = 0;
+        foreach(ShlyEnemy shly in shlyList)
         {
-            //checks whether objects within radius x are tagged players
-            //if so, player movement speed will get speedDebuff-ed
-            Collider[] hitColliders = Physics.OverlapSphere(referenceObject.transform.position, x);
-            int i = 0;
-            while (i < hitColliders.Length)
+            if( referenceObject.transform.position.x - shly.referenceObject.transform.position.x < shlySprainRange &&
+                referenceObject.transform.position.y - shly.referenceObject.transform.position.y < shlySprainRange &&
+                referenceObject.transform.position.z - shly.referenceObject.transform.position.z < shlySprainRange)
             {
-                if (hitColliders[i].CompareTag("Player"))
-                {
-                    //Include player debuff
-                    //hitColliders[i].gameObject.GetComponent<StatManager>().playerMultiplySpeed(speedDebuff);
-                }
-                i++;
+                shlyCount++;
             }
         }
+
+        if (shlyCount >= minSprainShlyCount)
+        {
+            sprainActive = true;
+        }
+        else
+        {
+            sprainActive = false;
+        }
+
+        if (sprainActive)
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(referenceObject.transform.position, shlySprainRange);
+            int j = 0;
+            if (hitColliders[j].CompareTag("Player"))
+            {
+                //initiate sprain behavior 
+                //Include player debuff
+                //hitColliders[i].gameObject.GetComponent<StatManager>().playerMultiplySpeed(speedDebuff);
+            }
+        }
+
     }
 
 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2285097985784262664}
   - component: {fileID: 2187155684026029383}
   - component: {fileID: 227025246855450590}
+  - component: {fileID: 3529628806469246882}
   m_Layer: 0
   m_Name: Shly
   m_TagString: Untagged
@@ -91,3 +92,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3529628806469246882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6167622916773630156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4175fc022589d6f4aac974af4a7f5587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Projectile: {fileID: 0}
+  timer: 20
+  variableTimer: 5

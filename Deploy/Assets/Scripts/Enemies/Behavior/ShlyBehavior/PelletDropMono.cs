@@ -1,26 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Timers;
+//using System.Timers;
 
 
 public class PelletDropMono : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public float dropRange;
+    //Old Pellet Drop Stuff
+    /*public float dropRange;
     public GameObject pellet = null;
     private bool canAttack = true;
-    private int invokeCountdown = 3;
+    private int invokeCountdown = 3;*/
 
+
+    public GameObject Projectile;
+    public float timer;
+    public float variableTimer;
+    // Start is called before the first frame update
     void Start()
     {
-
+        variableTimer = timer;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        timer -= Time.deltaTime;
+        if (timer <= 0)
+        {
+            GameObject laser = (GameObject)Instantiate(Projectile, gameObject.transform.position, gameObject.transform.rotation);
+            timer = variableTimer;
+        }
+
+        //Old Pellet Drop Stuff
+        /*
         if (canAttack)
         {
 
@@ -49,9 +65,11 @@ public class PelletDropMono : MonoBehaviour
             }
         }
         //Just used for test scene, moves object
-        this.transform.Translate(Vector3.right * Time.deltaTime);
+        this.transform.Translate(Vector3.right * Time.deltaTime);*/
+
     }
 
+    /*Old Pellet Drop Stuff
     private void ReleasePellets()
     {
         InvokeRepeating("ReleasePellet", 0.9f, 0.3f);
@@ -65,5 +83,5 @@ public class PelletDropMono : MonoBehaviour
             Instantiate(pellet, pos, Quaternion.identity);
         }
         invokeCountdown--;
-    }
+    }*/
 }
