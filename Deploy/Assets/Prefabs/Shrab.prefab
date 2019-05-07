@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 202793097249508996}
   - component: {fileID: 2891473718988229583}
   - component: {fileID: 1784320776727708344}
-  - component: {fileID: 5697513455488609027}
   m_Layer: 0
   m_Name: Shrab
   m_TagString: Untagged
@@ -92,16 +91,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5697513455488609027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6004316977859840691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39957ef6c2112314b98bb8a74391ef0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1

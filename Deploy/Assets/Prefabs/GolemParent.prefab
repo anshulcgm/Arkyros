@@ -466,7 +466,8 @@ MonoBehaviour:
   shootRange: 100
   noActionRange: 0
   groundPoundRadius: 5
-  projectile: {fileID: 1136677087986642, guid: 89f07b51d18d0b442b44951002cdeede, type: 3}
+  projectile: {fileID: 4560942895118958702, guid: 89f07b51d18d0b442b44951002cdeede,
+    type: 3}
 --- !u!114 &114369388953672176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,6 +544,14 @@ MonoBehaviour:
   IRAttackBuff: 1.5
   IRPlayerAttackDebuff: 0.5
   IRPlayerSpeedDebuff: 0.5
+  shlyMaxHp: 0
+  shlyDefense: 0
+  shlyMovementSpeed: 0
+  aggregateNumberofShlies: 0
+  bullChargeSpeed: 0
+  speedDebuffProportion: 0
+  pelletDamage: 0
+  bullChargeDamage: 0
 --- !u!1 &1555681830148934
 GameObject:
   m_ObjectHideFlags: 0
