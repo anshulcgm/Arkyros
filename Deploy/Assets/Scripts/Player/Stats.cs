@@ -128,4 +128,15 @@ public class Stats : MonoBehaviour
         //statusAilment[status] += duration;
     }
 
+    public void dealDamage(GameObject target, float damage)
+    {
+        //deals dmg to target
+
+        //not sure if this works exactly to detect if its been killed
+        if (target == null)
+        {
+            //trigger onKill() passives
+        }
+    }
+
 }

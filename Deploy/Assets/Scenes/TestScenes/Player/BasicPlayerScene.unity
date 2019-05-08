@@ -497,6 +497,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ghostSound: {fileID: 1401434302}
+  Cleave: {fileID: 8300000, guid: 18a28668ea7908e4699f7f89741f768e, type: 3}
+  CullingStrike: {fileID: 8300000, guid: 0212df2a71e16c840a9979199df7f73d, type: 3}
+  SpiritBlade: {fileID: 8300000, guid: 9db3a9f494bd98f44b7398161c326c02, type: 3}
   DFCombined: {fileID: 8300000, guid: bfb961d4fa83dba44812967a9cb40ecd, type: 3}
   LeapInTheDark: {fileID: 8300000, guid: 97f27a82dcf76ac4fbfa1302bbc89486, type: 3}
   ShadowRush: {fileID: 8300000, guid: c37dcc4b6410a4a43b0de22cb3f2af97, type: 3}

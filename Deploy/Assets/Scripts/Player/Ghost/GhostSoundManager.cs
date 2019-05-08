@@ -7,6 +7,14 @@ public class GhostSoundManager : MonoBehaviour
 
     public AudioSource ghostSound;
 
+    //Tier 1
+    public AudioClip Cleave;
+
+    public AudioClip CullingStrike;
+
+    public AudioClip SpiritBlade;
+
+
     //Tier 2
 
     public AudioClip DFCombined;
@@ -14,6 +22,8 @@ public class GhostSoundManager : MonoBehaviour
     public AudioClip LeapInTheDark;
 
     public AudioClip ShadowRush;
+
+
 
 
 
@@ -31,7 +41,7 @@ public class GhostSoundManager : MonoBehaviour
     
     public void playDFCombined()
     {
-        ghostSound.clip = DFCombined;
+        //ghostSound.clip = DFCombined;
         ghostSound.PlayOneShot(DFCombined);
         
     }
