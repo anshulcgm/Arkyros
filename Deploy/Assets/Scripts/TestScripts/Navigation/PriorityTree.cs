@@ -14,8 +14,12 @@ using UnityEngine;
 * \see https://en.wikipedia.org/wiki/D-ary_heap
 */
 public class PriorityTree{
-		/** Number of items in the tree */
-		public int numberOfItems;
+        double[] fVal;
+        double[] gVal;
+        int[] index;
+
+        /** Number of items in the tree */
+        public int numberOfItems;
 
 		/** The tree will grow by at least this factor every time it is expanded */
 		public float growthFactor = 2;
@@ -35,7 +39,7 @@ public class PriorityTree{
 		const bool SortGScores = true;
 
 		/** Internal backing array for the heap */
-		private Node[] heap;
+		private int[] heap;
 
 		/** True if the heap does not contain any elements */
 		public bool isEmpty {
@@ -52,27 +56,31 @@ public class PriorityTree{
 		}
 
 		/** Create a new heap with the specified initial capacity */
-		public PriorityTree (int capacity) {
+		public PriorityTree (int capacity, double[] fVal, double[] gVal, int[] index) {
 			// Make sure the size has remainder 1 when divided by D
 			// This allows us to always guarantee that indices used in the Remove method
 			// will never throw out of bounds exceptions
 			capacity = RoundUpToNextMultipleMod1(capacity);
 
-			heap = new Node[capacity];
+			heap = new int[capacity];
 			numberOfItems = 0;
-		}
+
+            this.fVal = fVal;
+            this.gVal = gVal;
+            this.index = index;
+        }
 
 		/** Removes all elements from the heap */
 		public void Clear () {
 			numberOfItems = 0;
 		}
 
-		internal Node GetNode (int i) {
+		internal int Getint (int i) {
 			return heap[i];
 		}
 
 		internal void SetF (int i, double f) {
-			heap[i].fVal = f;
+		    fVal[heap[i]] = f;
 		}
 
 		/** Expands to a larger backing array when the current one is too small */
@@ -89,7 +97,7 @@ public class PriorityTree{
 					"\nRemove this check (in BinaryHeap.cs) if you are sure that it is not caused by a bug");
 			}
 
-			var newHeap = new Node[newSize];
+			var newHeap = new int[newSize];
 
 			for (int i = 0; i < heap.Length; i++) {
 				newHeap[i] = heap[i];
@@ -98,7 +106,7 @@ public class PriorityTree{
 		}
 
 		/** Adds a node to the heap */
-		public void Add (Node node)
+		public void Add (int node)
         {
             //throw an exception if you're adding a null node.
 			if (node == null) throw new System.ArgumentNullException("node");
@@ -110,40 +118,40 @@ public class PriorityTree{
 
             //add the node and bubble it up.
             heap[numberOfItems] = node;
-            node.index = numberOfItems;         
+            index[node] = numberOfItems;         
             Bubble(node);
 			numberOfItems++;
 		}
 
         //bubbles a node 'n'
-        public void Bubble(Node n)
+        public void Bubble(int n)
         {
-            if(n.index == -1)
+            if(index[n] == -1)
             {
                 return;
             }
-            Bubble(n.index);
+            BubbleIndex(index[n]);
         }
 
         //bubbles a node at an index i.
-        private void Bubble(int bubbleIndex)
+        private void BubbleIndex(int bubbleIndex)
         {
-            Node node = heap[bubbleIndex];
-            double nodeF = node.fVal;
-            double nodeG = node.gVal;
+            int node = heap[bubbleIndex];
+            double nodeF = fVal[node];
+            double nodeG = gVal[node];
 
             while (bubbleIndex != 0)
             {
                 // Parent node of the bubble node
                 int parentIndex = (bubbleIndex - 1) / D;
 
-                if (nodeF < heap[parentIndex].fVal || (SortGScores && nodeF == heap[parentIndex].fVal && nodeG > heap[parentIndex].gVal))
+                if (nodeF < fVal[heap[parentIndex]] || (SortGScores && nodeF == fVal[heap[parentIndex]] && nodeG > gVal[heap[parentIndex]]))
                 {
                     // Swap the bubble node and parent node
                     // (we don't really need to store the bubble node until we know the final index though
                     // so we do that after the loop instead)
                     heap[bubbleIndex] = heap[parentIndex];
-                    heap[bubbleIndex].index = bubbleIndex;
+                    index[heap[bubbleIndex]] = bubbleIndex;
                     bubbleIndex = parentIndex;
                 }
                 else
@@ -153,15 +161,15 @@ public class PriorityTree{
             }
             
             heap[bubbleIndex] = node;
-            heap[bubbleIndex].index = bubbleIndex;
+            index[heap[bubbleIndex]] = bubbleIndex;
         }
 
 		/** Returns the node with the lowest F score from the heap */
-		public Node Remove () {
+		public int Remove () {
 			numberOfItems--;
-			Node returnItem = heap[0];
-			Node swapItem = heap[numberOfItems];
-			double swapItemG = swapItem.gVal;
+			int returnItem = heap[0];
+			int swapItem = heap[numberOfItems];
+			double swapItemG = gVal[swapItem];
 
             int swapIndex = 0;
             int parent = 0;
@@ -169,16 +177,16 @@ public class PriorityTree{
 			while (true)
             {
 				parent = swapIndex;
-				double swapF = swapItem.fVal;
-                double swapG = swapItem.gVal;
+				double swapF = fVal[swapItem];
+                double swapG = gVal[swapItem];
 
                 int childStart = parent * D + 1;
                 for(int i = 0; i < D && (childStart + i) < numberOfItems; i++)
                 {
-                    if (heap[childStart + i].fVal < swapF || (heap[childStart + i].fVal == swapF && heap[childStart + i].gVal > swapG))
+                    if (fVal[heap[childStart + i]] < swapF || (fVal[heap[childStart + i]] == swapF && gVal[heap[childStart + i]] > swapG))
                     {
-                        swapF = heap[childStart + i].fVal;
-                        swapG = heap[childStart + i].gVal;
+                        swapF = fVal[heap[childStart + i]];
+                        swapG = gVal[heap[childStart + i]];
                         swapIndex = childStart + i;
                     }
                 }
@@ -188,7 +196,7 @@ public class PriorityTree{
 				// in local variable and only assign it once we know the final index)
 				if (parent != swapIndex) {
 					heap[parent] = heap[swapIndex];
-                    heap[parent].index = parent;
+                    index[heap[parent]] = parent;
                 } else {
 					break;
 				}
@@ -196,17 +204,22 @@ public class PriorityTree{
 
 			// Assign element to the final position
 			heap[swapIndex] = swapItem;
-            heap[swapIndex].index = swapIndex;
+            index[heap[swapIndex]] = swapIndex;
 
-            returnItem.index = -1;
+            index[returnItem] = -1;
             return returnItem;
 		}
+
+        public int Peek()
+        {
+            return heap[0];
+        }
 
 		public void Validate () {
 			for (int i = 1; i < numberOfItems; i++) {
 				int parentIndex = (i-1)/D;
-				if (heap[parentIndex].fVal > heap[i].fVal) {
-					Debug.Log("Invalid state at " + i + ":" +  parentIndex + " ( " + heap[parentIndex].fVal + " > " + heap[i].fVal + " ) ");
+				if (fVal[heap[parentIndex]] > fVal[heap[i]]) {
+					Debug.Log("Invalid state at " + i + ":" +  parentIndex + " ( " + fVal[heap[parentIndex]] + " > " + fVal[heap[i]] + " ) ");
 				}
 			}
 		}
@@ -217,15 +230,15 @@ public class PriorityTree{
 			for (int i = 2; i < numberOfItems; i++) {
 				int bubbleIndex = i;
 				var node = heap[i];
-				double nodeF = node.fVal;
+				double nodeF = fVal[node];
 				while (bubbleIndex != 1) {
 					int parentIndex = bubbleIndex / D;
 
-					if (nodeF < heap[parentIndex].fVal) {
+					if (nodeF < fVal[heap[parentIndex]]) {
 						heap[bubbleIndex] = heap[parentIndex];
 						heap[parentIndex] = node;
-                        heap[bubbleIndex].index = bubbleIndex;
-                        heap[parentIndex].index = parentIndex;
+                        index[heap[bubbleIndex]] = bubbleIndex;
+                        index[heap[parentIndex]] = parentIndex;
                         bubbleIndex = parentIndex;
 					} else {
 						break;

@@ -17,7 +17,7 @@ public class Planet : IClass
     //vars to store points and connections
     private List<Vector3> points;
     private List<int[]> connections;
-    public List<int[]> triangles;
+    public List<Triangle> triangles;
 
     private float radius;
     private float variance;
@@ -44,28 +44,42 @@ public class Planet : IClass
     /* parameters: None
      * returns: ObjectUpdate with information neccesary to actually make the planet in unity.
      */
-    public Mesh GeneratePlanet()
+    public int[] GeneratePlanet(DateTime start, out List<int>[] map, out List<Vector3> pts, out List<int>[][] trianglesHash)
     {
-        List<Triangle>[,] trianglesHash;
-        List<Triangle> triangles = new ObjectUpdate().GetTrianglesFromConnections(points, connections, out trianglesHash);
-        return MeshBuilder3D.GetMeshFrom(points, triangles, trianglesHash);
+        Debug.Log("planet mesh creation time (sec): " + (DateTime.Now - start).TotalSeconds);// -> 9
+        map = ObjectUpdate.GetMap(connections);
+        pts = points;
+        Debug.Log(pts.Count);
+        
+        Debug.Log("planet mesh creation time (sec): " + (DateTime.Now - start).TotalSeconds);// -> 16
+        triangles = new ObjectUpdate().GetTrianglesFromConnections(points, map, out trianglesHash);
+        Debug.Log("planet mesh creation time (sec): " + (DateTime.Now - start).TotalSeconds);// -> 20
+        Debug.Log(triangles.Count + " numtri");
+        ObjectHandler.cacheObjMap = new List<CacheObjTuple>[points.Count][];
+        Debug.Log("planet mesh creation time (sec): " + (DateTime.Now - start).TotalSeconds);//-> 21
+        Debug.Log(pts.Count + " pts");
+        int[] mesh = MeshBuilder3D.GetMeshFrom(points, triangles, map, trianglesHash);
+        Debug.Log("planet mesh creation time (sec): " + (DateTime.Now - start).TotalSeconds);
+        Debug.Log(pts.Count + " pts");
+        return mesh;
     }
 
     public ObjectUpdate MakeObjectsOnSurface(Vector3 planetCenter, string pathToObject, int numObjs, float scale, ObjectPlacementDirection placeDir, bool isCache)
     {
         ObjectUpdate o = new ObjectUpdate();
-        for(int i = 0; i < numObjs; i++)
+        LayerMask mask = ~LayerMask.GetMask(new string[] { "ocean" });
+        for (int i = 0; i < numObjs; i++)
         {
             Vector3 dir = new Vector3((float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f).normalized;
             Vector3 randomUp = new Vector3((float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f).normalized;
             RaycastHit hit;
-            Physics.Raycast(planetCenter + dir * (2 * radius + 2 * variance) * scale, -dir, out hit, Mathf.Infinity, ~LayerMask.GetMask(new string[] { "ocean" }));
+            Physics.Raycast(planetCenter + dir * (2 * radius + 2 * variance) * scale, -dir, out hit, Mathf.Infinity, mask);
             Vector3 forward;
             if (placeDir == ObjectPlacementDirection.UP) { forward = dir; }
             else if(placeDir == ObjectPlacementDirection.NORMAL){ forward = hit.normal; }
             else if(placeDir == ObjectPlacementDirection.RANDOM) { forward = new Vector3((float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f).normalized; }
             else { throw new Exception("ObjectPlacementDirection parameter is invalid"); }            
-            o.AddInstantiationRequest(new InstantiationRequest(pathToObject, hit.point, Quaternion.LookRotation(forward, randomUp), isCache));
+            o.AddInstantiationRequest(new InstantiationRequest(pathToObject, hit.point, Quaternion.LookRotation(forward, randomUp), triangles[hit.triangleIndex].points));
         }
         return o;
     }

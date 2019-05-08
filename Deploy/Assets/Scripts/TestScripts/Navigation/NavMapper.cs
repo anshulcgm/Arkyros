@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class NavMapper : MonoBehaviour
 {
+    /*
     //things in the default and spatial layers will be mapped. Everything else will not.
     public LayerMask collisionLayer;
 
@@ -489,8 +490,7 @@ public class NavMapper : MonoBehaviour
             {
                 currDir = finish.location - start.location;
             }
-
-            int dir = 0;
+            
             foreach (Node node in currentNode.connectedNodes)
             {
                 if (node == null || (isMeteor && !node.isPassableForMeteor))
@@ -527,8 +527,7 @@ public class NavMapper : MonoBehaviour
                     }
                 }
 
-
-                dir++;
+                
             }
         }
         nodeQueue = null;
@@ -664,6 +663,7 @@ public class NavMapper : MonoBehaviour
                 }
             }
             */
+            /*
             if (isValid(current, c))
             {
                 foreach(Node n in removedNodes)
@@ -680,7 +680,7 @@ public class NavMapper : MonoBehaviour
                     }
                 }
                 */
-                
+                /*
                 return current;
             }
 
@@ -828,6 +828,7 @@ public class NavMapper : MonoBehaviour
             }
         }
         */
+        /*
         return solutions;
     }
 
@@ -1003,6 +1004,7 @@ public class NavMapper : MonoBehaviour
         int xNode = Mathf.RoundToInt(((pos - start) / spaceBetweenNodes).x);
         return new Vector3(xNode, yNode, zNode);
     }
+    */
 }
 
 public enum PathState {COMPLETE, NO_PATH, INCOMPLETE, NULL};

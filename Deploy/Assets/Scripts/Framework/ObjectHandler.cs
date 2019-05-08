@@ -4,26 +4,10 @@ using System.Collections.Generic;
 
 public class ObjectHandler
 {
-    public static Server server;
-    private class CacheObject
-    {         
-        public static float maxTimeHandlingCache = 5.0f;
-        public static float maxCacheRenderDist = 1000.0f;
 
-        public string name;
-        public List<Vector3> positions = new List<Vector3>();
-        public List<Quaternion> orientations = new List<Quaternion>();
-        public List<GameObject> objs = new List<GameObject>();
-        public int numInCache = 1000;
-        public GameObject resource = null;
-        public CacheObject(string name, List<Vector3> positions, List<Quaternion> orientations, GameObject resource)
-        {
-            this.name = name;
-            this.positions.AddRange(positions);
-            this.orientations.AddRange(orientations);
-            this.resource = resource;
-        }
-    }
+    public static Server server;
+    public static List<CacheObjTuple>[][] cacheObjMap;
+
     static List<CacheObject> cachedObjects = new List<CacheObject>();
 
     static int currCachedObjIndex = 0;
@@ -62,8 +46,44 @@ public class ObjectHandler
         {
             currCache = 0;
         }
-    }
+    }    
     
+    public static void PullCachedObjectsTo(int[] connection)
+    {
+        /*
+        List<CacheObjTuple> tuples = new List<CacheObjTuple>();
+        if(cacheObjMap[connection[0]]!= null)
+        {
+            List<CacheObjTuple> tuplesTemp = cacheObjMap[connection[0], connection[1]];
+            foreach (CacheObjTuple t in tuplesTemp)
+            {
+                tuples.Add(t);
+            }
+        }
+        if(cacheObjMap[connection[1], connection[0]] != null)
+        {
+            List<CacheObjTuple> tuplesTemp = cacheObjMap[connection[1], connection[0]];
+            foreach (CacheObjTuple t in tuplesTemp)
+            {
+                tuples.Add(t);
+            }
+        }
+
+        int[] numObjectsBrought = new int[cachedObjects.Count];
+        foreach(CacheObjTuple t in tuples)
+        {
+            if(numObjectsBrought[t.cacheObjIndex] >= cachedObjects[t.cacheObjIndex].numInCache)
+            {
+                continue;
+            }
+            GameObject cacheObj = cachedObjects[t.cacheObjIndex].objs[numObjectsBrought[t.cacheObjIndex]];
+            cacheObj.transform.position = cachedObjects[t.cacheObjIndex].positions[t.objIndex];
+            cacheObj.transform.rotation = cachedObjects[t.cacheObjIndex].orientations[t.objIndex];
+            numObjectsBrought[t.cacheObjIndex]++;
+        }
+        */
+    }
+
     /* Parameters: 
      * o: list of changes to make to the gameObject, as well as new gameObjects to instantiate and behaviors to attatch to the new gameObjects.
      * gameObject: the gameObject to change
@@ -73,19 +93,40 @@ public class ObjectHandler
      */
     public static void Update(ObjectUpdate o, GameObject gameObject)
     {
+        
         //handling all the instantiation requests
         foreach(InstantiationRequest i in o.instatiationRequests)
         {
             GameObject resource = (GameObject)Resources.Load(i.resourcePath);
-            if (i.isCache)
+            /*
+            if (i.triangle != null)
             {
                 bool existsInCache = false;
-                foreach(CacheObject c in cachedObjects)
+                for(int a = 0; a < cachedObjects.Count; a++)
                 {
-                    if (c.name.Equals(i.resourcePath))
+                    if (cachedObjects[a].name.Equals(i.resourcePath))
                     {
-                        c.positions.Add(i.position);
-                        c.orientations.Add(i.orientation);
+                        cachedObjects[a].positions.Add(i.position);
+                        cachedObjects[a].orientations.Add(i.orientation);
+
+                        if(cacheObjMap[i.triangle[0], i.triangle[1]] == null)
+                        {
+                            cacheObjMap[i.triangle[0], i.triangle[1]] = new List<CacheObjTuple>();
+                        }
+                        if (cacheObjMap[i.triangle[0], i.triangle[2]] == null)
+                        {
+                            cacheObjMap[i.triangle[0], i.triangle[2]] = new List<CacheObjTuple>();
+                        }
+                        if (cacheObjMap[i.triangle[1], i.triangle[2]] == null)
+                        {
+                            cacheObjMap[i.triangle[1], i.triangle[2]] = new List<CacheObjTuple>();
+                        }
+                        CacheObjTuple t = new CacheObjTuple { cacheObjIndex = a, objIndex = cachedObjects[a].positions.Count - 1 };
+
+                        cacheObjMap[i.triangle[0], i.triangle[1]].Add(t);
+                        cacheObjMap[i.triangle[0], i.triangle[2]].Add(t);
+                        cacheObjMap[i.triangle[1], i.triangle[2]].Add(t);
+
                         existsInCache = true;
                         break;
                     }
@@ -93,7 +134,27 @@ public class ObjectHandler
                 if (!existsInCache)
                 {
                     Debug.Log("making new cache " + i.resourcePath);
-                    CacheObject newCache = new CacheObject(i.resourcePath, new List<Vector3> { i.position }, new List<Quaternion> { i.orientation }, resource);
+                    CacheObject newCache = new CacheObject(i.resourcePath, new List<Vector3> { i.position }, 
+                        new List<Quaternion> { i.orientation }, resource);
+
+                    if (cacheObjMap[i.triangle[0], i.triangle[1]] == null)
+                    {
+                        cacheObjMap[i.triangle[0], i.triangle[1]] = new List<CacheObjTuple>();
+                    }
+                    if (cacheObjMap[i.triangle[0], i.triangle[2]] == null)
+                    {
+                        cacheObjMap[i.triangle[0], i.triangle[2]] = new List<CacheObjTuple>();
+                    }
+                    if (cacheObjMap[i.triangle[1], i.triangle[2]] == null)
+                    {
+                        cacheObjMap[i.triangle[1], i.triangle[2]] = new List<CacheObjTuple>();
+                    }
+                    CacheObjTuple t = new CacheObjTuple { cacheObjIndex = cachedObjects.Count, objIndex = 0 };
+
+                    cacheObjMap[i.triangle[0], i.triangle[1]].Add(t);
+                    cacheObjMap[i.triangle[0], i.triangle[2]].Add(t);
+                    cacheObjMap[i.triangle[1], i.triangle[2]].Add(t);
+
                     for (int i1 = 0; i1 < newCache.numInCache; i1++)
                     {
                         newCache.objs.Add(UnityEngine.Object.Instantiate(resource, new Vector3(100000,100000,100000), Quaternion.Euler(Vector3.zero)));
@@ -102,7 +163,7 @@ public class ObjectHandler
                 }
                 continue;
             }
-
+            */
             foreach (IClass c in i.behaviorsToAdd)
             {
                 if (c == null)
@@ -185,4 +246,30 @@ public class ObjectHandler
         Animator animator = gameObject.GetComponent<Animator>();
         
     }
+}
+
+public class CacheObject
+{
+    public static float maxTimeHandlingCache = 5.0f;
+    public static float maxCacheRenderDist = 200.0f;
+
+    public string name;
+    public List<Vector3> positions = new List<Vector3>();
+    public List<Quaternion> orientations = new List<Quaternion>();
+    public List<GameObject> objs = new List<GameObject>();
+    public int numInCache = 1000;
+    public GameObject resource = null;
+    public CacheObject(string name, List<Vector3> positions, List<Quaternion> orientations, GameObject resource)
+    {
+        this.name = name;
+        this.positions.AddRange(positions);
+        this.orientations.AddRange(orientations);
+        this.resource = resource;
+    }
+}
+
+public struct CacheObjTuple
+{
+    public int cacheObjIndex;
+    public int objIndex;
 }

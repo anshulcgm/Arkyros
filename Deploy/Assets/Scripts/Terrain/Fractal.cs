@@ -36,7 +36,7 @@ public class Fractal
             //create the mesh in the world
             GameObject child = GameObject.Instantiate(fractalChild, Vector3.zero, Quaternion.identity);
             List<Vector3> normals = null;
-            Mesh mesh = null; //MeshBuilder3D.GetMeshFrom(fractals[0].f.points, fractals[0].f.triangles, out normals);
+            Mesh mesh = null; //MeshBuilder3D.GetMeshFrom(fractals[0].f.points, fractals[0].f.triangles, fractals[0].f.trianglesHash, out normals);
             child.GetComponent<MeshFilter>().mesh = mesh;
             child.GetComponent<MeshCollider>().sharedMesh = mesh;
 
@@ -74,7 +74,7 @@ public class Fractal
                     int[] triangle = new int[] { face[i], face[i1], face[i2] };
                     for (int i3 = 0; i3 < baseShape.triangles.Count; i3++)
                     {
-                        if (baseShape.triangles[i3].SequenceEqual(triangle))
+                        if (baseShape.triangles[i3].points.SequenceEqual(triangle))
                         {
                             triangleIndex = i3;
                         }
@@ -177,7 +177,7 @@ public class Fractal
         {
             newBaseShapePoints.Add(baseShapeMapped[i].x * transitionPlane.xDir + baseShapeMapped[i].y * transitionPlane.yDir + distFromBasePlane[i] * transitionPlane.normal.normalized + averageGenerationPoint);
         }
-        FractalShape newBaseShape = new FractalShape(newBaseShapePoints, baseShape.triangles, baseShape.baseFace, baseShape.generationFaces);
+        FractalShape newBaseShape = new FractalShape(newBaseShapePoints, baseShape.triangles, baseShape.trianglesHash, baseShape.baseFace, baseShape.generationFaces);
 
         return new List<FractalShape> { transitionShape, newBaseShape };
     }
@@ -186,14 +186,30 @@ public class Fractal
 public class FractalShape
 {
     public List<Vector3> points { get; internal set; }
-    public List<int[]> triangles { get; internal set; }
+    public List<Triangle> triangles { get; internal set; }
+    public List<Triangle>[,] trianglesHash { get; internal set; }
     public int[] baseFace { get; internal set; }
     public List<int[]> generationFaces { get; internal set; }
 
-    public FractalShape(List<Vector3> points, List<int[]> triangles, int[] baseFace, List<int[]> generationFaces)
+    public FractalShape(List<Vector3> points, List<int[]> cons, int[] baseFace, List<int[]> generationFaces)
+    {
+        this.points = points;
+
+
+        List<Triangle>[,] triHashTemp = null;
+        triangles = null;//new ObjectUpdate().GetTrianglesFromConnections(points, cons, out triHashTemp);
+        Debug.Log(triangles.Count + "numTri");
+        trianglesHash = triHashTemp;
+
+        this.baseFace = baseFace;
+        this.generationFaces = generationFaces;
+    }
+
+    public FractalShape(List<Vector3> points, List<Triangle> triangles, List<Triangle>[,] trianglesHash, int[] baseFace, List<int[]> generationFaces)
     {
         this.points = points;
         this.triangles = triangles;
+        this.trianglesHash = trianglesHash;
         this.baseFace = baseFace;
         this.generationFaces = generationFaces;
     }
