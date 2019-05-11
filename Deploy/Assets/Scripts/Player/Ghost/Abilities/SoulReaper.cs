@@ -21,6 +21,7 @@ public class SoulReaper : Passive
     {
         if (isActive)
         {
+            /*
             if ()//if (button for attack pressed & enemies health falls)
             {
                 storedLifeForce += 1; //life force increases with damage done to enemy
@@ -30,6 +31,7 @@ public class SoulReaper : Passive
                 //increase health by storedLifeForce
                 storedLifeForce = 0;
             }
+            */
         }
     }
 }

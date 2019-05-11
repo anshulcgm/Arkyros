@@ -26,7 +26,8 @@ public class SpiritBladeProjectile : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             //other. take damage
-            Destroy(this);
+            
         }
+        Destroy(this.gameObject);
     }
 }

@@ -59,7 +59,8 @@ public class SoulsOfTheDamnedProjectile : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             //other. take damage
-            Destroy(this);
+            
         }
+        Destroy(this.gameObject);//gets destroyed on contact, even terrain
     }
 }

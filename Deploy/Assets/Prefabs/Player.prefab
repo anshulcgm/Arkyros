@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3964492238729989579}
   - component: {fileID: 1943815952628627974}
   - component: {fileID: 4393704401562751898}
+  - component: {fileID: 186668917152639198}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -155,3 +156,18 @@ MonoBehaviour:
   screenTargets: []
   target: {fileID: 0}
   enemies: []
+--- !u!114 &186668917152639198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536539931531146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e4044b1cd8d4e84b8a8af610230c2f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  SoulsOfTheDamnedProjectile: {fileID: 1445912041631301893, guid: d7977e476dd97cd459b87dc3094c9e03,
+    type: 3}
