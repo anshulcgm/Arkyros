@@ -471,19 +471,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1756083686}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1401434300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401434299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5406a75f1af5bc6458820b8cbeb41c89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 0
 --- !u!114 &1401434301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,11 +485,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ghostSound: {fileID: 1401434302}
   Cleave: {fileID: 8300000, guid: 18a28668ea7908e4699f7f89741f768e, type: 3}
+  EnhancedCleave: {fileID: 8300000, guid: 3b0bfa5db6936b544b549dcd24fe72f1, type: 3}
   CullingStrike: {fileID: 8300000, guid: 0212df2a71e16c840a9979199df7f73d, type: 3}
+  EnhancedCullingStrike: {fileID: 8300000, guid: 50d7542794dfe184fad7eefcb50e4c6f,
+    type: 3}
   SpiritBlade: {fileID: 8300000, guid: 9db3a9f494bd98f44b7398161c326c02, type: 3}
+  EnhancedSpiritBlade: {fileID: 8300000, guid: 621cb1de9cc88fa49836418da7afff65, type: 3}
   DFCombined: {fileID: 8300000, guid: bfb961d4fa83dba44812967a9cb40ecd, type: 3}
   LeapInTheDark: {fileID: 8300000, guid: 97f27a82dcf76ac4fbfa1302bbc89486, type: 3}
   ShadowRush: {fileID: 8300000, guid: c37dcc4b6410a4a43b0de22cb3f2af97, type: 3}
+  HSSprout: {fileID: 8300000, guid: 0f20e7aaa0fa28d4883458fc6a7c7bc7, type: 3}
+  HSHeal: {fileID: 8300000, guid: b5e9e38a25caec344a62b638e23ff1be, type: 3}
+  EtherealFormDodge: {fileID: 8300000, guid: 1c24ee2e01b068a4fbfb3bb57e23e13f, type: 3}
+  BansheesWail: {fileID: 8300000, guid: db8d20388b3f0724a9301e89266dc922, type: 3}
+  ShadowsWing: {fileID: 8300000, guid: 94f86b1fad7706d4a990d01ad4ced377, type: 3}
+  SOTDDamage: {fileID: 8300000, guid: d0cdf5edfbb935549b36c5f3fb9cbb95, type: 3}
+  SOTDFloating: {fileID: 8300000, guid: 6d50e546a9141ee4f9bc253f358e81d8, type: 3}
+  MMThrow: {fileID: 8300000, guid: be6570852f4980146b8a544d0849b2ea, type: 3}
+  MMReturn: {fileID: 8300000, guid: 94179f44a81085d4ba48260153c8ef47, type: 3}
+  NPKTeleport: {fileID: 8300000, guid: 2df2ab82db8a01842ac805b89acc0147, type: 3}
+  NPKVoiceLine: {fileID: 8300000, guid: d96399ca483c2ef47b3719ef36bb1a3b, type: 3}
+  SpiritSummons: {fileID: 8300000, guid: 1a3c7d4078edddb4584bc4b0040c2f8f, type: 3}
+  NowYouSeeMe: {fileID: 8300000, guid: aa41f4ca38b1b6540888144aa9206794, type: 3}
+  Onslaught: {fileID: 8300000, guid: 5fa6499731607d64daf247a014c2ac81, type: 3}
+  SoulReaperResurrect: {fileID: 8300000, guid: 20c9584464d515e4aaf301d11edfd5a9, type: 3}
+  CloakSlapCharge: {fileID: 8300000, guid: ae08dac6dd752d141b6b56f4f489361e, type: 3}
+  CloakSlapRelease: {fileID: 8300000, guid: a90d31b9b5a7cfd40806582a32e8256a, type: 3}
+  HoDRise: {fileID: 8300000, guid: e33f26391fa83064783907ae7cb298db, type: 3}
+  HoDDive: {fileID: 8300000, guid: 3879e3b76e3b5f54fb0877859a30df8b, type: 3}
+  P3LSprout: {fileID: 8300000, guid: f23ca54777d32854786436af28d9309f, type: 3}
+  P3LHeal: {fileID: 8300000, guid: 097a8f6afb620104e9853c689f5ea36e, type: 3}
 --- !u!82 &1401434302
 AudioSource:
   m_ObjectHideFlags: 0
