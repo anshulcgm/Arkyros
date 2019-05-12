@@ -121,41 +121,41 @@ public class GhostSoundManager : MonoBehaviour
     //Tier 2
     public void playDFCombined()
     {
-        ghostSound.clip = DFCombined;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = DFCombined;
+        ghostSound.PlayOneShot(DFCombined);
 
     }
 
 
     void playLeapInTheDark()
     {
-        ghostSound.clip = LeapInTheDark;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = LeapInTheDark;
+        ghostSound.PlayOneShot(LeapInTheDark);
 
     }
 
     void playShadowRush()
     {
-        ghostSound.clip = ShadowRush;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = ShadowRush;
+        ghostSound.PlayOneShot(ShadowRush);
     }
 
     //Tier 3
     void playHSSprout()
     {
-        ghostSound.clip = HSSprout;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = HSSprout;
+        ghostSound.PlayOneShot(HSSprout);
     }
     void playHSHeal()
     {
-        ghostSound.clip = HSHeal;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = HSHeal;
+        ghostSound.PlayOneShot(HSHeal);
     }
 
     void playEtherealFormDodge()
     {
-        ghostSound.clip = EtherealFormDodge;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = EtherealFormDodge;
+        ghostSound.PlayOneShot(EtherealFormDodge);
     }
 
     //Tier 4
@@ -167,14 +167,14 @@ public class GhostSoundManager : MonoBehaviour
 
     void playBansheesWail()
     {
-        ghostSound.clip = BansheesWail;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = BansheesWail;
+        ghostSound.PlayOneShot(BansheesWail);
     }
 
     void playSOTDDamage()
     {
-        ghostSound.clip = SOTDDamage;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = SOTDDamage;
+        ghostSound.PlayOneShot(SOTDDamage);
     }
     void playSOTDFloating()
     {
@@ -185,8 +185,8 @@ public class GhostSoundManager : MonoBehaviour
     //Tier 5
     void playMMThrow()
     {
-        ghostSound.clip = MMThrow;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = MMThrow;
+        ghostSound.PlayOneShot(MMThrow);
     }
     void playMMReturn()
     {
@@ -196,19 +196,19 @@ public class GhostSoundManager : MonoBehaviour
 
     void playSpiritSummons()
     {
-        ghostSound.clip = SpiritSummons;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = SpiritSummons;
+        ghostSound.PlayOneShot(SpiritSummons);
     }
 
     void playNPKTeleport()
     {
-        ghostSound.clip = NPKTeleport;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = NPKTeleport;
+        ghostSound.PlayOneShot(NPKTeleport);
     }
     void playNPKVoiceLine()
     {
-        ghostSound.clip = NPKVoiceLine;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = NPKVoiceLine;
+        ghostSound.PlayOneShot(NPKVoiceLine);
     }
 
     //Tier 6
@@ -216,26 +216,26 @@ public class GhostSoundManager : MonoBehaviour
     void playSoulReaperResurrect()
     {
         ghostSound.clip = SoulReaperResurrect;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        ghostSound.PlayOneShot(SoulReaperResurrect);
     }
 
     void playOnslaught()
     {
         ghostSound.clip = Onslaught;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        ghostSound.PlayOneShot(Onslaught);
     }
 
     void playNowYouSeeMe()
     {
-        ghostSound.clip = NowYouSeeMe;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = NowYouSeeMe;
+        ghostSound.PlayOneShot(NowYouSeeMe);
     }
 
     //Tier 7
     void playHoDRise()
     {
-        ghostSound.clip = HoDRise;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = HoDRise;
+        ghostSound.PlayOneShot(HoDRise);
     }
     void playHoDDive()
     {
@@ -255,19 +255,19 @@ public class GhostSoundManager : MonoBehaviour
     }
     void playCloakSlapRelease()
     {
-        ghostSound.clip = CloakSlapRelease;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = CloakSlapRelease;
+        ghostSound.PlayOneShot(CloakSlapRelease);
     }
 
     void playP3LSprout()
     {
-        ghostSound.clip = P3LSprout;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = P3LSprout;
+        ghostSound.PlayOneShot(P3LSprout);
     }
     void playP3LHeal()
     {
-        ghostSound.clip = P3LHeal;
-        ghostSound.PlayOneShot(ghostSound.clip);
+        //ghostSound.clip = P3LHeal;
+        ghostSound.PlayOneShot(P3LHeal);
     }
 
     public void stop()

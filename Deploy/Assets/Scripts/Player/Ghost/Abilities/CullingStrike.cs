@@ -20,6 +20,7 @@ public class CullingStrike : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
+    GhostSoundManager ghostSoundManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,13 +53,7 @@ public class CullingStrike : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
 
-            /*
-             * All the code for the ability that you want to write
-             * transform.forward for the direction the player is 
-             * maybe setting colliders
-             * instantiating new objects
-             * to damage enemy, EnemyGameObject.GetComponent<StatManager>().changeHealth(amount), amount can be positive or negative
-             */
+            //stSoundManager
 
 
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
