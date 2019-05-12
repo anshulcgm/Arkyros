@@ -7,6 +7,9 @@ TagManager:
   - planet
   - moon
   - playercam
+  - FxTemporaire
+  - Fire
+  - Enemy
   layers:
   - Default
   - TransparentFX
