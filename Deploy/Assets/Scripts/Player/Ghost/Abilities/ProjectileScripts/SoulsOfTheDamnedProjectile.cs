@@ -30,7 +30,7 @@ public class SoulsOfTheDamnedProjectile : MonoBehaviour
     {
         if ((DateTime.Now - start).TotalSeconds > 8)//bullet lifetime of 8 seconds
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
         transform.position = Vector3.MoveTowards(transform.position, target.position, .03f);
     }

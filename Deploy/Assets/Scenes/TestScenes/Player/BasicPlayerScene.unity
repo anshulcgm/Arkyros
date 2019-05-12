@@ -617,6 +617,21 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1756083686}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1401434310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401434299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652be6915ca01ac418f92ea230e9519b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  MementoMoriProjectile: {fileID: 7221904468566208928, guid: be64e16490fd30a40ae0c9a54617a8b7,
+    type: 3}
 --- !u!1001 &1456034056
 PrefabInstance:
   m_ObjectHideFlags: 0
