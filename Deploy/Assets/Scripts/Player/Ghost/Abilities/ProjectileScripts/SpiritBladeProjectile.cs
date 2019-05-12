@@ -17,7 +17,7 @@ public class SpiritBladeProjectile : MonoBehaviour
     {
         if((DateTime.Now - start).TotalSeconds > 4)//bullet lifetime of 4 seconds
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 
