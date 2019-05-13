@@ -27,13 +27,11 @@ public class PelletDropMono : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
             GameObject laser = (GameObject)Instantiate(Projectile, gameObject.transform.position, gameObject.transform.rotation);
-            timer = variableTimer;
-        }
+         }
 
         //Old Pellet Drop Stuff
         /*

@@ -10,7 +10,10 @@ public class RandomEnemySpawn: MonoBehaviour {
     public GameObject golem;
     public GameObject IREnemy;
     public GameObject shrab;
-    public GameObject shly; 
+
+    public GameObject shly;
+    public GameObject threeShly;
+    public GameObject sixShly;
 
     public GameObject Player;
     
@@ -22,6 +25,9 @@ public class RandomEnemySpawn: MonoBehaviour {
     public int golemSwarms = 1;
 
     public int numIREnemies;
+
+    public int numShlyBatchesPerIREnemy; //A batch constitutes of 1 of each type of shly
+    public float shlySpawnRadius; 
 
     private Vector3 planetCenter;
     private float planetRadius;
@@ -181,6 +187,19 @@ public class RandomEnemySpawn: MonoBehaviour {
             
             }
         }
+    }
+
+    public void instantiateShlies()
+    {
+         foreach(Vector3 point in IREnemies)
+         {
+            for(int i = 0; i < numShlyBatchesPerIREnemy; i++)
+            {
+                spawnEnemyWithinRadius(EnemyType.Shly, shly, shlySpawnRadius, point, 1f);
+                spawnEnemyWithinRadius(EnemyType.Shly, threeShly, shlySpawnRadius, point, 1f);
+                spawnEnemyWithinRadius(EnemyType.Shly, sixShly, shlySpawnRadius, point, 1f);
+            }
+         }
     }
 
     //This method is for IRenemies so that they can spawn squishy enemies to defend themselves, the squishy enemies will likely not be at full health

@@ -12,7 +12,7 @@ public class ShlyEnemy : Enemy {
 
     public int minSprainShlyCount = 12;
     public float shlySprainRange = 10;
-    private bool sprainActive;
+    public bool sprainActive;
     public static List<ShlyEnemy> shlyList = new List<ShlyEnemy>();
 
     public ShlyEnemy(float hp, int ms, float defense, int aNum, float bCS, float sD, GameObject rf, float pelletDamage, float bullChargeDamage) : base(hp, ms, defense, rf)
@@ -50,20 +50,21 @@ public class ShlyEnemy : Enemy {
 
     public void sprain(float x) //enemies within a radius of x will slow down
     {
+
         int i = 0;
         int shlyCount = 0;
         foreach(ShlyEnemy shly in shlyList)
         {
-            if( referenceObject.transform.position.x - shly.referenceObject.transform.position.x < shlySprainRange &&
-                referenceObject.transform.position.y - shly.referenceObject.transform.position.y < shlySprainRange &&
-                referenceObject.transform.position.z - shly.referenceObject.transform.position.z < shlySprainRange)
+            if(Vector3.Distance(referenceObject.transform.position, shly.referenceObject.transform.position) <= shlySprainRange)
             {
-                shlyCount++;
+                shlyCount += shly.aggregateNum;
+                
             }
         }
-
+        Debug.Log("ShlyCount is " + shlyCount);
         if (shlyCount >= minSprainShlyCount)
         {
+            Debug.Log("SprainActive set to true");
             sprainActive = true;
         }
         else
@@ -73,13 +74,16 @@ public class ShlyEnemy : Enemy {
 
         if (sprainActive)
         {
+            Debug.Log("Trying to hit players with sprain");
             Collider[] hitColliders = Physics.OverlapSphere(referenceObject.transform.position, shlySprainRange);
             int j = 0;
-            if (hitColliders[j].CompareTag("Player"))
+            if (hitColliders[j].CompareTag("Player") && Vector3.Distance(referenceObject.transform.position, hitColliders[j].gameObject.transform.position) <= x)
             {
-                //initiate sprain behavior 
-                //Include player debuff
-                //hitColliders[i].gameObject.GetComponent<StatManager>().playerMultiplySpeed(speedDebuff);
+                Debug.Log("Sprain in progress");
+            }
+            else
+            {
+                sprainActive = false;
             }
         }
 
@@ -89,8 +93,8 @@ public class ShlyEnemy : Enemy {
     public void bullCharge(float radius) //knockback attack when aggregated
     {
         Vector3 playerPos;
-
-        if(aggregateNum >= 6) //must be aggregate shly (one more more)
+        Debug.Log("Bull charging");
+        if(aggregateNum >= 1) //must be aggregate shly (one more more)
         {
             //checks whether objects within radius x are tagged players
             //if so, shly will charge at the player and attack
@@ -105,10 +109,10 @@ public class ShlyEnemy : Enemy {
                     UNity Logic?    
                     
                     */
-                    float speed = 1; //arbitrary number
-                    float step = speed * Time.deltaTime;
+                    float speed = 20; //arbitrary number
+                    
 
-                    referenceObject.transform.position = Vector3.MoveTowards(referenceObject.transform.position, playerPos, step);
+                    referenceObject.GetComponent<Rigidbody>().velocity = (playerPos - referenceObject.transform.position).normalized * speed;
                     //above logic will move the aggregate shly towards the player
 
                     //damage dealt
@@ -132,6 +136,10 @@ public class ShlyEnemy : Enemy {
         bullChargeDamage *= multiplier;
     }
 
+    public void changeAggregateNum(int amount)
+    {
+        aggregateNum += amount;
+    }
     //public accessors
 	public int getAggregateNum() {
 		return aggregateNum;

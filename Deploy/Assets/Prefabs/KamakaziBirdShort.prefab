@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 54883796390546080}
   - component: {fileID: 65593059741827472}
   - component: {fileID: 6396872423448316767}
+  - component: {fileID: 4042781569624622014}
   m_Layer: 0
   m_Name: KamakaziBirdShort
   m_TagString: Enemy
@@ -123,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa1fc3738f7d924c9ab633b27a7da06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyName: Kamikaze
   kamikazeMaxHP: 100
   kamikazeDefense: 30
   kamikazeMovementSpeed: 20
@@ -144,6 +146,29 @@ MonoBehaviour:
   IRAttackBuff: 1.5
   IRPlayerAttackDebuff: 0.5
   IRPlayerSpeedDebuff: 0.5
+  shlyMaxHp: 0
+  shlyDefense: 0
+  shlyMovementSpeed: 0
+  aggregateNumberofShlies: 0
+  bullChargeSpeed: 0
+  speedDebuffProportion: 0
+  pelletDamage: 0
+  bullChargeDamage: 0
+--- !u!114 &4042781569624622014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002896406898434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e9eef46c918de4c9b8e0ca85bf41a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
+  maxDis: 10
+  timer: 5
 --- !u!1 &1045979456465860
 GameObject:
   m_ObjectHideFlags: 0

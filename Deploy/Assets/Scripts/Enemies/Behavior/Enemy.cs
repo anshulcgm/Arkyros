@@ -112,6 +112,7 @@ public class Enemy : IClass
         {
             return true;
         }
+
     }
 
     //Starts Boost Timers

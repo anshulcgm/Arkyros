@@ -7,6 +7,8 @@ public class StatManager : MonoBehaviour
 
     //Monobehavior class that is attached to every enemy gameobject, allows both player and enemy to make changes to all enemy stats
     //fields for Kamikaze
+    public string enemyName; 
+
     public float kamikazeMaxHP;
     public float kamikazeDefense;
     public float kamikazeMovementSpeed;
@@ -53,28 +55,27 @@ public class StatManager : MonoBehaviour
     //Start function sets enemytype for the script so that the right variables are changed
     void Start()
     {
-        if(gameObject.name == "KamakaziBirdShort(Clone)")
-        {
+        if(enemyName == "Kamikaze") { 
             flyingKam = new KamikazeEnemy(kamikazeMaxHP, (int)kamikazeMovementSpeed, kamikazeDefense, gameObject, (int)kamikazeIQ);
             Enemy.enemyList.Add(flyingKam);
             type = EnemyType.FlyingKamikaze;
             Debug.Log("Instantiated flying kamikaze");
         }
-        else if(gameObject.name == "GolemParent(Clone)")
+        else if(enemyName == "Golem")
         {
             golem = new Golem(golemMaxHp, (int)golemMovementSpeed, golemDefense, gameObject, golemProjectileSpeed, golemChargeSpeed, golemKnockbackDmg, golemGroundPoundDmg, golemProjectileDmg);
             Enemy.enemyList.Add(golem);
             type = EnemyType.Brawler;
             Debug.Log("Instantiated golem");
         }
-        else if(gameObject.name == "IREnemy(Clone)")
+        else if(enemyName == "IRTower")
         {
             IREnemy = new IrradiatedEnemies(IRMaxHp, (int)IRMovementSpeed, IRDefense, gameObject, IRRadiusAffect, IRSpeedBuff, IRMaxHpBuff, IRAttackBuff, IRPlayerAttackDebuff, IRPlayerSpeedDebuff);
             Enemy.enemyList.Add(IREnemy);
             type = EnemyType.IrradiatedEnemy;
             Debug.Log("Instantiated IR enemy");
         }
-        else if(gameObject.name == "ShlyEnemy(Clone)")
+        else if(enemyName == "Shly")
         {
             shly = new ShlyEnemy(shlyMaxHp, (int)shlyMovementSpeed, shlyDefense, (int)aggregateNumberofShlies, bullChargeSpeed, speedDebuffProportion, this.gameObject, pelletDamage, bullChargeDamage);
             Enemy.enemyList.Add(shly);

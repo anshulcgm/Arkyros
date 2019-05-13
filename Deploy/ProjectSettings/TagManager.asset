@@ -9,6 +9,7 @@ TagManager:
   - playercam
   - Enemy
   - FxTemporaire
+  - player
   layers:
   - Default
   - TransparentFX
