@@ -499,6 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa1fc3738f7d924c9ab633b27a7da06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyName: IRTower
   kamikazeMaxHP: 100
   kamikazeDefense: 30
   kamikazeMovementSpeed: 20
@@ -520,6 +521,14 @@ MonoBehaviour:
   IRAttackBuff: 1.5
   IRPlayerAttackDebuff: 0.5
   IRPlayerSpeedDebuff: 0.5
+  shlyMaxHp: 0
+  shlyDefense: 0
+  shlyMovementSpeed: 0
+  aggregateNumberofShlies: 0
+  bullChargeSpeed: 0
+  speedDebuffProportion: 0
+  pelletDamage: 0
+  bullChargeDamage: 0
 --- !u!114 &751020705723886831
 MonoBehaviour:
   m_ObjectHideFlags: 0

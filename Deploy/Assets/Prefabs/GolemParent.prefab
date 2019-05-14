@@ -523,6 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa1fc3738f7d924c9ab633b27a7da06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyName: Golem
   kamikazeMaxHP: 100
   kamikazeDefense: 30
   kamikazeMovementSpeed: 20

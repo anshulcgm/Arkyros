@@ -13,6 +13,7 @@ public class StatSystem
 
     public StatSystem(float maxHealth, float speed, float defense)
     {
+        Debug.Log("Instantiating a stat system");
         this.maxHealth = maxHealth;
         health = this.maxHealth;
         this.speed = speed;
