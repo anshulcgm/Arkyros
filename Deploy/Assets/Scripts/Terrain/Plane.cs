@@ -13,14 +13,14 @@ public class Plane
 
     public Plane(Vector3 normal, float d)
     {
-        this.normal = normal.normalized;
+        this.normal = normal;
         this.d = d;
         GetDirs(); 
     }
 
     public Plane(Vector3 normal, Vector3 point)
     {
-        this.normal = normal.normalized;
+        this.normal = normal;
         d = -Vector3.Dot(point, normal);
         GetDirs();
     }
@@ -29,9 +29,9 @@ public class Plane
     {
         Vector3 v1, v2;
         v1 = f - e;
-        v2 = g - f;
-        normal = Vector3.Cross(v1, v2).normalized;
-        d = Vector3.Dot(e, normal.normalized);
+        v2 = g - e;
+        normal = Vector3.Cross(v1, v2);
+        d = -Vector3.Dot(e, normal);
         GetDirs();
     }
 
@@ -68,23 +68,23 @@ public class Plane
         }
 
         float x, y, z;
-        if (normal.z != 0)
+        if (normal.normalized.z != 0)
         {
             x = val;
             y = val;
-            z = (d - normal.x * x - normal.y * y) / (normal.z);
+            z = (d - normal.normalized.x * x - normal.normalized.y * y) / (normal.normalized.z);
         }
-        else if (normal.y != 0)
+        else if (normal.normalized.y != 0)
         {
             x = val;
             z = val;
-            y = (d - normal.x * x - normal.z * z) / (normal.y);
+            y = (d - normal.normalized.x * x - normal.normalized.z * z) / (normal.normalized.y);
         }
         else
         {
             y = val;
             z = val;
-            x = (d - normal.y * y - normal.z * z) / (normal.x);
+            x = (d - normal.normalized.y * y - normal.normalized.z * z) / (normal.normalized.x);
         }
         return new Vector3(x, y, z);
     }
@@ -111,7 +111,7 @@ public class Plane
      */
     public float GetDistToPlane(Vector3 point)
     {
-        return Vector3.Dot(normal.normalized, point) - d;
+        return (Vector3.Dot(normal, point) + d)/normal.magnitude;
     }
 
     /* Parameters:
@@ -161,7 +161,7 @@ public class Plane
      */
     public Vector2 GetMappedPoint(Vector3 unMappedPoint)
     {
-        Vector3 unMappedPointOnPlane = GetDistToPlane(unMappedPoint) * -normal + unMappedPoint;
+        Vector3 unMappedPointOnPlane = GetDistToPlane(unMappedPoint) * -normal.normalized + unMappedPoint;
         Vector2 posMapped = new Vector2(Vector3.Dot(unMappedPointOnPlane, xDir), Vector3.Dot(unMappedPointOnPlane, yDir));
         return posMapped;
     }

@@ -7,8 +7,6 @@ public class PathReciever
 {
     //the owner of this class
     public GameObject owner = null;
-    //the navMapper
-    public NavMapper navScript = null;
     //the current path
     public List<Vector3> path;
     //the current pathTask
@@ -18,15 +16,13 @@ public class PathReciever
 
     public int costIncrease = 0;
 
-    public bool isMeteor = false;
+    public WalkingMap map;
 
-    public PathReciever(NavMapper navScript, GameObject owner, int costIncrease, bool isMeteor)
+    public PathReciever(WalkingMap map, GameObject owner, int costIncrease)
     {
-        this.navScript = navScript;
         this.owner = owner;
         this.costIncrease = costIncrease;
-        this.isMeteor = isMeteor;
-        Debug.Log("initialized pathReciever");
+        this.map = map;
     }
 	
     //attempts to update the path, if possible. Returns whether the update succeeded or not
@@ -68,9 +64,9 @@ public class PathReciever
             }
 
             //create a new task, set it to the current task
-            currentTask = new PathTask(start, finish, oldPathHolder, costIncrease, isMeteor);
+            currentTask = new PathTask(start, finish, oldPathHolder, costIncrease);
             //add the task
-            navScript.addTask(currentTask);
+            map.AddTask(currentTask);
         }
         else
         {

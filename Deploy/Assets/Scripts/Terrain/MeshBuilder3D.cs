@@ -7,64 +7,67 @@ using UnityEngine;
 public class MeshBuilder3D
 {
 
-    public static Mesh GetMeshFrom(List<Vector3> points, List<Triangle> allTriangles, List<Triangle>[,] trianglesHash, out List<Vector3> normals)
+    public static int[] GetMeshFrom(List<Vector3> points, List<Triangle> allTriangles, List<int>[] map, List<int>[][] trianglesHash, out List<Vector3> normals)
     {
         normals = new List<Vector3>();
         BlockingDirection dir;
         DateTime start = DateTime.Now;
         int ind = GetFirstKnownTriangle(points, allTriangles, out dir);
 
-        Debug.Log("first known tri: " + (DateTime.Now - start).TotalSeconds);
         allTriangles[ind].direction = dir;
-        List<Triangle> trianglesWithKnownDirection = new List<Triangle> { allTriangles[ind] };
+        List <Triangle> trianglesWithKnownDirection = new List<Triangle> { allTriangles[ind] };
         start = DateTime.Now;        
 
         while (trianglesWithKnownDirection.Count > 0)
         {
             Triangle t = trianglesWithKnownDirection[0];
-            Plane tPlane = new Plane(t.normal * t.GetDirInt(), points[t.points[0]]);
-            List<Triangle> neighbors = GetNeighboringTriangles(t, trianglesHash);
+            Plane tPlane = t.plane;
+            List<Triangle> neighbors = GetNeighboringTriangles(t, map, allTriangles, trianglesHash);
             for (int i1 = 0; i1 < neighbors.Count; i1++)
             {
                 Triangle neighbor = neighbors[i1];
-                Plane neighborPlane = new Plane(neighbor.normal, points[neighbor.points[0]]);
+                Plane neighborPlane = neighbor.plane;
                 if (neighbor.GetDirInt() == 0)
                 {
                     Vector3 centerA = GetCentroid(t, points);
                     Vector3 centerB = GetCentroid(neighbor, points);
-                    float distA = tPlane.GetDistToPlane(centerB);
+                    float distA = tPlane.GetDistToPlane(centerB) * t.GetDirInt();
                     float distB = neighborPlane.GetDistToPlane(centerA);
-
+                    if(Math.Abs(distA) < Mathf.Epsilon || Math.Abs(distB) < Mathf.Epsilon)
+                    {
+                        continue;
+                    }
                     bool a = Math.Sign(distA) == Math.Sign(distB);
                     if (a)
                     {
                         neighbor.direction = BlockingDirection.AWAY_FROM_NORMAL;
                         Vector3 center = GetCentroid(neighbor, points);
-                        Debug.DrawLine(center * 4000, center * 4000 + neighbor.normal * neighbor.GetDirInt() * 100, Color.red, 100000.0f);
+                        //Debug.DrawLine(center * 4000, center * 4000 + neighbor.plane.normal.normalized * neighbor.GetDirInt() * 100, Color.red, 100000.0f);
                     }
                     else
                     {
-                        neighbor.direction = BlockingDirection.TOWARDS_NORMAL;                      
+                        neighbor.direction = BlockingDirection.TOWARDS_NORMAL;
                         Vector3 center = GetCentroid(neighbor, points);
-                        Debug.DrawLine(center * 4000, center * 4000 + neighbor.normal * neighbor.GetDirInt() * 100, Color.cyan, 100000.0f);
+                        //Debug.DrawLine(center * 4000, center * 4000 + neighbor.plane.normal.normalized * neighbor.GetDirInt() * 100, Color.cyan, 100000.0f);
                     }
                     trianglesWithKnownDirection.Add(neighbor);
                 }
             }
             trianglesWithKnownDirection.RemoveAt(0);
         }
+        
 
         Debug.Log("fill: " + (DateTime.Now - start).TotalSeconds);
-        int[][] faces = new int[allTriangles.Count][];
+        int[] faces = new int[allTriangles.Count * 3];
         for (int i = 0; i < allTriangles.Count; i++)
         {
             Array.Sort(allTriangles[i].points);
             Vector3 a = points[allTriangles[i].points[0]];
             Vector3 b = points[allTriangles[i].points[1]];
             Vector3 c = points[allTriangles[i].points[2]];
-            normals.Add(allTriangles[i].normal * allTriangles[i].GetDirInt());
+            normals.Add(allTriangles[i].plane.normal * allTriangles[i].GetDirInt());
             int[] triangle = new int[3];
-            if (!IsClockwise(b - a, c - a, allTriangles[i].normal * allTriangles[i].GetDirInt()))
+            if (!IsClockwise(b - a, c - a, allTriangles[i].plane.normal * allTriangles[i].GetDirInt()))
             {
                 triangle[0] = allTriangles[i].points[2];
                 triangle[1] = allTriangles[i].points[1];
@@ -76,11 +79,13 @@ public class MeshBuilder3D
                 triangle[1] = allTriangles[i].points[1];
                 triangle[2] = allTriangles[i].points[2];
             }
-            faces[i] = triangle;
-
+            faces[i * 3] = triangle[0];
+            faces[i * 3 + 1] = triangle[1];
+            faces[i * 3 + 2] = triangle[2];
             //Debug.DrawLine(GetCentroid(allTriangles[i], points) * 1000, GetCentroid(allTriangles[i], points) * 1000 + allTriangles[i].normal * allTriangles[i].direction * 1000, Color.red, 1000);
         }
-        return GetMesh(points.ToArray(), faces);
+        Debug.Log("running tris: " + (DateTime.Now - start).TotalSeconds);
+        return faces;
     }
 
 
@@ -91,10 +96,10 @@ public class MeshBuilder3D
      * Returns:
      * Mesh object that can be assigned to a GameObject to display the mesh.
      */
-    public static Mesh GetMeshFrom(List<Vector3> points, List<Triangle> trianglesIndexes, List<Triangle>[,] trianglesHash)
+    public static int[] GetMeshFrom(List<Vector3> points, List<Triangle> trianglesIndexes, List<int>[] map, List<int>[][] trianglesHash)
     {
         List<Vector3> normals = null;
-        return GetMeshFrom(points, trianglesIndexes, trianglesHash, out normals);
+        return GetMeshFrom(points, trianglesIndexes, map, trianglesHash, out normals);
     }
 
     #region Helper Functions
@@ -146,44 +151,13 @@ public class MeshBuilder3D
      * Returns:
      * Mesh object that can be attatched to a GameObject to display the 3D mesh/shape
      */
-    static Mesh GetMesh(Vector3[] points, int[][] faces)
+    static Mesh GetMesh(List<Vector3> points, int[] triangles)
     {
         //get mesh and coll
         Mesh mesh = new Mesh();
-        /*
-        for (int i = 0; i < faces.Length; i++)
-        {
-            String s = "{";
-            for (int i1 = 0; i1 < faces[i].Length; i1++)
-            {
-                s += faces[i][i1] + ",";
-            }
-            s += "}";
-            Debug.Log(s);
-        }
-        */
-        mesh.vertices = points;
-        //get triangles
-        List<int> triangles = new List<int>();
-        for (int i = 0; i < faces.Length; i++)
-        {
-            triangles.AddRange(GetTrianglesFromFace(faces[i]));
-        }
-        //set triangles
-        mesh.triangles = triangles.ToArray();
-
-        //set the uvs so that the shader texture is evenly distributed.
-        Vector2[] uvs = new Vector2[mesh.vertices.Length];
-        for (int i = 0; i < uvs.Length; i++)
-        {
-            uvs[i] = new Vector2(mesh.vertices[i].x, mesh.vertices[i].z);
-        }
-        mesh.uv = uvs;
-
-
-        //save all the changes
-        mesh.RecalculateBounds();
-        mesh.RecalculateNormals();
+        mesh.subMeshCount = 1;
+        mesh.SetVertices(points);
+        mesh.SetTriangles(triangles, 0);
         return mesh;
     }
 
@@ -256,7 +230,7 @@ public class MeshBuilder3D
                     }
                 }
             }
-            Triangle t = new Triangle(trianglesList[i].points, trianglePlane.normal, blockedFaces);
+            Triangle t = new Triangle(trianglesList[i].points, trianglePlane, blockedFaces);
             t.direction = GetBlockingDir(points, trianglesList, edges, i, t.direction, t);
             if(t.GetDirInt() != 0)
             {
@@ -442,7 +416,7 @@ public class MeshBuilder3D
                     }
                 }
             }
-            trianglesList.Add(new Triangle (triangles[i], trianglePlane.normal, blockedFaces));
+            trianglesList.Add(new Triangle (triangles[i], trianglePlane, blockedFaces));
         }
 
         drawTriangles = 1;
@@ -550,14 +524,23 @@ public class MeshBuilder3D
      * Returns:
      * List of all the triangles that are next to the one passed in
      */
-    private static List<Triangle> GetNeighboringTriangles(Triangle triangle, List<Triangle>[,] trianglesHash)
+    public static List<Triangle> GetNeighboringTriangles(Triangle triangle, List<int>[] map, List<Triangle> allTriangles, List<int>[][] trianglesHash)
     {
         List<Triangle> neighbors = new List<Triangle>();
         for(int i = 0; i < 3; i++)
         {
             int index1 = triangle.points[i];
             int index2 = triangle.points[(i + 1) % 3];
-            List<Triangle> possibleNeighbors = trianglesHash[index1, index2];
+            int index = -1;
+            for(int i1 = 0; i1 < map[index1].Count; i1++)
+            {
+                if(map[index1][i1] == index2)
+                {
+                    index = i1;
+                    break;
+                }
+            }
+            List<Triangle> possibleNeighbors = trianglesHash[index1][index].Select(x => allTriangles[x]).ToList();
             foreach(Triangle t in possibleNeighbors)
             {
                 if (!t.Equals(triangle) && !neighbors.Contains(t) && 
@@ -700,13 +683,13 @@ public enum BlockingDirection { NONE, TOWARDS_NORMAL, AWAY_FROM_NORMAL, BOTH }
 public class Triangle
 {
     public int[] points;
-    public Vector3 normal;
+    public Plane plane;
     public BlockingDirection direction;
 
-    public Triangle(int[] points, Vector3 normal, BlockingDirection direction)
+    public Triangle(int[] points, Plane plane, BlockingDirection direction)
     {
         this.points = points;
-        this.normal = normal;
+        this.plane = plane;
         this.direction = direction;
     }
 

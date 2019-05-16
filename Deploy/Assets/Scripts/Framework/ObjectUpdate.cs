@@ -76,19 +76,75 @@ public class ObjectUpdate
     
     #region Mesh Setting
 
-    public bool CheckIfTriExists(List<int>[,] trianglesStored, int a, int b, int c)
+    public bool CheckIfTriExists(List<int>[][] trianglesStored, List<int>[] map, int[] abc)
     {
-        return (trianglesStored[a, b] != null && trianglesStored[a, b].Contains(c)) || (trianglesStored[b, a] != null && trianglesStored[b, a].Contains(c))
-            || (trianglesStored[a, c] != null && trianglesStored[a, c].Contains(b)) || (trianglesStored[c, a] != null && trianglesStored[c, a].Contains(b))
-            || (trianglesStored[c, b] != null && trianglesStored[c, b].Contains(a)) || (trianglesStored[b, c] != null && trianglesStored[b, c].Contains(a));
+        for(int i = 0; i < 3; i++)
+        {
+            if(trianglesStored[abc[i]] == null)
+            {
+                continue;
+            }
+            for(int i1 = 0; i1 < trianglesStored[abc[i]].Length; i1++)
+            {
+                if (trianglesStored[abc[i]][i1] == null)
+                {
+                    continue;
+                }
+                for (int i2 = 0; i2 < trianglesStored[abc[i]][i1].Count; i2++)
+                {
+                    int a = abc[i];
+                    int b = map[a][i1];
+                    int c = trianglesStored[abc[i]][i1][i2];
+                    if(abc.Contains(a) && abc.Contains(b) && abc.Contains(c))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public void AssignTri(int[] abc, List<int>[] map, List<int>[][] trianglesHash, int triangle)
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            int a = abc[i];
+            if(trianglesHash[a] == null)
+            {
+                trianglesHash[a] = new List<int>[map[a].Count];
+            }
+            int indexB = -1;
+            int indexC = -1;
+            for(int i1 = 0; i1 < map[a].Count; i1++)
+            {
+                if(map[a][i1] == abc[(i + 1) % 3])
+                {
+                    indexB = i1;
+                }
+                if (map[a][i1] == abc[(i + 2) % 3])
+                {
+                    indexC = i1;
+                }
+            }
+
+            if (trianglesHash[a][indexB] == null)
+            {
+                trianglesHash[a][indexB] = new List<int>();
+            }
+            if (trianglesHash[a][indexC] == null)
+            {
+                trianglesHash[a][indexC] = new List<int>();
+            }
+            trianglesHash[a][indexB].Add(triangle);
+            trianglesHash[a][indexC].Add(triangle);
+        }
     }
     
-    public List<Triangle> GetTrianglesFromConnections(List<Vector3> points, List<int[]> connections, out List<Triangle>[,] trianglesHash)
+    public List<Triangle> GetTrianglesFromConnections(List<Vector3> points, List<int>[] map, out List<int>[][] trianglesHash)
     {
         DateTime start = DateTime.Now;
-        List<int>[] map = GetMap(connections);
-        List<int>[,] trianglesStored = new List<int>[points.Count, points.Count];
-        trianglesHash = new List<Triangle>[points.Count, points.Count];
+        trianglesHash = new List<int>[points.Count][];
         List<Triangle> triangles = new List<Triangle>();
 
         for (int i = 0; i < map.Length; i++)
@@ -101,58 +157,16 @@ public class ObjectUpdate
                     {
                         continue;
                     }
-                    if (map[conn1].Contains(conn2) && !CheckIfTriExists(trianglesStored, i, conn1, conn2))
+                    if (map[conn1].Contains(conn2) && !CheckIfTriExists(trianglesHash, map, new int[] { i, conn1, conn2 }))
                     {
                         Plane plane = new Plane(points[i], points[conn1], points[conn2]);
-                        Triangle t = new Triangle(new int[] { i, conn1, conn2 }, plane.normal, BlockingDirection.NONE);
-
-                        if(trianglesHash[i, conn1] == null)
-                        {
-                            trianglesHash[i, conn1] = new List<Triangle>();
-                        }
-                        if (trianglesHash[conn1, i] == null)
-                        {
-                            trianglesHash[conn1, i] = new List<Triangle>();
-                        }
-
-                        if (trianglesHash[i, conn2] == null)
-                        {
-                            trianglesHash[i, conn2] = new List<Triangle>();
-                        }
-                        if (trianglesHash[conn2, i] == null)
-                        {
-                            trianglesHash[conn2, i] = new List<Triangle>();
-                        }
-
-                        if (trianglesHash[conn1, conn2] == null)
-                        {
-                            trianglesHash[conn1, conn2] = new List<Triangle>();
-                        }
-                        if (trianglesHash[conn2, conn1] == null)
-                        {
-                            trianglesHash[conn2, conn1] = new List<Triangle>();
-                        }
-
-                        trianglesHash[i, conn1].Add(t);
-                        trianglesHash[i, conn2].Add(t);
-                        trianglesHash[conn1, conn2].Add(t);
-
-                        trianglesHash[conn1, i].Add(t);
-                        trianglesHash[conn2, i].Add(t);
-                        trianglesHash[conn2, conn1].Add(t);
-
+                        AssignTri(new int[] { i, conn1, conn2 }, map, trianglesHash, triangles.Count);
+                        Triangle t = new Triangle(new int[] { i, conn1, conn2 }, plane, BlockingDirection.NONE);
                         triangles.Add(t);
-                        if(trianglesStored[i,conn1] == null)
-                        {
-                            trianglesStored[i, conn1] = new List<int>();
-                        }
-                        trianglesStored[i, conn1].Add(conn2);
                     }
                 }
             }
         }
-        Debug.Log("tri from con: " + (DateTime.Now - start).TotalSeconds);
-
         return triangles;
     }
 
@@ -179,7 +193,7 @@ public class ObjectUpdate
         }
     }
 
-    private static List<int>[] GetMap(List<int[]> cons)
+    public static List<int>[] GetMap(List<int[]> cons)
     {
         int max = 0;
         foreach (int[] con in cons)
@@ -195,20 +209,18 @@ public class ObjectUpdate
         }
 
         List<int>[] map = new List<int>[max + 1];
-        for (int i = 0; i < map.Length; i++)
+        foreach (int[] con in cons)
         {
-            map[i] = new List<int>();
-            foreach (int[] con in cons)
+            if(map[con[0]] == null)
             {
-                if (con[0] == i)
-                {
-                    map[i].Add(con[1]);
-                }
-                if (con[1] == i)
-                {
-                    map[i].Add(con[0]);
-                }
+                map[con[0]] = new List<int>();
             }
+            if (map[con[1]] == null)
+            {
+                map[con[1]] = new List<int>();
+            }
+            map[con[0]].Add(con[1]);
+            map[con[1]].Add(con[0]);
         }
         return map;
     }
@@ -242,8 +254,8 @@ public class InstantiationRequest
     public string resourcePath;
     public Vector3 position;
     public Quaternion orientation;
+    public int[] triangle = null;
     public List<IClass> behaviorsToAdd = new List<IClass>();
-    public bool isCache = false;
     public InstantiationRequest(string resourcePath, Vector3 position, Quaternion orientation, List<IClass> behaviorsToAdd)
     {
         this.resourcePath = resourcePath;
@@ -256,12 +268,19 @@ public class InstantiationRequest
         this.behaviorsToAdd.AddRange(behaviorsToAdd);
     }
 
-    public InstantiationRequest(string resourcePath, Vector3 position, Quaternion orientation, bool isCache)
+    public InstantiationRequest(string resourcePath, Vector3 position, Quaternion orientation, int[] triangle)
     {
         this.resourcePath = resourcePath;
         this.orientation = orientation;
         this.position = position;
-        this.isCache = isCache;
+        this.triangle = triangle;
+    }
+
+    public InstantiationRequest(string resourcePath, Vector3 position, Quaternion orientation)
+    {
+        this.resourcePath = resourcePath;
+        this.orientation = orientation;
+        this.position = position;
     }
 }
 

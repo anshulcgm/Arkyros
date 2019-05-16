@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PathTask
 {
+    public static double[] cost;
+
     //holds the start and finish positions
     public Vector3 start;
     public Vector3 finish;
@@ -16,39 +18,31 @@ public class PathTask
 
     public bool finishedTask { get; private set; }
 
-    public bool isMeteor = false;
-
-
-    int costIncrease = 0;
+    public int costIncrease;
 
     //initialization
-    public PathTask(Vector3 start, Vector3 finish, PathHolder oldPathHolder, int costIncrease, bool isMeteor)
+    public PathTask(Vector3 start, Vector3 finish, PathHolder oldPathHolder, int costIncrease)
     {
-        this.isMeteor = isMeteor;
         this.start = start;
         this.finish = finish;
         pathHolder = null;
         this.oldPathHolder = oldPathHolder;
-        this.costIncrease = costIncrease;
         finishedTask = false;
-        if(costIncrease == 0)
-        {
-            return;
-        }
+
+        this.costIncrease = costIncrease;
 
         //decrease costs for old path
         if (oldPathHolder != null && oldPathHolder.nodePath != null)
         {
-            foreach (Node n in oldPathHolder.nodePath)
+            foreach (int n in oldPathHolder.nodePath)
             {
-                if (n == null) { continue; }
-                n.cost -= costIncrease;
+                cost[n] -= costIncrease;
             }
         }
     }
 
     //completes the task. If the task has already been completed, it does nothing.
-    public void finishTask(List<Node> nodePath, List<Vector3> path, float pathLength)
+    public void finishTask(List<int> nodePath, List<Vector3> path, float pathLength)
     {
         //if we haven't already finished this task
         if(!finishedTask)
@@ -67,19 +61,12 @@ public class PathTask
             {
                 return;
             }
-            
-            //increase costs for current path, draws path.
+
             if(nodePath != null)
             {
-                Node prev = null;
-                foreach (Node n in nodePath)
+                foreach (int n in nodePath)
                 {
-                    if (n == null) { continue; }
-                    n.cost += costIncrease;
-                    if (prev != null)
-                       //Debug.DrawLine(prev.location, n.location,Color.green, 1.0f);
-
-                    prev = n;
+                    cost[n] += costIncrease;
                 }
             }
         }        
@@ -89,7 +76,7 @@ public class PathTask
 //holds the node path, the Vector 3 path, and the length of the path
 public class PathHolder
 {
-    public List<Node> nodePath;
+    public List<int> nodePath;
     public List<Vector3> path;
     public float pathLength;
 }

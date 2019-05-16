@@ -188,7 +188,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 1
-  far clip plane: 50000
+  far clip plane: 5000
   field of view: 45
   orthographic: 0
   orthographic size: 5
@@ -292,7 +292,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 723688944}
-  - component: {fileID: 723688943}
   m_Layer: 0
   m_Name: EnemyManager
   m_TagString: Untagged
@@ -300,18 +299,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &723688943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723688942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a47c8ea7cda6f44caaf50d522d51665, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &723688944
 Transform:
   m_ObjectHideFlags: 0
@@ -415,7 +402,7 @@ Transform:
   m_GameObject: {fileID: 908601210}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4000, y: 4000, z: 4000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -446,6 +433,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   building: {fileID: 0}
+  biomeMats:
+  - {fileID: 2100000, guid: dfa17c0599f60bd43adf6e56979e031c, type: 2}
+  - {fileID: 2100000, guid: a244aab362f9650488dda7211c137aff, type: 2}
+  - {fileID: 2100000, guid: 112d9cf3693a1574a80e5e706f420a61, type: 2}
 --- !u!1 &1026736975
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,7 +505,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026736975}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.23, y: 6167, z: 86.505}
+  m_LocalPosition: {x: -2.23, y: 4054, z: 86.505}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1867300250}
@@ -937,8 +928,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774942566}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 24795, z: 0}
-  m_LocalScale: {x: 13987.601, y: 13987.601, z: 13987.601}
+  m_LocalPosition: {x: 0, y: 7368, z: 0}
+  m_LocalScale: {x: 2000, y: 2000, z: 2000}
   m_Children: []
   m_Father: {fileID: 1989158405}
   m_RootOrder: 0

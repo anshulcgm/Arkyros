@@ -30,8 +30,11 @@ public class TestFractals : MonoBehaviour {
         int[] baseFace = new int[] { 0, 1, 2 };
 
         List<int[]> generationFaces = new List<int[]>() { new int[] { 3, 4, 6 }, new int[] { 4, 5, 6 }, new int[] { 5, 3, 6 } };
+        List<Triangle> tris = null;
+        List<Triangle>[,] trianglesHash = null;//new ObjectUpdate().GetTrianglesHashFromTriangles(positions, triangles, out tris);
+        Debug.Log(tris.Count + "number of triangles");
 
-        Fractal f = new Fractal(new FractalShape(positions, triangles, baseFace, generationFaces), 0.5f, 0.75f, 1);
+        Fractal f = new Fractal(new FractalShape(positions, tris, trianglesHash, baseFace, generationFaces), 0.5f, 0.75f, 1);
         f.Generate();
 
 	}

@@ -16,10 +16,7 @@ public class Follower : MonoBehaviour
 
     //the pathReciever, recieves paths from navScript
     public PathReciever pathReciever;
-
-    //the navScript, set by component outside of this script
-    public NavMapper navScript;
-
+    
     //the rigidbody
     public Rigidbody r;
 
@@ -28,6 +25,7 @@ public class Follower : MonoBehaviour
     //the position on the path
     private int posOnPath = 1;
 
+    private WalkingMap map = null;
 
     //whether this script was initialized or not.
     private bool initialized = false;
@@ -36,18 +34,11 @@ public class Follower : MonoBehaviour
     float deAccel;
     float maxMoveSpeed;
     float rotationSpeed;
-    void Start()
+
+    public void Initialize(WalkingMap map, float accel, float deAccel, float maxMoveSpeed, float rotationSpeed, bool isMeteor)
     {
-        if(autoInit)
-        {
-            Initialize(navScript, 50, 15, 3, 30, false);
-        }
-    }
-    
-    public void Initialize(NavMapper nav, float accel, float deAccel, float maxMoveSpeed, float rotationSpeed, bool isMeteor)
-    {
-        navScript = nav;
-        pathReciever = new PathReciever(navScript, gameObject, 10, isMeteor);
+        this.map = map;
+        pathReciever = new PathReciever(map, gameObject, 10);
         this.accel = accel;
         this.deAccel = deAccel;
         this.maxMoveSpeed = maxMoveSpeed;
@@ -96,19 +87,11 @@ public class Follower : MonoBehaviour
         }
         
         //follow the path
-        followPath(pathReciever.path);
-        
+        followPath(pathReciever.path);        
 
         //keep updating the path task.
         pathReciever.updatePathTask(transform.position, destination);
-
-        
-        if (pathReciever.path == null)
-        {
-            return;
-        }
     }
-
 
     //allows the enemy to smoothly go to the target, while using physics instead of position setting 
     //(because the latter method ignores collisions)
@@ -169,8 +152,7 @@ public class Follower : MonoBehaviour
 
     //follows the current path. Returns if the enemy has reached the end of the path or not.
 
-
-
+    float minDistToSwitch = 1.0f;
     public bool followPath(List<Vector3> path)
     {        
         if (path == null || posOnPath >= path.Count)
@@ -185,7 +167,7 @@ public class Follower : MonoBehaviour
             return true;
         }
 
-        if (posOnPath < path.Count - 1 && Vector3.Distance(path[posOnPath], transform.position) <= navScript.spaceBetweenNodes / 2.0f)
+        if (posOnPath < path.Count - 1 && Vector3.Distance(path[posOnPath], transform.position) <= minDistToSwitch)
         {
             posOnPath++;
         }

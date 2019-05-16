@@ -19,21 +19,22 @@ public class PlanetGenerator
         cons = new List<int[]>();
         System.Random rand = new System.Random(varianceSeed);
 
-        double theta = -Mathf.PI / 2 + Math.PI / (numPointsLat);
+        float thetaSlerp = 0;
         double rot = 0;
         //making points
         for (int i = 0; i < numPointsLat - 1; i++)
         {            
             for (int i1 = 0; i1 < numPointsLong; i1++)
-            {                
-                double rad = radius + rand.NextDouble() * variance;
+            {
+                float theta = Mathf.Lerp((float)(-Mathf.PI / 2 + Math.PI / (numPointsLat)), (float)(Mathf.PI / 2 - Math.PI / (numPointsLat)), thetaSlerp);
+                double rad = radius + Mathf.PerlinNoise(theta, (float)rot) * variance;
                 float x = (float)(Math.Cos(rot) * Math.Cos(theta) * (rad));
                 float y = (float)(Math.Sin(theta) * (rad));
                 float z = (float)(Math.Sin(rot) * Math.Cos(theta) * (rad));
                 points.Add(new Vector3(x, y, z));
                 rot += 2 * Math.PI / (numPointsLong);
             }
-            theta += Math.PI / (numPointsLat);
+            thetaSlerp += 1.0f / numPointsLat;
         }
 
 
@@ -65,7 +66,7 @@ public class PlanetGenerator
         }
         cons.Add(new int[] { count - 1, count - numPointsLong });
         
-        List<int>[] map = GetMap(cons);
+        List<int>[] map = ObjectUpdate.GetMap(cons);
 
         
         //valley
@@ -113,6 +114,10 @@ public class PlanetGenerator
             points = Smooth(index, 5, 0.3f, map, points);
         }
 
+        for(int i = 0; i < points.Count; i++)
+        {
+            points[i] += points[i].normalized * variance * (float)rand.NextDouble();
+        }
     }
 
     private struct Tuple
@@ -164,38 +169,9 @@ public class PlanetGenerator
         return newPoints;
     }
 
-    private static List<int>[] GetMap(List<int[]> cons)
+    float Smooth(float x)
     {
-        int max = 0;
-        foreach (int[] con in cons)
-        {
-            if (con[0] > max)
-            {
-                max = con[0];
-            }
-            if (con[1] > max)
-            {
-                max = con[1];
-            }
-        }
-
-        List<int>[] map = new List<int>[max + 1];
-        for (int i = 0; i < map.Length; i++)
-        {
-            map[i] = new List<int>();
-            foreach (int[] con in cons)
-            {
-                if (con[0] == i)
-                {
-                    map[i].Add(con[1]);
-                }
-                if (con[1] == i)
-                {
-                    map[i].Add(con[0]);
-                }
-            }
-        }
-        return map;
+        return x + (x - (x * x * (3.0f - 2.0f * x)));
     }
 }
 
