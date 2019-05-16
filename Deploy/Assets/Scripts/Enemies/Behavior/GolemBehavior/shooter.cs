@@ -66,6 +66,10 @@ public class shooter : MonoBehaviour {
     void OnCollisionEnter(Collision collision)
     {
         //Debug.Log("Projectile destroyed because of collision with " +collision.gameObject.name);
+        if(collision.gameObject.tag == "Player")
+        {
+            //Adjust player health here
+        }
         Destroy(gameObject);
     }
 }

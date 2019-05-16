@@ -72,7 +72,7 @@ public class GolemAttackBehavior : MonoBehaviour {
         {
             if (col.gameObject.tag == "Player")
             {
-               //Insert player damage code here
+               //Adjust player health here
             }
         }
     }

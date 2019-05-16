@@ -19,7 +19,7 @@ public class StriaghtShooter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.Find("Player");
+        Player = GameObject.FindGameObjectWithTag("Player");
 
 		rb = GetComponent<Rigidbody>();
 		current = Player.transform.position - transform.position;
@@ -49,6 +49,14 @@ public class StriaghtShooter : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Destroy(this.gameObject);
+        if(collision.gameObject.tag != "Enemy")
+        {
+            Destroy(this.gameObject);
+        }
+        if(collision.gameObject.tag == "Player")
+        {
+            //Adjust player health here
+        }
+        
     }
 }

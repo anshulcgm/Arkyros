@@ -45,6 +45,10 @@ public class PlayerAttack : MonoBehaviour {
             GameObject particleEffect = Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
+        if(collision.gameObject.tag == "Player")
+        {
+            //Adjust player health here
+        }
 		
     }
 

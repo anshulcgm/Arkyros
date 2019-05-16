@@ -840,7 +840,7 @@ GameObject:
   - component: {fileID: 3444825276652991976}
   m_Layer: 0
   m_Name: 1-shrab
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -922,10 +922,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shurikenRange: 30
   pincerMovementRange: 10
+  pincer_R_Top: {fileID: 4557612403389848504}
   player: {fileID: 0}
+  projectile: {fileID: 4560942895118958702, guid: 89f07b51d18d0b442b44951002cdeede,
+    type: 3}
   shrabMovementSpeed: 2
   leftPlayerLeg: {fileID: 0}
   rightPlayerLeg: {fileID: 0}
+  timer: 0.33
 --- !u!135 &3444825276652991976
 SphereCollider:
   m_ObjectHideFlags: 0
