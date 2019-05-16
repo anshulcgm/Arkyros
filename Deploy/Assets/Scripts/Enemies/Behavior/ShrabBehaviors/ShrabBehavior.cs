@@ -13,7 +13,7 @@ public class ShrabBehavior : MonoBehaviour
     public GameObject player;
     public GameObject projectile; 
 
-    public float shrabMovementSpeed; 
+    private float shrabMovementSpeed = 0; 
 
     public GameObject leftPlayerLeg;
     public GameObject rightPlayerLeg;
@@ -37,6 +37,7 @@ public class ShrabBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        shrabMovementSpeed = GetComponent<StatManager>().shrabMovementSpeed;
         transform.LookAt(player.transform);
         pincerMovement();
         if(Vector3.Distance(transform.position, player.transform.position) > 3.0f)

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 45248138865205014}
   - component: {fileID: 45248138865205013}
   - component: {fileID: 45248138865205012}
+  - component: {fileID: 8915198285223302979}
   m_Layer: 0
   m_Name: 4-shrab
   m_TagString: Untagged
@@ -87,8 +88,55 @@ MonoBehaviour:
   shrab4pincer_R_Top: {fileID: 4584423232869607544}
   projectile: {fileID: 4560942895118958702, guid: 89f07b51d18d0b442b44951002cdeede,
     type: 3}
-  shrabMovementSpeed: 1
   timer: 1.5
+--- !u!114 &8915198285223302979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45248138865205010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa1fc3738f7d924c9ab633b27a7da06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyName: Shrab
+  kamikazeMaxHP: 0
+  kamikazeDefense: 0
+  kamikazeMovementSpeed: 0
+  kamikazeIQ: 0
+  golemMaxHp: 0
+  golemDefense: 0
+  golemMovementSpeed: 0
+  golemChargeSpeed: 0
+  golemProjectileSpeed: 0
+  golemKnockbackDmg: 0
+  golemGroundPoundDmg: 0
+  golemProjectileDmg: 0
+  IRMaxHp: 0
+  IRDefense: 0
+  IRMovementSpeed: 0
+  IRRadiusAffect: 0
+  IRSpeedBuff: 0
+  IRMaxHpBuff: 0
+  IRAttackBuff: 0
+  IRPlayerAttackDebuff: 0
+  IRPlayerSpeedDebuff: 0
+  shlyMaxHp: 0
+  shlyDefense: 0
+  shlyMovementSpeed: 0
+  aggregateNumberofShlies: 0
+  bullChargeSpeed: 0
+  speedDebuffProportion: 0
+  pelletDamage: 0
+  bullChargeDamage: 0
+  shrabMaxHp: 100
+  shrabDefense: 10
+  shrabMovementSpeed: 20
+  aggregateNumberofShrabs: 4
+  shrabPincerDmg: 35
+  shrabEruptionRadius: 100
 --- !u!1001 &45248137778060354
 PrefabInstance:
   m_ObjectHideFlags: 0
