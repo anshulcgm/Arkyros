@@ -80,6 +80,7 @@ public class ShlyEnemy : Enemy {
             if (hitColliders[j].CompareTag("Player") && Vector3.Distance(referenceObject.transform.position, hitColliders[j].gameObject.transform.position) <= x)
             {
                 Debug.Log("Sprain in progress");
+                //Adjust player speed here
             }
             else
             {

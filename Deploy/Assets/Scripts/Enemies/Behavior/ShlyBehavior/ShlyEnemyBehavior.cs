@@ -91,5 +91,8 @@ public class ShlyEnemyBehavior : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);  
         }
     }
-    
+    public void OnCollisionEnter(Collision collision)
+    {
+        //Adjust player transform and health here
+    }
 }
