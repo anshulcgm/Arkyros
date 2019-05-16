@@ -45,10 +45,19 @@ public class StatManager : MonoBehaviour
     public float pelletDamage;
     public float bullChargeDamage;
 
+    //fields for Shrab
+    public float shrabMaxHp;
+    public float shrabDefense;
+    public float shrabMovementSpeed;
+    public int aggregateNumberofShrabs;
+    public float shrabPincerDmg;
+    public float shrabEruptionRadius;
+   
     private KamikazeEnemy flyingKam;
     private Golem golem;
     public IrradiatedEnemies IREnemy;
-    public ShlyEnemy shly; 
+    public ShlyEnemy shly;
+    public Shrab shrab;
 
     private EnemyType type;
     
@@ -83,6 +92,14 @@ public class StatManager : MonoBehaviour
             type = EnemyType.Shly;
             Debug.Log("Instantiated shly object");
         }
+        else if(enemyName == "Shrab")
+        {
+            shrab = new Shrab(shrabMaxHp, (int)shrabMovementSpeed, shrabDefense, gameObject, shrabPincerDmg, shrabEruptionRadius, aggregateNumberofShrabs);
+            Enemy.enemyList.Add(shrab);
+            Shrab.shrabList.Add(shrab);
+            type = EnemyType.Shrab;
+            Debug.Log("Instantiated shrab object");
+        }
         //Change values in Enemy Behavior scripts to align with these values
     }
 
@@ -111,6 +128,10 @@ public class StatManager : MonoBehaviour
         {
             shly.enemyStats.updateHealth(amount);
         }
+        else if(type == EnemyType.Shrab)
+        {
+            shrab.enemyStats.updateHealth(amount);
+        }
     }
 
     //multiplies speed by a constant such as *0.5 
@@ -131,6 +152,10 @@ public class StatManager : MonoBehaviour
         else if(type == EnemyType.Shly)
         {
             shly.enemyStats.multiplySpeed(multiplier);
+        }
+        else if(type == EnemyType.Shrab)
+        {
+            shrab.enemyStats.multiplySpeed(multiplier);
         }
     }
 
@@ -153,6 +178,10 @@ public class StatManager : MonoBehaviour
         {
             shly.enemyStats.flatSpeed(amount);
         }
+        else if(type == EnemyType.Shrab)
+        {
+            shrab.enemyStats.flatSpeed(amount);
+        }
     }
 
     public void enemyMultiplyDefense(float multiplier)
@@ -173,6 +202,10 @@ public class StatManager : MonoBehaviour
         {
             shly.enemyStats.multiplyDefense(multiplier);
         }
+        else if(type == EnemyType.Shrab)
+        {
+            shrab.enemyStats.multiplyDefense(multiplier);
+        }
     }
 
     public void multiplyAttack(float multiplier)
@@ -190,6 +223,10 @@ public class StatManager : MonoBehaviour
         else if(type == EnemyType.Shly)
         {
             shly.adjustDamage(multiplier);
+        }
+        else if(type == EnemyType.Shrab)
+        {
+            shrab.setchargeDmg(multiplier);
         }
     }
     public void modifyKamikazeIQ(int amount)

@@ -26,7 +26,7 @@ public class FourShrabBehavior : MonoBehaviour
     private GameObject player;
     public GameObject projectile;
 
-    public float shrabMovementSpeed;
+    private float shrabMovementSpeed = 0f;
 
     public float timer; //How often should the shrab shoot shurikens
     private float variableTimer;
@@ -51,7 +51,7 @@ public class FourShrabBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        shrabMovementSpeed = GetComponent<StatManager>().shrabMovementSpeed;
         pincerMovement();
         if(Vector3.Distance(transform.position, player.transform.position) >= 2.5f)
         {
