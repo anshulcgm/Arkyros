@@ -10,6 +10,8 @@ public class SoulsOfTheDamnedProjectile : MonoBehaviour
     private GameObject[] enemies;
     private Transform[] enemyTransform;
 
+    GhostSoundManager ghostSoundManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class SoulsOfTheDamnedProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ghostSoundManager.playSOTDFloating();
         if ((DateTime.Now - start).TotalSeconds > 8)//bullet lifetime of 8 seconds
         {
             Destroy(this.gameObject);
@@ -59,6 +62,7 @@ public class SoulsOfTheDamnedProjectile : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             //other. take damage
+            ghostSoundManager.playSOTDDamage();
             
         }
         Destroy(this.gameObject);//gets destroyed on contact, even terrain

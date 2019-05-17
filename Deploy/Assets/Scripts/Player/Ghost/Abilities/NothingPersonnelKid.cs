@@ -21,6 +21,8 @@ public class NothingPersonnelKid : MonoBehaviour
 
     private bool cast;
 
+    GhostSoundManager ghostSoundManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +55,8 @@ public class NothingPersonnelKid : MonoBehaviour
             if(Vector3.Distance(tcs.target.transform.position, transform.position) < 20)
             {
                 transform.position = Vector3.Lerp(transform.position, tcs.target.transform.position, 1);
+                ghostSoundManager.playNPKTeleport();
+                ghostSoundManager.playNPKVoiceLine();
             }
 
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds

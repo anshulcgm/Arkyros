@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 8627290208260390468}
   - component: {fileID: 5164469418099452265}
   - component: {fileID: 6926532907656579303}
+  - component: {fileID: 817468541438934469}
+  - component: {fileID: 3260695752151395707}
   m_Layer: 0
   m_Name: SoulsOfTheDamnedProjectile
   m_TagString: Untagged
@@ -122,3 +124,142 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!82 &817468541438934469
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445912041631301893}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &3260695752151395707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445912041631301893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a71b16b373c6f64dbed93a1d3723676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostSound: {fileID: 817468541438934469}
+  Cleave: {fileID: 0}
+  EnhancedCleave: {fileID: 0}
+  CullingStrike: {fileID: 0}
+  EnhancedCullingStrike: {fileID: 0}
+  SpiritBlade: {fileID: 0}
+  EnhancedSpiritBlade: {fileID: 0}
+  DFCombined: {fileID: 0}
+  LeapInTheDark: {fileID: 0}
+  ShadowRush: {fileID: 0}
+  HSSprout: {fileID: 0}
+  HSHeal: {fileID: 0}
+  EtherealFormDodge: {fileID: 0}
+  BansheesWail: {fileID: 0}
+  ShadowsWing: {fileID: 0}
+  SOTDDamage: {fileID: 8300000, guid: d0cdf5edfbb935549b36c5f3fb9cbb95, type: 3}
+  SOTDFloating: {fileID: 8300000, guid: 6d50e546a9141ee4f9bc253f358e81d8, type: 3}
+  MMThrow: {fileID: 0}
+  MMReturn: {fileID: 0}
+  NPKTeleport: {fileID: 0}
+  NPKVoiceLine: {fileID: 0}
+  SpiritSummons: {fileID: 0}
+  NowYouSeeMe: {fileID: 0}
+  Onslaught: {fileID: 0}
+  SoulReaperResurrect: {fileID: 0}
+  CloakSlapCharge: {fileID: 0}
+  CloakSlapRelease: {fileID: 0}
+  HoDRise: {fileID: 0}
+  HoDDive: {fileID: 0}
+  P3LSprout: {fileID: 0}
+  P3LHeal: {fileID: 0}

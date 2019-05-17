@@ -9,7 +9,7 @@ public class Template : MonoBehaviour
 
     private GameObject camera;
 
-    private Animator anim;
+    private AnimController anim;
     DateTime start;
     
 
@@ -26,7 +26,7 @@ public class Template : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponent<AnimController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         
         rigidbody = GetComponent<Rigidbody>();
@@ -44,13 +44,13 @@ public class Template : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
-            
-            
-            //put any setup code here, before the ability is actually cast
-             
+            anim.PlayOverlayAnim("AnimationName", 0.5f); //this tells the animator to play the right animation
 
-            
+
+            //put any setup code here, before the ability is actually cast
+
+
+
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)

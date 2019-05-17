@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1943815952628627974}
   - component: {fileID: 4393704401562751898}
   - component: {fileID: 186668917152639198}
+  - component: {fileID: 1049771189972130463}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -171,3 +172,25 @@ MonoBehaviour:
   cooldown: 0
   SoulsOfTheDamnedProjectile: {fileID: 1445912041631301893, guid: d7977e476dd97cd459b87dc3094c9e03,
     type: 3}
+--- !u!114 &1049771189972130463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536539931531146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7dcfb1a90d43d43a5050adbac906bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InputX: 0
+  InputZ: 0
+  desiredMoveDirection: {x: 0, y: 0, z: 0}
+  blockRotationPlayer: 0
+  desiredRotationSpeed: 0.1
+  Speed: 0
+  allowPlayerRotation: 0
+  cam: {fileID: 0}
+  controller: {fileID: 0}
+  isGrounded: 0

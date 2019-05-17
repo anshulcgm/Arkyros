@@ -20,6 +20,7 @@ public class GhostSoundManager : MonoBehaviour
 
     //Tier 2
     public AudioClip DFCombined;
+    //public AudioClip DFLift
 
     public AudioClip LeapInTheDark;
 
@@ -80,37 +81,37 @@ public class GhostSoundManager : MonoBehaviour
     }
 
     //Tier 1
-    void playCleave()
+    public void playCleave()
     {
         ghostSound.clip = Cleave;
         ghostSound.PlayOneShot(ghostSound.clip);
     }
 
-    void playCullingStrike()
+    public void playCullingStrike()
     {
         ghostSound.clip = EnhancedCullingStrike;
         ghostSound.PlayOneShot(ghostSound.clip);
     }
 
-    void playEnhancedSpiritBlade()
+    public void playEnhancedSpiritBlade()
     {
         ghostSound.clip = EnhancedSpiritBlade;
         ghostSound.PlayOneShot(ghostSound.clip);
     }
 
-    void playEnhancedCleave()
+    public void playEnhancedCleave()
     {
         ghostSound.clip = EnhancedCleave;
         ghostSound.PlayOneShot(ghostSound.clip);
     }
 
-    void playEnhancedCullingStrike()
+    public void playEnhancedCullingStrike()
     {
         ghostSound.clip = CullingStrike;
         ghostSound.PlayOneShot(ghostSound.clip);
     }
 
-    void playSpiritBlade()
+    public void playSpiritBlade()
     {
         ghostSound.clip = SpiritBlade;
         ghostSound.PlayOneShot(ghostSound.clip);
@@ -127,85 +128,85 @@ public class GhostSoundManager : MonoBehaviour
     }
 
 
-    void playLeapInTheDark()
+    public void playLeapInTheDark()
     {
         //ghostSound.clip = LeapInTheDark;
         ghostSound.PlayOneShot(LeapInTheDark);
 
     }
 
-    void playShadowRush()
+    public void playShadowRush()
     {
         //ghostSound.clip = ShadowRush;
         ghostSound.PlayOneShot(ShadowRush);
     }
 
     //Tier 3
-    void playHSSprout()
+    public void playHSSprout()
     {
         //ghostSound.clip = HSSprout;
         ghostSound.PlayOneShot(HSSprout);
     }
-    void playHSHeal()
+    public void playHSHeal()
     {
         //ghostSound.clip = HSHeal;
         ghostSound.PlayOneShot(HSHeal);
     }
 
-    void playEtherealFormDodge()
+    public void playEtherealFormDodge()
     {
         //ghostSound.clip = EtherealFormDodge;
         ghostSound.PlayOneShot(EtherealFormDodge);
     }
 
     //Tier 4
-    void playShadowsWing()
+    public void playShadowsWing()
     {
         ghostSound.clip = ShadowsWing;
         ghostSound.Play();
     }
 
-    void playBansheesWail()
+    public void playBansheesWail()
     {
         //ghostSound.clip = BansheesWail;
         ghostSound.PlayOneShot(BansheesWail);
     }
 
-    void playSOTDDamage()
+    public void playSOTDDamage()
     {
         //ghostSound.clip = SOTDDamage;
         ghostSound.PlayOneShot(SOTDDamage);
     }
-    void playSOTDFloating()
+    public void playSOTDFloating()
     {
         ghostSound.clip = SOTDFloating;
         ghostSound.Play();
     }
 
     //Tier 5
-    void playMMThrow()
+    public void playMMThrow()
     {
         //ghostSound.clip = MMThrow;
         ghostSound.PlayOneShot(MMThrow);
     }
-    void playMMReturn()
+    public void playMMReturn()
     {
         ghostSound.clip = MMReturn;
         ghostSound.Play();
     }
 
-    void playSpiritSummons()
+    public void playSpiritSummons()
     {
         //ghostSound.clip = SpiritSummons;
         ghostSound.PlayOneShot(SpiritSummons);
     }
 
-    void playNPKTeleport()
+    public void playNPKTeleport()
     {
         //ghostSound.clip = NPKTeleport;
         ghostSound.PlayOneShot(NPKTeleport);
     }
-    void playNPKVoiceLine()
+    public void playNPKVoiceLine()
     {
         //ghostSound.clip = NPKVoiceLine;
         ghostSound.PlayOneShot(NPKVoiceLine);
@@ -213,58 +214,58 @@ public class GhostSoundManager : MonoBehaviour
 
     //Tier 6
 
-    void playSoulReaperResurrect()
+    public void playSoulReaperResurrect()
     {
         ghostSound.clip = SoulReaperResurrect;
         ghostSound.PlayOneShot(SoulReaperResurrect);
     }
 
-    void playOnslaught()
+    public void playOnslaught()
     {
         ghostSound.clip = Onslaught;
         ghostSound.PlayOneShot(Onslaught);
     }
 
-    void playNowYouSeeMe()
+    public void playNowYouSeeMe()
     {
         //ghostSound.clip = NowYouSeeMe;
         ghostSound.PlayOneShot(NowYouSeeMe);
     }
 
     //Tier 7
-    void playHoDRise()
+    public void playHoDRise()
     {
         //ghostSound.clip = HoDRise;
         ghostSound.PlayOneShot(HoDRise);
     }
-    void playHoDDive()
+    public void playHoDDive()
     {
         ghostSound.clip = HoDDive;
         ghostSound.Play();
     }
-    void playHoDLand()
+    public void playHoDLand()
     {
         //ghostSound.clip = HoDLand;
         ghostSound.PlayOneShot(ghostSound.clip);
     }
 
-    void playCloakSlapCharge()
+    public void playCloakSlapCharge()
     {
         ghostSound.clip = CloakSlapCharge;
         ghostSound.Play();
     }
-    void playCloakSlapRelease()
+    public void playCloakSlapRelease()
     {
         //ghostSound.clip = CloakSlapRelease;
         ghostSound.PlayOneShot(CloakSlapRelease);
     }
 
-    void playP3LSprout()
+    public void playP3LSprout()
     {
         //ghostSound.clip = P3LSprout;
         ghostSound.PlayOneShot(P3LSprout);
     }
-    void playP3LHeal()
+    public void playP3LHeal()
     {
         //ghostSound.clip = P3LHeal;
         ghostSound.PlayOneShot(P3LHeal);

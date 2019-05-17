@@ -212,7 +212,7 @@ public class TankController : MonoBehaviour
         Ray ray = new Ray(transform.position + transform.up, -transform.up);
         //RaycastHit rayHit;
 
-        if (Physics.Raycast(ray, 2f)) //1 is placeholder for model height
+        if (Physics.Raycast(ray, 1.1f)) //1 is placeholder for model height
         {
             anim.SetBool("JumpBool", false);
             grounded = true;

@@ -410,7 +410,6 @@ GameObject:
   - component: {fileID: 453410389}
   - component: {fileID: 127882516006223827}
   - component: {fileID: 5069760282892579741}
-  - component: {fileID: 302189376227944463}
   m_Layer: 0
   m_Name: KnightTankFinal
   m_TagString: Player
@@ -515,19 +514,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 453410384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bb23c534a3054647b92562bb37750fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &302189376227944463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453410384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92420125d43c90641a6449f3eeddc8ac, type: 3}
+  m_Script: {fileID: 11500000, guid: d47378d5c032a4541843dc182ef57beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivityX: 1

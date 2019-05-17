@@ -22,6 +22,8 @@ public class SoulsOfTheDamned : MonoBehaviour
 
     public GameObject SoulsOfTheDamnedProjectile;
 
+    GhostSoundManager ghostSoundManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,7 +60,8 @@ public class SoulsOfTheDamned : MonoBehaviour
             Instantiate(SoulsOfTheDamnedProjectile, transform.position + distance * transform.right - distance * transform.forward, Quaternion.identity);
             Instantiate(SoulsOfTheDamnedProjectile, transform.position - distance * transform.right + distance * transform.forward, Quaternion.identity);
             Instantiate(SoulsOfTheDamnedProjectile, transform.position - distance * transform.right - distance * transform.forward, Quaternion.identity);
-
+            
+            
 
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
             cast = true;

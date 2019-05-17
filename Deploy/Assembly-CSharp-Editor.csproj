@@ -77,6 +77,9 @@
     <Compile Include="Assets\StandardAssets\Editor\ImageEffects\SunShaftsEditor.cs" />
     <Compile Include="Assets\StandardAssets\Editor\ImageEffects\TonemappingEditor.cs" />
     <Compile Include="Assets\StandardAssets\Editor\ImageEffects\VignetteAndChromaticAberrationEditor.cs" />
+    <Reference Include="Cinemachine">
+      <HintPath>C:/Users/BlazinDrakon/skills-features_rw722/Deploy/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/BlazinDrakon/skills-features_rw722/Deploy/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -85,6 +88,9 @@
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>C:/Users/BlazinDrakon/skills-features_rw722/Deploy/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>C:/Users/BlazinDrakon/skills-features_rw722/Deploy/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/Users/BlazinDrakon/skills-features_rw722/Deploy/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
