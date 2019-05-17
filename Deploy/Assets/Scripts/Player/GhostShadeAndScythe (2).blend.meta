@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8da898d24ba127b44bdc28a504b4437b
+guid: c51ed63391444a54789da1be0ff3f220
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -17,15 +17,38 @@ ModelImporter:
     100022: Cube_007
     100024: Cube_008
     100026: Cube_009
-    100028: //RootNode
-    100030: Head
-    100032: L_Leg_Base
-    100034: L_Leg_Tip
-    100036: R_Leg_Base
-    100038: R_Leg_Tip
-    100040: Weapon_Base
-    100042: Weapon_Base_2
-    100044: Weapon_Blade
+    100028: Cube_010
+    100030: //RootNode
+    100032: Head
+    100034: L_Leg_Base
+    100036: L_Leg_Tip
+    100038: R_Cloak_Arm_Base
+    100040: R_Cloak_Arm_Base_001
+    100042: R_Cloak_Arm_Tip
+    100044: R_Cloak_Arm_Tip_001
+    100046: R_Cloak_Hand
+    100048: R_Cloak_Hand_001
+    100050: R_Cloak_Middle_Base
+    100052: R_Cloak_Middle_Base_001
+    100054: R_Cloak_Middle_Mid
+    100056: R_Cloak_Middle_Mid_001
+    100058: R_Cloak_Middle_Tip
+    100060: R_Cloak_Middle_Tip_001
+    100062: R_Cloak_Pinky_Base
+    100064: R_Cloak_Pinky_Base_001
+    100066: R_Cloak_Pinky_Tip
+    100068: R_Cloak_Pinky_Tip_001
+    100070: R_Cloak_Point_Mid
+    100072: R_Cloak_Point_Mid_001
+    100074: R_Cloak_Pointer_Base
+    100076: R_Cloak_Pointer_Base_001
+    100078: R_Cloak_Pointer_Tip
+    100080: R_Cloak_Pointer_Tip_001
+    100082: R_Leg_Base
+    100084: R_Leg_Tip
+    100086: Weapon_Base
+    100088: Weapon_Base_2
+    100090: Weapon_Blade
     400000: Armature
     400002: Body_Bottom
     400004: Body_Top
@@ -40,44 +63,75 @@ ModelImporter:
     400022: Cube_007
     400024: Cube_008
     400026: Cube_009
-    400028: //RootNode
-    400030: Head
-    400032: L_Leg_Base
-    400034: L_Leg_Tip
-    400036: R_Leg_Base
-    400038: R_Leg_Tip
-    400040: Weapon_Base
-    400042: Weapon_Base_2
-    400044: Weapon_Blade
-    2100000: Material_001
-    2100002: Head
-    2100004: Face
-    2100006: Material_010
-    2100008: Material_012
-    2100010: Material_011
-    4300000: Cone
-    4300002: Cube_008
-    4300004: Cube
-    4300006: Cube_001
-    4300008: Cube_007
-    4300010: Cube_002
-    4300012: Cube_006
-    4300014: Cube_003
-    4300016: Cube_004
-    4300018: Cube_005
-    4300020: Cube_009
+    400028: Cube_010
+    400030: //RootNode
+    400032: Head
+    400034: L_Leg_Base
+    400036: L_Leg_Tip
+    400038: R_Cloak_Arm_Base
+    400040: R_Cloak_Arm_Base_001
+    400042: R_Cloak_Arm_Tip
+    400044: R_Cloak_Arm_Tip_001
+    400046: R_Cloak_Hand
+    400048: R_Cloak_Hand_001
+    400050: R_Cloak_Middle_Base
+    400052: R_Cloak_Middle_Base_001
+    400054: R_Cloak_Middle_Mid
+    400056: R_Cloak_Middle_Mid_001
+    400058: R_Cloak_Middle_Tip
+    400060: R_Cloak_Middle_Tip_001
+    400062: R_Cloak_Pinky_Base
+    400064: R_Cloak_Pinky_Base_001
+    400066: R_Cloak_Pinky_Tip
+    400068: R_Cloak_Pinky_Tip_001
+    400070: R_Cloak_Point_Mid
+    400072: R_Cloak_Point_Mid_001
+    400074: R_Cloak_Pointer_Base
+    400076: R_Cloak_Pointer_Base_001
+    400078: R_Cloak_Pointer_Tip
+    400080: R_Cloak_Pointer_Tip_001
+    400082: R_Leg_Base
+    400084: R_Leg_Tip
+    400086: Weapon_Base
+    400088: Weapon_Base_2
+    400090: Weapon_Blade
+    2100000: Material_000
+    2100002: Material_001
+    2100004: Head
+    2100006: Face
+    2100008: Material_010
+    2100010: Material_012
+    2100012: Material_011
+    4300000: Cube_010
+    4300002: Cone
+    4300004: Cube_008
+    4300006: Cube
+    4300008: Cube_001
+    4300010: Cube_007
+    4300012: Cube_002
+    4300014: Cube_006
+    4300016: Cube_003
+    4300018: Cube_004
+    4300020: Cube_005
+    4300022: Cube_009
     7400000: Default Take
-    7400002: Idle
-    7400004: Idle_001
-    7400006: Move_Backward
-    7400008: Move_Forward
-    7400010: Move_Forward_002
-    7400012: Move_ForwardLunge
-    7400014: Move_Left
-    7400016: Move_Right
-    7400018: Swing_Heavy_1
-    7400020: Swing_Heavy_2
-    7400022: Swing_Light
+    7400002: Circle_strike_2
+    7400004: CircleSwing
+    7400006: Culling_Strike
+    7400008: Fly_Forward
+    7400010: Idle
+    7400012: Move_Backward
+    7400014: Move_Forward
+    7400016: Move_ForwardLunge
+    7400018: Move_Left
+    7400020: Move_Right
+    7400022: Slap
+    7400024: Summon_Area
+    7400026: Swing_Circle
+    7400028: Swing_Heavy_1
+    7400030: Swing_Heavy_2
+    7400032: Swing_Light
+    7400034: Target_Summon
     9500000: //RootNode
     13700000: Cone
     13700002: Cube
@@ -90,6 +144,7 @@ ModelImporter:
     13700016: Cube_007
     13700018: Cube_008
     13700020: Cube_009
+    13700022: Cube_010
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:

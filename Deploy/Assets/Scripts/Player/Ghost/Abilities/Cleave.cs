@@ -20,6 +20,7 @@ public class Cleave : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
+    GhostSoundManager ghostSoundManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +52,7 @@ public class Cleave : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-
+            ghostSoundManager.playCleave();
             /*
              * All the code for the ability that you want to write
              * transform.forward for the direction the player is 

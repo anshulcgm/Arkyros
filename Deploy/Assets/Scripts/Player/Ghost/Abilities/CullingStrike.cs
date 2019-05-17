@@ -53,7 +53,7 @@ public class CullingStrike : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
 
-            //stSoundManager
+            ghostSoundManager.playCullingStrike();
 
 
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
