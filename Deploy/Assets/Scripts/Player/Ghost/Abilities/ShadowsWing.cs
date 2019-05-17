@@ -20,6 +20,8 @@ public class ShadowsWing : MonoBehaviour
 
     DateTime start;
 
+    GhostSoundManager ghostSoundManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +45,7 @@ public class ShadowsWing : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 5 && Input.GetKey("e") && !cast)
         {
+            ghostSoundManager.playShadowsWing();
             //put any setup code here, before the ability is actually cast
             //allStats[(int)stats.Defense, (int)statModifier.Multiplier] * 3; //Triple Defense
             cast = true;

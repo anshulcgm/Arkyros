@@ -17,6 +17,9 @@ public class NewBehaviourScript : MonoBehaviour
     Stats stats;
 
     DateTime start;
+
+    GhostSoundManager ghostSoundManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +39,7 @@ public class NewBehaviourScript : MonoBehaviour
             cooldown = 360;                   //placeholder time, divide by 60 for cooldown in seconds
             stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] *= 2; //double speed
             buffActive = true;
+            ghostSoundManager.playShadowRush();
         }
         if ((DateTime.Now - start).TotalSeconds > 6) //when duration of ability is over, set back to original speed
         {

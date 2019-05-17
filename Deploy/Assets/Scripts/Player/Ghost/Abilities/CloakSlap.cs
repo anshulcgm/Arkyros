@@ -20,6 +20,8 @@ public class CloakSlap : MonoBehaviour
 
     DateTime start;
 
+    GhostSoundManager ghostSoundManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,14 +43,16 @@ public class CloakSlap : MonoBehaviour
             //slow down while charging
             //allStats[(int)stats.Speed, (int)statModifier.Multiplier] / 3; //decrease speed
             buffActive = true;
+            ghostSoundManager.playCloakSlapCharge();
         }
         if ((DateTime.Now - start).TotalSeconds >= 4 && Input.GetKey("e") && !cast)
         {
+            ghostSoundManager.stop();
             //when charged for at least 4 seconds - set cooldown and do release
             cooldown = 600;     //set cooldown, placeholder time
             cast = true;
             //maybe set collider to scythe
-
+            ghostSoundManager.playCloakSlapRelease();
             //damage enemy
             //EnemyGameObject.GetComponent<StatManager>().changeHealth(amount);
             //add knockback
@@ -57,6 +61,7 @@ public class CloakSlap : MonoBehaviour
         //when key released and the seconds held less than 4, return to normal speed
         if ((DateTime.Now - start).TotalSeconds <= 4 && !Input.GetKey("e") && buffActive && !cast)
         {
+            ghostSoundManager.stop();
             //allStats[(int)stats.Speed, (int)statModifier.Multiplier] * 3; //return speed
             buffActive = false;
         }
