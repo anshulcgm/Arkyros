@@ -7,6 +7,7 @@ using UnityEngine;
 // it also processes and sends the data from the server to the UnityHandler object.
 public class Client
 {
+
     UDP udp;
     GameObject player;
     string serverIP;
@@ -22,12 +23,14 @@ public class Client
            // Debug.Log("CLIENT: new instance created");
         }
     }
-    public void SendPositionAndOrientation()
-    {
-        string position = player.transform.position.ToString();
-        string orientation = player.transform.rotation.ToString();
-        string client_ipaddr = UDP.GetLocalIPAddress();
-        udp.Send("{U|" + position + "|" + orientation + "|" + client_ipaddr + "}", serverIP); //send position and orientation and ipaddr of client to server for update
+    public void SendKeysAndOrientation()
+    {        
+        string clientData = DataParserAndFormatter.GetClientInputFormatted(Input.inputString, Input.GetMouseButtonDown(0), Input.GetMouseButtonDown(1), player.transform.rotation, UDP.GetLocalIPAddress());
+        udp.Send(clientData, serverIP); //send position and orientation and ipaddr of client to server for update
+    }
+
+    public void SendClassData(String classPath, int[] abilityIds){
+        udp.Send(DataParserAndFormatter.GetClassPathAndAbilityIdsFormatted(classPath, abilityIds), serverIP);
     }
 
     //reads in server output and does what the server says
