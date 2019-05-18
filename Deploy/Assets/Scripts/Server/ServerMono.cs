@@ -66,5 +66,6 @@ public class ServerMono : MonoBehaviour
 
         //after getting clients and sending terrain, just continue updating all gameObjects for all clients.
         server.UpdateGameObjects();
+        server.HandleClientInput();
     }
 }

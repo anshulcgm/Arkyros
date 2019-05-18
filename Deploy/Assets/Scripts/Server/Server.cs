@@ -7,10 +7,11 @@ using UnityEngine;
 
 public class Server
 {
+    private Vector3 spawn;
     private UDP udp;
     private List<Player> players;
     private List<GameObject> gameObjectsToUpdate;
-    public bool debug = true;
+    public bool debug = false;
     
     public Server(UDP udp)
     {
@@ -23,8 +24,7 @@ public class Server
         }
     }
     
-    ///@TODO this function needs to be finished. It should send a broadcast on the LAN with all the things
-    ///required by the UnityHandler.Create function.
+    // this function sends a broadcast on the LAN with all the things necessary for client to creat the new object
     public void Create(GameObject g, string resourcePath)
     {
         string message = "C{" + resourcePath + "|" + g.transform.position.ToString() + "|" + g.transform.rotation.ToString() + "}";
@@ -44,13 +44,12 @@ public class Server
         gameObjectsToUpdate.Add(g);
     }
 
-    ///@TODO this function needs to be finished. It should send a broadcast on the LAN for 
-    ///each gameObject in gameObjectsToUpdate with all the things required by the UnityHandler.Update function.
+    //this function sends all the necessary things for the clinet to update the objrct
     public void UpdateGameObjects()
     {
         //loops through each gameObject in the list of game objects to update and sends a broadcast for updating them to the clients
         for (int g = 0; g < gameObjectsToUpdate.Count(); g += 1) {
-            if(gameObjectsToUpdate[g] == null) { continue; }
+            if(gameObjectsToUpdate[g] == null) { continue; } //skip if it has been destroyed            
             string message = "U{" + g.ToString() + "|" + gameObjectsToUpdate[g].transform.position.ToString() + "|" + gameObjectsToUpdate[g].transform.rotation.ToString() + "}";
 
             //sending to all clients
@@ -65,6 +64,7 @@ public class Server
         }
 
     }
+
     //the destroy function
     public void Destroy(GameObject g)
     {
@@ -90,6 +90,20 @@ public class Server
         }
     }
 
+    public void SendAnimation(GameObject Object, string animation_name, bool isAnimating)
+    {
+        string boolchar = "F";
+        if (isAnimating)
+        {
+            boolchar = "T";
+        }
+        string message = ("A{" + gameObjectsToUpdate.IndexOf(Object).ToString() + "|" + animation_name + "|" + boolchar + "}"); // gameobject index with animation and true/false char
+        foreach (string clientIP in clientIPs)
+        {
+            udp.Send(message, clientIP);
+        }
+    }
+
     public List<string> clientIPs = new List<string>();
     public void GetClients()
     {
@@ -102,20 +116,55 @@ public class Server
             {
                 clientIPs.Add(message);
             }
+            
         }        
     }
 
+<<<<<<< HEAD
 
+=======
+    public void CreatePlayers(){
+        List<string> messages = udp.ReadMessages();
+        foreach(string message in messages){
+            string ip = DataParserAndFormatter.GetIP(message);
+            string classPath = DataParserAndFormatter.GetClassPath(message);
+            int[] abilityIds = DataParserAndFormatter.GetAbilityIds(message);
+            GameObject player = GameObject.Instantiate(Resources.Load(classPath) as GameObject, spawn, Quaternion.identity);
+            
+           // player.GetComponent<PlayerScript>().SetAbilityIds(abilityIds);
+           players.Add(new Player(ip, player, classPath));
+           udp.Send("P{" + gameObjectsToUpdate.Count + "}", ip);
+           Create(player, classPath);  
+        }
+    }
+
+    public void HandleClientInput(){
+        List<string> messages = udp.ReadMessages();
+        foreach(string message in messages){
+            string ip = DataParserAndFormatter.GetIP(message);
+            for(int i = 0; i < players.Count; i++){
+                if(players[i].ipAddr.Equals(ip)){
+                    players[i].playerGameObject.transform.rotation = DataParserAndFormatter.GetOrientationIn(message);
+
+                    //need player script that can take in key input and mouse input and do stuff to the player.
+                    //players[i].playerGameObject.GetComponent<PlayerScript>().HandleInput(DataParserAndFormatter.GetKeysIn(message), DataParserAndFormatter.GetMouseIn(message));
+                }
+            }
+        }
+    }
+>>>>>>> 6ccff5232599c5701762e566e0a444aa327646fb
 
     //private because we only want to access it from here
     private class Player
     {
-        string ipAddr;
-        GameObject playerGameObject;
-        public Player(string ipAddr, GameObject playerGameObject)
+        public string ipAddr;
+        public GameObject playerGameObject;
+        public string classPath;
+        public Player(string ipAddr, GameObject playerGameObject, string classPath)
         {
             this.ipAddr = ipAddr;
             this.playerGameObject = playerGameObject;
+            this.classPath = classPath;
         }
     }
 }

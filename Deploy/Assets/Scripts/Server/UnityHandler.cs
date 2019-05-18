@@ -3,6 +3,10 @@ using UnityEngine;
 
 public static class UnityHandler
 {
+    public static GameObject player;
+    
+    public static int playerIndex = -1;
+
     private static List<GameObject> gameObjects = new List<GameObject>();
     public static bool debug = false;
 
@@ -39,8 +43,19 @@ public static class UnityHandler
         {
             Destroy(m.messageText);
         }
-        
+        else if (m.messageType == ServerMessageType.TERRAIN)
+        {
+            Terrain(m.messageText);
+        }
+        else if (m.messageType == ServerMessageType.ANIMATION)
+        {
+            Animate(m.messageText);
+        }
+        else if(m.messageType == ServerMessageType.PLAYER){
+            Player(m.messageText);
+        }      
     }
+
 
     private static void Update(string message)
     {
@@ -49,21 +64,26 @@ public static class UnityHandler
             return;
         }
         //all the vars we'll need 
-        string[] data = message.Substring(1, message.Length - 1).Split('|');  // for splitting string
+        string[] data = message.Substring(1, message.Length - 2).Split('|');  // for splitting string
         int index = 0; // will be easier when mostRecentMessage gets larger
         Debug.Log(data[index] + " jjjjkklkkf " + gameObjects.Count);
+        
+        if(int.Parse(data[index]) == playerIndex){
+            player.transform.position = DataParserAndFormatter.StringToVector3(data[index + 1]);
+            return;
+        }
 
         //get the object to update
         GameObject Object = gameObjects[int.Parse(data[index])];
         //ignore if null
         if (Object != null)
         {
-        Object.transform.position = DataParserAndFormatter.StringToVector3(data[index + 1]); //parse and update position
-        Object.transform.rotation = DataParserAndFormatter.StringToQuaternion(data[index + 2]); //parse and update rotation
-        if (debug == true)
-        {
-            Debug.Log("UNITY HANDLER: Updated Object of name: " + Object.name.ToString() + "to position "+ data[index+1] + " and rotation " + data[index+2]);
-        }
+            Object.transform.position = DataParserAndFormatter.StringToVector3(data[index + 1]); //parse and update position
+            Object.transform.rotation = DataParserAndFormatter.StringToQuaternion(data[index + 2]); //parse and update rotation
+            if (debug == true)
+            {
+                Debug.Log("UNITY HANDLER: Updated Object of name: " + Object.name.ToString() + "to position "+ data[index+1] + " and rotation " + data[index+2]);
+            }
         }
     }
 
@@ -71,6 +91,11 @@ public static class UnityHandler
     {
         string[] data; // for splitting string
         int index = 0; // will be easier when mostRecentMessage gets larger
+        
+        if(gameObjects.Count == playerIndex){
+            gameObjects.Add(null);
+            return;
+        }
 
         data = message.Substring(1, message.Length - 2).Split('|'); //split each object into an array
         string resourcePath = data[index];
@@ -79,6 +104,8 @@ public static class UnityHandler
         Quaternion orientation = DataParserAndFormatter.StringToQuaternion(data[index + 2].Substring(1, data[index + 2].Length - 1)); //parse and update rotation
         GameObject resource = (GameObject)Resources.Load(resourcePath); //get GameObject resource from resourcePath
         GameObject Object = GameObject.Instantiate(resource, position, orientation); //make the GameObject in the scene with the correct orientation and position
+
+
 
         //add this object to total list of gameObjects
         gameObjects.Add(Object);
@@ -91,10 +118,44 @@ public static class UnityHandler
     
     private static void Destroy(string message)
     {
-        string data = message.Substring(1, message.Length - 1);
+        string data = message.Substring(1, message.Length - 2);
         int index = int.Parse(data);
-        UnityEngine.Object.Destroy(gameObjects[index]); //destroy the object then set it to a null
+        GameObject.Destroy(gameObjects[index]); //destroy the object then set it to a null
         gameObjects[index] = null;      
     
+    }
+    
+    private static void Terrain(string message)
+    {
+        string string_seed = message.Substring(1, message.Length - 2); // retrieve seed from string
+        int seed = int.Parse(string_seed); //parse into an integar
+        //find the planet, activate it, set the seed then generate
+        GameObject planet = GameObject.FindGameObjectWithTag("planet");
+        planet.SetActive(true);
+        planet.GetComponent<PlanetMono>().Create(seed);
+    }
+
+    private static void Animate(string message)
+    {
+        string[] data;
+        int index = 0;
+        bool isAnimating;
+        data = message.Substring(1, message.Length - 2).Split('|'); //split the message
+        //set the bool to true if the last entry in the str is T or false if it is F
+        if (data[index + 2] == "T")
+        {
+            isAnimating = true;
+        }
+        else
+        {
+            isAnimating = false;
+        }        
+        gameObjects[int.Parse(data[index])].GetComponent<Animator>().SetBool(data[index+1], isAnimating); //get the gameobj from the index, change the animation to true or false
+    }
+
+    private static void Player(string message){
+        string string_num = message.Substring(1, message.Length - 2); // retrieve seed from string
+        int player_num = int.Parse(string_num);
+        playerIndex = player_num;
     }
 }
