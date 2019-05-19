@@ -14,7 +14,7 @@ using System;
 //For the following stat arrays, [0] is the base, [1] is the multiplier, and [2] is the flat
 public enum statModifier { Base, Multiplier, Flat };
 public enum stat { HealthRegen, /*ManaRegen*/ Speed, Attack, AttackSpeed, Defense };
-public enum buff { Invisible, Gravityless };
+public enum buff { Invisible, Gravityless, Unstoppable };
 
 public class Stats : MonoBehaviour
 {
@@ -32,7 +32,7 @@ public class Stats : MonoBehaviour
 
 
     public float[,] allStats = new float[5, 3]; //first column is base stats, second multiplier, third flat. Each 
-    public int[] buffs = new int[2];            //number changes with number of positive buffs
+    public int[] buffs = new int[3];            //number changes with number of positive buffs
 
 
 
