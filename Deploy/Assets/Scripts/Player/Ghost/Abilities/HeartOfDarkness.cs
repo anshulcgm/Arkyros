@@ -42,7 +42,6 @@ public class HeartOfDarkness : MonoBehaviour
             rigidbody.AddForce(transform.position.normalized * 1000);
             stats.addBuff((int)buff.Gravityless, 240);
         }
-
         if (cast)
         {
             if ((DateTime.Now - start).TotalSeconds < 4)
@@ -78,9 +77,9 @@ public class HeartOfDarkness : MonoBehaviour
         {
             transform.position = target;
             Collider[] stuff = Physics.OverlapSphere(target, 20);
-            foreach(Collider c in stuff)
+            foreach (Collider c in stuff)
             {
-                stats.dealDamage(c.gameObject, float.MaxValue);                
+                stats.dealDamage(c.gameObject, float.MaxValue);
             }
             u_gottem = false;
         }
