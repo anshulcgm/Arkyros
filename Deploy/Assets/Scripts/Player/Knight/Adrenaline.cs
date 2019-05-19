@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Defiant : Passive
+public class Adrenaline : Passive
 {
     //ADD passive ability's tier - check from ability log
     public int tier = 0;
@@ -24,8 +24,10 @@ public class Defiant : Passive
     {
         if (isActive && Stats.Health < 20 && !used)
         {
-            // Stats.addBuff((int)buff.Unstoppable, 720);
-            //Stats.Defense.IncreaseDefense(20);
+            //cleanse debuffs
+            //stats.addBuff adrenaline buff, 720
+            //increase attack by 20
+            //increase speed
             used = true;
         }
         if(Stats.Health == 0)
