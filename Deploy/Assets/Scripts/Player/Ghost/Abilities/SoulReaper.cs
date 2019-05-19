@@ -9,6 +9,8 @@ public class SoulReaper : Passive
 
     private int storedLifeForce = 0;
 
+    GhostSoundManager ghostSoundManager;
+
     public override void On()
     {
         isActive = true;
@@ -21,14 +23,14 @@ public class SoulReaper : Passive
     {
         if (isActive)
         {
-            /*
-            if ()//if (button for attack pressed & enemies health falls)
+/* 
             {
                 storedLifeForce += 1; //life force increases with damage done to enemy
             }
-            if()//health reaches 0 && storedLifeForce >= 7
+            if()//health reaches 0 && storedLifeForce >= threshold
             {
-                //increase health by storedLifeForce
+                ghostSoundManager.playSoulReaperResurrect();
+                //increase health by % that scales with storedLifeForce
                 storedLifeForce = 0;
             }
             */
