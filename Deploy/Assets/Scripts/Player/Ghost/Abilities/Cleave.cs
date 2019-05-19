@@ -9,7 +9,7 @@ public class Cleave : MonoBehaviour
 
     private GameObject camera;
 
-    private Animator anim;
+    private AnimationController anim;
     DateTime start;
 
 
@@ -24,7 +24,7 @@ public class Cleave : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
@@ -41,7 +41,8 @@ public class Cleave : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
+            Debug.Log("reee");
+            anim.StartOverlayAnim("Circle_strike_2", 0.5f, 1f); //this tells the animator to play the right animation
 
 
             //put any setup code here, before the ability is actually cast
@@ -53,6 +54,7 @@ public class Cleave : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
             ghostSoundManager.playCleave();
+
             /*
              * All the code for the ability that you want to write
              * transform.forward for the direction the player is 
