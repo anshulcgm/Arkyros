@@ -22,11 +22,11 @@ public class EtherealForm : Passive
     {
         if (isActive)
         {
-            if() //(damage is dealt and target is ghost)
+            if(true) //(damage is dealt and target is ghost)
             {
                 Random rnd = new Random();
                 //int num = rnd.Next(1, 5);
-                if(num == 1)
+                if(1 == 1)
                 {
                     //stats - don't deal damage
                 }
