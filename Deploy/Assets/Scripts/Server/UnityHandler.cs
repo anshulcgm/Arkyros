@@ -139,18 +139,17 @@ public static class UnityHandler
     {
         string[] data;
         int index = 0;
-        bool isAnimating;
         data = message.Substring(1, message.Length - 2).Split('|'); //split the message
-        //set the bool to true if the last entry in the str is T or false if it is F
-        if (data[index + 2] == "T")
+        if (data[index + 1] == "T")        //call overlay depending on True or False
         {
-            isAnimating = true;
+            //call overlay when true
+            gameObjects[int.Parse(data[index])].GetComponent<AnimController>().StartOverlayAnim(data[index+2], float.Parse(data[index+3]), float.Parse(data[index+4]));
         }
         else
         {
-            isAnimating = false;
+            gameObjects[int.Parse(data[index])].GetComponent<AnimController>().PlayLoopingAnim(data[index+2]);
         }        
-        gameObjects[int.Parse(data[index])].GetComponent<Animator>().SetBool(data[index+1], isAnimating); //get the gameobj from the index, change the animation to true or false
+        
     }
 
     private static void Player(string message){

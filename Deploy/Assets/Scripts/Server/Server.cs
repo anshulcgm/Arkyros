@@ -90,14 +90,17 @@ public class Server
         }
     }
 
-    public void SendAnimation(GameObject Object, string animation_name, bool isAnimating)
+    public void SendAnimation(GameObject Object, string animation_name, bool isOverlay, float strength = 0, float duration = 0)
     {
-        string boolchar = "F";
-        if (isAnimating)
+        if (isOverlay)
         {
-            boolchar = "T";
+            string message = ("A{" + gameObjectsToUpdate.IndexOf(Object).ToString() + "|" + "T" + "|" + animation_name + strength.ToString() + duration.ToString() +"}"); // gameobject index with animation and false char
         }
-        string message = ("A{" + gameObjectsToUpdate.IndexOf(Object).ToString() + "|" + animation_name + "|" + boolchar + "}"); // gameobject index with animation and true/false char
+        else
+        {
+            string message = ("A{" + gameObjectsToUpdate.IndexOf(Object).ToString() + "|" + "F" + "|" + animation_name + "}"); //game obj, and other overlay parameters
+        }
+        
         foreach (string clientIP in clientIPs)
         {
             udp.Send(message, clientIP);
