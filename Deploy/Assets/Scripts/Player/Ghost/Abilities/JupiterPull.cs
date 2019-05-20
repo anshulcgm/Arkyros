@@ -18,12 +18,15 @@ public class JupiterPull : MonoBehaviour
     DateTime start;
     //public GameObject damageDealt;
     private bool cast;
+    SoundManager soundManager;
+
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
-        
+        soundManager = GetComponent<SoundManager>();
+
     }
 
     // Update is called once per frame

@@ -20,7 +20,7 @@ public class Cleave : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
-    GhostSoundManager ghostSoundManager;
+    SoundManager soundManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +29,7 @@ public class Cleave : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
+        soundManager = GetComponent<SoundManager>();
 
         cooldown = 0;
 
@@ -43,7 +44,7 @@ public class Cleave : MonoBehaviour
             start = DateTime.Now;
             Debug.Log("reee");
             anim.StartOverlayAnim("Circle_strike_2", 0.5f, 1f); //this tells the animator to play the right animation
-
+            soundManager.playOneShot("Cleave");
 
             //put any setup code here, before the ability is actually cast
 
@@ -53,7 +54,7 @@ public class Cleave : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            ghostSoundManager.playCleave();
+            
 
             /*
              * All the code for the ability that you want to write

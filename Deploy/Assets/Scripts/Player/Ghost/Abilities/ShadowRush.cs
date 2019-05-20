@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class ShadowRush: MonoBehaviour
 {
     public float cooldown;
 
     private GameObject camera;
 
-    private Animator anim;
+    private AnimationController anim;
+
 
     private bool buffActive;
 
@@ -18,15 +19,16 @@ public class NewBehaviourScript : MonoBehaviour
 
     DateTime start;
 
-    GhostSoundManager ghostSoundManager;
+    SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
+        soundManager = GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -35,17 +37,18 @@ public class NewBehaviourScript : MonoBehaviour
         if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
         {
             start = DateTime.Now;
-            anim.SetBool("ShadowRush", true); //this tells the animator to play the right animation
+            //anim.SetBool("ShadowRush", true); //this tells the animator to play the right animation
             cooldown = 360;                   //placeholder time, divide by 60 for cooldown in seconds
             stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] *= 2; //double speed
             buffActive = true;
-            ghostSoundManager.playShadowRush();
+            soundManager.play("ShadowRush");
         }
         if ((DateTime.Now - start).TotalSeconds > 6) //when duration of ability is over, set back to original speed
         {
             if (buffActive)
             {
                 stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] /= 2; //original speed
+                soundManager.stop();
                 buffActive = false;
             }
         }
