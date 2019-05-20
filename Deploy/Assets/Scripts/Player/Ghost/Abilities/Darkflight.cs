@@ -9,9 +9,10 @@ public class Darkflight : MonoBehaviour
 
     private GameObject camera;
 
-    private Animator anim;
+    private AnimationController anim;
 
-    GhostSoundManager ghostSoundManager;
+
+    SoundManager soundManager;
     Rigidbody rigidbody;
 
     DateTime start;
@@ -21,9 +22,10 @@ public class Darkflight : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<AnimationController>();
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
-        ghostSoundManager = GetComponent<GhostSoundManager>();
+        soundManager = GetComponent<SoundManager>();
 
         cooldown = 0;
     }
@@ -35,7 +37,7 @@ public class Darkflight : MonoBehaviour
         {
             cast = false;
             start = DateTime.Now;
-            anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
+            //anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
                                       //placeholder time, divide by 60 for cooldown in seconds
 
 
@@ -46,9 +48,11 @@ public class Darkflight : MonoBehaviour
         {
             rigidbody.AddForce(transform.up * 1000, ForceMode.Impulse); //jumps super high
 
-            ghostSoundManager.playDFCombined();
+            soundManager.playOneShot("DarkFlightTakeoff");
 
             stats.buffs[(int)buff.Gravityless] += 240; //lets you fly
+
+            soundManager.play("DarkFlightFlight");
 
             cooldown = 240;
             cast = true;
@@ -57,6 +61,14 @@ public class Darkflight : MonoBehaviour
         if (cooldown > 0) //counts down for the cooldown
         {
             cooldown--;
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag.Equals("planet") && cast) //lands back on the ground
+        {
+            soundManager.playOneShot("DarkFlightLanding");
         }
     }
 }

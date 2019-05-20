@@ -9,7 +9,8 @@ public class NothingPersonnelKid : MonoBehaviour
 
     private GameObject camera;
 
-    private Animator anim;
+    private AnimationController anim;
+
 
     private bool buffActive;
 
@@ -21,16 +22,17 @@ public class NothingPersonnelKid : MonoBehaviour
 
     private bool cast;
 
-    GhostSoundManager ghostSoundManager;
+    SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
+        soundManager = GetComponent<SoundManager>();
 
     }
 
@@ -41,7 +43,7 @@ public class NothingPersonnelKid : MonoBehaviour
         {
             cast = false;
             start = DateTime.Now;
-            anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
+            //anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
             
 
             //put any setup code here, before the ability is actually cast
@@ -55,10 +57,11 @@ public class NothingPersonnelKid : MonoBehaviour
             if(Vector3.Distance(tcs.target.transform.position, transform.position) < 20)
             {
                 transform.position = Vector3.Lerp(transform.position, tcs.target.transform.position, 1);
-                ghostSoundManager.playNPKTeleport();
-                ghostSoundManager.playNPKVoiceLine();
+                soundManager.playOneShot("NPKTeleport");
+                soundManager.playOneShot("NPKVoiceLine");
             }
 
+            
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
             cast = true;
         }

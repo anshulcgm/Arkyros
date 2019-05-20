@@ -9,7 +9,7 @@ public class SoulReaper : Passive
 
     private int storedLifeForce = 0;
 
-    GhostSoundManager ghostSoundManager;
+    //SoundManager soundManager = GetComponent<SoundManager>();
 
     public override void On()
     {

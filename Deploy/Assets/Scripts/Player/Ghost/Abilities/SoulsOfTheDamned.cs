@@ -9,7 +9,8 @@ public class SoulsOfTheDamned : MonoBehaviour
 
     private GameObject camera;
 
-    private Animator anim;
+    private AnimationController anim;
+
     DateTime start;
 
 
@@ -22,16 +23,17 @@ public class SoulsOfTheDamned : MonoBehaviour
 
     public GameObject SoulsOfTheDamnedProjectile;
 
-    GhostSoundManager ghostSoundManager;
+    SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
+        soundManager = GetComponent<SoundManager>();
 
         cooldown = 0;
 
@@ -44,8 +46,8 @@ public class SoulsOfTheDamned : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
-
+            //anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
+            
 
             //put any setup code here, before the ability is actually cast
 

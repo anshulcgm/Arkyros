@@ -20,7 +20,7 @@ public class Template : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
-    GhostSoundManager ghostSoundManager;
+    SoundManager soundManager;
     //might not always be Ghost, need different one for each class.
 
     // Start is called before the first frame update
@@ -32,6 +32,7 @@ public class Template : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
+        soundManager = GetComponent<SoundManager>();
 
         cooldown = 0;
 

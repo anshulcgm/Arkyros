@@ -9,7 +9,8 @@ public class SpiritBlade : MonoBehaviour
 
     private GameObject camera;
 
-    private Animator anim;
+    private AnimationController anim;
+
 
     private bool buffActive;
 
@@ -24,14 +25,17 @@ public class SpiritBlade : MonoBehaviour
     private int projectileSpeed = 40;
     private bool cast;
 
+    SoundManager soundManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
+        soundManager = GetComponent<SoundManager>();
 
         cooldown = 0;
 
@@ -44,8 +48,8 @@ public class SpiritBlade : MonoBehaviour
         {
             cast = false;
             start = DateTime.Now;
-            anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
-            
+            //anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
+            soundManager.playOneShot("SpiritBlade");
 
             //put any setup code here, before the ability is actually cast
             
