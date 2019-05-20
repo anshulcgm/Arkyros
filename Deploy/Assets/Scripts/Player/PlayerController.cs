@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
+    public float speed = 50;
     //public float sprint_Speed = 5;
     public float jump_Force = 10;
 
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 		Vector3 targetDirection = new Vector3(moveHorizontal * getSpeed(), moveUp, moveVertical*getSpeed());
-		targetDirection = Camera.current.transform.TransformDirection(targetDirection);
+		targetDirection = Camera.main.transform.TransformDirection(targetDirection);
 		targetDirection.y = 0.0f;
         rb.AddForce(targetDirection);
     }

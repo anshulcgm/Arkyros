@@ -13,8 +13,11 @@ GameObject:
   - component: {fileID: 23581065862720710}
   - component: {fileID: 1262042915742738782}
   - component: {fileID: 1401434301}
-  - component: {fileID: 1401434305}
-  - component: {fileID: 1401434306}
+  - component: {fileID: 3964492238729989579}
+  - component: {fileID: 1943815952628627974}
+  - component: {fileID: 4393704401562751898}
+  - component: {fileID: 186668917152639198}
+  - component: {fileID: 1049771189972130463}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -110,7 +113,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1401434305
+--- !u!114 &3964492238729989579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,12 +122,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1536539931531146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f72b4232a0d934449af3608d64310796, type: 3}
+  m_Script: {fileID: 11500000, guid: 149b6f573de243946a0c0a8fa3c8717b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 0
   jump_Force: 10
---- !u!114 &1401434306
+--- !u!114 &1943815952628627974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,8 +136,61 @@ MonoBehaviour:
   m_GameObject: {fileID: 1536539931531146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3789f0f84b93df64aa246925cb656457, type: 3}
+  m_Script: {fileID: 11500000, guid: 39303ee909370d643a8336435578f47e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraOne: {fileID: 0}
-  cameraTwo: {fileID: 0}
+  player: {fileID: 0}
+  speedH: 4
+  speedV: 4
+--- !u!114 &4393704401562751898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536539931531146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e081378817b1a246884039d33a3cfe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenTargets: []
+  target: {fileID: 0}
+  enemies: []
+--- !u!114 &186668917152639198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536539931531146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e4044b1cd8d4e84b8a8af610230c2f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  SoulsOfTheDamnedProjectile: {fileID: 1445912041631301893, guid: d7977e476dd97cd459b87dc3094c9e03,
+    type: 3}
+--- !u!114 &1049771189972130463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536539931531146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7dcfb1a90d43d43a5050adbac906bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InputX: 0
+  InputZ: 0
+  desiredMoveDirection: {x: 0, y: 0, z: 0}
+  blockRotationPlayer: 0
+  desiredRotationSpeed: 0.1
+  Speed: 0
+  allowPlayerRotation: 0
+  cam: {fileID: 0}
+  controller: {fileID: 0}
+  isGrounded: 0
