@@ -49,6 +49,7 @@ public class Darkflight : MonoBehaviour
             rigidbody.AddForce(transform.up * 1000, ForceMode.Impulse); //jumps super high
 
             soundManager.playOneShot("DarkFlightTakeoff");
+            anim.PlayLoopingAnim("Fly_Forward");
 
             stats.buffs[(int)buff.Gravityless] += 240; //lets you fly
 
@@ -69,6 +70,7 @@ public class Darkflight : MonoBehaviour
         if (collision.gameObject.tag.Equals("planet") && cast) //lands back on the ground
         {
             soundManager.playOneShot("DarkFlightLanding");
+            anim.PlayLoopingAnim("Idle");
         }
     }
 }

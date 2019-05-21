@@ -43,7 +43,7 @@ public class CullingStrike : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            //anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
+            anim.StartOverlayAnim("Culling_Strike", 0.5f, 1f); //this tells the animator to play the right animation
             soundManager.playOneShot("CullingStrike");
 
             //put any setup code here, before the ability is actually cast

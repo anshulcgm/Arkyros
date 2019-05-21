@@ -57,6 +57,8 @@ public class NothingPersonnelKid : MonoBehaviour
             if(Vector3.Distance(tcs.target.transform.position, transform.position) < 20)
             {
                 transform.position = Vector3.Lerp(transform.position, tcs.target.transform.position, 1);
+
+                anim.StartOverlayAnim("Swing_Circle_1", 0.5f, 1f);
                 soundManager.playOneShot("NPKTeleport");
                 soundManager.playOneShot("NPKVoiceLine");
             }

@@ -50,7 +50,7 @@ public class MementoMori : MonoBehaviour
             start = DateTime.Now;
             //anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
             soundManager.playOneShot("MementoMoriThrow");
-
+            anim.StartOverlayAnim("Swing_Light", 0.5f, 1f);
             //put any setup code here, before the ability is actually cast
 
 

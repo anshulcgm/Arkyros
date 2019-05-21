@@ -7,6 +7,9 @@ TagManager:
   - planet
   - moon
   - playercam
+  - Enemy
+  - LeftLeg
+  - RightLeg
   layers:
   - Default
   - TransparentFX

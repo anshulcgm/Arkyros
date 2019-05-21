@@ -48,7 +48,7 @@ public class SpiritBlade : MonoBehaviour
         {
             cast = false;
             start = DateTime.Now;
-            //anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
+            anim.StartOverlayAnim("Swing_Light", 0.5f, 0.5f);
             soundManager.playOneShot("SpiritBlade");
 
             //put any setup code here, before the ability is actually cast

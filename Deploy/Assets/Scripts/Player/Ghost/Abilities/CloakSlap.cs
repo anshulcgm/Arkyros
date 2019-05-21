@@ -42,10 +42,10 @@ public class CloakSlap : MonoBehaviour
             cast = false;
             start = DateTime.Now;
 
-            //anim.SetBool("CloakSlap", true); //this tells the animator to play the right animation
+            
 
             //slow down while charging
-            //allStats[(int)stats.Speed, (int)statModifier.Multiplier] / 3; //decrease speed
+            stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] /= 3; //decrease speed
             buffActive = true;
             soundManager.play("CloakSlapCharge");
         }
@@ -56,6 +56,8 @@ public class CloakSlap : MonoBehaviour
             cooldown = 600;     //set cooldown, placeholder time
             cast = true;
             //maybe set collider to scythe
+            anim.StartOverlayAnim("CloakSlap", 0.5f, 1.0f); //this tells the animator to play the right animation
+
             soundManager.playOneShot("CloakSlapRelease");
             //damage enemy
             //EnemyGameObject.GetComponent<StatManager>().changeHealth(amount);
@@ -66,7 +68,7 @@ public class CloakSlap : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds <= 4 && !Input.GetKey("e") && buffActive && !cast)
         {
             soundManager.stop();
-            //allStats[(int)stats.Speed, (int)statModifier.Multiplier] * 3; //return speed
+            stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] *= 3; //return speed
             buffActive = false;
         }
         if (cooldown > 0) //counts down for the cooldown

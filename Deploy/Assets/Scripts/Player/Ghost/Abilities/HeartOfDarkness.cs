@@ -46,6 +46,7 @@ public class HeartOfDarkness : MonoBehaviour
             start = DateTime.Now;
             rigidbody.AddForce(transform.position.normalized * 1000);
             soundManager.playOneShot("HeartofDarknessTeleport");
+            anim.PlayLoopingAnim("Fly_Forward");
             stats.addBuff((int)buff.Gravityless, 240);
         }
         if (cast)
@@ -83,6 +84,7 @@ public class HeartOfDarkness : MonoBehaviour
         {
             transform.position = target;
             soundManager.playOneShot("HeartofDarknessDivebomb");
+
             Collider[] stuff = Physics.OverlapSphere(target, 20);
             foreach (Collider c in stuff)
             {

@@ -46,8 +46,8 @@ public class SoulsOfTheDamned : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            //anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
-            
+            anim.StartOverlayAnim("Summon_Area", 0.5f, 1f);
+
 
             //put any setup code here, before the ability is actually cast
 
