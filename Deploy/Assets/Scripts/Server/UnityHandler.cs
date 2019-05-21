@@ -98,21 +98,25 @@ public static class UnityHandler
         }
 
         data = message.Substring(1, message.Length - 2).Split('|'); //split each object into an array
-        string resourcePath = data[index];
-        Debug.Log(resourcePath + " <- that's it");
-        Vector3 position = DataParserAndFormatter.StringToVector3(data[index + 1]); //parse and update position
-        Quaternion orientation = DataParserAndFormatter.StringToQuaternion(data[index + 2].Substring(1, data[index + 2].Length - 1)); //parse and update rotation
-        GameObject resource = (GameObject)Resources.Load(resourcePath); //get GameObject resource from resourcePath
-        GameObject Object = GameObject.Instantiate(resource, position, orientation); //make the GameObject in the scene with the correct orientation and position
+        if (data[index] != "ignore"){        //if this create message is for me then add a null object and move on
+        
+            string resourcePath = data[index];
+            Debug.Log(resourcePath + " <- that's it");
+            Vector3 position = DataParserAndFormatter.StringToVector3(data[index + 1]); //parse and update position
+            Quaternion orientation = DataParserAndFormatter.StringToQuaternion(data[index + 2].Substring(1, data[index + 2].Length - 1)); //parse and update rotation
+            GameObject resource = (GameObject)Resources.Load(resourcePath); //get GameObject resource from resourcePath
+            GameObject Object = GameObject.Instantiate(resource, position, orientation); //make the GameObject in the scene with the correct orientation and position
 
+            //add this object to total list of gameObjects
+            gameObjects.Add(Object);
 
-
-        //add this object to total list of gameObjects
-        gameObjects.Add(Object);
-
-        if (debug == true)
-        {
-            Debug.Log("UNITY HANDLER: Created Object with resource path " + data[index] + "to position " + data[index+1] + " and rotation " + data[index+2]);
+            if (debug == true)
+            {
+                Debug.Log("UNITY HANDLER: Created Object with resource path " + data[index] + "to position " + data[index+1] + " and rotation " + data[index+2]);
+            }
+        }
+        else {
+            gameObjects.Add(null);
         }
     }
     
