@@ -15,7 +15,7 @@ public class Plane
     {
         this.normal = normal;
         this.d = d;
-        GetDirs();
+        GetDirs(); 
     }
 
     public Plane(Vector3 normal, Vector3 point)

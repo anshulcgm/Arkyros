@@ -9,21 +9,21 @@ public class SphericalMovement : MonoBehaviour {
     private GameObject player;
 
     public float gravity = -10f;
-    //private float planetRadius;
-	// Use this for initialization
+  
 	void Start () {
         planet = GameObject.FindGameObjectWithTag("planet");
         player = GameObject.FindGameObjectWithTag("Player");
-        //planetRadius = planet.transform.localScale.x / 2;
+        
         rb = GetComponent<Rigidbody>();
-        //Physics.IgnoreCollision(transform.GetComponent<Collider>(), GameObject.Find("Planet").GetComponent<Collider>());
-        //rb.velocity = (player.transform.position - transform.position).normalized;
+       
     }
 	
 	// Update is called once per frame
 	void Update () {
         //Attract();
         //moveOnSphere(player.transform.position);
+
+        //This code moves the golem towards the player using plane-logic
         Plane2 plane = new Plane2(transform.position.normalized, transform.position);
 
         Vector2 mappedPoint = plane.GetMappedPoint(player.transform.position) - plane.GetMappedPoint(transform.position);
@@ -46,6 +46,8 @@ public class SphericalMovement : MonoBehaviour {
         rb.AddForce(transform.position.normalized * gravity);
 
     }
+
+    //Method is not in use right now
     public void moveOnSphere(Vector3 endPoint)
     {
         rb.velocity = (player.transform.position - transform.position).normalized;
@@ -68,6 +70,8 @@ public class SphericalMovement : MonoBehaviour {
         rb.AddForce(transform.forward * speed);
         //Debug.DrawLine(transform.position, rb.velocity, Color.blue, Time.deltaTime);
     }
+    
+    //Method is not in use right now
     public void Attract()
     {
         //Debug.Log("In attract function");
