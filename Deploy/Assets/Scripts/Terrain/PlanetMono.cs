@@ -20,7 +20,7 @@ public class PlanetMono : MonoBehaviour, IMono
         System.Random r = new System.Random(seed);
         int minRad = 4000;
         int maxRad = 4000;
-        planet = new Planet(r, minRad, maxRad, 10f, 30f, 81, 81);
+        planet = new Planet(r, minRad, maxRad, 10f, 30f, 91, 91);
 
         List<Vector3> pts = null;
         List<int>[] map = null;
