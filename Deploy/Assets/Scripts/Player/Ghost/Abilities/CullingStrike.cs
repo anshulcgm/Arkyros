@@ -9,7 +9,8 @@ public class CullingStrike : MonoBehaviour
 
     private GameObject camera;
 
-    private Animator anim;
+    private AnimationController anim;
+
     DateTime start;
 
 
@@ -20,15 +21,16 @@ public class CullingStrike : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
-    GhostSoundManager ghostSoundManager;
+    SoundManager soundManager;
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
+        soundManager = GetComponent<SoundManager>();
 
         cooldown = 0;
 
@@ -41,8 +43,8 @@ public class CullingStrike : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
-
+            anim.StartOverlayAnim("Culling_Strike", 0.5f, 1f); //this tells the animator to play the right animation
+            soundManager.playOneShot("CullingStrike");
 
             //put any setup code here, before the ability is actually cast
 
@@ -53,7 +55,7 @@ public class CullingStrike : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
 
-            ghostSoundManager.playCullingStrike();
+            
 
 
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds

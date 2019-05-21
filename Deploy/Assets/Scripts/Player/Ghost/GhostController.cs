@@ -16,14 +16,12 @@ public class GhostController : MonoBehaviour
     //public bool enemyInRange = false;
     //public LayerMask groundedMask;
 
-
-
     private float speed_Multiplier = 1;
     private bool isSprinting;
     private int attackDelay;
     private int blastForce = 20;
 
-    private Animator anim;
+    private AnimationController anim;
     DateTime attackStart;
 
     // System vars
@@ -39,6 +37,7 @@ public class GhostController : MonoBehaviour
     legSound movementSound;
     hammerSound attackSound;
 
+    SoundManager soundManager;
 
     void Awake()
     {
@@ -47,7 +46,7 @@ public class GhostController : MonoBehaviour
         Cursor.visible = false;
         cameraTransform = Camera.main.transform;
         rigidbody = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
+        anim = GetComponent<AnimationController>();
         sound = Camera.main.GetComponent<cameraSoundManager>();
         movementSound = GameObject.Find("L_Foot_IK").GetComponent<legSound>();
         attackSound = GameObject.Find("Hammer_Head").GetComponent<hammerSound>();
@@ -76,13 +75,13 @@ public class GhostController : MonoBehaviour
             {
                 if (moveDir.x > 0)
                 {
-                    setAllTriggersFalse();
-                    anim.SetBool("WalkRightBool", true);
+                    //setAllTriggersFalse();
+                    anim.PlayLoopingAnim("Move_Right");
                 }
                 else
                 {
-                    setAllTriggersFalse();
-                    anim.SetBool("WalkLeftBool", true);
+                    //setAllTriggersFalse();
+                    anim.PlayLoopingAnim("Move_Left");
                 }
             }
         }
@@ -96,8 +95,9 @@ public class GhostController : MonoBehaviour
                     {
                         movementSound.isWalking = false;
                         movementSound.isSprinting = true;
-                        setAllTriggersFalse();
-                        anim.SetBool("RunForwardBool", true);
+                        soundManager.play("Sprint");
+                        //setAllTriggersFalse();
+                        anim.PlayLoopingAnim("Move_ForwardLunge");
                         speed_Multiplier = 2; //sprint speed
                         Camera.main.transform.localPosition = new Vector3(0f, 16f, 8f);
                     }
@@ -105,15 +105,15 @@ public class GhostController : MonoBehaviour
                     {
                         movementSound.isWalking = true;
                         movementSound.isSprinting = false;
-                        anim.SetBool("RunForwardBool", false);
-                        anim.SetBool("WalkForwardBool", true);
+                        soundManager.play("walk");
+                        anim.PlayLoopingAnim("Move_Forward");
                         Camera.main.transform.localPosition = new Vector3(0f, 16f, 3.1f);
                     }
                 }
                 else
                 {
-                    setAllTriggersFalse();
-                    anim.SetBool("WalkBackwardsBool", true);
+                    //setAllTriggersFalse();
+                    anim.PlayLoopingAnim("Move_Backward");
                 }
             }
 
@@ -121,14 +121,19 @@ public class GhostController : MonoBehaviour
 
         if (moveDir.x <= 0.01f && moveDir.z <= 0.01f)
         {
+            /*
             anim.SetBool("RunForwardBool", false);
             anim.SetBool("WalkBackwardsBool", false);
             anim.SetBool("WalkRightBool", false);
             anim.SetBool("WalkLeftBool", false);
             anim.SetBool("WalkForwardBool", false);
+            */
+
+            anim.PlayLoopingAnim("Idle");
 
             movementSound.isWalking = false;
             movementSound.isSprinting = false;
+            soundManager.playOneShot("CapeFlutter");
         }
         moveAmount = Vector3.SmoothDamp(moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
 
@@ -136,8 +141,8 @@ public class GhostController : MonoBehaviour
         if (Input.GetMouseButton(0) && attackDelay == 0)
         {
             //Debug.Log("Attack was pressed");
-            setAllTriggersFalse();
-            anim.SetBool("Swing_HeavyBool", true);
+            //setAllTriggersFalse();
+            anim.StartOverlayAnim("Swing_Heavy_1", 0.5f, 0.5f);
             attackStart = DateTime.Now;
             attackDelay = 60; //can attack 60 frames later
 
@@ -147,6 +152,7 @@ public class GhostController : MonoBehaviour
         {
 
             attackSound.isSwinging = true;
+            soundManager.playOneShot("BasicScytheAttack");
             Collider[] hits = Physics.OverlapSphere(transform.position + transform.forward * 20, 50);
             Debug.Log("REEEEEEEEE");
             foreach (Collider hit in hits)
@@ -164,7 +170,7 @@ public class GhostController : MonoBehaviour
         }
         else
         {
-            anim.SetBool("Swing_HeavyBool", false);
+            //anim.SetBool("Swing_HeavyBool", false);
             attackSound.isSwinging = false;
         }
 
@@ -182,8 +188,8 @@ public class GhostController : MonoBehaviour
             {
                 //Debug.Log("Jump was pressed");
                 //rigidbody.velocity = (transform.up * jumpForce);
-                setAllTriggersFalse();
-                anim.SetBool("JumpBool", true);
+                //setAllTriggersFalse();
+                //anim.SetBool("JumpBool", true);
                 rigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
                 sound.isJumping = true;
             }
@@ -214,7 +220,7 @@ public class GhostController : MonoBehaviour
 
         if (Physics.Raycast(ray, 1.1f)) //1 is placeholder for model height
         {
-            anim.SetBool("JumpBool", false);
+            //anim.SetBool("JumpBool", false);
             grounded = true;
         }
         else
@@ -224,6 +230,8 @@ public class GhostController : MonoBehaviour
 
 
     }
+
+    /*
     public void setAllTriggersFalse()
     {
         foreach (AnimatorControllerParameter parameter in anim.parameters)
@@ -231,6 +239,8 @@ public class GhostController : MonoBehaviour
             anim.SetBool(parameter.name, false);
         }
     }
+    */
+
     void FixedUpdate()
     {
         // Apply movement to rigidbody

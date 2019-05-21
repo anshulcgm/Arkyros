@@ -9,7 +9,8 @@ public class ShadowsWing : MonoBehaviour
 
     private GameObject camera;
 
-    private Animator anim;
+    private AnimationController anim;
+
 
     private bool buffActive;
 
@@ -20,15 +21,16 @@ public class ShadowsWing : MonoBehaviour
 
     DateTime start;
 
-    GhostSoundManager ghostSoundManager;
+    SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
+        soundManager = GetComponent<SoundManager>();
 
     }
 
@@ -39,22 +41,23 @@ public class ShadowsWing : MonoBehaviour
         {
             cast = false;
             start = DateTime.Now;
-            anim.SetBool("ShadowsWing", true); //this tells the animator to play the right animation
-
+            anim.StartOverlayAnim("CircleSwing", 0.5f, 1f); //puts cloak up
+            soundManager.play("ShadowsWing");
         }
 
         if ((DateTime.Now - start).TotalSeconds < 5 && Input.GetKey("e") && !cast)
         {
-            ghostSoundManager.playShadowsWing();
+            
             //put any setup code here, before the ability is actually cast
-            //allStats[(int)stats.Defense, (int)statModifier.Multiplier] * 3; //Triple Defense
+            stats.allStats[(int)stat.Defense, (int)statModifier.Multiplier] *= 3; //Triple Defense
             cast = true;
             buffActive = true;
         }
         if(((DateTime.Now - start).TotalSeconds > 5) && !Input.GetKey("e") && cast && buffActive)
         {
             cooldown = (float)(DateTime.Now - start).TotalSeconds * 60;
-            //allStats[(int)stats.Defense, (int)statModifier.Multiplier] / 3; //return to original Defense
+            stats.allStats[(int)stat.Defense, (int)statModifier.Multiplier] /= 3; //return to original Defense
+            soundManager.stop();
         }
 
         if (cooldown > 0) //counts down for the cooldown

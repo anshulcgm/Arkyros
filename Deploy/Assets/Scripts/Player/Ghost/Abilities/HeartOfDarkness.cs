@@ -9,7 +9,8 @@ public class HeartOfDarkness : MonoBehaviour
 
     private GameObject camera;
 
-    private Animator anim;
+    private AnimationController anim;
+
     DateTime start;
 
     Rigidbody rigidbody;
@@ -19,12 +20,16 @@ public class HeartOfDarkness : MonoBehaviour
     private bool buffActive;
     private bool cast = false;
 
+    SoundManager soundManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
+        soundManager = GetComponent<SoundManager>();
         cooldown = 0;
     }
 
@@ -40,6 +45,8 @@ public class HeartOfDarkness : MonoBehaviour
             cast = true; //ability not yet cast
             start = DateTime.Now;
             rigidbody.AddForce(transform.position.normalized * 1000);
+            soundManager.playOneShot("HeartofDarknessTeleport");
+            anim.PlayLoopingAnim("Fly_Forward");
             stats.addBuff((int)buff.Gravityless, 240);
         }
         if (cast)
@@ -76,6 +83,8 @@ public class HeartOfDarkness : MonoBehaviour
         if (u_gottem)
         {
             transform.position = target;
+            soundManager.playOneShot("HeartofDarknessDivebomb");
+
             Collider[] stuff = Physics.OverlapSphere(target, 20);
             foreach (Collider c in stuff)
             {
