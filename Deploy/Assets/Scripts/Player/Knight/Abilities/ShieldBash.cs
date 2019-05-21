@@ -20,8 +20,7 @@ public class ShieldBash : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
-    GhostSoundManager ghostSoundManager;
-    //might not always be Ghost, need different one for each class.
+    SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +31,8 @@ public class ShieldBash : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
+
+        soundManager = GetComponent<SoundManager>();
 
         cooldown = 0;
 
@@ -45,6 +46,7 @@ public class ShieldBash : MonoBehaviour
             cast = false; //ability not yet cast
             start = DateTime.Now;
             anim.StartOverlayAnim("ShieldBash", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
+            soundManager.playOneShot("ShieldBash");
             
         }
 

@@ -11,6 +11,7 @@ public class HammerTime : MonoBehaviour
 
     private AnimationController anim;
     DateTime start;
+    DateTime hammerSwing;
 
 
     Rigidbody rigidbody;
@@ -20,8 +21,7 @@ public class HammerTime : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
-    //KnightSoundManager knightSoundManager;
-    //might not always be Ghost, need different one for each class.
+    SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +32,8 @@ public class HammerTime : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
+
+        soundManager = GetComponent<SoundManager>();
 
         cooldown = 0;
 
@@ -44,7 +46,9 @@ public class HammerTime : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            anim.StartOverlayAnim("HammerTime", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
+            hammerSwing = DateTime.Now;
+
+            soundManager.play("HammerTime");
 
             //put any setup code here, before the ability is actually cast
 
@@ -54,8 +58,11 @@ public class HammerTime : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            for (int i = 0; i < 7; i++)
+            
+            if((DateTime.Now - hammerSwing).TotalSeconds > 1)
             {
+                hammerSwing = DateTime.Now;
+                anim.StartOverlayAnim("Swing_Heavy", 0.5f, 1f);
                 Collider[] hits = Physics.OverlapSphere(transform.position + transform.forward * 3/*placeholder position*/, 4/*placeholder radius*/);
                 foreach (Collider hit in hits)
                 {
@@ -64,15 +71,18 @@ public class HammerTime : MonoBehaviour
                         stats.dealDamage(hit.gameObject, 20);
                     }
                 }
-                int frame_delay = 60; //for 1 second time delay
-                if (frame_delay > 0)
-                {
-                    frame_delay--;
-                }
+
             }
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            
+            
+            cooldown = 600;                          //placeholder time, divide by 60 for cooldown in seconds
             cast = true;
 
+        }
+
+        if((DateTime.Now - start).TotalSeconds > 4)
+        {
+            soundManager.stop();
         }
 
 

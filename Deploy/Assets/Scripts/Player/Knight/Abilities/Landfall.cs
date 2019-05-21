@@ -26,8 +26,7 @@ public class Landfall : MonoBehaviour
     private int enemySetback = 400;
 
 
-    GhostSoundManager ghostSoundManager;
-    //might not always be Ghost, need different one for each class.
+    SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +37,8 @@ public class Landfall : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
+
+        soundManager = GetComponent<SoundManager>();
 
         cooldown = 0;
 
@@ -58,6 +59,7 @@ public class Landfall : MonoBehaviour
 
 
             //put any setup code here, before the ability is actually cast
+            soundManager.playOneShot("LandfallJump");
 
 
 
@@ -66,13 +68,7 @@ public class Landfall : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
 
-            /*
-             * All the code for the ability that you want to write
-             * transform.forward for the direction the player is 
-             * maybe setting colliders
-             * instantiating new objects
-             * to damage enemy, EnemyGameObject.GetComponent<StatManager>().changeHealth(amount), amount can be positive or negative
-             */
+            soundManager.play("LandfallSustain");
             GetComponent<Rigidbody>().AddForce(transform.forward * numForward);
             GetComponent<Rigidbody>().AddForce(transform.up * numUp);
 
@@ -90,6 +86,8 @@ public class Landfall : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("planet") && cast) //lands back on the ground
         {
+            soundManager.stop();
+            soundManager.playOneShot("LandfallFall");
             Collider[] enemies = Physics.OverlapSphere(transform.position, sphereRadius);
             foreach(Collider col in enemies)
             {

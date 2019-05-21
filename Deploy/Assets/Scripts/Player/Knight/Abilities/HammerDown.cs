@@ -21,8 +21,7 @@ public class HammerDown : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
-    //KnightSoundManager knightSoundManager;
-    //might not always be Ghost, need different one for each class.
+    SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +32,8 @@ public class HammerDown : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
+
+        soundManager = GetComponent<SoundManager>();
 
         cooldown = 0;
 
@@ -55,6 +56,7 @@ public class HammerDown : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
+            soundManager.playOneShot("HammerDown");
             if (Input.GetMouseButtonDown(0)) {
                 RaycastHit hit;
                 if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit)) {

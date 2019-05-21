@@ -21,6 +21,8 @@ public class SkyHammerScript : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
+    SoundManager soundManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,8 +34,10 @@ public class SkyHammerScript : MonoBehaviour
     {
         
     }
+
     void onCollisionEnter(Collision collision) {
         if (collision.gameObject.tag.Equals("planet")) {
+            //soundManager.playOneShot("HammerDown");
             Collider[] hits = Physics.OverlapSphere(transform.position, 20);
             foreach (Collider hit in hits)
             {
