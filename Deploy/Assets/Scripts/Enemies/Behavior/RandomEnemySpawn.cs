@@ -79,15 +79,10 @@ public class RandomEnemySpawn: MonoBehaviour {
             {
                 Vector3 randomInstanPoint = Random.insideUnitSphere * 5.0f + point;  
                 GameObject enemy = (GameObject)Instantiate(flyingKamikaze, randomInstanPoint, Quaternion.identity);
-<<<<<<< HEAD
                 Enemy e = new Enemy(EnemyType.FlyingKamikaze, 50, 10, enemy);
                 Enemy.enemyList.Add(e);
                 //InstantiationRequest instanRequest = new InstantiationRequest("KamikaziBird", randomInstanPoint, Quaternion.identity, false);
                 //o.AddInstantiationRequest(instanRequest);
-=======
-                InstantiationRequest instanRequest = new InstantiationRequest("KamikaziBird", randomInstanPoint, Quaternion.identity, false); //Call to server
-                o.AddInstantiationRequest(instanRequest);
->>>>>>> 0e6ba978282b258b6fd354cc79551bd36f7ab98d
 
             }
         }
@@ -225,8 +220,8 @@ public class RandomEnemySpawn: MonoBehaviour {
                 bird.GetComponent<StatManager>().kamikazeMaxHP *= maxHPProportion;
             }
             
-            InstantiationRequest instanRequest = new InstantiationRequest("KamikaziBird", instantiationPoint, Quaternion.identity, false);
-            o.AddInstantiationRequest(instanRequest);
+            //InstantiationRequest instanRequest = new InstantiationRequest("KamikaziBird", instantiationPoint, Quaternion.identity, false);
+            //o.AddInstantiationRequest(instanRequest);
         }
         else if(type == EnemyType.Brawler || type == EnemyType.Shrab)
         {
