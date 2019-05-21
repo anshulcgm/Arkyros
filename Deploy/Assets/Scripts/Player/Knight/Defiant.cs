@@ -19,7 +19,7 @@ public class Defiant : Passive
         isActive = false;
         //REVERSE EFFECTS IF NEEDED
     }
-
+    /*
     void FixedUpdate()
     {
         if (isActive && Stats.Health < 20 && !used)
@@ -33,4 +33,5 @@ public class Defiant : Passive
             used = false;
         }
     }
+    */
 }

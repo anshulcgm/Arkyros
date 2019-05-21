@@ -71,7 +71,7 @@ public class JupiterPull : MonoBehaviour
         }
         else
         {
-            camera.GetComponent<cameraSoundManager>().jupiterPullCast = false;
+            //camera.GetComponent<cameraSoundManager>().jupiterPullCast = false;
 
         }
 
