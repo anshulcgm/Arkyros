@@ -61,9 +61,10 @@ public class LeapintheDark : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
 
-            Vector3 newpos = new Vector3(gameObject.transform.position.x + 10, gameObject.transform.position.y, gameObject.transform.position.z);
+            Vector3 newpos = transform.position + transform.forward * 10;
             transform.position = newpos;
             // the attack will be taken care by the animation??
+            anim.StartOverlayAnim("Swing_Heavy_1", 0.5f, 1f);
 
 
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds

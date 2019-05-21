@@ -1678,7 +1678,7 @@ GameObject:
   - component: {fileID: 6566487193644415157}
   - component: {fileID: 4406701942322411558}
   m_Layer: 0
-  m_Name: KnightTankWithHammer 1
+  m_Name: KnightTankWithHammerSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1850,7 +1850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b9c23e5acb79243b6263fd5a0e040d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound: {fileID: 0}
+  Sound: {fileID: 2836834545625976075}
   Clips:
   - {fileID: 8300000, guid: cbf851916d9b5c04b9e4d74722c93e7a, type: 3}
   - {fileID: 8300000, guid: ad0bd87440441ef448644caa5e267e99, type: 3}

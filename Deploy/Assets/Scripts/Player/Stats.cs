@@ -18,6 +18,7 @@ public enum buff { Invisible, Gravityless, Unstoppable };
 
 public class Stats : MonoBehaviour
 {
+    SoundManager soundManager;
     public int regenTimer = 0;
     //go with this for now, we may need maxHealth as a separate variable
 
@@ -55,7 +56,7 @@ public class Stats : MonoBehaviour
     public void Start()
     {
         //file reading, assign the numbers to the variables
-
+        soundManager = GetComponent<SoundManager>();
     }
 
     public void Update()
@@ -106,6 +107,7 @@ public class Stats : MonoBehaviour
     {
         health -= damage;
         health = Mathf.Clamp(health, 0, maxHealth); //might be moved to update
+        soundManager.playOneShot("TakeDamage");
     }
 
     public void heal(float healAmount)
