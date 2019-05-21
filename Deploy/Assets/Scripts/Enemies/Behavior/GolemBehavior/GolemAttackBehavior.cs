@@ -9,7 +9,7 @@ public class GolemAttackBehavior : MonoBehaviour {
     public float shootRange;
     public float noActionRange;
 
-    public float chargeSpeed;
+    private float chargeSpeed;
     public float groundPoundRadius;
 
     private GameObject mainCamera;
@@ -27,12 +27,10 @@ public class GolemAttackBehavior : MonoBehaviour {
 	void Start () {
 
         rb = GetComponent<Rigidbody>();
+        chargeSpeed = GetComponent<StatManager>().golemChargeSpeed;
         player = GameObject.FindGameObjectWithTag("Player");
         anim = transform.GetChild(0).GetComponent<Animator>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        //projectileReloadTime = (2.49600f - 0.7072f)/(0.5f * projectilesPerBatch); //Reload time at which it makes sense to shoot based on the animation
-        
-        //transform.LookAt(player.transform);
 
 
     }
@@ -40,26 +38,26 @@ public class GolemAttackBehavior : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //Logic for running behaviors
+        //Logic for running behaviors, ground pound is a close range attack, charge is mid-range attack and projectile launch is far range-attack
         float playerDist = Vector3.Distance(player.transform.position, transform.position);
         if (playerDist < groundPoundRange)
         {
-            mainCamera.GetComponent<cameraSoundManager>().enemyInRange = true;
+            //mainCamera.GetComponent<cameraSoundManager>().enemyInRange = true;
             groundPound();
         }
         else if (playerDist > groundPoundRange && playerDist < chargeRange)
         {
-            mainCamera.GetComponent<cameraSoundManager>().enemyInRange = true;
+            //mainCamera.GetComponent<cameraSoundManager>().enemyInRange = true;
             charge();
         }
         else if (playerDist > chargeRange && playerDist < shootRange)
         {
-            mainCamera.GetComponent<cameraSoundManager>().enemyInRange = true;
+            //mainCamera.GetComponent<cameraSoundManager>().enemyInRange = true;
             setShootTrigger();
         }
         else
         {
-            mainCamera.GetComponent<cameraSoundManager>().enemyInRange = false;
+            //mainCamera.GetComponent<cameraSoundManager>().enemyInRange = false;
             Debug.Log("Golem is too far from player to enact behavior");
         }
 	}
@@ -74,7 +72,7 @@ public class GolemAttackBehavior : MonoBehaviour {
         {
             if (col.gameObject.tag == "Player")
             {
-               //Insert player damage code here
+               //Adjust player health here
             }
         }
     }
@@ -86,12 +84,12 @@ public class GolemAttackBehavior : MonoBehaviour {
         Vector3 playerPos = player.transform.position;
         Vector3 direction = (playerPos - this.transform.position).normalized;
         rb.velocity = direction * chargeSpeed;
+        //Code for player damage
     }
 
     public void setShootTrigger()
     {
         anim.SetTrigger("Shoot");
-        
     }
 
     private void OnCollisionEnter(Collision collision)
