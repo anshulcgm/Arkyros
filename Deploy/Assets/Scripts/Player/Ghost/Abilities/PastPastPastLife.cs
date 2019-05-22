@@ -75,11 +75,12 @@ public class PastPastPastLife : MonoBehaviour
                 {
                     if (Colliders[i].tag == "Enemy" && radius >= Vector3.Distance(transform.position, Colliders[i].gameObject.transform.position))
                     {
-                        //Enemy.GetComponent(HealthScript).addDamage(100);
+                        stats.dealDamage(Colliders[i].gameObject, 20);
 
                     }
-                    if (Colliders[i].tag == "Allies")
+                    else if (Colliders[i].tag == "Allies")
                     {
+                        Colliders[i].gameObject.GetComponent<Stats>().heal(20);
                         //heal them
 
                     }

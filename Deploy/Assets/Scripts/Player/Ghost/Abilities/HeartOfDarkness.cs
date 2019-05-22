@@ -88,7 +88,7 @@ public class HeartOfDarkness : MonoBehaviour
             Collider[] stuff = Physics.OverlapSphere(target, 20);
             foreach (Collider c in stuff)
             {
-                stats.dealDamage(c.gameObject, float.MaxValue);
+                stats.dealDamage(c.gameObject, 100);
             }
             u_gottem = false;
         }

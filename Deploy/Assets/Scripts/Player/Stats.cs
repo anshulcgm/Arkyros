@@ -132,7 +132,16 @@ public class Stats : MonoBehaviour
 
     public void dealDamage(GameObject target, float damage)
     {
-        //deals dmg to target
+        if(target.tag == "Enemy")
+        {
+            target.GetComponent<StatManager>().changeHealth(damage);
+
+            //not sure if this works exactly to detect if its been killed
+            if (target == null)
+            {
+                //trigger onKill() passives
+            }
+        }
 
         //not sure if this works exactly to detect if its been killed
         if (target == null)

@@ -112,6 +112,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &89223024 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7419422671845705535, guid: baa18a7b3322d754e84ecb949b0a90dc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1771502988}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &89223025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89223024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f419ccd688bf657489f10d88a0d5f2d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &89223026
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89223024}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 19.468048, y: 89.11262, z: 1.5629361}
+  m_Center: {x: -5.503039, y: 111.45444, z: 0.73683226}
 --- !u!1 &233509939
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,11 +328,6 @@ PrefabInstance:
     - target: {fileID: 8496959184446560009, guid: b4770786ad0711f4db9fa58ba6af72ce,
         type: 3}
       propertyPath: m_Transitions.m_InheritPosition
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8496959184446560009, guid: b4770786ad0711f4db9fa58ba6af72ce,
-        type: 3}
-      propertyPath: m_BindingMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8496959184722459089, guid: b4770786ad0711f4db9fa58ba6af72ce,
