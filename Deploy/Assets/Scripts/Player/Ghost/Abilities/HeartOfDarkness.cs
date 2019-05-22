@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 
 public class HeartOfDarkness : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class HeartOfDarkness : MonoBehaviour
     private AnimationController anim;
 
     DateTime start;
+    DateTime lastCast;
 
     Rigidbody rigidbody;
     Stats stats;
@@ -21,6 +23,9 @@ public class HeartOfDarkness : MonoBehaviour
     private bool cast = false;
 
     SoundManager soundManager;
+    public GameObject reee;
+
+    float sat;
 
     // Start is called before the first frame update
     void Start()
@@ -31,26 +36,36 @@ public class HeartOfDarkness : MonoBehaviour
         stats = GetComponent<Stats>();
         soundManager = GetComponent<SoundManager>();
         cooldown = 0;
+
+        sat = 1;
     }
 
 
     Vector3 target;
     bool u_gottem = false;
+    bool gottem_r = false;
     Vector3 lastPosn = Vector3.zero;
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("r") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetKey("r") && cooldown == 0 && !gottem_r)      //place key, any key can be pressed.
         {
+            gottem_r = true;
             cast = true; //ability not yet cast
             start = DateTime.Now;
-            rigidbody.AddForce(transform.position.normalized * 1000);
+            rigidbody.AddForce(transform.position.normalized * 5000);
             soundManager.playOneShot("HeartofDarknessTeleport");
             anim.PlayLoopingAnim("Fly_Forward");
-            stats.addBuff((int)buff.Gravityless, 240);
+            stats.setBuffDuration((int)buff.Gravityless, 240);
+            
         }
         if (cast)
         {
+            
+            sat = Mathf.Max(1 - (float)(DateTime.Now - start).TotalSeconds, 0);
+            lastCast = DateTime.Now;
+
+            camera.GetComponent<ColorCorrectionCurves>().saturation = sat;
             if ((DateTime.Now - start).TotalSeconds < 4)
             {
                 if (Input.GetMouseButtonDown(0))
@@ -76,13 +91,22 @@ public class HeartOfDarkness : MonoBehaviour
             {
                 cooldown = 500;
                 cast = false;
+                
             }
+        }
+        else
+        {
+            sat = Mathf.Min((float)(DateTime.Now - lastCast).TotalSeconds, 1);
+            camera.GetComponent<ColorCorrectionCurves>().saturation = sat;
+            gottem_r = false;
         }
 
 
         if (u_gottem)
         {
+            stats.setBuffDuration((int)buff.Gravityless, 0);
             transform.position = target;
+            Instantiate(reee, transform.position, Quaternion.identity);
             soundManager.playOneShot("HeartofDarknessDivebomb");
 
             Collider[] stuff = Physics.OverlapSphere(target, 20);
@@ -90,7 +114,9 @@ public class HeartOfDarkness : MonoBehaviour
             {
                 stats.dealDamage(c.gameObject, 100);
             }
+            
             u_gottem = false;
+            
         }
 
         if (cooldown > 0) //counts down for the cooldown

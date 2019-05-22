@@ -125,6 +125,11 @@ public class Stats : MonoBehaviour
         buffs[buff] += duration;
     }
 
+    public void setBuffDuration(int buff, int duration)
+    {
+        buffs[buff] = duration;
+    }
+
     public void addStatus(int status, int duration)
     {
         //statusAilment[status] += duration;
