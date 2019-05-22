@@ -63,9 +63,11 @@ public class Intimidate : MonoBehaviour
 
             foreach (Collider col in Physics.OverlapSphere(transform.position, 20))
             {
-                //All enemy code stuff happens here
-
-                //col.gameObject
+                if(col.gameObject.tag == "Enemy")
+                {
+                    col.gameObject.GetComponent<StatManager>().enemyMultiplyDefense(0.75f);
+                    col.gameObject.GetComponent<StatManager>().enemyMultiplySpeed(0.75f);
+                }
             }
 
 

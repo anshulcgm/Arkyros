@@ -44,7 +44,7 @@ public class Cleave : MonoBehaviour
             start = DateTime.Now;
             Debug.Log("reee");
             anim.StartOverlayAnim("Circle_strike_2", 0.5f, 1f); //this tells the animator to play the right animation
-            soundManager.playOneShot("Cleave");
+            
 
             //put any setup code here, before the ability is actually cast
 
@@ -54,7 +54,7 @@ public class Cleave : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            
+            soundManager.playOneShot("Cleave");
 
             /*
              * All the code for the ability that you want to write

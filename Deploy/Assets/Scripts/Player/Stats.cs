@@ -143,11 +143,6 @@ public class Stats : MonoBehaviour
             }
         }
 
-        //not sure if this works exactly to detect if its been killed
-        if (target == null)
-        {
-            //trigger onKill() passives
-        }
     }
 
 }

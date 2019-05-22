@@ -15,4 +15,9 @@ public class ScytheCollider : MonoBehaviour
     {
         
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
 }

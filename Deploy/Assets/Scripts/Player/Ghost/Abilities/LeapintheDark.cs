@@ -45,11 +45,7 @@ public class LeapintheDark : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            anim.StartOverlayAnim("AnimationName", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
 
-            //or
-
-            anim.PlayLoopingAnim("AnimationName"); // mostly only for movement, probably not used in an ability
             soundManager.playOneShot("LeapInTheDark");
 
             //put any setup code here, before the ability is actually cast
