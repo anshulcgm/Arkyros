@@ -12,6 +12,7 @@ TagManager:
   - LeftLeg
   - playercam
   - ocean
+  - Center
   layers:
   - Default
   - TransparentFX

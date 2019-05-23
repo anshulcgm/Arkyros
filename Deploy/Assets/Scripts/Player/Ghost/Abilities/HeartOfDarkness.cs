@@ -109,13 +109,18 @@ public class HeartOfDarkness : MonoBehaviour
             Instantiate(reee, transform.position, Quaternion.identity);
             soundManager.playOneShot("HeartofDarknessDivebomb");
 
+            u_gottem = false;
             Collider[] stuff = Physics.OverlapSphere(target, 20);
             foreach (Collider c in stuff)
             {
-                stats.dealDamage(c.gameObject, 100);
+                if(c.gameObject.tag == "Enemy")
+                {
+                    stats.dealDamage(c.gameObject, 100);
+                }
+                
             }
             
-            u_gottem = false;
+            
             
         }
 

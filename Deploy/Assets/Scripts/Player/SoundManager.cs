@@ -46,5 +46,9 @@ public class SoundManager : MonoBehaviour
     public void stop()
     {
         Sound.Stop();
+        /*
+        Sound.clip = SoundsDictionary["Idle"];
+        Sound.Play();
+        */
     }
 }
