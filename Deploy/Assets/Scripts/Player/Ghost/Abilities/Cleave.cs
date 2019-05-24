@@ -57,13 +57,16 @@ public class Cleave : MonoBehaviour
             anim.StartOverlayAnim("Circle_strike_2", 0.5f, 1f); //this tells the animator to play the right animation
             soundManager.playOneShot("Cleave");
 
-            /*
-             * All the code for the ability that you want to write
-             * transform.forward for the direction the player is 
-             * maybe setting colliders
-             * instantiating new objects
-             * to damage enemy, EnemyGameObject.GetComponent<StatManager>().changeHealth(amount), amount can be positive or negative
-             */
+            //temporary damage dealer
+            Collider[] hits = Physics.OverlapSphere(transform.position, 2);
+            foreach (Collider hit in hits)
+            {
+                if (hit.gameObject.tag == "Enemy")
+                {
+                    stats.dealDamage(hit.gameObject, 20);
+
+                }
+            }
 
 
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
