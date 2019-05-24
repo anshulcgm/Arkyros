@@ -41,13 +41,13 @@ public class ShieldsUp : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetMouseButtonDown(1) && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
             
 
-            anim.StartOverlayAnim("ShieldsUp", 0.5f, 2f); // mostly only for movement, probably not used in an ability
+            
 
 
             //put any setup code here, before the ability is actually cast
@@ -58,7 +58,7 @@ public class ShieldsUp : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-
+            anim.StartOverlayAnim("Stance", 0.5f, 4f); // mostly only for movement, probably not used in an ability
             /*
              * All the code for the ability that you want to write
              * transform.forward for the direction the player is 

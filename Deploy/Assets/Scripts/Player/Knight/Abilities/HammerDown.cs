@@ -42,11 +42,11 @@ public class HammerDown : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetKey("f") && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            anim.StartOverlayAnim("HammerDown", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
+            
                
 
 
@@ -56,16 +56,17 @@ public class HammerDown : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
+            anim.StartOverlayAnim("BuffActivation", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
             soundManager.playOneShot("HammerDown");
-            if (Input.GetMouseButtonDown(0)) {
+            //if (Input.GetMouseButtonDown(0)) {
                 RaycastHit hit;
                 if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit)) {
                     Vector3 target = hit.point;
-                    GameObject skyHammerObj = Instantiate(SkyHammer, target + transform.up * 100, Quaternion.identity);
-                    skyHammerObj.GetComponent<Rigidbody>().AddForce(-transform.position.normalized * 50, ForceMode.Impulse);
+                    GameObject skyHammerObj = Instantiate(SkyHammer, target + transform.up * 100, transform.rotation);
+                    skyHammerObj.GetComponent<Rigidbody>().AddForce(-transform.position.normalized * 20, ForceMode.Impulse);
                 }
 
-            }
+            //}
              
           
 

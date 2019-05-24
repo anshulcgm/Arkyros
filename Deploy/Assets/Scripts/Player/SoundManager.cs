@@ -35,11 +35,12 @@ public class SoundManager : MonoBehaviour
 
     public void play(string soundname)
     {
-        if(Sound.clip != SoundsDictionary[soundname])
+        if (Sound.clip != SoundsDictionary[soundname])
         {
             Sound.clip = SoundsDictionary[soundname];
             Sound.Play();
         }
+        else Sound.Play();
         
     }
 
