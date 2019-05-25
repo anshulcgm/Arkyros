@@ -13,9 +13,9 @@ public class ThreeShlyHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shly1 = transform.GetChild(0).gameObject;
-        shly2 = transform.GetChild(1).gameObject;
-        shly3 = transform.GetChild(2).gameObject;
+        shly1 = transform.GetChild(0).GetChild(0).gameObject;
+        shly2 = transform.GetChild(0).GetChild(1).gameObject;
+        shly3 = transform.GetChild(0).GetChild(2).gameObject;
 
         
     }

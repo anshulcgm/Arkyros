@@ -27,7 +27,9 @@ public class RandomEnemySpawn: MonoBehaviour {
     public int numIREnemies;
 
     public int numShlyBatchesPerIREnemy; //A batch constitutes of 1 of each type of shly
-    public float shlySpawnRadius; 
+    public float shlySpawnRadius;
+
+    public int numShrabs;
 
     private Vector3 planetCenter;
     private float planetRadius;
@@ -38,6 +40,7 @@ public class RandomEnemySpawn: MonoBehaviour {
     private List<Vector3> kamikazeInstantiationPoints;
     private List<Vector3> golemInstantiationPoints;
     private List<Vector3> IREnemies;
+    private List<Vector3> shrabPoints; 
 
     public void Start()
     {
@@ -47,9 +50,11 @@ public class RandomEnemySpawn: MonoBehaviour {
         planetRadius = (1.25f * planet.transform.localScale.x);
 
         //Instantiates enemies
-        instantiateGolems(false);
-        InstantiateKamikazeNearPlayer(flyingKamikaze, 1, 3); //alternatively use kamikazeInstantiation()
-        instantiateIREnemy();
+        //instantiateGolems(false);
+        //InstantiateKamikazeNearPlayer(flyingKamikaze, 1, 3); //alternatively use kamikazeInstantiation()
+        //instantiateIREnemy();
+
+
     }
     public Vector3 GetRandomInstantiationPointOnSphere()
     {
@@ -132,6 +137,11 @@ public class RandomEnemySpawn: MonoBehaviour {
                 Instantiate(golem, point, Quaternion.identity);
             }
         }
+    }
+
+    public void instantiateShrabs(bool instantiateNearPlayer)
+    {
+        shrabPoints = new List<Vector3>();
     }
 
     public void instantiateIREnemy()

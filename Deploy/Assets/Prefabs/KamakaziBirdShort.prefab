@@ -14,14 +14,13 @@ GameObject:
   - component: {fileID: 54883796390546080}
   - component: {fileID: 65593059741827472}
   - component: {fileID: 6396872423448316767}
-  - component: {fileID: 4042781569624622014}
   m_Layer: 0
   m_Name: KamakaziBirdShort
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4673744408239424
 Transform:
   m_ObjectHideFlags: 0
@@ -83,6 +82,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance: 200
   explosion: {fileID: 1742013225946848, guid: b3d8264aa7d2d824a8a503e45291ddf4, type: 3}
+  maxDis: 20
+  timer: 3
 --- !u!54 &54883796390546080
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -127,8 +128,8 @@ MonoBehaviour:
   enemyName: Kamikaze
   kamikazeMaxHP: 100
   kamikazeDefense: 30
-  kamikazeMovementSpeed: 20
-  kamikazeIQ: 115
+  kamikazeMovementSpeed: 10
+  kamikazeIQ: 135
   golemMaxHp: 300
   golemDefense: 20
   golemMovementSpeed: 10
@@ -154,21 +155,21 @@ MonoBehaviour:
   speedDebuffProportion: 0
   pelletDamage: 0
   bullChargeDamage: 0
---- !u!114 &4042781569624622014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1002896406898434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57e9eef46c918de4c9b8e0ca85bf41a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 20
-  maxDis: 10
-  timer: 5
+  shrabMaxHp: 0
+  shrabDefense: 0
+  shrabMovementSpeed: 0
+  aggregateNumberofShrabs: 0
+  shrabPincerDmg: 0
+  shrabEruptionRadius: 0
+  starshipMaxHp: 0
+  starshipDefense: 0
+  starshipMovementSpeed: 0
+  IRHealthSpawnStart: 0
+  bombDamage: 0
+  bombRadius: 0
+  rayDamage: 0
+  rayWidth: 0
+  turretDamage: 0
 --- !u!1 &1045979456465860
 GameObject:
   m_ObjectHideFlags: 0

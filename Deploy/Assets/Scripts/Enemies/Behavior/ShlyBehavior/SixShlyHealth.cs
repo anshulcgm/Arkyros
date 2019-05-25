@@ -22,12 +22,12 @@ public class SixShlyHealth : MonoBehaviour
     void Start()
     {
 
-        shly1 = transform.GetChild(0).gameObject;
-        shly2 = transform.GetChild(1).gameObject;
-        shly3 = transform.GetChild(2).gameObject;
-        shly4 = transform.GetChild(3).gameObject;
-        shly5 = transform.GetChild(4).gameObject;
-        shly6 = transform.GetChild(5).gameObject;
+        shly1 = transform.GetChild(0).GetChild(0).gameObject;
+        shly2 = transform.GetChild(0).GetChild(1).gameObject;
+        shly3 = transform.GetChild(0).GetChild(2).gameObject;
+        shly4 = transform.GetChild(0).GetChild(3).gameObject;
+        shly5 = transform.GetChild(0).GetChild(4).gameObject;
+        shly6 = transform.GetChild(0).GetChild(5).gameObject;
 
        
 

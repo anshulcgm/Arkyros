@@ -17,14 +17,14 @@ public class KamikazeEnemy : Enemy {
         if (IQ >= 130)
         {
             stealthField = 15;
-			diveSpeed = 10;
+			diveSpeed = 50;
         }
-        else if(IQ >= 100) {
+        else if(IQ >= 100 && IQ < 130) {
 			stealthField = 8;
-			diveSpeed = 7;
+			diveSpeed = 30;
         } else {
 			stealthField = 5;
-			diveSpeed = 5;
+			diveSpeed = 25;
         }
     }
 
