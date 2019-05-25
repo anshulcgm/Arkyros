@@ -23,6 +23,12 @@ public class NothingPersonnelKid : MonoBehaviour
     private bool cast;
 
     SoundManager soundManager;
+    public GameObject ParticleTrail;
+    public GameObject ParticleHit;
+
+    GameObject enemy;
+    GameObject clone;
+    bool cloneSpawned;
 
     // Start is called before the first frame update
     void Start()
@@ -42,23 +48,39 @@ public class NothingPersonnelKid : MonoBehaviour
         if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false;
+            cloneSpawned = false;
             start = DateTime.Now;
             //anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
+            enemy = tcs.getTarget();
             
-
             //put any setup code here, before the ability is actually cast
+            if (!cloneSpawned)
+            {
+                clone = Instantiate(ParticleTrail, transform.position, transform.rotation);
+                cloneSpawned = true;
+            }
+            //Transform cloneStart = clone.transform;
+            clone.transform.position = Vector3.MoveTowards(clone.transform.position, enemy.transform.position,  (clone.transform.position - enemy.transform.position).magnitude);
 
 
 
         }
 
-        if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
+        if ((DateTime.Now - start).TotalSeconds < 1 && !cast && enemy != null)
         {
-            if(Vector3.Distance(tcs.target.transform.position, transform.position) < 20)
+            
+            if(Vector3.Distance(enemy.transform.position, transform.position) < 200)
             {
-                transform.position = Vector3.Lerp(transform.position, tcs.target.transform.position, 1);
 
-                anim.StartOverlayAnim("Swing_Circle_1", 0.5f, 1f);
+                transform.position = enemy.transform.position + enemy.transform.forward;
+                Instantiate(ParticleHit, enemy.transform.position, enemy.transform.rotation);
+
+                
+                transform.LookAt(enemy.transform);
+                camera.transform.LookAt(enemy.transform); //might not spin camera around
+                
+
+                anim.StartOverlayAnim("Swing_Heavy_1", 0.5f, 1.1f);
                 soundManager.playOneShot("NPKTeleport");
                 soundManager.playOneShot("NPKVoiceLine");
             }

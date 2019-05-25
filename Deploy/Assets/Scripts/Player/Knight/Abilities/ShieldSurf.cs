@@ -20,8 +20,7 @@ public class ShieldSurf : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
-    //KnightSoundManager knightSoundManager;
-    //might not always be Ghost, need different one for each class.
+    SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +31,8 @@ public class ShieldSurf : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
+
+        soundManager = GetComponent<SoundManager>();
 
         cooldown = 0;
 

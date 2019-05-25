@@ -5,7 +5,6 @@ using UnityEngine;
 public class TargetCenterScreen : MonoBehaviour
 {
     public List<GameObject> screenTargets = new List<GameObject>();
-    public GameObject target;
 
     public GameObject[] enemies;
 
@@ -18,28 +17,7 @@ public class TargetCenterScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach(GameObject potentialEnemy in enemies)
-        {
-            Vector3 position = Camera.main.WorldToViewportPoint(potentialEnemy.transform.position);
-            if(position.x > 0 && position.y < 1)
-            {
-                if(position.y > 0 && position.y < 1)
-                {
-                    if(position.z > 0)
-                    {
-                        screenTargets.Add(potentialEnemy);
-                    }
-                }
-            }
-        }
-
-
-        if (screenTargets.Count < 1)
-            return;
-
-        target = screenTargets[targetIndex()];
+        
     }
 
     public int targetIndex()
@@ -62,5 +40,34 @@ public class TargetCenterScreen : MonoBehaviour
 
         return index;
 
+    }
+
+    public GameObject getTarget()
+    {
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject potentialEnemy in enemies)
+        {
+            Vector3 position = Camera.main.WorldToViewportPoint(potentialEnemy.transform.position);
+            if (position.x > 0 && position.y < 1)
+            {
+                if (position.y > 0 && position.y < 1)
+                {
+                    if (position.z > 0)
+                    {
+                        screenTargets.Add(potentialEnemy);
+                    }
+                }
+            }
+        }
+
+
+        if (screenTargets.Count < 1)
+        {
+            return null;
+        }
+            
+
+        return screenTargets[targetIndex()];
     }
 }

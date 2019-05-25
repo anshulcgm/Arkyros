@@ -13,7 +13,7 @@ public class JupiterPull : MonoBehaviour
 
     private GameObject camera;
 
-    private Animator anim;
+    private AnimationController anim;
 
     DateTime start;
     //public GameObject damageDealt;
@@ -23,7 +23,7 @@ public class JupiterPull : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         soundManager = GetComponent<SoundManager>();
 
@@ -36,8 +36,8 @@ public class JupiterPull : MonoBehaviour
         {
             cast = false;
             start = DateTime.Now;
-            anim.SetBool("JupiterPullBool", true);
-            
+            //anim.SetBool("JupiterPullBool", true);
+            soundManager.playOneShot("JPCharge");
 
             Collider[] hits = Physics.OverlapSphere(transform.position, radius);
             foreach (Collider hit in hits)
@@ -55,7 +55,7 @@ public class JupiterPull : MonoBehaviour
         {
             Collider[] hits = Physics.OverlapSphere(transform.position, radius);
             Debug.Log("Gottem");
-            camera.GetComponent<cameraSoundManager>().jupiterPullCast = true;
+            //camera.GetComponent<cameraSoundManager>().jupiterPullCast = true;
             foreach (Collider hit in hits)
             {
                 // Detects if the object is an "enemy" and if so destroys it
@@ -63,7 +63,7 @@ public class JupiterPull : MonoBehaviour
                 {
                     Debug.Log(hit.gameObject.name);
 
-                    hit.gameObject.GetComponent<Rigidbody>().AddForce(-speed * (hit.gameObject.transform.position - this.gameObject.transform.position).normalized);
+                    hit.gameObject.GetComponent<Rigidbody>().AddForce(-speed * (hit.gameObject.transform.position - this.gameObject.transform.position).normalized, ForceMode.Impulse);
 
                     //Instantiate(damageDealt, hit.gameObject.transform.position, Quaternion.identity);
                 }

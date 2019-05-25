@@ -590,7 +590,7 @@ GameObject:
   - component: {fileID: 908601213}
   - component: {fileID: 908601212}
   - component: {fileID: 908601215}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Planet
   m_TagString: planet
   m_Icon: {fileID: 0}
@@ -682,7 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81fd4bf415604ef4c9457fbb7bcd7b3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 0
+  seed: 1
 --- !u!114 &908601216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,9 +826,9 @@ GameObject:
   - component: {fileID: 1089004650}
   - component: {fileID: 1089004653}
   - component: {fileID: 1089004649}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: ocean
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1050,7 +1050,7 @@ GameObject:
   - component: {fileID: 1379703954}
   m_Layer: 0
   m_Name: Directional light
-  m_TagString: Untagged
+  m_TagString: ocean
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

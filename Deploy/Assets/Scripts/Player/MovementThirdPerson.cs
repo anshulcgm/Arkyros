@@ -15,14 +15,16 @@ public class MovementThirdPerson : MonoBehaviour
     public Camera cam;
     public CharacterController controller;
     public bool isGrounded;
-
+    private float verticalVel;
     private Vector3 moveVector;
+    AnimationController anim;
 
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
         controller = this.GetComponent<CharacterController>();
+        anim = GetComponent<AnimationController>();
         
     }
 
@@ -30,12 +32,26 @@ public class MovementThirdPerson : MonoBehaviour
     void Update()
     {
         InputMagnitude();
+
+        isGrounded = controller.isGrounded;
+        if (isGrounded)
+        {
+            verticalVel -= 0;
+        }
+        else
+        {
+            verticalVel -= 2;
+        }
+        moveVector = new Vector3(0, verticalVel, 0);
+        controller.Move(moveVector);
+
+        
     }
 
     void PlayerMoveAndRotation()
     {
         InputX = Input.GetAxis("Horizontal");
-        InputZ = Input.GetAxis("Veritcal");
+        InputZ = Input.GetAxis("Vertical");
 
         var camera = Camera.main;
         var forward = cam.transform.forward;
@@ -48,7 +64,8 @@ public class MovementThirdPerson : MonoBehaviour
         right.Normalize();
 
         desiredMoveDirection = forward * InputZ + right * InputX;
-
+        controller.Move(desiredMoveDirection);
+        
         if(blockRotationPlayer == false)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
@@ -58,7 +75,7 @@ public class MovementThirdPerson : MonoBehaviour
     void InputMagnitude()
     {
         InputX = Input.GetAxis("Horizontal");
-        InputZ = Input.GetAxis("Veritcal");
+        InputZ = Input.GetAxis("Vertical");
 
         //animations
 
@@ -70,6 +87,7 @@ public class MovementThirdPerson : MonoBehaviour
         {
             //anim stuff
             PlayerMoveAndRotation();
+            anim.PlayLoopingAnim("Move_Forward");
         }
         else if (Speed < allowPlayerRotation)
         {

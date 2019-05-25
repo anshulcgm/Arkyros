@@ -22,8 +22,7 @@ public class WarBanner : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
-    //GhostSoundManager ghostSoundManager;
-    //might not always be Ghost, need different one for each class.
+    SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +33,8 @@ public class WarBanner : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
+
+        soundManager = GetComponent<SoundManager>();
 
         cooldown = 0;
 

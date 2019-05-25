@@ -43,7 +43,7 @@ public class MementoMoriProjectile : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            //other. take damage
+            other.gameObject.GetComponent<StatManager>().changeHealth(20);
 
         }
         

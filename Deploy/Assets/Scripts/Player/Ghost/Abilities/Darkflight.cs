@@ -46,7 +46,7 @@ public class Darkflight : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            rigidbody.AddForce(transform.up * 1000, ForceMode.Impulse); //jumps super high
+            rigidbody.AddForce(transform.up * 20, ForceMode.Impulse); //jumps super high
 
             soundManager.playOneShot("DarkFlightTakeoff");
             anim.PlayLoopingAnim("Fly_Forward");

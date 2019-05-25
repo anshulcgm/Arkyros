@@ -20,8 +20,7 @@ public class Intimidate : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
-    //GhostSoundManager ghostSoundManager;
-    //might not always be Ghost, need different one for each class.
+    SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +31,8 @@ public class Intimidate : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
+
+        soundManager = GetComponent<SoundManager>();
 
         cooldown = 0;
 
@@ -50,7 +51,7 @@ public class Intimidate : MonoBehaviour
 
             anim.PlayLoopingAnim("AnimationName"); // mostly only for movement, probably not used in an ability
 
-
+            soundManager.playOneShot("Intimidate");
             //put any setup code here, before the ability is actually cast
 
 
@@ -62,9 +63,11 @@ public class Intimidate : MonoBehaviour
 
             foreach (Collider col in Physics.OverlapSphere(transform.position, 20))
             {
-                //All enemy code stuff happens here
-
-                //col.gameObject
+                if(col.gameObject.tag == "Enemy")
+                {
+                    col.gameObject.GetComponent<StatManager>().enemyMultiplyDefense(0.75f);
+                    col.gameObject.GetComponent<StatManager>().enemyMultiplySpeed(0.75f);
+                }
             }
 
 

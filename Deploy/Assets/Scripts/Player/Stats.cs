@@ -125,6 +125,11 @@ public class Stats : MonoBehaviour
         buffs[buff] += duration;
     }
 
+    public void setBuffDuration(int buff, int duration)
+    {
+        buffs[buff] = duration;
+    }
+
     public void addStatus(int status, int duration)
     {
         //statusAilment[status] += duration;
@@ -132,13 +137,17 @@ public class Stats : MonoBehaviour
 
     public void dealDamage(GameObject target, float damage)
     {
-        //deals dmg to target
-
-        //not sure if this works exactly to detect if its been killed
-        if (target == null)
+        if(target.tag == "Enemy")
         {
-            //trigger onKill() passives
+            target.GetComponent<StatManager>().changeHealth(damage);
+
+            //not sure if this works exactly to detect if its been killed
+            if (target == null)
+            {
+                //trigger onKill() passives
+            }
         }
+
     }
 
 }
