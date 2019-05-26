@@ -4,13 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - FxTemporaire
-  - planet
-  - Fire
-  - Enemy
   - RightLeg
   - LeftLeg
+  - Enemy
+  - planet
   - playercam
+  - FxTemporaire
   - ocean
   - Center
   layers:

@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa1fc3738f7d924c9ab633b27a7da06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: 
+  enemyName: Shly
   kamikazeMaxHP: 0
   kamikazeDefense: 0
   kamikazeMovementSpeed: 0
@@ -85,6 +85,12 @@ MonoBehaviour:
   speedDebuffProportion: 0.2
   pelletDamage: 20
   bullChargeDamage: 50
+  shrabMaxHp: 0
+  shrabDefense: 0
+  shrabMovementSpeed: 0
+  aggregateNumberofShrabs: 0
+  shrabPincerDmg: 0
+  shrabEruptionRadius: 0
 --- !u!114 &1368483377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +107,7 @@ MonoBehaviour:
   pelletDropStoppingDistance: 0
   searchRadius: 20
   sprainEffectRadius: 10
-  pelletTimer: 0
+  pelletTimer: 0.33
   projectile: {fileID: 4560942895118958702, guid: 89f07b51d18d0b442b44951002cdeede,
     type: 3}
 --- !u!1001 &3883730579192043720
@@ -500,37 +506,37 @@ PrefabInstance:
     - target: {fileID: 2557895862616085371, guid: 010b5a65a06814442a520f6a9991f1a0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19718.9
+      value: -6.016024
       objectReference: {fileID: 0}
     - target: {fileID: 2557895862616085371, guid: 010b5a65a06814442a520f6a9991f1a0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11801.8
+      value: 3.75
       objectReference: {fileID: 0}
     - target: {fileID: 2557895862616085371, guid: 010b5a65a06814442a520f6a9991f1a0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3909.1
+      value: 7.627363
       objectReference: {fileID: 0}
     - target: {fileID: 2557895862616085371, guid: 010b5a65a06814442a520f6a9991f1a0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2557895862616085371, guid: 010b5a65a06814442a520f6a9991f1a0,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.30857688
       objectReference: {fileID: 0}
     - target: {fileID: 2557895862616085371, guid: 010b5a65a06814442a520f6a9991f1a0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2557895862616085371, guid: 010b5a65a06814442a520f6a9991f1a0,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9511994
       objectReference: {fileID: 0}
     - target: {fileID: 2557895862616085371, guid: 010b5a65a06814442a520f6a9991f1a0,
         type: 3}
@@ -545,7 +551,7 @@ PrefabInstance:
     - target: {fileID: 2557895862616085371, guid: 010b5a65a06814442a520f6a9991f1a0,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 35.947002
       objectReference: {fileID: 0}
     - target: {fileID: 2557895862616085371, guid: 010b5a65a06814442a520f6a9991f1a0,
         type: 3}
@@ -782,7 +788,9 @@ PrefabInstance:
       propertyPath: m_RootBone
       value: 
       objectReference: {fileID: 8654162075797336757}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1937832379, guid: 010b5a65a06814442a520f6a9991f1a0, type: 3}
+    - {fileID: 1937832377, guid: 010b5a65a06814442a520f6a9991f1a0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 010b5a65a06814442a520f6a9991f1a0, type: 3}
 --- !u!1 &2624232671987121390 stripped
 GameObject:

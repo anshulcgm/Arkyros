@@ -52,12 +52,24 @@ public class StatManager : MonoBehaviour
     public int aggregateNumberofShrabs;
     public float shrabPincerDmg;
     public float shrabEruptionRadius;
+
+    //Fields for Starships
+    public float starshipMaxHp;
+    public float starshipDefense;
+    public float starshipMovementSpeed;
+    public float IRHealthSpawnStart;
+    public float bombDamage;
+    public float bombRadius;
+    public float rayDamage;
+    public float rayWidth;
+    public float turretDamage;
    
-    private KamikazeEnemy flyingKam;
-    private Golem golem;
+    public KamikazeEnemy flyingKam;
+    public Golem golem;
     public IrradiatedEnemies IREnemy;
     public ShlyEnemy shly;
     public Shrab shrab;
+    public Starship ship;
 
     private EnemyType type;
     
@@ -100,6 +112,12 @@ public class StatManager : MonoBehaviour
             type = EnemyType.Shrab;
             Debug.Log("Instantiated shrab object");
         }
+        else if(enemyName == "Starship")
+        {
+            ship = new Starship(starshipMaxHp, (int)starshipMovementSpeed, starshipDefense, gameObject, IRHealthSpawnStart, bombDamage, bombRadius, rayDamage, rayWidth, turretDamage);
+            Enemy.enemyList.Add(ship);
+            type = EnemyType.Starship;
+        }
         //Change values in Enemy Behavior scripts to align with these values
     }
 
@@ -132,6 +150,10 @@ public class StatManager : MonoBehaviour
         {
             shrab.enemyStats.updateHealth(amount);
         }
+        else if(type == EnemyType.Starship)
+        {
+            ship.enemyStats.updateHealth(amount);
+        }
     }
 
     //multiplies speed by a constant such as *0.5 
@@ -156,6 +178,10 @@ public class StatManager : MonoBehaviour
         else if(type == EnemyType.Shrab)
         {
             shrab.enemyStats.multiplySpeed(multiplier);
+        }
+        else if(type == EnemyType.Starship)
+        {
+            ship.enemyStats.multiplySpeed(multiplier);
         }
     }
 
@@ -182,6 +208,10 @@ public class StatManager : MonoBehaviour
         {
             shrab.enemyStats.flatSpeed(amount);
         }
+        else if(type == EnemyType.Starship)
+        {
+            ship.enemyStats.flatSpeed(amount);
+        }
     }
 
     public void enemyMultiplyDefense(float multiplier)
@@ -206,6 +236,10 @@ public class StatManager : MonoBehaviour
         {
             shrab.enemyStats.multiplyDefense(multiplier);
         }
+        else if(type == EnemyType.Starship)
+        {
+            ship.enemyStats.multiplyDefense(multiplier);
+        }
     }
 
     public void multiplyAttack(float multiplier)
@@ -227,6 +261,12 @@ public class StatManager : MonoBehaviour
         else if(type == EnemyType.Shrab)
         {
             shrab.setchargeDmg(multiplier);
+        }
+        else if(type == EnemyType.Starship)
+        {
+            ship.bombDamage *= multiplier;
+            ship.turretDamage *= multiplier;
+            ship.rayDamage *= multiplier;
         }
     }
     public void modifyKamikazeIQ(int amount)

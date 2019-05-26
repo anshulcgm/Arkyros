@@ -10,37 +10,45 @@ public class ShrabBehavior : MonoBehaviour
 
     public GameObject pincer_R_Top;
 
-    public GameObject player;
+    private GameObject player;
     public GameObject projectile; 
 
     private float shrabMovementSpeed = 0; 
 
-    public GameObject leftPlayerLeg;
-    public GameObject rightPlayerLeg;
+    private GameObject leftPlayerLeg;
+    private GameObject rightPlayerLeg;
 
+    public float distanceAbovePlanetSurface; 
     private Animator anim;
 
     public float timer; //How often should the shrab shoot shurikens
     private float variableTimer;
 
+    private Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        leftPlayerLeg = GameObject.FindGameObjectWithTag("LeftLeg");
+        rightPlayerLeg = GameObject.FindGameObjectWithTag("RightLeg");
         anim = GetComponent<Animator>(); 
         this.shurikenRange = 15;
         //this.shrabsInRange = new List<Shrab>();
         this.pincerMovementRange = 10;
 
-        variableTimer = timer; 
+        variableTimer = timer;
+
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
         shrabMovementSpeed = GetComponent<StatManager>().shrabMovementSpeed;
-        transform.LookAt(player.transform);
+        //transform.LookAt(player.transform);
         pincerMovement();
-        if(Vector3.Distance(transform.position, player.transform.position) > 3.0f)
+       /* if(Vector3.Distance(transform.position, player.transform.position) > 3.0f)
         {
             waterShurikenAttack();
         }
@@ -63,37 +71,107 @@ public class ShrabBehavior : MonoBehaviour
         }
         */
     }
+    public void shrabSphereMovement(Vector3 target)
+    {
+        //This code moves the golem towards the player using plane-logic
+        //For shrab, instead of transform.position.normalized, raycast to the center of the planet and use hit.normal 
+        Vector3 targetPosition = findRaycastPointOnSphere(target);
+        Vector3 planeInstantiationPoint = Vector3.zero;
+        RaycastHit planeHit;
+        if (Physics.Raycast(transform.position.normalized * 5f + transform.position, (-transform.position).normalized, out planeHit, Mathf.Infinity))
+        {
+            planeInstantiationPoint = planeHit.normal;
+            //if(Vector3.Distance(transform.position, planeHit.point) >= 2.0f)
+            //{
+            transform.position = planeHit.point + transform.position.normalized * distanceAbovePlanetSurface;
+            //}
+        }
+
+        Debug.Log("Plane instantiation point is " + planeInstantiationPoint);
+        Plane2 plane = new Plane2(planeInstantiationPoint, transform.position);
+
+        Vector2 mappedPoint = plane.GetMappedPoint(target) - plane.GetMappedPoint(transform.position);
+        if (mappedPoint.magnitude > 1)
+            transform.LookAt(mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir + transform.position, transform.position.normalized);
+        /*
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, (planet.transform.position - transform.position).normalized, out hit, Mathf.Infinity))
+        {
+            Plane2 alignPlane = new Plane2(hit.normal, transform.position);
+            //Vector2 mappedPoint2 = alignPlane.GetMappedPoint(player.transform.position) - alignPlane.GetMappedPoint(transform.position);
+            //rb.AddForce((mappedPoint2.x * alignPlane.xDir + mappedPoint2.y * alignPlane.yDir).normalized * speed);
+            if (Vector3.Distance(hit.point, transform.position) >= 1f)
+            {
+                rb.AddForce(transform.position.normalized * gravity * 2);
+                //rb.AddForce((mappedPoint2.x * alignPlane.xDir + mappedPoint2.y * alignPlane.yDir).normalized * speed/-2f);
+            }
+        }
+        */
+        //adding force towards gravity, adding force towards direction faced
+        //float step = Time.deltaTime * speed;
+        //rb.AddForce((mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir).normalized * shrabMovementSpeed);
+        rb.velocity = ((mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir) - transform.position).normalized * shrabMovementSpeed;
+        Debug.Log("Velocity is " + rb.velocity + " and magnitude is " + rb.velocity.magnitude);
+        //transform.position = Vector3.MoveTowards(transform.position, (mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir), step);
+        //rb.velocity = (mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir) * speed;
+        //rb.AddForce((mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir) * speed);
+
+        //rb.AddForce(transform.position.normalized * gravity * rb.mass);
+
+        Debug.DrawLine(transform.position, transform.position + mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir, Color.red);
+
+    }
+
+
+    public Vector3 findRaycastPointOnSphere(Vector3 point)
+    {
+        RaycastHit hit;
+        Vector3 pointToReturn = Vector3.zero;
+        if (Physics.Raycast(point + point.normalized * 5.0f, (-point).normalized, out hit, Mathf.Infinity))
+        {
+            pointToReturn = hit.point;
+        }
+        return pointToReturn;
+    }
 
     public void pincerMovement()
     {
         if (Vector3.Distance(transform.position, leftPlayerLeg.transform.position) < Vector3.Distance(transform.position, rightPlayerLeg.transform.position))
         {
-            Debug.Log("going for right leg");
-            if (Vector3.Distance(transform.position, leftPlayerLeg.transform.position) >= 0.5f)
+            Debug.Log("going for left leg");
+            Debug.Log("Distance between enemy and left leg is " + Vector3.Distance(transform.position, leftPlayerLeg.transform.position));
+            if (Vector3.Distance(transform.position, leftPlayerLeg.transform.position) > 10.0f)
             {
+                Debug.Log("Moving towards left leg");
                 anim.SetBool("Moving", true);
                 anim.SetBool("Attack", false);
-                float step = shrabMovementSpeed * Time.deltaTime;
-                transform.position = Vector3.MoveTowards(transform.position, leftPlayerLeg.transform.position, step);
+                shrabSphereMovement(leftPlayerLeg.transform.position);
             }
             else
             {
+                Debug.Log("Trying to stop at left leg");
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
                 anim.SetBool("Moving", false);
                 anim.SetBool("Attack", true);
             }
         }
         else
         {
-            Debug.Log("going for left leg");
-            if (Vector3.Distance(transform.position, rightPlayerLeg.transform.position) >= 0.5f)
+            Debug.Log("going for right leg");
+            Debug.Log("Distance between enemy and right leg is " + Vector3.Distance(transform.position, rightPlayerLeg.transform.position));
+            if (Vector3.Distance(transform.position, rightPlayerLeg.transform.position) > 10.0f)
             {
+                Debug.Log("Moving towards right leg");
                 anim.SetBool("Moving", true);
                 anim.SetBool("Attack", false);
-                float step = shrabMovementSpeed * Time.deltaTime;
-                transform.position = Vector3.MoveTowards(transform.position, rightPlayerLeg.transform.position, step);
+                shrabSphereMovement(rightPlayerLeg.transform.position);
             }
             else
             {
+                Debug.Log("Trying to stop at right leg");
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
                 anim.SetBool("Moving", false);
                 anim.SetBool("Attack", true);
                 //Adjust player health here

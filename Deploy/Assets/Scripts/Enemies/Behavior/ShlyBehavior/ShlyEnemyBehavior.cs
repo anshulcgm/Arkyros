@@ -7,11 +7,15 @@ public class ShlyEnemyBehavior : MonoBehaviour
     private GameObject player;
     public ShlyEnemy shly;
     private Rigidbody r;
+
     public float speed;
+    public float bullChargeSpeed;
 
     public float pelletDropStoppingDistance;
     public float searchRadius;
     public float sprainEffectRadius;
+
+    public GameObject explosion;
 
     private Animator anim;
 
@@ -22,14 +26,16 @@ public class ShlyEnemyBehavior : MonoBehaviour
     public float pelletTimer;
     private float oPelletTimer;
 
-    public GameObject projectile; 
+    public GameObject projectile;
+
+    private Vector3 center;
     // Start is called before the first frame update
     void Start()
     {
         //speed = GetComponent<StatManager>().kamikazeMovementSpeed;
         r = GetComponent<Rigidbody>();
         //player = GameObject.FindGameObjectWithTag("Player");
-        anim = GetComponent<Animator>();
+        //anim = transform.GetChild(0).gameObject.GetComponent<Animator>();
         
         /*foreach (ShlyEnemy e in Enemy.enemyList) {
             ShlyEnemy.shlyList.Add(e); //adds all shlies to shlylist
@@ -37,12 +43,18 @@ public class ShlyEnemyBehavior : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         oPelletTimer = pelletTimer;
         pelletTimer = -0.01f;
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Center");
+
+        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        center = player.GetComponent<SkinnedMeshRenderer>().bounds.center;
+        speed = GetComponent<StatManager>().shly.enemyStats.getSpeed();
+        bullChargeSpeed = GetComponent<StatManager>().shly.getBullChargeSpeed();
         transform.LookAt(player.transform);
         if(shly == null)
         {
@@ -52,7 +64,7 @@ public class ShlyEnemyBehavior : MonoBehaviour
         {
             if (!shly.sprainActive)
             {
-                bullCharge(player.transform.position);
+                bullCharge(center);
             }
         }
         else
@@ -67,8 +79,7 @@ public class ShlyEnemyBehavior : MonoBehaviour
     public void bullCharge(Vector3 target)
     {
         Debug.Log("In bull charge");
-        float step = Time.deltaTime * speed;
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
+        rb.velocity = (target - transform.position).normalized * bullChargeSpeed;
     }
 
     public void PelletDrop()
@@ -92,7 +103,16 @@ public class ShlyEnemyBehavior : MonoBehaviour
         }
     }
     public void OnCollisionEnter(Collision collision)
-    {
+    {/*
+        Debug.Log("In OnCollisionEnter");
         //Adjust player transform and health here
+        if(collision.gameObject.tag == "Player")
+        {
+            Debug.Log("Collided with player");
+            collision.gameObject.transform.position += rb.velocity * 3.0f;
+        }
+    */
+        Instantiate(explosion, collision.GetContact(0).point, Quaternion.identity);
+      
     }
 }
