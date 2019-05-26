@@ -115,7 +115,7 @@ public class HeartOfDarkness : MonoBehaviour
             {
                 if(c.gameObject.tag == "Enemy")
                 {
-                    stats.dealDamage(c.gameObject, 100);
+                    stats.dealDamage(c.gameObject, 1000);
                 }
                 
             }

@@ -26,6 +26,7 @@ public class JupiterPull : MonoBehaviour
         anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         soundManager = GetComponent<SoundManager>();
+        speed = 40;
 
     }
 
@@ -58,7 +59,7 @@ public class JupiterPull : MonoBehaviour
             //camera.GetComponent<cameraSoundManager>().jupiterPullCast = true;
             foreach (Collider hit in hits)
             {
-                // Detects if the object is an "enemy" and if so destroys it
+                // Detects if the object is an "enemy" and if so pulls it
                 if (hit.gameObject.tag == "Enemy")
                 {
                     Debug.Log(hit.gameObject.name);

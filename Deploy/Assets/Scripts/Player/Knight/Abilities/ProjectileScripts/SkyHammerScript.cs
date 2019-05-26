@@ -35,7 +35,7 @@ public class SkyHammerScript : MonoBehaviour
             {
                 if (hit.gameObject.tag == "Enemy")
                 {
-                    hit.gameObject.GetComponent<StatManager>().changeHealth(20);
+                    hit.gameObject.GetComponent<StatManager>().changeHealth(600);
 
                 }
             }
