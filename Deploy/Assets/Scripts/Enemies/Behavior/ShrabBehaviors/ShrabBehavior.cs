@@ -197,8 +197,6 @@ public class ShrabBehavior : MonoBehaviour
         }
         //adding force towards gravity, adding force towards direction faced
         rb.velocity = transform.forward * shrabMovementSpeed;
-
-        rb.AddForce(transform.position.normalized * gravity);
     }
 
 
