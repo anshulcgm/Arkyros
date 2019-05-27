@@ -1,5 +1,125 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &400795045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400795048}
+  - component: {fileID: 400795047}
+  - component: {fileID: 400795046}
+  - component: {fileID: 7061218053119672240}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400795048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400795045}
+  m_LocalRotation: {x: 0.05798374, y: -0, z: -0, w: 0.99831754}
+  m_LocalPosition: {x: 0, y: 20, z: -60}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6687687129875835496}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &400795047
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400795045}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_GateFitMode: 2
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
+  orthographic: 1
+  orthographic size: 10
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!81 &400795046
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400795045}
+  m_Enabled: 1
+--- !u!114 &7061218053119672240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400795045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_DefaultBlend:
+    m_Style: 1
+    m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Cinemachine.CinemachineBrain+BrainEvent, Cinemachine, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Cinemachine.CinemachineBrain+VcamActivatedEvent, Cinemachine, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &117600604258838398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1713,6 +1833,7 @@ Transform:
   - {fileID: 8770876301411163487}
   - {fileID: 6985161452684169450}
   - {fileID: 6145855363012427421}
+  - {fileID: 400795048}
   - {fileID: 7109573628608922995}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1839,7 +1960,7 @@ Animation:
   - {fileID: 7400042, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
   - {fileID: 7400014, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
   - {fileID: 7400024, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
-  - {fileID: 0}
+  - {fileID: 7400016, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -1945,7 +2066,7 @@ MonoBehaviour:
   - Swing_Heavy
   - Jump
   - Stance
-  - 
+  - Pull
   - 
   - 
   loopingAnims:
@@ -2514,7 +2635,7 @@ PrefabInstance:
     - target: {fileID: 8496959184446560014, guid: b4770786ad0711f4db9fa58ba6af72ce,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8496959184446560014, guid: b4770786ad0711f4db9fa58ba6af72ce,
         type: 3}
@@ -2649,12 +2770,12 @@ PrefabInstance:
     - target: {fileID: 8496959186466642074, guid: b4770786ad0711f4db9fa58ba6af72ce,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000026781186
+      value: 0.0000000016181524
       objectReference: {fileID: 0}
     - target: {fileID: 8496959186466642074, guid: b4770786ad0711f4db9fa58ba6af72ce,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000010748705
+      value: 0.00000001053474
       objectReference: {fileID: 0}
     - target: {fileID: 8496959186466642074, guid: b4770786ad0711f4db9fa58ba6af72ce,
         type: 3}
@@ -2733,12 +2854,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4770786ad0711f4db9fa58ba6af72ce, type: 3}
---- !u!4 &7109573628608922995 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8496959184446560014, guid: b4770786ad0711f4db9fa58ba6af72ce,
-    type: 3}
-  m_PrefabInstance: {fileID: 1675625827998782077}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7109573628815584173 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8496959184722459088, guid: b4770786ad0711f4db9fa58ba6af72ce,
@@ -2751,6 +2866,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &7109573629802482227 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8496959185899673678, guid: b4770786ad0711f4db9fa58ba6af72ce,
+    type: 3}
+  m_PrefabInstance: {fileID: 1675625827998782077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7109573630089179804 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8496959186186625249, guid: b4770786ad0711f4db9fa58ba6af72ce,
@@ -2787,9 +2908,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1675625827998782077}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &7109573629802482227 stripped
+--- !u!4 &7109573628608922995 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8496959185899673678, guid: b4770786ad0711f4db9fa58ba6af72ce,
+  m_CorrespondingSourceObject: {fileID: 8496959184446560014, guid: b4770786ad0711f4db9fa58ba6af72ce,
     type: 3}
   m_PrefabInstance: {fileID: 1675625827998782077}
   m_PrefabAsset: {fileID: 0}
