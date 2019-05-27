@@ -83,6 +83,19 @@ MonoBehaviour:
   aggregateNumberofShrabs: 0
   shrabPincerDmg: 0
   shrabEruptionRadius: 0
+  starshipMaxHp: 0
+  starshipDefense: 0
+  starshipMovementSpeed: 0
+  IRHealthSpawnStart: 0
+  bombDamage: 0
+  bombRadius: 0
+  rayDamage: 0
+  rayWidth: 0
+  turretDamage: 0
+  brokenKamikaze: {fileID: 1531583384, guid: 23c8eb42d2e4bf240aa4de2828b242e5, type: 3}
+  brokenGolem: {fileID: 266699126, guid: 78a65ee2976308247821c28d54b93dc3, type: 3}
+  brokenShly: {fileID: 1257030116, guid: af8fead65e20d7747aed19c3aeb0fe33, type: 3}
+  brokenShrab: {fileID: 1785281474, guid: 5465cab4bff5f7c4d85ff736ae8ec4c1, type: 3}
 --- !u!114 &8200929906575894871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +113,7 @@ MonoBehaviour:
   pelletDropStoppingDistance: 5
   searchRadius: 1.5
   sprainEffectRadius: 10
+  explosion: {fileID: 0}
   pelletTimer: 0.33
   projectile: {fileID: 4560942895118958702, guid: 89f07b51d18d0b442b44951002cdeede,
     type: 3}

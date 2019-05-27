@@ -21,10 +21,10 @@ public class ShootProjectile : MonoBehaviour {
 
     void shootProj()
     {
-        GameObject leftProjectile = (GameObject)Instantiate(projectile, leftArmTip.transform.position, transform.rotation);
+        GameObject leftProjectile = (GameObject)Instantiate(projectile, leftArmTip.transform.position - leftArmTip.transform.right * 2.5f, transform.rotation);
         leftProjectile.GetComponent<Rigidbody>().velocity = -leftArmTip.transform.right * projSpeed;
         //Debug.Log("Left arm position is " + leftArmTip.transform.position);
-        GameObject rightProjectile = (GameObject)Instantiate(projectile, rightArmTip.transform.position, transform.rotation);
+        GameObject rightProjectile = (GameObject)Instantiate(projectile, rightArmTip.transform.position - rightArmTip.transform.right * 2.5f, transform.rotation);
         rightProjectile.GetComponent<Rigidbody>().velocity = -rightArmTip.transform.right * projSpeed;
     }
 	

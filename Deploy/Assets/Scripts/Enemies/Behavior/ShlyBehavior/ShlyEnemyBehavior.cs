@@ -26,14 +26,25 @@ public class ShlyEnemyBehavior : MonoBehaviour
     public float pelletTimer;
     private float oPelletTimer;
 
+    public float neutralMovementTimer;
+    private float oNeutralMovementTimer;
+
     public GameObject projectile;
 
     private Vector3 center;
+
+    public float maxDisToTravel;
+
+    private Vector3 finalPos;
+
+    public float idleBehaviorRadius;
+    public float attackRadius;
     // Start is called before the first frame update
     void Start()
     {
         //speed = GetComponent<StatManager>().kamikazeMovementSpeed;
         r = GetComponent<Rigidbody>();
+        oNeutralMovementTimer = neutralMovementTimer;
         //player = GameObject.FindGameObjectWithTag("Player");
         //anim = transform.GetChild(0).gameObject.GetComponent<Animator>();
         
@@ -44,7 +55,7 @@ public class ShlyEnemyBehavior : MonoBehaviour
         oPelletTimer = pelletTimer;
         pelletTimer = -0.01f;
         player = GameObject.FindGameObjectWithTag("Center");
-
+        finalPos = Random.insideUnitSphere * maxDisToTravel + transform.position;
         
 
     }
@@ -52,29 +63,38 @@ public class ShlyEnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        center = player.GetComponent<SkinnedMeshRenderer>().bounds.center;
-        speed = GetComponent<StatManager>().shly.enemyStats.getSpeed();
-        bullChargeSpeed = GetComponent<StatManager>().shly.getBullChargeSpeed();
-        transform.LookAt(player.transform);
-        if(shly == null)
+        float disToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        if(disToPlayer <= idleBehaviorRadius && disToPlayer > attackRadius)
         {
-            shly = GetComponent<StatManager>().shly;
+            neutralMovement();
         }
-        if (shly.getAggregateNum() > 1)
+        else if(disToPlayer <= attackRadius)
         {
-            if (!shly.sprainActive)
+            center = player.GetComponent<SkinnedMeshRenderer>().bounds.center;
+            speed = GetComponent<StatManager>().shly.enemyStats.getSpeed();
+            bullChargeSpeed = GetComponent<StatManager>().shly.getBullChargeSpeed();
+            transform.LookAt(player.transform);
+            if (shly == null)
             {
-                bullCharge(center);
+                shly = GetComponent<StatManager>().shly;
             }
-        }
-        else
-        {
-            if (!shly.sprainActive)
+            if (shly.getAggregateNum() > 1)
             {
-                PelletDrop();
+                if (!shly.sprainActive)
+                {
+                    bullCharge(center);
+                }
             }
+            else
+            {
+                if (!shly.sprainActive)
+                {
+                    PelletDrop();
+                }
+            }
+            shly.sprain(sprainEffectRadius);
         }
-        shly.sprain(sprainEffectRadius);
+       
     }  
     public void bullCharge(Vector3 target)
     {
@@ -100,6 +120,34 @@ public class ShlyEnemyBehavior : MonoBehaviour
             Debug.Log("moving towards player");
             float step = Time.deltaTime * speed;
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);  
+        }
+    }
+
+    public void neutralMovement()
+    {
+        //Debug.Log("In update of neutral movement");
+        //within the beginning of Update(), start moving towards final
+        rb.velocity = (finalPos - transform.position).normalized * speed;
+
+        //rotation
+        Quaternion rotation = Quaternion.LookRotation(finalPos - transform.position);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, speed * Time.deltaTime);
+
+        //once destination reached, or "reached", wait for x seconds and find new final
+        if (Vector3.Distance(transform.position, finalPos) < 1.0f)
+        {
+
+            neutralMovementTimer -= Time.deltaTime; 
+            if (neutralMovementTimer >= 0)
+            {
+                r.velocity = Vector3.zero;
+            }
+            else
+            {
+                finalPos = Random.insideUnitSphere * maxDisToTravel + transform.position;
+                neutralMovementTimer = oNeutralMovementTimer;
+            }
+
         }
     }
     public void OnCollisionEnter(Collision collision)

@@ -72,7 +72,16 @@ public class StatManager : MonoBehaviour
     public Starship ship;
 
     private EnemyType type;
-    
+
+    public GameObject brokenKamikaze;
+    public GameObject brokenGolem;
+    public GameObject brokenShly;
+    public GameObject brokenShrab;
+
+    private Enemy defaultEnemy;
+    private GameObject defaultBroken; 
+
+    //private Enemy defaultEnemy;
     //Start function sets enemytype for the script so that the right variables are changed
     void Start()
     {
@@ -80,6 +89,8 @@ public class StatManager : MonoBehaviour
             flyingKam = new KamikazeEnemy(kamikazeMaxHP, (int)kamikazeMovementSpeed, kamikazeDefense, gameObject, (int)kamikazeIQ);
             Enemy.enemyList.Add(flyingKam);
             type = EnemyType.FlyingKamikaze;
+            defaultEnemy = flyingKam;
+            defaultBroken = brokenKamikaze;
             Debug.Log("Instantiated flying kamikaze");
         }
         else if(enemyName == "Golem")
@@ -87,6 +98,8 @@ public class StatManager : MonoBehaviour
             golem = new Golem(golemMaxHp, (int)golemMovementSpeed, golemDefense, gameObject, golemProjectileSpeed, golemChargeSpeed, golemKnockbackDmg, golemGroundPoundDmg, golemProjectileDmg);
             Enemy.enemyList.Add(golem);
             type = EnemyType.Brawler;
+            defaultEnemy = golem;
+            defaultBroken = brokenGolem;
             Debug.Log("Instantiated golem");
         }
         else if(enemyName == "IRTower")
@@ -94,6 +107,8 @@ public class StatManager : MonoBehaviour
             IREnemy = new IrradiatedEnemies(IRMaxHp, (int)IRMovementSpeed, IRDefense, gameObject, IRRadiusAffect, IRSpeedBuff, IRMaxHpBuff, IRAttackBuff, IRPlayerAttackDebuff, IRPlayerSpeedDebuff);
             Enemy.enemyList.Add(IREnemy);
             type = EnemyType.IrradiatedEnemy;
+            defaultEnemy = IREnemy;
+            defaultBroken = null;
             Debug.Log("Instantiated IR enemy");
         }
         else if(enemyName == "Shly")
@@ -102,6 +117,8 @@ public class StatManager : MonoBehaviour
             Enemy.enemyList.Add(shly);
             ShlyEnemy.shlyList.Add(shly);
             type = EnemyType.Shly;
+            defaultEnemy = shly;
+            defaultBroken = brokenShly;
             Debug.Log("Instantiated shly object");
         }
         else if(enemyName == "Shrab")
@@ -110,6 +127,8 @@ public class StatManager : MonoBehaviour
             Enemy.enemyList.Add(shrab);
             Shrab.shrabList.Add(shrab);
             type = EnemyType.Shrab;
+            defaultEnemy = shrab;
+            defaultBroken = brokenShrab;
             Debug.Log("Instantiated shrab object");
         }
         else if(enemyName == "Starship")
@@ -117,6 +136,8 @@ public class StatManager : MonoBehaviour
             ship = new Starship(starshipMaxHp, (int)starshipMovementSpeed, starshipDefense, gameObject, IRHealthSpawnStart, bombDamage, bombRadius, rayDamage, rayWidth, turretDamage);
             Enemy.enemyList.Add(ship);
             type = EnemyType.Starship;
+            defaultEnemy = ship;
+            defaultBroken = null;
         }
         //Change values in Enemy Behavior scripts to align with these values
     }
@@ -124,7 +145,11 @@ public class StatManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(defaultEnemy.enemyStats.getHealth() <= 0 && (type != EnemyType.IrradiatedEnemy || type != EnemyType.Starship))
+        {
+            Instantiate(defaultBroken, transform.position, transform.rotation);
+            Destroy(this.gameObject);
+        }
     }
 
     //methods for adjusting and debuffing base stats

@@ -170,6 +170,10 @@ MonoBehaviour:
   rayDamage: 0
   rayWidth: 0
   turretDamage: 0
+  brokenKamikaze: {fileID: 1531583384, guid: 23c8eb42d2e4bf240aa4de2828b242e5, type: 3}
+  brokenGolem: {fileID: 266699126, guid: 78a65ee2976308247821c28d54b93dc3, type: 3}
+  brokenShly: {fileID: 1257030116, guid: af8fead65e20d7747aed19c3aeb0fe33, type: 3}
+  brokenShrab: {fileID: 1785281474, guid: 5465cab4bff5f7c4d85ff736ae8ec4c1, type: 3}
 --- !u!1 &1045979456465860
 GameObject:
   m_ObjectHideFlags: 0

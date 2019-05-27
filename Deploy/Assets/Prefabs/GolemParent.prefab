@@ -285,7 +285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05abcc94cd5bcd24d920a9127cfceaf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 1136677087986642, guid: c67b7c392d411eb40923d187d89cacaa, type: 3}
+  projectile: {fileID: 3466408551947788080, guid: 4814ddd52dc357d42b10ea4e6636f5f5,
+    type: 3}
   leftArmTip: {fileID: 1746733756491788}
   rightArmTip: {fileID: 1038331988832478}
   projSpeed: 20
@@ -423,7 +424,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4567808929262780}
   - component: {fileID: 114750740368673868}
-  - component: {fileID: 114369388953672176}
   - component: {fileID: 54295875629863764}
   - component: {fileID: 135516192973308034}
   - component: {fileID: 576322408585817096}
@@ -443,7 +443,7 @@ Transform:
   m_GameObject: {fileID: 1522681304276564}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -19, y: 6163, z: 316}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4860631050437038}
   m_Father: {fileID: 0}
@@ -461,27 +461,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78d6ffeea23bff4ab6c8171dac5f3ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundPoundRange: 10
+  groundPoundRange: 20
   chargeRange: 40
-  shootRange: 100
-  noActionRange: 0
-  groundPoundRadius: 5
-  projectile: {fileID: 4560942895118958702, guid: 89f07b51d18d0b442b44951002cdeede,
+  shootRange: 300
+  noActionRange: 1000
+  groundPoundRadius: 20
+  projectile: {fileID: 7221904468566208928, guid: be64e16490fd30a40ae0c9a54617a8b7,
     type: 3}
---- !u!114 &114369388953672176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522681304276564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95648350da48a68429da10cb3a94699d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 30
-  gravity: -20
+  maxIdleDistance: 10
+  idleTimer: 10
 --- !u!54 &54295875629863764
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -553,6 +541,25 @@ MonoBehaviour:
   speedDebuffProportion: 0
   pelletDamage: 0
   bullChargeDamage: 0
+  shrabMaxHp: 0
+  shrabDefense: 0
+  shrabMovementSpeed: 0
+  aggregateNumberofShrabs: 0
+  shrabPincerDmg: 0
+  shrabEruptionRadius: 0
+  starshipMaxHp: 0
+  starshipDefense: 0
+  starshipMovementSpeed: 0
+  IRHealthSpawnStart: 0
+  bombDamage: 0
+  bombRadius: 0
+  rayDamage: 0
+  rayWidth: 0
+  turretDamage: 0
+  brokenKamikaze: {fileID: 1531583384, guid: 23c8eb42d2e4bf240aa4de2828b242e5, type: 3}
+  brokenGolem: {fileID: 266699126, guid: 78a65ee2976308247821c28d54b93dc3, type: 3}
+  brokenShly: {fileID: 1257030116, guid: af8fead65e20d7747aed19c3aeb0fe33, type: 3}
+  brokenShrab: {fileID: 1785281474, guid: 5465cab4bff5f7c4d85ff736ae8ec4c1, type: 3}
 --- !u!1 &1555681830148934
 GameObject:
   m_ObjectHideFlags: 0
