@@ -97,6 +97,7 @@ public class GolemAttackBehavior : MonoBehaviour {
     //Attack Behaviors
     public void groundPound()
     {
+        rb.velocity = Vector3.zero;
         Debug.Log("In groundPound");
         anim.SetTrigger("GroundPound");
         //Debug.Log("GroundPound trigger set");
@@ -123,7 +124,7 @@ public class GolemAttackBehavior : MonoBehaviour {
     {
         Debug.Log("Trying to shoot");
         anim.SetTrigger("Shoot");
-        sphericalMovement(player.transform.position, chargeSpeed);
+        sphericalMovement(player.transform.position, speed);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -148,16 +149,17 @@ public class GolemAttackBehavior : MonoBehaviour {
             transform.position = hit.point;
             //Vector2 mappedPoint2 = alignPlane.GetMappedPoint(player.transform.position) - alignPlane.GetMappedPoint(transform.position);
             //rb.AddForce((mappedPoint2.x * alignPlane.xDir + mappedPoint2.y * alignPlane.yDir).normalized * speed);
-            if (Vector3.Distance(hit.point, transform.position) >= 1f)
-            {
-                rb.AddForce(transform.position.normalized * gravity);
+            //if (Vector3.Distance(hit.point, transform.position) >= 1f)
+            //{
+              //  rb.AddForce(transform.position.normalized * gravity);
                 //rb.AddForce((mappedPoint2.x * alignPlane.xDir + mappedPoint2.y * alignPlane.yDir).normalized * speed/-2f);
-            }
+            //}
         }
         //adding force towards gravity, adding force towards direction faced
-        rb.AddForce(transform.forward * speed);
+        //rb.AddForce(transform.forward * speed);
+        rb.velocity = (target - transform.position).normalized* speed;
 
-        rb.AddForce(transform.position.normalized * gravity);
+        //rb.AddForce(transform.position.normalized * gravity);
     }
     public Vector3 randomPointInRadius()
     {

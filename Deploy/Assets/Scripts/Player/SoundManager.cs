@@ -30,7 +30,7 @@ public class SoundManager : MonoBehaviour
 
     public void playOneShot(string soundname)
     {
-        Sound.PlayOneShot(SoundsDictionary[soundname]);
+        //Sound.PlayOneShot(SoundsDictionary[soundname]);
     }
 
     public void play(string soundname)

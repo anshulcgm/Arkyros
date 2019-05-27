@@ -65,6 +65,8 @@ public class ShlyEnemyBehavior : MonoBehaviour
     void Update()
     {
         float disToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        transform.rotation = Quaternion.LookRotation(rb.velocity);
+        //Debug.Log("Player position is " + player.transform.position);
         if(disToPlayer <= idleBehaviorRadius && disToPlayer > attackRadius)
         {
             neutralMovement();
@@ -73,9 +75,9 @@ public class ShlyEnemyBehavior : MonoBehaviour
         {
             //center = player.GetComponent<SkinnedMeshRenderer>().bounds.center;
             //speed = GetComponent<StatManager>().shly.enemyStats.getSpeed();
-            speed = 30;
+            speed = GetComponent<StatManager>().shly.enemyStats.getSpeed();
             bullChargeSpeed = GetComponent<StatManager>().shly.getBullChargeSpeed();
-            transform.LookAt(player.transform);
+            //transform.LookAt(player.transform);
             if (shly == null)
             {
                 shly = GetComponent<StatManager>().shly;
@@ -84,7 +86,7 @@ public class ShlyEnemyBehavior : MonoBehaviour
             {
                 if (!shly.sprainActive)
                 {
-                    bullCharge(center);
+                    bullCharge(player.transform.position);
                 }
             }
             else
@@ -95,6 +97,10 @@ public class ShlyEnemyBehavior : MonoBehaviour
                 }
             }
             shly.sprain(sprainEffectRadius);
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
         }
        
     }  
@@ -127,13 +133,13 @@ public class ShlyEnemyBehavior : MonoBehaviour
 
     public void neutralMovement()
     {
-        //Debug.Log("In update of neutral movement");
+        Debug.Log("In neutral movement");
         //within the beginning of Update(), start moving towards final
         rb.velocity = (finalPos - transform.position).normalized * speed;
 
         //rotation
-        Quaternion rotation = Quaternion.LookRotation(finalPos - transform.position);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, speed * Time.deltaTime);
+        //Quaternion rotation = Quaternion.LookRotation(finalPos - transform.position);
+       //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, speed * Time.deltaTime);
 
         //once destination reached, or "reached", wait for x seconds and find new final
         if (Vector3.Distance(transform.position, finalPos) < 1.0f)
@@ -162,10 +168,17 @@ public class ShlyEnemyBehavior : MonoBehaviour
             collision.gameObject.transform.position += rb.velocity * 3.0f;
         }
     */
-        if (collision.gameObject.CompareTag("Player"))
+        Debug.Log("Shly collision detected");
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Center"))
         {
             collision.gameObject.GetComponent<Stats>().takeDamage(GetComponent<StatManager>().shly.getBullChargeDamage());
+            Vector3 dir = collision.contacts[0].point - transform.position;
+            dir = -dir.normalized;
+
+            //rb.AddForce(dir * 2f);
+
         }
+
         Instantiate(explosion, collision.GetContact(0).point, Quaternion.identity);
       
     }

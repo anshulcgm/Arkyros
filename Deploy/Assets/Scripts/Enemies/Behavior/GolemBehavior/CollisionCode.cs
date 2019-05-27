@@ -8,13 +8,19 @@ public class CollisionCode : MonoBehaviour {
 
     public float golemShootDamage;
 
+
+    public float destroyTimer = 5.0f;
 	void Start () {
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+        destroyTimer -= Time.deltaTime;
+        if(destroyTimer <= 0)
+        {
+            Destroy(gameObject);
+        }
 	}
 
     private void OnCollisionEnter(Collision collision)
@@ -24,5 +30,6 @@ public class CollisionCode : MonoBehaviour {
         {
             collision.gameObject.GetComponent<Stats>().takeDamage(golemShootDamage);
         }
+        Destroy(gameObject);
     }
 }
