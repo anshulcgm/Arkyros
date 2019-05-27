@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05abcc94cd5bcd24d920a9127cfceaf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 3466408551947788080, guid: 4814ddd52dc357d42b10ea4e6636f5f5,
+  projectile: {fileID: 1520741122268667120, guid: 7c84b7cbd27a806428367409bac952ee,
     type: 3}
   leftArmTip: {fileID: 1746733756491788}
   rightArmTip: {fileID: 1038331988832478}

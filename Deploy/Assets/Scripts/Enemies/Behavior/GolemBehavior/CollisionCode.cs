@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class CollisionCode : MonoBehaviour {
 
-	// Use this for initialization
+    // Use this for initialization
+
+    public float golemShootDamage;
+
 	void Start () {
 		
 	}
@@ -17,5 +20,9 @@ public class CollisionCode : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Collided with " + collision.gameObject.name);
+        if(collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<Stats>().takeDamage(golemShootDamage);
+        }
     }
 }

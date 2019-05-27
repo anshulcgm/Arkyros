@@ -454,6 +454,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 1-shrab (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5838973325038508718, guid: a45dac9987b8e7d4bb6122f17fcdf9c8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4202194166852568307, guid: a45dac9987b8e7d4bb6122f17fcdf9c8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1369,6 +1374,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 1-shrab
       objectReference: {fileID: 0}
+    - target: {fileID: 5838973325038508718, guid: a45dac9987b8e7d4bb6122f17fcdf9c8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4202194166852568307, guid: a45dac9987b8e7d4bb6122f17fcdf9c8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1437,6 +1447,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 1-shrab (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5838973325038508718, guid: a45dac9987b8e7d4bb6122f17fcdf9c8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4202194166852568307, guid: a45dac9987b8e7d4bb6122f17fcdf9c8,
         type: 3}
@@ -2412,6 +2427,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 1-shrab (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5838973325038508718, guid: a45dac9987b8e7d4bb6122f17fcdf9c8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4202194166852568307, guid: a45dac9987b8e7d4bb6122f17fcdf9c8,
         type: 3}

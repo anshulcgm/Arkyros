@@ -160,6 +160,10 @@ public class ShlyEnemyBehavior : MonoBehaviour
             collision.gameObject.transform.position += rb.velocity * 3.0f;
         }
     */
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<Stats>().takeDamage(GetComponent<StatManager>().shly.getBullChargeDamage());
+        }
         Instantiate(explosion, collision.GetContact(0).point, Quaternion.identity);
       
     }

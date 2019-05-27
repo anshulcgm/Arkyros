@@ -59,7 +59,7 @@ public class PlayerAttack : MonoBehaviour {
         }
         if(collision.gameObject.tag == "Player")
         {
-            //Adjust player health here
+            collision.gameObject.GetComponent<Stats>().takeDamage(GetComponent<StatManager>().flyingKam.getDiveSpeed() * 2.0f);
         }
 		
     }

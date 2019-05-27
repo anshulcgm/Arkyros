@@ -105,7 +105,7 @@ public class GolemAttackBehavior : MonoBehaviour {
         {
             if (col.gameObject.tag == "Player")
             {
-               //Adjust player health here
+                col.gameObject.GetComponent<Stats>().takeDamage(GetComponent<StatManager>().golem.getGroundPoundDmg());
             }
         }
     }
@@ -128,9 +128,9 @@ public class GolemAttackBehavior : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Projectile")
+        if(collision.gameObject.tag == "Player")
         {
-            Destroy(gameObject);
+            collision.gameObject.GetComponent<Stats>().takeDamage(GetComponent<StatManager>().golem.getChargeDmg());
         }
     }
     public void sphericalMovement(Vector3 target, float speed)

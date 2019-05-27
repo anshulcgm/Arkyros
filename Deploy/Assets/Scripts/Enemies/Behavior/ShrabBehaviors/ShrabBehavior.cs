@@ -235,6 +235,7 @@ public class ShrabBehavior : MonoBehaviour
                 rb.angularVelocity = Vector3.zero;
                 anim.SetBool("Moving", false);
                 anim.SetBool("Attack", true);
+                player.GetComponent<Stats>().takeDamage(1f);
             }
         }
         else
