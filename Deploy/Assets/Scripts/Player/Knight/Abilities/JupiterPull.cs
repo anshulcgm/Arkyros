@@ -54,6 +54,7 @@ public class JupiterPull : MonoBehaviour
 
         if((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
+            anim.StartOverlayAnim("Pull", 0.5f, 1f);
             Collider[] hits = Physics.OverlapSphere(transform.position, radius);
             Debug.Log("Gottem");
             //camera.GetComponent<cameraSoundManager>().jupiterPullCast = true;
