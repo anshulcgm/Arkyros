@@ -845,7 +845,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4202194166852568307
 Transform:
   m_ObjectHideFlags: 0
@@ -928,8 +928,8 @@ MonoBehaviour:
     type: 3}
   distanceAbovePlanetSurface: 0
   timer: 0.33
-  idleRadius: 100
-  attackRadius: 30
+  idleRadius: 200
+  attackRadius: 100
   idleTimer: 10
   maxIdleDistance: 25
 --- !u!135 &3444825276652991976

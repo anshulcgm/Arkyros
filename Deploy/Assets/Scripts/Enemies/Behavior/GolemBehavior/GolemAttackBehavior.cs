@@ -155,7 +155,7 @@ public class GolemAttackBehavior : MonoBehaviour {
               //  rb.AddForce(transform.position.normalized * gravity);
                 //rb.AddForce((mappedPoint2.x * alignPlane.xDir + mappedPoint2.y * alignPlane.yDir).normalized * speed/-2f);
             //}
-        }
+        }  
         //adding force towards gravity, adding force towards direction faced
         //rb.AddForce(transform.forward * speed);
         rb.velocity = (target - transform.position).normalized* speed;
