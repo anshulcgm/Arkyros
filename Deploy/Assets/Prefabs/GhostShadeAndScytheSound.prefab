@@ -233,7 +233,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1460149294690421005}
-  m_LocalRotation: {x: 0.10410984, y: -0.000000008556441, z: 8.9567687e-10, w: 0.99456584}
+  m_LocalRotation: {x: 0.10410984, y: 0.000000008556441, z: -8.9567687e-10, w: 0.99456584}
   m_LocalPosition: {x: 0, y: 12, z: -24.000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1387,10 +1387,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.8690338
-  m_Height: 1.8558989
+  m_Radius: 0.18719661
+  m_Height: 0.37439322
   m_Direction: 1
-  m_Center: {x: 0.049834847, y: 1.2971492, z: -0.566391}
+  m_Center: {x: -0.05614817, y: 0.55639637, z: -0.566391}
 --- !u!114 &6936991349772073669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3327,12 +3327,12 @@ PrefabInstance:
     - target: {fileID: 8496959186186625254, guid: b4770786ad0711f4db9fa58ba6af72ce,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000011723171
+      value: -0.0000000031667307
       objectReference: {fileID: 0}
     - target: {fileID: 8496959186186625254, guid: b4770786ad0711f4db9fa58ba6af72ce,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000071569794
+      value: 0.00000007067412
       objectReference: {fileID: 0}
     - target: {fileID: 8496959186466642074, guid: b4770786ad0711f4db9fa58ba6af72ce,
         type: 3}
@@ -3342,12 +3342,12 @@ PrefabInstance:
     - target: {fileID: 8496959186466642074, guid: b4770786ad0711f4db9fa58ba6af72ce,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000036926964
+      value: -0.000000004878584
       objectReference: {fileID: 0}
     - target: {fileID: 8496959186466642074, guid: b4770786ad0711f4db9fa58ba6af72ce,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000064949996
+      value: 0.0000000072353026
       objectReference: {fileID: 0}
     - target: {fileID: 8496959185230288564, guid: b4770786ad0711f4db9fa58ba6af72ce,
         type: 3}
