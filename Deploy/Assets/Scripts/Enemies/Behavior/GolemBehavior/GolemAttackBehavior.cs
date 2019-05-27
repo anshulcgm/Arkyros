@@ -97,7 +97,7 @@ public class GolemAttackBehavior : MonoBehaviour {
     //Attack Behaviors
     public void groundPound()
     {
-        rb.velocity = Vector3.zero;
+        sphericalMovement(player.transform.position, speed);
         Debug.Log("In groundPound");
         anim.SetTrigger("GroundPound");
         //Debug.Log("GroundPound trigger set");
@@ -132,6 +132,7 @@ public class GolemAttackBehavior : MonoBehaviour {
         if(collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<Stats>().takeDamage(GetComponent<StatManager>().golem.getChargeDmg());
+            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
         }
     }
     public void sphericalMovement(Vector3 target, float speed)
