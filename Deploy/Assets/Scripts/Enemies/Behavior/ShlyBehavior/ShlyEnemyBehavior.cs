@@ -55,6 +55,7 @@ public class ShlyEnemyBehavior : MonoBehaviour
         oPelletTimer = pelletTimer;
         pelletTimer = -0.01f;
         player = GameObject.FindGameObjectWithTag("Center");
+        Debug.Log(player.name);
         finalPos = Random.insideUnitSphere * maxDisToTravel + transform.position;
         
 
@@ -70,8 +71,9 @@ public class ShlyEnemyBehavior : MonoBehaviour
         }
         else if(disToPlayer <= attackRadius)
         {
-            center = player.GetComponent<SkinnedMeshRenderer>().bounds.center;
-            speed = GetComponent<StatManager>().shly.enemyStats.getSpeed();
+            //center = player.GetComponent<SkinnedMeshRenderer>().bounds.center;
+            //speed = GetComponent<StatManager>().shly.enemyStats.getSpeed();
+            speed = 30;
             bullChargeSpeed = GetComponent<StatManager>().shly.getBullChargeSpeed();
             transform.LookAt(player.transform);
             if (shly == null)

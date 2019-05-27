@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7228260067136529736}
   m_Layer: 0
   m_Name: 3-shlyParent
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -412,7 +412,10 @@ PrefabInstance:
       propertyPath: m_RootBone
       value: 
       objectReference: {fileID: 8116742951557471545}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1937832379, guid: 010b5a65a06814442a520f6a9991f1a0, type: 3}
+    - {fileID: 1937832378, guid: 010b5a65a06814442a520f6a9991f1a0, type: 3}
+    - {fileID: 1937832377, guid: 010b5a65a06814442a520f6a9991f1a0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 010b5a65a06814442a520f6a9991f1a0, type: 3}
 --- !u!4 &5129750092428057760 stripped
 Transform:

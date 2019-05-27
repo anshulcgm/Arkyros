@@ -23,7 +23,7 @@ public class NothingPersonnelKid : MonoBehaviour
     private bool cast;
 
     SoundManager soundManager;
-    public GameObject ParticleTrail;
+    //public GameObject ParticleTrail;
     public GameObject ParticleHit;
 
     GameObject enemy;
@@ -56,11 +56,11 @@ public class NothingPersonnelKid : MonoBehaviour
             //put any setup code here, before the ability is actually cast
             if (!cloneSpawned)
             {
-                clone = Instantiate(ParticleTrail, transform.position, transform.rotation);
+                //clone = Instantiate(ParticleTrail, transform.position, transform.rotation);
                 cloneSpawned = true;
             }
             //Transform cloneStart = clone.transform;
-            clone.transform.position = Vector3.MoveTowards(clone.transform.position, enemy.transform.position,  (clone.transform.position - enemy.transform.position).magnitude);
+            //clone.transform.position = Vector3.MoveTowards(clone.transform.position, enemy.transform.position,  (clone.transform.position - enemy.transform.position).magnitude);
 
 
 
