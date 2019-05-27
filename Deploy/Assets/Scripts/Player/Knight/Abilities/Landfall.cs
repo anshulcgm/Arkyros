@@ -23,7 +23,7 @@ public class Landfall : MonoBehaviour
     private int numForward = 200;
     private int numUp = 200;
     private int sphereRadius = 20;
-    private int enemySetback = 400;
+    private int enemySetback = 200;
 
     public GameObject particleLanding;
     bool particleSpawned;
@@ -99,13 +99,15 @@ public class Landfall : MonoBehaviour
             anim.PlayLoopingAnim("Standard"); //Idle
             soundManager.stop();
             soundManager.playOneShot("LandfallFall");
+
             Collider[] enemies = Physics.OverlapSphere(transform.position, sphereRadius);
             foreach(Collider col in enemies)
             {
                 if (col.gameObject.tag == "Enemy")
                 {
-                    //collision.gameObject.GetComponent<StatManager>().changeHealth(20);
-                    collision.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * -enemySetback);
+                    stats.dealDamage(col.gameObject, 600);
+                    //knockbacks
+                    collision.gameObject.GetComponent<Rigidbody>().AddForce((collision.gameObject.transform.position - transform.position).normalized * enemySetback, ForceMode.Impulse);
                 }
                 
             }

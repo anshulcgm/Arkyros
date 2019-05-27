@@ -97,7 +97,7 @@ public class HammerTime : MonoBehaviour
             {
                 if (hit.gameObject.tag == "Enemy")
                 {
-                    stats.dealDamage(hit.gameObject, 20);
+                    stats.dealDamage(hit.gameObject, 600);
                 }
             }
 

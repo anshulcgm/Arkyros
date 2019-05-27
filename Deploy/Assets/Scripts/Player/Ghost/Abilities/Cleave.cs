@@ -58,12 +58,12 @@ public class Cleave : MonoBehaviour
             soundManager.playOneShot("Cleave");
 
             //temporary damage dealer
-            Collider[] hits = Physics.OverlapSphere(transform.position, 2);
+            Collider[] hits = Physics.OverlapSphere(transform.position, 10);
             foreach (Collider hit in hits)
             {
                 if (hit.gameObject.tag == "Enemy")
                 {
-                    stats.dealDamage(hit.gameObject, 20);
+                    stats.dealDamage(hit.gameObject, 600);
 
                 }
             }

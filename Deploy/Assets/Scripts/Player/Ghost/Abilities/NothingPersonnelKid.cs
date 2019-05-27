@@ -79,10 +79,12 @@ public class NothingPersonnelKid : MonoBehaviour
                 transform.LookAt(enemy.transform);
                 camera.transform.LookAt(enemy.transform); //might not spin camera around
                 
-
+                
                 anim.StartOverlayAnim("Swing_Heavy_1", 0.5f, 1.1f);
                 soundManager.playOneShot("NPKTeleport");
                 soundManager.playOneShot("NPKVoiceLine");
+
+                stats.dealDamage(enemy, 600);
             }
 
             
