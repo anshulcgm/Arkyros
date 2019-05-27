@@ -22,6 +22,7 @@ public class ShieldsUp : MonoBehaviour
 
     SoundManager soundManager;
     //might not always be Ghost, need different one for each class.
+    public GameObject shieldTemp;
 
     // Start is called before the first frame update
     void Start()
@@ -59,13 +60,7 @@ public class ShieldsUp : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
             anim.StartOverlayAnim("Stance", 0.5f, 4f); // mostly only for movement, probably not used in an ability
-            /*
-             * All the code for the ability that you want to write
-             * transform.forward for the direction the player is 
-             * maybe setting colliders
-             * instantiating new objects
-             * to damage enemy, EnemyGameObject.GetComponent<StatManager>().changeHealth(amount), amount can be positive or negative
-             */
+            Instantiate(shieldTemp, transform.position + transform.forward * 4, transform.rotation);
 
 
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
