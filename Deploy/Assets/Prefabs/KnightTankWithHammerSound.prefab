@@ -1961,10 +1961,6 @@ Animation:
   - {fileID: 7400014, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
   - {fileID: 7400024, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
   - {fileID: 7400016, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -2067,8 +2063,6 @@ MonoBehaviour:
   - Jump
   - Stance
   - Pull
-  - 
-  - 
   loopingAnims:
   - Flight
   - RunForward
@@ -2770,12 +2764,12 @@ PrefabInstance:
     - target: {fileID: 8496959186466642074, guid: b4770786ad0711f4db9fa58ba6af72ce,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000016181524
+      value: -0.0000000026781186
       objectReference: {fileID: 0}
     - target: {fileID: 8496959186466642074, guid: b4770786ad0711f4db9fa58ba6af72ce,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000001053474
+      value: 0.000000010748705
       objectReference: {fileID: 0}
     - target: {fileID: 8496959186466642074, guid: b4770786ad0711f4db9fa58ba6af72ce,
         type: 3}
