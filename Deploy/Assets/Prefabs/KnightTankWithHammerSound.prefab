@@ -1958,9 +1958,11 @@ Animation:
   - {fileID: 7400030, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
   - {fileID: 7400034, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
   - {fileID: 7400042, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
-  - {fileID: 7400014, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
+  - {fileID: 7400014, guid: 7cdaf01252efa594d81f3437c50aa5e9, type: 3}
   - {fileID: 7400024, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
   - {fileID: 7400016, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
+  - {fileID: 7400004, guid: 7cdaf01252efa594d81f3437c50aa5e9, type: 3}
+  - {fileID: 7400012, guid: 7cdaf01252efa594d81f3437c50aa5e9, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -2063,6 +2065,8 @@ MonoBehaviour:
   - Jump
   - Stance
   - Pull
+  - BannerPlant
+  - Intimidate
   loopingAnims:
   - Flight
   - RunForward
@@ -2191,6 +2195,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  shieldTemp: {fileID: 7383818346270251463, guid: 53db4d4734790e6489064c444bb2a6d0,
+    type: 3}
 --- !u!114 &7037134346127120625
 MonoBehaviour:
   m_ObjectHideFlags: 0

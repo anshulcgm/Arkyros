@@ -27,6 +27,11 @@ public class HeartOfDarkness : MonoBehaviour
 
     float sat;
 
+    Vector3 target;
+    bool u_gottem = false;
+    bool gottem_r = false;
+    Vector3 lastPosn = Vector3.zero;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,10 +46,7 @@ public class HeartOfDarkness : MonoBehaviour
     }
 
 
-    Vector3 target;
-    bool u_gottem = false;
-    bool gottem_r = false;
-    Vector3 lastPosn = Vector3.zero;
+    
     // Update is called once per frame
     void FixedUpdate()
     {
