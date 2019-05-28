@@ -32,6 +32,8 @@ public class HeartOfDarkness : MonoBehaviour
     bool gottem_r = false;
     Vector3 lastPosn = Vector3.zero;
 
+    public LayerMask self;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,14 +75,14 @@ public class HeartOfDarkness : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit))
+                    if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, Mathf.Infinity, self))
                     {
                         target = hit.point;
                         u_gottem = true;
                         cast = false;
-                        Debug.Log("hhhhhhhhhh");
+                        
                     }
-                    cooldown = 1000;
+                    cooldown = 300;
                 }
                 if ((DateTime.Now - start).TotalSeconds > 1)
                 {
@@ -91,7 +93,7 @@ public class HeartOfDarkness : MonoBehaviour
             }
             else
             {
-                cooldown = 500;
+                cooldown = 300;
                 cast = false;
                 
             }
@@ -107,10 +109,14 @@ public class HeartOfDarkness : MonoBehaviour
         if (u_gottem)
         {
             stats.setBuffDuration((int)buff.Gravityless, 0);
+            Debug.Log("HoD");
+
+            rigidbody.isKinematic = true;
             transform.position = target;
             Instantiate(reee, transform.position, Quaternion.identity);
             soundManager.playOneShot("HeartofDarknessDivebomb");
 
+            rigidbody.isKinematic = false;
             u_gottem = false;
             Collider[] stuff = Physics.OverlapSphere(target, 20);
             foreach (Collider c in stuff)

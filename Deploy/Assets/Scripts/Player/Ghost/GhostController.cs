@@ -51,6 +51,8 @@ public class GhostController : MonoBehaviour
         soundManager = GetComponent<SoundManager>();
         cam = Camera.main;
 
+        anim.PlayLoopingAnim("Idle");
+
 
     }
 
@@ -152,7 +154,7 @@ public class GhostController : MonoBehaviour
             anim.SetBool("WalkForwardBool", false);
             */
 
-            anim.PlayLoopingAnim("Idle");
+            //anim.PlayLoopingAnim("Idle");
 
 
             soundManager.playOneShot("CapeFlutter");
