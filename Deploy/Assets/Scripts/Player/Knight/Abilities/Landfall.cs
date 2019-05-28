@@ -67,8 +67,8 @@ public class Landfall : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {            
-            anim.PlayLoopingAnim("Flight"); //this tells the animator to play the right animation, what strength, what duration
-            anim.StartOverlayAnim("Jump", 0.5f, 0.5f);
+            //anim.PlayLoopingAnim("Flight"); //this tells the animator to play the right animation, what strength, what duration
+            anim.StartOverlayAnim("Jump", 0.5f, 1f);
             soundManager.playOneShot("LandfallJump");
             soundManager.play("LandfallSustain");
             transform.rotation = camera.transform.rotation;

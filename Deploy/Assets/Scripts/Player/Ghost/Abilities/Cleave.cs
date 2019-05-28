@@ -42,7 +42,7 @@ public class Cleave : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            Debug.Log("reee");
+            //Debug.Log("reee");
             
             
 
@@ -56,6 +56,7 @@ public class Cleave : MonoBehaviour
         {
             anim.StartOverlayAnim("Circle_strike_2", 0.5f, 1f); //this tells the animator to play the right animation
             soundManager.playOneShot("Cleave");
+            Debug.Log("Cleave");
 
             //temporary damage dealer
             Collider[] hits = Physics.OverlapSphere(transform.position, 10);
