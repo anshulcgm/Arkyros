@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(GravityBody))]
@@ -11,6 +12,7 @@ public class SphericalMovementPlayer : MonoBehaviour
     public float walkSpeed = 6;
     public float jumpForce = 220;
     public LayerMask groundedMask;
+    AnimationController anim;
 
     // System vars
     bool grounded;
@@ -27,6 +29,8 @@ public class SphericalMovementPlayer : MonoBehaviour
         Cursor.visible = false;
         cameraTransform = Camera.main.transform;
         rigidbody = GetComponent<Rigidbody>();
+
+        anim = GetComponent<AnimationController>();
     }
 
     void Update()
@@ -45,6 +49,44 @@ public class SphericalMovementPlayer : MonoBehaviour
         Vector3 moveDir = new Vector3(inputX, 0, inputY).normalized;
         Vector3 targetMoveAmount = moveDir * walkSpeed;
         moveAmount = Vector3.SmoothDamp(moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
+
+        if (Math.Abs(moveDir.x) > Math.Abs(moveDir.z))
+        {
+            if (!Input.GetButtonDown("Jump"))
+            {
+                if (moveDir.x > 0)
+                {
+                    anim.PlayLoopingAnim("Move_Right");
+                }
+                else
+                {
+                    anim.PlayLoopingAnim("Move_Left");
+                }
+            }
+        }
+        else if (Math.Abs(moveDir.x) < Math.Abs(moveDir.z))
+        {
+            if (!Input.GetButtonDown("Jump"))
+            {
+                if (moveDir.z > 0)
+                {
+                    anim.PlayLoopingAnim("Move_Forward");
+
+                }
+                else
+                {
+                    anim.PlayLoopingAnim("Move_Backward");
+                }
+            }
+
+        }
+
+        if (moveDir.x <= 0.01f && moveDir.z <= 0.01f)
+        {
+            anim.PlayLoopingAnim("Idle");
+        }
+
+
 
         // Jump
         if (Input.GetButtonDown("Jump"))
