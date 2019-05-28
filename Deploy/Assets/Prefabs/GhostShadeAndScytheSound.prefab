@@ -1220,7 +1220,6 @@ GameObject:
   - component: {fileID: 7883453124324539443}
   - component: {fileID: 7883453124324539452}
   - component: {fileID: 7883453124324539453}
-  - component: {fileID: 7883453124324539454}
   - component: {fileID: 7883453124324539455}
   - component: {fileID: 7883453124324539448}
   - component: {fileID: 7883453124324539449}
@@ -1230,10 +1229,9 @@ GameObject:
   - component: {fileID: 7883453124324539397}
   - component: {fileID: 7883453124324539398}
   - component: {fileID: 7883453124324539399}
-  - component: {fileID: 7883453124324539392}
   - component: {fileID: 7883453124324539393}
   - component: {fileID: 7883453124324539394}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GhostShadeAndScytheSound
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1321,19 +1319,6 @@ MonoBehaviour:
   - Move_Right
   currentLoopingAnim: 
   currentOverlayAnim: 
---- !u!114 &7883453124324539454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7883453124324539395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81d2f846493c43f4abd45d56f26514fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 0
 --- !u!82 &7883453124324539455
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1484,8 +1469,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 35dc0ebc37d646a4a8429786199c27fd, type: 3}
   - {fileID: 8300000, guid: e4d20c890f4f4bd4f951576fa919c005, type: 3}
   - {fileID: 8300000, guid: 5d4f1aa195ae9f64d824490f2520b2fe, type: 3}
-  - {fileID: 8300000, guid: e33f26391fa83064783907ae7cb298db, type: 3}
-  - {fileID: 8300000, guid: e33f26391fa83064783907ae7cb298db, type: 3}
   ClipNames:
   - Cleave
   - CullingStrike
@@ -1527,8 +1510,6 @@ MonoBehaviour:
   - Sprint
   - Walk
   - Idle
-  - HeartofDarknessTeleport
-  - HeartofDarknessTeleport
 --- !u!54 &7883453124324539449
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1636,19 +1617,6 @@ MonoBehaviour:
   cooldown: 0
   ParticleHit: {fileID: 973864921190199927, guid: 7d3c94594af65124595ccaa982e50c7a,
     type: 3}
---- !u!114 &7883453124324539392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7883453124324539395}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5406a75f1af5bc6458820b8cbeb41c89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 0
 --- !u!114 &7883453124324539393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1663,6 +1631,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   reee: {fileID: 1651180266, guid: ad021eb4027393c49bd70d3962f95c29, type: 3}
+  self:
+    serializedVersion: 2
+    m_Bits: 311
 --- !u!114 &7883453124324539394
 MonoBehaviour:
   m_ObjectHideFlags: 0
