@@ -26,9 +26,10 @@ public class CollisionCode : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Collided with " + collision.gameObject.name);
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Center")
         {
             collision.gameObject.GetComponent<Stats>().takeDamage(golemShootDamage);
+            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
         }
         Destroy(gameObject);
     }

@@ -6,7 +6,6 @@ public class ShlyEnemyBehavior : MonoBehaviour
 {
     private GameObject player;
     public ShlyEnemy shly;
-    private Rigidbody r;
 
     public float speed;
     public float bullChargeSpeed;
@@ -43,7 +42,6 @@ public class ShlyEnemyBehavior : MonoBehaviour
     void Start()
     {
         //speed = GetComponent<StatManager>().kamikazeMovementSpeed;
-        r = GetComponent<Rigidbody>();
         oNeutralMovementTimer = neutralMovementTimer;
         //player = GameObject.FindGameObjectWithTag("Player");
         //anim = transform.GetChild(0).gameObject.GetComponent<Animator>();
@@ -148,7 +146,7 @@ public class ShlyEnemyBehavior : MonoBehaviour
             neutralMovementTimer -= Time.deltaTime; 
             if (neutralMovementTimer >= 0)
             {
-                r.velocity = Vector3.zero;
+                rb.velocity = Vector3.zero;
             }
             else
             {
@@ -175,7 +173,7 @@ public class ShlyEnemyBehavior : MonoBehaviour
             Vector3 dir = collision.contacts[0].point - transform.position;
             dir = -dir.normalized;
 
-            //rb.AddForce(dir * 2f);
+            rb.AddForce(dir * 0.5f);
 
         }
 

@@ -97,7 +97,8 @@ public class GolemAttackBehavior : MonoBehaviour {
     //Attack Behaviors
     public void groundPound()
     {
-        sphericalMovement(player.transform.position, speed);
+        rb.velocity = Vector3.zero;
+        //sphericalMovement(player.transform.position, speed);
         Debug.Log("In groundPound");
         anim.SetTrigger("GroundPound");
         //Debug.Log("GroundPound trigger set");
@@ -113,7 +114,7 @@ public class GolemAttackBehavior : MonoBehaviour {
 
     public void charge()
     {
-        Debug.Log("In charge funciton");
+        Debug.Log("In charge function");
         anim.SetTrigger("Charge");
         //Debug.Log("Charge trigger set");
         sphericalMovement(player.transform.position, chargeSpeed);
@@ -129,16 +130,16 @@ public class GolemAttackBehavior : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Center")
         {
             collision.gameObject.GetComponent<Stats>().takeDamage(GetComponent<StatManager>().golem.getChargeDmg());
-            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+            //Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
         }
     }
     public void sphericalMovement(Vector3 target, float speed)
     {
         Plane2 plane = new Plane2(transform.position.normalized, transform.position);
-
+        target = findRaycastPointOnSphere(target);
         Vector2 mappedPoint = plane.GetMappedPoint(target) - plane.GetMappedPoint(transform.position);
         Vector3 mappedPoint3D = mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir;
         if (mappedPoint.magnitude > 1)
@@ -155,12 +156,31 @@ public class GolemAttackBehavior : MonoBehaviour {
               //  rb.AddForce(transform.position.normalized * gravity);
                 //rb.AddForce((mappedPoint2.x * alignPlane.xDir + mappedPoint2.y * alignPlane.yDir).normalized * speed/-2f);
             //}
-        }  
+        }
         //adding force towards gravity, adding force towards direction faced
         //rb.AddForce(transform.forward * speed);
-        rb.velocity = (target - transform.position).normalized* speed;
-
+        //rb.velocity = (findRaycastPointOnSphere(target) - transform.position).normalized * speed;
+        if(Vector3.Distance(player.transform.position, transform.position) <= 10f)
+        {
+            rb.velocity = -(findRaycastPointOnSphere(target) - transform.position).normalized * speed;
+        }
+        else
+        {
+            rb.velocity = (findRaycastPointOnSphere(target) - transform.position).normalized * speed;
+        }
+        
         //rb.AddForce(transform.position.normalized * gravity);
+    }
+
+    public Vector3 findRaycastPointOnSphere(Vector3 point)
+    {
+        RaycastHit hit;
+        Vector3 pointToReturn = Vector3.zero;
+        if (Physics.Raycast(point + point.normalized * 5.0f, (-point).normalized, out hit, Mathf.Infinity))
+        {
+            pointToReturn = hit.point;
+        }
+        return pointToReturn;
     }
     public Vector3 randomPointInRadius()
     {

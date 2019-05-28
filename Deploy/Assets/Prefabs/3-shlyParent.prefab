@@ -133,8 +133,8 @@ MonoBehaviour:
   projectile: {fileID: 4560942895118958702, guid: 89f07b51d18d0b442b44951002cdeede,
     type: 3}
   maxDisToTravel: 10
-  idleBehaviorRadius: 100
-  attackRadius: 40
+  idleBehaviorRadius: 200
+  attackRadius: 100
 --- !u!54 &7228260067136529737
 Rigidbody:
   m_ObjectHideFlags: 0
