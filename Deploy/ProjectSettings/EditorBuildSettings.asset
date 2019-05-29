@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/TestScenes/Enemy/Enemy_PitchVideo.unity
     guid: cacdcfbbec7731742afaf0c7bd20ae90
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestScenes/PitchVideoScene.unity
     guid: 0f52c29cf1d6316498a867c31ed73aae
   m_configObjects: {}
