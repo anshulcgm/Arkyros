@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 [RequireComponent(typeof(GravityBody))]
-public class KnightController : MonoBehaviour
+public class AlphaController : MonoBehaviour
 {
 
     // public vars
@@ -59,9 +59,11 @@ public class KnightController : MonoBehaviour
         // Look rotation:
         
         transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivityX);
+        /*
         verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
         verticalLookRotation = Mathf.Clamp(verticalLookRotation, -60, 60);
         cameraTransform.localEulerAngles = Vector3.left * verticalLookRotation;
+        */
 
         // Calculate movement:
         float inputX = Input.GetAxisRaw("Horizontal");
