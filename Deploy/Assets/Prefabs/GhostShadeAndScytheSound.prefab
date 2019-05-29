@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453123714921343}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Pinky_Base_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7883453123735363584}
   - component: {fileID: 7883453123735363585}
   - component: {fileID: 7883453123735363586}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453123757069260}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Middle_Mid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453123784408280}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body_Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453123837363423}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Arm_Tip_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453123855252777}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Pinky_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453123867890047}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Middle_Base_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883453123876816374}
   - component: {fileID: 7883453123876816373}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +359,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7883453124324539443}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &7883453123876816373
 SkinnedMeshRenderer:
@@ -451,7 +451,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453123923488002}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Leg_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -482,7 +482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453124048858761}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Arm_Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -515,7 +515,7 @@ GameObject:
   - component: {fileID: 7883453124094129275}
   - component: {fileID: 7883453124094129273}
   - component: {fileID: 7883453124094129274}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CM Third Person
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,14 +530,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7883453124094129220}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.000024557114, y: 12.000023, z: -24.000004}
+  m_LocalPosition: {x: 0.00000333786, y: 11.999987, z: -23.999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7883453125390904642}
   - {fileID: 7883453124111189394}
   - {fileID: 7883453124872942468}
   m_Father: {fileID: 7883453124324539443}
-  m_RootOrder: 1
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7883453124094129273
 MonoBehaviour:
@@ -680,7 +680,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883453124111189394}
   - component: {fileID: 7883453124111189393}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MiddleRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -694,7 +694,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7883453124111189395}
-  m_LocalRotation: {x: 0.104110755, y: 0.0000018209685, z: -0.00000031187665, w: 0.9945657}
+  m_LocalRotation: {x: 0.10410923, y: -0.00000016173, z: 0.000000035506677, w: 0.9945659}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -755,7 +755,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453124147075277}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -776,7 +776,7 @@ Transform:
   - {fileID: 7883453123784408280}
   - {fileID: 7883453124173906057}
   m_Father: {fileID: 7883453124324539443}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7883453124160897993
 GameObject:
@@ -788,7 +788,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883453124160897992}
   - component: {fileID: 7883453124160897999}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -807,7 +807,7 @@ Transform:
   m_LocalScale: {x: -0.08457172, y: -0.08457173, z: -4.2793803}
   m_Children: []
   m_Father: {fileID: 7883453124324539443}
-  m_RootOrder: 14
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &7883453124160897999
 SkinnedMeshRenderer:
@@ -901,7 +901,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453124173906057}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Weapon_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -932,7 +932,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453124194629926}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Point_Mid_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -963,7 +963,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453124244410441}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Pointer_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -995,7 +995,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883453124258287145}
   - component: {fileID: 7883453124258287144}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1014,7 +1014,7 @@ Transform:
   m_LocalScale: {x: 0.68496543, y: 0.7370462, z: 0.56}
   m_Children: []
   m_Father: {fileID: 7883453124324539443}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &7883453124258287144
 SkinnedMeshRenderer:
@@ -1107,7 +1107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883453124278502625}
   - component: {fileID: 7883453124278502624}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1126,7 +1126,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7883453124324539443}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &7883453124278502624
 SkinnedMeshRenderer:
@@ -1249,9 +1249,6 @@ Transform:
   m_LocalPosition: {x: 1025.436, y: 3839.4363, z: 544.2243}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7883453124527897395}
-  - {fileID: 7883453124094129275}
-  - {fileID: 7883453125667408863}
   - {fileID: 7883453124147075277}
   - {fileID: 7883453125751203697}
   - {fileID: 7883453124700102921}
@@ -1265,6 +1262,9 @@ Transform:
   - {fileID: 7883453124845496986}
   - {fileID: 7883453124160897992}
   - {fileID: 7883453125222887028}
+  - {fileID: 7883453124527897395}
+  - {fileID: 7883453124094129275}
+  - {fileID: 7883453125667408863}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 7.7830005, y: -1.0810001, z: -14.961}
@@ -1588,7 +1588,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7883453124324539395}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa2bd1ac093f48f499d6e7f6e0ebbb96, type: 3}
   m_Name: 
@@ -1668,7 +1668,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453124338520218}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Middle_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1703,7 +1703,7 @@ GameObject:
   - component: {fileID: 7883453124527897392}
   - component: {fileID: 7883453124527897393}
   - component: {fileID: 7883453124527897394}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1717,12 +1717,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7883453124527897404}
-  m_LocalRotation: {x: 0.10411078, y: 0.0000018060674, z: -0.00000019086293, w: 0.9945657}
-  m_LocalPosition: {x: -0.000024557114, y: 12.000023, z: -24.000004}
+  m_LocalRotation: {x: 0.10410923, y: -0.00000013565297, z: 0.00000003364403, w: 0.9945659}
+  m_LocalPosition: {x: 0.00000333786, y: 11.999987, z: -23.999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7883453124324539443}
-  m_RootOrder: 0
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &7883453124527897399
 Camera:
@@ -2013,7 +2013,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453124591842959}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Leg_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2044,7 +2044,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453124604140746}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Pointer_Tip_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2075,7 +2075,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883453124643365429}
   - component: {fileID: 7883453124643365428}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2094,7 +2094,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7883453124324539443}
-  m_RootOrder: 8
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &7883453124643365428
 SkinnedMeshRenderer:
@@ -2186,7 +2186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453124654720280}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Pinky_Tip_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2217,7 +2217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883453124700102921}
   - component: {fileID: 7883453124700102920}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2236,7 +2236,7 @@ Transform:
   m_LocalScale: {x: 0.93342364, y: 0.9334238, z: 0.9334237}
   m_Children: []
   m_Father: {fileID: 7883453124324539443}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &7883453124700102920
 SkinnedMeshRenderer:
@@ -2329,7 +2329,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883453124724223347}
   - component: {fileID: 7883453124724223346}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2348,7 +2348,7 @@ Transform:
   m_LocalScale: {x: -1, y: -1, z: -1}
   m_Children: []
   m_Father: {fileID: 7883453124324539443}
-  m_RootOrder: 12
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &7883453124724223346
 SkinnedMeshRenderer:
@@ -2441,7 +2441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883453124764183038}
   - component: {fileID: 7883453124764183037}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2460,7 +2460,7 @@ Transform:
   m_LocalScale: {x: -0.68496543, y: -0.73704624, z: -0.5600002}
   m_Children: []
   m_Father: {fileID: 7883453124324539443}
-  m_RootOrder: 10
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &7883453124764183037
 SkinnedMeshRenderer:
@@ -2552,7 +2552,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453124782867647}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Middle_Tip_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2583,7 +2583,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883453124845496986}
   - component: {fileID: 7883453124845496985}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2602,7 +2602,7 @@ Transform:
   m_LocalScale: {x: 0.39737934, y: 0.3973794, z: 0.3973794}
   m_Children: []
   m_Father: {fileID: 7883453124324539443}
-  m_RootOrder: 13
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &7883453124845496985
 SkinnedMeshRenderer:
@@ -2695,7 +2695,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453124863616638}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Point_Mid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2727,7 +2727,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883453124872942468}
   - component: {fileID: 7883453124872942523}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BottomRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2741,7 +2741,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7883453124872942469}
-  m_LocalRotation: {x: 0.08605074, y: 0.0000018710268, z: -0.0000011274241, w: 0.99629074}
+  m_LocalRotation: {x: 0.08604926, y: -0.00000009161887, z: -0.00000090611877, w: 0.9962909}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2802,7 +2802,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453124888202900}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Weapon_Base_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2833,7 +2833,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453124932699252}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Arm_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2864,7 +2864,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453124936020231}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Arm_Base_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2898,7 +2898,7 @@ GameObject:
   - component: {fileID: 7883453125055134997}
   - component: {fileID: 7883453125055134998}
   - component: {fileID: 7883453125055134999}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3020,7 +3020,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453125058414046}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Weapon_Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3050,7 +3050,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453125136327738}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Pinky_Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3080,7 +3080,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453125189900673}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Leg_Tip
   m_TagString: LeftLeg
   m_Icon: {fileID: 0}
@@ -3111,7 +3111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883453125222887028}
   - component: {fileID: 7883453125222887019}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3130,7 +3130,7 @@ Transform:
   m_LocalScale: {x: 0.2191411, y: 0.21914114, z: 0.09374437}
   m_Children: []
   m_Father: {fileID: 7883453124324539443}
-  m_RootOrder: 15
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &7883453125222887019
 SkinnedMeshRenderer:
@@ -3222,7 +3222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453125238259604}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Leg_Tip
   m_TagString: RightLeg
   m_Icon: {fileID: 0}
@@ -3255,7 +3255,7 @@ GameObject:
   - component: {fileID: 7883453125251597058}
   - component: {fileID: 7883453125251597059}
   - component: {fileID: 7883453125251597068}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3377,7 +3377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453125299507114}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Hand_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3411,7 +3411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883453125325290685}
   - component: {fileID: 7883453125325290684}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3430,7 +3430,7 @@ Transform:
   m_LocalScale: {x: -1, y: -1, z: -1}
   m_Children: []
   m_Father: {fileID: 7883453124324539443}
-  m_RootOrder: 11
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &7883453125325290684
 SkinnedMeshRenderer:
@@ -3522,7 +3522,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453125359361099}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Pointer_Base_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3554,7 +3554,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883453125390904642}
   - component: {fileID: 7883453125390904641}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TopRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3568,7 +3568,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7883453125390904643}
-  m_LocalRotation: {x: 0.122184165, y: 0.0000019075815, z: -0.0000010594958, w: 0.9925075}
+  m_LocalRotation: {x: 0.122182705, y: -0.00000005218317, z: -0.0000009478536, w: 0.99250764}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3629,7 +3629,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453125480431303}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Middle_Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3659,7 +3659,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453125545244577}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Middle_Mid_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3690,7 +3690,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453125590627397}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3723,7 +3723,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453125664610740}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3756,7 +3756,7 @@ GameObject:
   - component: {fileID: 7883453125667408860}
   - component: {fileID: 7883453125667408861}
   - component: {fileID: 7883453125667408862}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GhostCenter
   m_TagString: Center
   m_Icon: {fileID: 0}
@@ -3775,7 +3775,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7883453124324539443}
-  m_RootOrder: 2
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7883453125667408860
 MeshFilter:
@@ -3845,7 +3845,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453125726513016}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3879,7 +3879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883453125751203697}
   - component: {fileID: 7883453125751203696}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3898,7 +3898,7 @@ Transform:
   m_LocalScale: {x: 1.1411312, y: 1.1411319, z: 0.70669603}
   m_Children: []
   m_Father: {fileID: 7883453124324539443}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &7883453125751203696
 SkinnedMeshRenderer:
@@ -3990,7 +3990,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7883453125756387736}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Cloak_Pointer_Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
