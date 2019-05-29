@@ -14,7 +14,7 @@ public class AccelerateThroughGate : MonoBehaviour
     {
         particleLocation = this.transform.GetChild(3).gameObject.transform.position;
 
-        System.Timers.Timer timer = new System.Timers.Timer(400);
+        System.Timers.Timer timer = new System.Timers.Timer(250);
         timer.Enabled = true;
         timer.Elapsed += (sender, e) =>
         {
@@ -23,7 +23,7 @@ public class AccelerateThroughGate : MonoBehaviour
             timer.Dispose();
 
         };
-        System.Timers.Timer timerP = new System.Timers.Timer(20000);
+        System.Timers.Timer timerP = new System.Timers.Timer(5000);
         timerP.Enabled = true;
         timerP.Elapsed += (sender, e) =>
         {
@@ -46,7 +46,7 @@ public class AccelerateThroughGate : MonoBehaviour
         }
         else
         {
-            speed += 10f;
+            speed += 50f;
         }
         this.transform.Translate(Vector3.forward * Time.deltaTime * speed);
         if (ridOfParticle == 1)
