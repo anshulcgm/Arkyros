@@ -29,6 +29,7 @@ public class NothingPersonnelKid : MonoBehaviour
     GameObject enemy;
     GameObject clone;
     bool cloneSpawned;
+    bool particleSpawned;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +50,7 @@ public class NothingPersonnelKid : MonoBehaviour
         {
             cast = false;
             cloneSpawned = false;
+            particleSpawned = false;
             start = DateTime.Now;
             //anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
             enemy = tcs.getTarget();
@@ -73,7 +75,12 @@ public class NothingPersonnelKid : MonoBehaviour
             {
 
                 transform.position = enemy.transform.position + enemy.transform.forward;
-                Instantiate(ParticleHit, enemy.transform.position, enemy.transform.rotation);
+                if (!particleSpawned)
+                {
+                    Instantiate(ParticleHit, enemy.transform.position, enemy.transform.rotation);
+                    particleSpawned = true;
+                }
+                
 
                 
                 transform.LookAt(enemy.transform);

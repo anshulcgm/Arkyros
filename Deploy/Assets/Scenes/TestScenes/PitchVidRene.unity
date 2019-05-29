@@ -1896,6 +1896,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GhostShadeAndScytheSound
       objectReference: {fileID: 0}
+    - target: {fileID: 7883453124324539395, guid: d915ec501d7a68743935116a6edd9aa3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7883453124324539443, guid: d915ec501d7a68743935116a6edd9aa3,
         type: 3}
       propertyPath: m_LocalPosition.x
