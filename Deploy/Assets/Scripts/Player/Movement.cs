@@ -22,6 +22,8 @@ public class Movement : MonoBehaviour
 
     public AnimationController anim;
 
+    public LayerMask layerMask;
+
     
     // Start is called before the first frame update
     void Start()
@@ -71,7 +73,7 @@ public class Movement : MonoBehaviour
         }
         moveAmount = moveAmount.normalized;
 
-        if(Input.GetKey(KeyCode.Space) && Physics.Raycast(transform.position, -transform.up, 1)){
+        if(Input.GetKey(KeyCode.Space) && Physics.Raycast(transform.position + transform.up, -transform.up, 1.5f, layerMask)){
             r.AddForce(jumpForce * transform.position.normalized);            
         }
 
@@ -81,14 +83,16 @@ public class Movement : MonoBehaviour
             playerModel.transform.localRotation = Quaternion.Slerp(playerModel.transform.localRotation, targetModelRot, Time.deltaTime * slerpSpeed);
         }
          r.AddForce(-gravity * transform.position.normalized);
-         
+
+        Vector3 localMove = moveAmount * Time.fixedDeltaTime * moveSpeed;
+        Debug.DrawLine(transform.position, transform.position + moveAmount, Color.red);
+        r.MovePosition(r.position + localMove);
+
     }
 
     void FixedUpdate()
     {
         // Apply movement to rigidbody
-        Vector3 localMove = moveAmount * Time.fixedDeltaTime * moveSpeed;
-        Debug.DrawLine(transform.position, transform.position + moveAmount, Color.red);        
-        r.MovePosition(r.position + localMove);
+        
     }
 }

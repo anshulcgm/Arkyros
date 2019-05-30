@@ -10,7 +10,7 @@ public class HeartOfDarkness : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
 
     DateTime start;
     DateTime lastCast;
@@ -37,7 +37,7 @@ public class HeartOfDarkness : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
@@ -100,6 +100,7 @@ public class HeartOfDarkness : MonoBehaviour
         }
         else
         {
+
             sat = Mathf.Min((float)(DateTime.Now - lastCast).TotalSeconds, 1);
             camera.GetComponent<ColorCorrectionCurves>().saturation = sat;
             gottem_r = false;

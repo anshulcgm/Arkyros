@@ -901,7 +901,7 @@ GameObject:
   - component: {fileID: 8246840471494153958}
   - component: {fileID: 8246840471494153880}
   m_Layer: 9
-  m_Name: GhostShadeAndScytheSound 1
+  m_Name: GhostShadeAndScytheMoving
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1130,7 +1130,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &8246840471494153949
 MonoBehaviour:
@@ -1176,6 +1176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  anim: {fileID: 6115156436900278675}
   ParticleHit: {fileID: 973864921190199927, guid: 7d3c94594af65124595ccaa982e50c7a,
     type: 3}
 --- !u!114 &8246840471494153959
@@ -1191,6 +1192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  anim: {fileID: 6115156436900278675}
   reee: {fileID: 1651180266, guid: ad021eb4027393c49bd70d3962f95c29, type: 3}
   self:
     serializedVersion: 2
@@ -1228,10 +1230,13 @@ MonoBehaviour:
   r: {fileID: 8246840471494153951}
   slerpSpeed: 5
   jumpForce: 30
-  gravity: 0
-  moveSpeed: 10
+  gravity: 10
+  moveSpeed: 50
   grounded: 0
   anim: {fileID: 6115156436900278675}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 311
 --- !u!65 &8246840471494153880
 BoxCollider:
   m_ObjectHideFlags: 0

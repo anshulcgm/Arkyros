@@ -7,6 +7,8 @@ public class FollowTargetOverrideUp : MonoBehaviour
     public GameObject targetLook;
     public GameObject targetFollow;
 
+    public float deadZone;
+
     public float rotationDamping;
 
     public float positionDamping;
@@ -19,9 +21,10 @@ public class FollowTargetOverrideUp : MonoBehaviour
 
     Vector3 velocity = Vector3.zero;
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         Quaternion lookRot = Quaternion.LookRotation(targetLook.transform.position - transform.position, targetLook.transform.up);
+
         Vector3 followPoint = targetFollow.transform.position;
         RaycastHit hit;
         if(Physics.Raycast(targetLook.transform.position, targetFollow.transform.position - targetLook.transform.position, out hit)){
@@ -29,7 +32,15 @@ public class FollowTargetOverrideUp : MonoBehaviour
                 followPoint = hit.point;
             }
         }
-        transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, rotationDamping * Time.deltaTime);
-        transform.position = Vector3.Lerp(transform.position, followPoint, positionDamping * Time.deltaTime);
+
+        if(Quaternion.Angle(transform.rotation, lookRot) > deadZone)
+        {
+            //transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, rotationDamping * Time.deltaTime);
+            
+        }
+        transform.rotation = lookRot;
+
+        transform.position = followPoint;
+        //transform.position = Vector3.Lerp(transform.position, followPoint, positionDamping * Time.deltaTime);
     }
 }
