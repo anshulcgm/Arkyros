@@ -107,7 +107,7 @@ public class Stats : MonoBehaviour
     {
         health -= damage;
         health = Mathf.Clamp(health, 0, maxHealth); //might be moved to update
-        soundManager.playOneShot("TakeDamage");
+        //soundManager.playOneShot("TakeDamage");
     }
 
     public void heal(float healAmount)
