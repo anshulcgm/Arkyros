@@ -41,8 +41,8 @@ public class GolemAttackBehavior : MonoBehaviour {
 	void Start () {
 
         rb = GetComponent<Rigidbody>();
-        chargeSpeed = GetComponent<StatManager>().golemChargeSpeed;
-        speed = GetComponent<StatManager>().golem.enemyStats.getSpeed();
+        chargeSpeed = 30;
+        speed = 10;
         planet = GameObject.FindGameObjectWithTag("planet");
         player = GameObject.FindGameObjectWithTag("Player");
         anim = transform.GetChild(0).GetComponent<Animator>();
