@@ -313,6 +313,11 @@ PrefabInstance:
       propertyPath: idleRadius
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8517697227333292104, guid: a45dac9987b8e7d4bb6122f17fcdf9c8,
+        type: 3}
+      propertyPath: healthTimer
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a45dac9987b8e7d4bb6122f17fcdf9c8, type: 3}
 --- !u!1 &516669576 stripped
@@ -627,6 +632,11 @@ PrefabInstance:
         type: 3}
       propertyPath: idleRadius
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517697227333292104, guid: a45dac9987b8e7d4bb6122f17fcdf9c8,
+        type: 3}
+      propertyPath: healthTimer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a45dac9987b8e7d4bb6122f17fcdf9c8, type: 3}
@@ -1692,6 +1702,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -10.2
       objectReference: {fileID: 0}
+    - target: {fileID: 8517697227333292104, guid: a45dac9987b8e7d4bb6122f17fcdf9c8,
+        type: 3}
+      propertyPath: healthTimer
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a45dac9987b8e7d4bb6122f17fcdf9c8, type: 3}
 --- !u!1 &1476159891 stripped
@@ -1713,7 +1728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1002896406898434, guid: 7177284d742bdb849941e3b6df07b34c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4673744408239424, guid: 7177284d742bdb849941e3b6df07b34c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1919,6 +1934,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517697227333292104, guid: a45dac9987b8e7d4bb6122f17fcdf9c8,
+        type: 3}
+      propertyPath: healthTimer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a45dac9987b8e7d4bb6122f17fcdf9c8, type: 3}
@@ -2525,22 +2545,22 @@ PrefabInstance:
     - target: {fileID: 7883453125667408862, guid: d915ec501d7a68743935116a6edd9aa3,
         type: 3}
       propertyPath: m_Center.x
-      value: -0.41631895
+      value: -0.4163189
       objectReference: {fileID: 0}
     - target: {fileID: 7883453125667408862, guid: d915ec501d7a68743935116a6edd9aa3,
         type: 3}
       propertyPath: m_Center.z
-      value: 0.46139547
+      value: 0.4613955
       objectReference: {fileID: 0}
     - target: {fileID: 7883453125667408862, guid: d915ec501d7a68743935116a6edd9aa3,
         type: 3}
       propertyPath: m_Center.y
-      value: -0.8220501
+      value: -0.006742231
       objectReference: {fileID: 0}
     - target: {fileID: 7883453125667408862, guid: d915ec501d7a68743935116a6edd9aa3,
         type: 3}
       propertyPath: m_Height
-      value: 3.3605347
+      value: 4.9911513
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d915ec501d7a68743935116a6edd9aa3, type: 3}
