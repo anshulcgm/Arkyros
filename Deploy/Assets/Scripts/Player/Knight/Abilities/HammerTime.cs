@@ -12,6 +12,7 @@ public class HammerTime : MonoBehaviour
     public AnimationController anim;
     DateTime start;
     DateTime hammerSwing;
+    DateTime firstSwing;
 
 
     Rigidbody rigidbody;
@@ -25,6 +26,7 @@ public class HammerTime : MonoBehaviour
     public GameObject particleSmash;
     bool particleSpawned;
     public GameObject HammerHead;
+    bool done;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +52,7 @@ public class HammerTime : MonoBehaviour
             cast = false; //ability not yet cast
             start = DateTime.Now;
             particleSpawned = false;
+            done = false;
             
 
 
@@ -62,6 +65,7 @@ public class HammerTime : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
             hammerSwing = DateTime.Now;
+            firstSwing = DateTime.Now;
             soundManager.playOneShot("HammerTime");
 
 
@@ -69,31 +73,17 @@ public class HammerTime : MonoBehaviour
             anim.StartOverlayAnim("Swing_Heavy", 0.5f, 0.8f);
             particleSpawned = false;
 
-            //dmg
-            Collider[] hits = Physics.OverlapSphere(HammerHead.transform.position, 4/*placeholder radius*/);
-
-            foreach (Collider hit in hits)
-            {
-                if (hit.gameObject.tag == "Enemy")
-                {
-                    stats.dealDamage(hit.gameObject, 20);
-                }
-            }
+            
 
             cooldown = 600;                          //placeholder time, divide by 60 for cooldown in seconds
             cast = true;
 
         }
 
-        if ((DateTime.Now - hammerSwing).TotalSeconds > 1 && cast)
+        if((DateTime.Now - firstSwing).TotalSeconds > 0.8 && cast && !done)
         {
-            hammerSwing = DateTime.Now;
-            anim.StartOverlayAnim("Swing_Heavy", 0.5f, 0.8f);
-            particleSpawned = false;
+            Collider[] hits = Physics.OverlapSphere(HammerHead.transform.position, 30);
 
-            //dmg
-            Collider[] hits = Physics.OverlapSphere(HammerHead.transform.position, 4/*placeholder radius*/);
-            
             foreach (Collider hit in hits)
             {
                 if (hit.gameObject.tag == "Enemy")
@@ -102,12 +92,37 @@ public class HammerTime : MonoBehaviour
                 }
             }
 
+            done = true;
+        }
+
+        if ((DateTime.Now - hammerSwing).TotalSeconds > 1 && cast)
+        {
+            hammerSwing = DateTime.Now;
+            anim.StartOverlayAnim("Swing_Heavy", 0.5f, 0.8f);
+            particleSpawned = false;
+
+            
+            
+
         }
 
         if ((DateTime.Now - hammerSwing).TotalSeconds > 0.8 && cast && !particleSpawned)//timed to explode with hammer connection
         {
             Instantiate(particleSmash, HammerHead.transform.position, transform.rotation);
             particleSpawned = true;
+
+            //dmg
+            Collider[] hits = Physics.OverlapSphere(HammerHead.transform.position, 60);
+
+            foreach (Collider hit in hits)
+            {
+                if (hit.gameObject.tag == "Enemy")
+                {
+                    stats.dealDamage(hit.gameObject, 600);
+                }
+            }
+
+            
         }
 
 

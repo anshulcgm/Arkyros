@@ -38,7 +38,7 @@ public class SkyHammerScript : MonoBehaviour
         
             Instantiate(particleBoom, transform.position, transform.rotation);
             Debug.Log("SkyHammer Down");
-            Collider[] hits = Physics.OverlapSphere(transform.position, 20);
+            Collider[] hits = Physics.OverlapSphere(transform.position, 60);
             foreach (Collider hit in hits)
             {
                 if (hit.gameObject.tag == "Enemy")
