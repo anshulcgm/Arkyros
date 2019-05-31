@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public bool isMoving = false;
+    public bool isAirborne = false;
+
     public float mouseSensitivity;
-    public GameObject camPitch;
     public GameObject playerModel;
     public GameObject playerDir;
+
+    public CinemachineFreeLook c;
+
 
     public Rigidbody r;
     public float slerpSpeed;
@@ -18,20 +24,17 @@ public class Movement : MonoBehaviour
 
     public float moveSpeed;
 
-    public bool grounded = false;
-
-    public AnimationController anim;
+    //public bool grounded = false;
 
     public LayerMask layerMask;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         r = GetComponent<Rigidbody>();
-        anim.PlayLoopingAnim("Idle");
     }
 
     float tiltAroundX, tiltAroundY = 0;
@@ -39,60 +42,62 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        r.rotation = Quaternion.FromToRotation(transform.up, r.position.normalized) * r.rotation;
 
-        transform.rotation = Quaternion.FromToRotation(transform.up, transform.position.normalized) * transform.rotation;
-
-        tiltAroundY += Input.GetAxis("Mouse X") * mouseSensitivity;
-        tiltAroundX -= Input.GetAxis("Mouse Y") * mouseSensitivity;
-        camPitch.transform.localRotation = Quaternion.Euler(tiltAroundX, tiltAroundY, 0);        
-        Quaternion targetDirRot = Quaternion.Euler(0, tiltAroundY, 0);
+        Quaternion targetDirRot = Quaternion.Euler(0, c.m_XAxis.Value, 0);
         playerDir.transform.localRotation = targetDirRot;
 
         moveAmount = Vector3.zero;
         Vector2 angleAdd = Vector2.zero;
         bool moving = false;
-        if(Input.GetKey("w")){
+        if (Input.GetKey("w"))
+        {
             moving = true;
-            angleAdd.y += 1;       
+            angleAdd.y += 1;
             moveAmount += playerDir.transform.forward;
         }
-        if(Input.GetKey("a")){
+        if (Input.GetKey("a"))
+        {
             moving = true;
             angleAdd.x += 1;
             moveAmount -= playerDir.transform.right;
         }
-        if(Input.GetKey("s")){
+        if (Input.GetKey("s"))
+        {
             moving = true;
             angleAdd.y -= 1;
             moveAmount -= playerDir.transform.forward;
         }
-        if(Input.GetKey("d")){
+        if (Input.GetKey("d"))
+        {
             moving = true;
             angleAdd.x -= 1;
             moveAmount += playerDir.transform.right;
         }
         moveAmount = moveAmount.normalized;
 
-        if(Input.GetKey(KeyCode.Space) && Physics.Raycast(transform.position + transform.up, -transform.up, 1.5f, layerMask)){
-            r.AddForce(jumpForce * transform.position.normalized);            
+        if (Input.GetKey(KeyCode.Space) && Physics.Raycast(transform.position + transform.up, -transform.up, 10f, layerMask))
+        {
+            r.AddForce(jumpForce * transform.position.normalized, ForceMode.Impulse);
         }
 
-        if(moving){
+        if (moving)
+        {
             float angle = Mathf.Atan2(angleAdd.y, angleAdd.x) * Mathf.Rad2Deg - 90.0f;
-            Quaternion targetModelRot = Quaternion.Euler(0, tiltAroundY + angle, 0);
+            Quaternion targetModelRot = Quaternion.Euler(0, c.m_XAxis.Value + angle, 0);
             playerModel.transform.localRotation = Quaternion.Slerp(playerModel.transform.localRotation, targetModelRot, Time.deltaTime * slerpSpeed);
         }
-         r.AddForce(-gravity * transform.position.normalized);
+        r.AddForce(-gravity * transform.position.normalized);
 
-        Vector3 localMove = moveAmount * Time.fixedDeltaTime * moveSpeed;
-        Debug.DrawLine(transform.position, transform.position + moveAmount, Color.red);
-        r.MovePosition(r.position + localMove);
-
+        isMoving = moving;
+        isAirborne = !Physics.Raycast(transform.position + transform.up, -transform.up, 10f, layerMask);
     }
 
     void FixedUpdate()
     {
         // Apply movement to rigidbody
-        
+        Vector3 localMove = moveAmount * Time.fixedDeltaTime * moveSpeed;
+        Debug.DrawLine(transform.position, transform.position + moveAmount, Color.red);
+        r.MovePosition(r.position + localMove);
     }
 }

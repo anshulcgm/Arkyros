@@ -40,7 +40,7 @@ public class SoundManager : MonoBehaviour
             Sound.clip = SoundsDictionary[soundname];
             Sound.Play();
         }
-        else Sound.Play();
+        
         
     }
 
