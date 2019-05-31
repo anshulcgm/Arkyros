@@ -62,8 +62,8 @@ public class CustomTimer : MonoBehaviour
         kamikazeTimer -= Time.deltaTime;
         if (kamikazeTimer <= 0 && activateKamikaze)
         {
-            //kamikaze.SetActive(true);
-            kamikaze.GetComponent<PlayerAttack>().enabled = true;
+            kamikaze.SetActive(true);
+            //kamikaze.GetComponent<PlayerAttack>().enabled = true;
             activateKamikaze = false;
         }
 

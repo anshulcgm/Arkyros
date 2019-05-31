@@ -222,18 +222,18 @@ public class ShrabBehavior : MonoBehaviour
         Vector3 rightLegRaycast = findRaycastPointOnSphere(rightPlayerLeg.transform.position);
         if (Vector3.Distance(transform.position, leftLegRaycast) < Vector3.Distance(transform.position, rightLegRaycast))
         {
-            Debug.Log("going for left leg");
-            Debug.Log("Distance between enemy and left leg is " + Vector3.Distance(transform.position, leftLegRaycast));
+            //Debug.Log("going for left leg");
+            //Debug.Log("Distance between enemy and left leg is " + Vector3.Distance(transform.position, leftLegRaycast));
             if (Vector3.Distance(transform.position, leftLegRaycast) > 4.5f)
             {
-                Debug.Log("Moving towards left leg");
+                //Debug.Log("Moving towards left leg");
                 anim.SetBool("Moving", true);
                 anim.SetBool("Attack", false);
                 shrabSphereMovement(leftLegRaycast);
             }
             else
             {
-                Debug.Log("Trying to stop at left leg");
+                //Debug.Log("Trying to stop at left leg");
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 anim.SetBool("Moving", false);
@@ -243,18 +243,18 @@ public class ShrabBehavior : MonoBehaviour
         }
         else
         {
-            Debug.Log("going for right leg");
-            Debug.Log("Distance between enemy and right leg is " + Vector3.Distance(transform.position, rightLegRaycast));
+            //Debug.Log("going for right leg");
+            //Debug.Log("Distance between enemy and right leg is " + Vector3.Distance(transform.position, rightLegRaycast));
             if (Vector3.Distance(transform.position, rightLegRaycast) > 4.5f)
             {
-                Debug.Log("Moving towards right leg");
+                //Debug.Log("Moving towards right leg");
                 anim.SetBool("Moving", true);
                 anim.SetBool("Attack", false);
                 shrabSphereMovement(rightLegRaycast);
             }
             else
             {
-                Debug.Log("Trying to stop at right leg");
+                //Debug.Log("Trying to stop at right leg");
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 anim.SetBool("Moving", false);

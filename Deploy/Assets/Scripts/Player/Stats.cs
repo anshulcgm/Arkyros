@@ -137,10 +137,12 @@ public class Stats : MonoBehaviour
 
     public void dealDamage(GameObject target, float damage)
     {
-        if(target.tag == "Enemy")
+        Debug.Log("REEEE1");
+        if (target.tag == "Enemy")
         {
+            
             target.GetComponent<StatManager>().changeHealth(damage);
-
+            Debug.Log("REEEE2");
             //not sure if this works exactly to detect if its been killed
             if (target == null)
             {

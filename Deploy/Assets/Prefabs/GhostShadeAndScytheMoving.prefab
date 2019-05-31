@@ -1223,17 +1223,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b61e56f0e44b6449a142ef3e345890b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMoving: 0
+  isAirborne: 0
   mouseSensitivity: 1
-  camPitch: {fileID: 6115156436674352030}
   playerModel: {fileID: 6115156436900278672}
   playerDir: {fileID: 6115156436718824697}
+  c: {fileID: 0}
   r: {fileID: 8246840471494153951}
   slerpSpeed: 5
   jumpForce: 30
   gravity: 10
   moveSpeed: 50
-  grounded: 0
-  anim: {fileID: 6115156436900278675}
   layerMask:
     serializedVersion: 2
     m_Bits: 311
@@ -1972,10 +1972,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 2.3739114
-  m_Height: 7.0480986
+  m_Radius: 1.6802673
+  m_Height: 4.9911513
   m_Direction: 1
-  m_Center: {x: -0.41631895, y: -0.31089827, z: -0.11034298}
+  m_Center: {x: -0.4163189, y: -0.006742231, z: 0.4613955}
 --- !u!1 &8246840472301564755
 GameObject:
   m_ObjectHideFlags: 0

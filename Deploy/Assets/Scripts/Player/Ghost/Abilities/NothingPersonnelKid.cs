@@ -92,6 +92,7 @@ public class NothingPersonnelKid : MonoBehaviour
                 soundManager.playOneShot("NPKVoiceLine");
 
                 stats.dealDamage(enemy, 600);
+                Debug.Log("REEEEEEE");
             }
 
             
