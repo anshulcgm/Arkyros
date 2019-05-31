@@ -13,7 +13,7 @@ public class JupiterPull : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
 
     DateTime start;
     //public GameObject damageDealt;
@@ -23,7 +23,7 @@ public class JupiterPull : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         soundManager = GetComponent<SoundManager>();
         speed = 40;

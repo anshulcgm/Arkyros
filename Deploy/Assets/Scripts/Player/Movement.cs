@@ -87,7 +87,12 @@ public class Movement : MonoBehaviour
             Quaternion targetModelRot = Quaternion.Euler(0, c.m_XAxis.Value + angle, 0);
             playerModel.transform.localRotation = Quaternion.Slerp(playerModel.transform.localRotation, targetModelRot, Time.deltaTime * slerpSpeed);
         }
-        r.AddForce(-gravity * transform.position.normalized);
+
+        if(GetComponent<Stats>().buffs[(int)buff.Gravityless] == 0)
+        {
+            r.AddForce(-gravity * transform.position.normalized);
+        }
+        
 
         isMoving = moving;
         isAirborne = !Physics.Raycast(transform.position + transform.up, -transform.up, 10f, layerMask);

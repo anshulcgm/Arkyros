@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3511806689959682709}
   - component: {fileID: 49118423385421968}
   - component: {fileID: 865433883790513954}
-  - component: {fileID: 232029072072189569}
+  - component: {fileID: 3313865101641639870}
   m_Layer: 0
   m_Name: SkyHammer
   m_TagString: Untagged
@@ -107,7 +107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ba277d7fc04fe40bfb65606db1b6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
   particleBoom: {fileID: 4039727760110134509, guid: b3aa5b74d95e6b5418ea39d92116aaad,
     type: 3}
 --- !u!54 &865433883790513954
@@ -126,7 +125,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &232029072072189569
+--- !u!114 &3313865101641639870
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

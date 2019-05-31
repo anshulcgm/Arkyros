@@ -9,7 +9,7 @@ public class HammerTime : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
     DateTime start;
     DateTime hammerSwing;
 
@@ -24,11 +24,12 @@ public class HammerTime : MonoBehaviour
     SoundManager soundManager;
     public GameObject particleSmash;
     bool particleSpawned;
+    public GameObject HammerHead;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
 
         rigidbody = GetComponent<Rigidbody>();
@@ -61,15 +62,15 @@ public class HammerTime : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
             hammerSwing = DateTime.Now;
-            soundManager.play("HammerTime");
+            soundManager.playOneShot("HammerTime");
 
 
             //First Swing, Rest follow in next if bracket
-            anim.StartOverlayAnim("Swing_Heavy", 0.5f, 0.5f);
+            anim.StartOverlayAnim("Swing_Heavy", 0.5f, 0.8f);
             particleSpawned = false;
 
             //dmg
-            Collider[] hits = Physics.OverlapSphere(transform.position + transform.forward * 8/*placeholder position*/, 4/*placeholder radius*/);
+            Collider[] hits = Physics.OverlapSphere(HammerHead.transform.position, 4/*placeholder radius*/);
 
             foreach (Collider hit in hits)
             {
@@ -87,11 +88,11 @@ public class HammerTime : MonoBehaviour
         if ((DateTime.Now - hammerSwing).TotalSeconds > 1 && cast)
         {
             hammerSwing = DateTime.Now;
-            anim.StartOverlayAnim("Swing_Heavy", 0.5f, 0.5f);
+            anim.StartOverlayAnim("Swing_Heavy", 0.5f, 0.8f);
             particleSpawned = false;
 
             //dmg
-            Collider[] hits = Physics.OverlapSphere(transform.position + transform.forward * 20/*placeholder position*/, 4/*placeholder radius*/);
+            Collider[] hits = Physics.OverlapSphere(HammerHead.transform.position, 4/*placeholder radius*/);
             
             foreach (Collider hit in hits)
             {
@@ -103,9 +104,9 @@ public class HammerTime : MonoBehaviour
 
         }
 
-        if ((DateTime.Now - hammerSwing).TotalSeconds > 0.7 && cast && !particleSpawned)//timed to explode with hammer connection
+        if ((DateTime.Now - hammerSwing).TotalSeconds > 0.8 && cast && !particleSpawned)//timed to explode with hammer connection
         {
-            Instantiate(particleSmash, transform.position + transform.forward * 20, transform.rotation);
+            Instantiate(particleSmash, HammerHead.transform.position, transform.rotation);
             particleSpawned = true;
         }
 
