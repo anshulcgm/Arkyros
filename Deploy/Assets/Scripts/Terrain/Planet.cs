@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class Planet : IClass
 {
-    public EventSystemMono eventSystem;
 
     //seed for this planet
     private int seed;
@@ -31,7 +30,7 @@ public class Planet : IClass
      * new Planet object
      * description: does all the math to make the planet, stores the representation of the planet by altering 'points' and 'connections'.
      */
-    public Planet(System.Random r, float minRad, float maxRad, float minVariance, float maxVariance, int minNumPts, int maxNumPts)
+    public Planet(System.Random r, float minRad, float maxRad, float minVariance, float maxVariance, int latPoints, int longPoints)
     {
         this.r = r;
         //get random values from the seed

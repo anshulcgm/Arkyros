@@ -6,12 +6,53 @@ using UnityEngine;
 
 public class PlanetMono : MonoBehaviour, IMono
 {
-    private Planet planet;    
+    private Planet planet;
+
+    public GameObject building;
+
+    public WalkingMap walkingMap;
+
+    public Material[] biomeMats;
+
+    public float buildingScale;
+
+    public EntityArray[] trees;
+
+    public IntArray[] numItems;
+
+    public EntityGenerator Rock;
+
+    public EntityGenerator Rock_Big;
+
+    public EntityGenerator fire_rock;
+
+    public EntityGenerator Rock_Tall;
+
+    public string[] biomeNames;
+
+
+
+    public void Start(){
+        
+    }
+
+    public void Update(){
+    }
 
     public void Create(int seed)
     {
+        DateTime start = DateTime.Now;
         System.Random r = new System.Random(seed);
-        planet = new Planet(r, 1, 1.1f, 0.1f, 0.3f, 24, 25);
+        
+        int minRad = 4000;
+        int maxRad = 4000;
+        planet = new Planet(r, minRad, maxRad, 40f, 50f, 91, 91);
+
+        List<Vector3> pts = null;
+        List<int>[] map = null;
+        List<int>[][] trianglesHash;
+        List<Triangle> triangles;
+
         //make the planet
         int[] mesh = planet.GeneratePlanet(start, out map, out pts, out trianglesHash);
         triangles = planet.triangles;
@@ -52,7 +93,73 @@ public class PlanetMono : MonoBehaviour, IMono
             List<int> trisToEval = new List<int>();
             trisToEval.Add(randomStartTri);
 
-        for (int i = 0; i < r.Next(5, 20); i++)
+            List<Triangle> biomeTriangles = new List<Triangle>();
+                        
+            while(trisInBiome.Count < biomeSize && numTrianglesUsed < triangles.Count && trisToEval.Count > 0)
+            {                
+                List<int> neighbors = new List<int>();
+                for(int i = 0; i < 3; i++)
+                {
+                    foreach (List<int> a in trianglesHash[triangles[trisToEval[0]].points[i]])
+                    {
+                        neighbors.AddRange(a);
+                    }
+                }
+
+                neighbors = neighbors.Distinct().Where(x => x != trisToEval[0]).ToList();
+                foreach (int a in neighbors)
+                {
+                    if (!triangleUsed[a] && !trisToEval.Contains(a))
+                    {                        
+                        trisToEval.Add(a);
+                    }
+                }
+                triangleUsed[trisToEval[0]] = true;
+                trisInBiome.Add(trisToEval[0]);
+                numTrianglesUsed++;
+                pointsMapping[triangles[trisToEval[0]].points[0]] = pointsPerBiome[pointsPerBiome.Count - 1].Count;
+                pointsPerBiome[pointsPerBiome.Count - 1].Add(pts[triangles[trisToEval[0]].points[0]]);
+                pointsMapping[triangles[trisToEval[0]].points[1]] = pointsPerBiome[pointsPerBiome.Count - 1].Count;
+                pointsPerBiome[pointsPerBiome.Count - 1].Add(pts[triangles[trisToEval[0]].points[1]]);
+                pointsMapping[triangles[trisToEval[0]].points[2]] = pointsPerBiome[pointsPerBiome.Count - 1].Count;
+                pointsPerBiome[pointsPerBiome.Count - 1].Add(pts[triangles[trisToEval[0]].points[2]]);
+
+                biomeTriangles.Add(triangles[trisToEval[0]]);
+                trisToEval.RemoveAt(0);
+            }           
+
+            int[] biome = new int[trisInBiome.Count * 3];
+            for(int i = 0; i < trisInBiome.Count; i++)
+            {
+                biome[i * 3] = pointsMapping[mesh[trisInBiome[i] * 3]];
+                biome[i * 3 + 1] = pointsMapping[mesh[trisInBiome[i] * 3 + 1]];
+                biome[i * 3 + 2] = pointsMapping[mesh[trisInBiome[i] * 3 + 2]];
+            }
+            biomes.Add(biome);
+            int biomeInd = r.Next(biomeMats.Length);
+            if(biomesOverall[biomeInd] == null){
+                biomesOverall[biomeInd] = new List<Triangle>();
+            }
+            biomesOverall[biomeInd].AddRange(biomeTriangles);
+            biomeTypes.Add(biomeInd);
+        }
+        int n = 0;
+        foreach (int[] biome in biomes)
+        {
+            GameObject newObj = Instantiate((GameObject)Resources.Load("Empty"), Vector3.zero, Quaternion.identity);
+            newObj.GetComponent<MeshFilter>().mesh = new Mesh();
+            newObj.GetComponent<MeshFilter>().mesh.subMeshCount = biomes.Count;
+            newObj.GetComponent<MeshFilter>().mesh.SetVertices(pointsPerBiome[n]);
+            newObj.GetComponent<MeshFilter>().mesh.SetTriangles(biome, 0);            
+            newObj.GetComponent<MeshRenderer>().material = biomeMats[biomeTypes[n]];
+            newObj.GetComponent<BiomeType>().biome = biomeNames[biomeTypes[n]];
+            newObj.GetComponent<MeshCollider>().sharedMesh = newObj.GetComponent<MeshFilter>().mesh;
+            n++;
+        }
+        
+/*
+        int numIslands = r.Next(5, 20);
+        for (int i = 0; i < numIslands; i++)
         {
             List<Vector3> points = new List<Vector3>();
             List<int[]> cons = new List<int[]>();
@@ -74,8 +181,8 @@ public class PlanetMono : MonoBehaviour, IMono
             g.GetComponent<MeshCollider>().sharedMesh = gameObject.GetComponent<MeshFilter>().mesh;
 
             g.GetComponent<MeshRenderer>().material = biomeMats[r.Next(biomeMats.Length)];
-        }*/
-
+        }
+*/
         int numCities = r.Next(10, 20);
         for (int i = 0; i < numCities; i++)
         {

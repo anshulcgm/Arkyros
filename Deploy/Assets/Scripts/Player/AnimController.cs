@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class AnimationController : MonoBehaviour
+public class AnimController : MonoBehaviour
 {
     public Animation anim;
     public Transform[] attackTransforms;
