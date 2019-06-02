@@ -80,7 +80,7 @@ public class HeartOfDarkness : MonoBehaviour
                         target = hit.point;
                         u_gottem = true;
                         cast = false;
-                        
+
                     }
                     cooldown = 300;
                 }

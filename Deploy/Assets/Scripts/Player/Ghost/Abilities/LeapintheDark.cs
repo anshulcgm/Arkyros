@@ -17,6 +17,7 @@ public class LeapintheDark : MonoBehaviour
     Rigidbody rigidbody;
     Stats stats;
     TargetCenterScreen tcs;
+    Vector3 target;
 
     private bool buffActive;
     private bool cast;
@@ -57,9 +58,15 @@ public class LeapintheDark : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            soundManager.playOneShot("LeapInTheDark", 0.5f);
+
             model.transform.rotation = camera.transform.rotation;
-            Vector3 newpos = model.transform.position + model.transform.forward * 40;
+            Vector3 newpos = model.transform.position + model.transform.forward * 100;
+            RaycastHit hit;
+            if (Physics.Raycast(model.transform.position, model.transform.forward, out hit, 100))
+            {
+                newpos = hit.point;          
+            }
+            soundManager.playOneShot("LeapInTheDark", 0.5f);
             transform.position = newpos;
             // the attack will be taken care by the animation??
             anim.StartOverlayAnim("Swing_Heavy_1", 0.5f, 0.5f);
