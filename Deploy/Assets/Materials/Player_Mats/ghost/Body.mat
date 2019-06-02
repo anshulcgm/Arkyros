@@ -7,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Snowy
+  m_Name: Body
   m_Shader: {fileID: 4800000, guid: 5966ff59647d59e42880ecd1d6e1762c, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 0
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -90,7 +90,7 @@ Material:
     - _WireframeThickness: 1
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.735849, g: 0.7254361, b: 0.7254361, a: 1}
-    - _Emission: {r: 0, g: 0.13652551, b: 0.5566038, a: 1}
+    - _Color: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+    - _Emission: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _WireframeColor: {r: 0.7372549, g: 0.7254902, b: 0.7254902, a: 1}
+    - _WireframeColor: {r: 0.34117648, g: 0.34117648, b: 0.34117648, a: 1}
