@@ -9,7 +9,8 @@ public class ShadowsWing : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
+    public GameObject model;
 
 
     private bool buffActive;
@@ -26,7 +27,7 @@ public class ShadowsWing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
@@ -41,23 +42,29 @@ public class ShadowsWing : MonoBehaviour
         {
             cast = false;
             start = DateTime.Now;
-            anim.StartOverlayAnim("CircleSwing", 0.5f, 1f); //puts cloak up
+            anim.StartOverlayAnim("CircleSwing", 0.5f, 5f); //puts cloak up
             soundManager.play("ShadowsWing");
         }
 
-        if ((DateTime.Now - start).TotalSeconds < 5 && Input.GetKey("e") && !cast)
+        if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
             
-            //put any setup code here, before the ability is actually cast
             stats.allStats[(int)stat.Defense, (int)statModifier.Multiplier] *= 3; //Triple Defense
-            cast = true;
+            Debug.Log("up");
+            
             buffActive = true;
+
+            cast = true;
+            cooldown = 360;
         }
-        if(((DateTime.Now - start).TotalSeconds > 5) && !Input.GetKey("e") && cast && buffActive)
+        if((DateTime.Now - start).TotalSeconds > 5 /*&& !Input.GetKey("e")*/ && cast && buffActive)
         {
-            cooldown = (float)(DateTime.Now - start).TotalSeconds * 60;
+            Debug.Log("down");
+            //cooldown = (int)(DateTime.Now - start).TotalSeconds * 60;
+            
             stats.allStats[(int)stat.Defense, (int)statModifier.Multiplier] /= 3; //return to original Defense
             soundManager.stop();
+            buffActive = false;
         }
 
         if (cooldown > 0) //counts down for the cooldown

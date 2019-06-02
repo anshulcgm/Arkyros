@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour
     public float gravity;
 
     public float moveSpeed;
+    Stats stats;
 
     //public bool grounded = false;
 
@@ -35,6 +36,7 @@ public class Movement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         r = GetComponent<Rigidbody>();
+        stats = GetComponent<Stats>();
     }
 
     float tiltAroundX, tiltAroundY = 0;
@@ -88,7 +90,7 @@ public class Movement : MonoBehaviour
             playerModel.transform.localRotation = Quaternion.Slerp(playerModel.transform.localRotation, targetModelRot, Time.deltaTime * slerpSpeed);
         }
 
-        if(GetComponent<Stats>().buffs[(int)buff.Gravityless] == 0)
+        if(stats.buffs[(int)buff.Gravityless] == 0)
         {
             r.AddForce(-gravity * transform.position.normalized);
         }

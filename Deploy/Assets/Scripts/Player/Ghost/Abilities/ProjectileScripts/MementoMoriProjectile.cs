@@ -9,7 +9,7 @@ public class MementoMoriProjectile : MonoBehaviour
     Rigidbody rigidBody;
     GameObject Source;
 
-    GhostSoundManager gsm;
+    SoundManager soundManager;
     private int projectileSpeed = 30;
 
     // Start is called before the first frame update
@@ -17,7 +17,7 @@ public class MementoMoriProjectile : MonoBehaviour
     {
         start = DateTime.Now;
         rigidBody = GetComponent<Rigidbody>();
-        gsm = GetComponent<GhostSoundManager>();
+        soundManager = GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -30,7 +30,7 @@ public class MementoMoriProjectile : MonoBehaviour
 
             rigidBody.velocity = ray * projectileSpeed;
         }
-        gsm.playMMReturn();
+        soundManager.playOneShot("MementoMoriReturn");
     }
 
     public void SetSource(GameObject source)

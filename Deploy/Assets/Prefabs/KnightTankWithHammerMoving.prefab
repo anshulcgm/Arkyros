@@ -1127,16 +1127,23 @@ GameObject:
   - component: {fileID: 8652570232259177776}
   - component: {fileID: 253643272353335891}
   - component: {fileID: 9222162044601352173}
+  - component: {fileID: 1061082241}
   - component: {fileID: 1897814018563279708}
   - component: {fileID: 1339353795962491827}
   - component: {fileID: 2140964412979006224}
-  - component: {fileID: 5004491684890124214}
-  - component: {fileID: 5004491684890124215}
-  - component: {fileID: 6997039946982392921}
-  - component: {fileID: 5004491684890124201}
   - component: {fileID: 5004491684890124216}
+  - component: {fileID: 6997039946982392921}
+  - component: {fileID: 5592577192024083935}
+  - component: {fileID: 7979313453317872640}
+  - component: {fileID: 1844576334460709028}
+  - component: {fileID: 5677541753909824412}
+  - component: {fileID: 5004491684890124214}
+  - component: {fileID: 4452070408759178479}
+  - component: {fileID: 3690964678292186687}
+  - component: {fileID: 5004491684890124201}
+  - component: {fileID: 5004491684890124215}
   - component: {fileID: 5852880707114821232}
-  - component: {fileID: 1061082241}
+  - component: {fileID: 2392544577265998281}
   m_Layer: 9
   m_Name: KnightTankWithHammerMoving
   m_TagString: Player
@@ -1332,6 +1339,20 @@ MonoBehaviour:
   - Walk
   - BasicAttack
   - TankTakeDamage
+--- !u!136 &1061082241
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004491684890124213}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 7.453149
+  m_Height: 18.64753
+  m_Direction: 1
+  m_Center: {x: 0.2702445, y: 8.797863, z: 0.52168274}
 --- !u!54 &1897814018563279708
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1340,7 +1361,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004491684890124213}
   serializedVersion: 2
-  m_Mass: 10000
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -1379,76 +1400,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenTargets: []
   enemies: []
---- !u!114 &5004491684890124214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5004491684890124213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 293688ff0cad59042b8a3fd2d3b2f844, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 0
-  anim: {fileID: 8927683913148525849}
-  numForward: 80
-  numUp: 80
-  particleLanding: {fileID: 4039727760110134509, guid: b3aa5b74d95e6b5418ea39d92116aaad,
-    type: 3}
---- !u!114 &5004491684890124215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5004491684890124213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4871ba67613af7747a5524ceefeae9a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 0
-  anim: {fileID: 8927683913148525849}
-  particleSmash: {fileID: 4039727760110134509, guid: b3aa5b74d95e6b5418ea39d92116aaad,
-    type: 3}
-  HammerHead: {fileID: 3113034461151589566}
---- !u!114 &6997039946982392921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5004491684890124213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 790c898de1a020147bf19fe999fddca6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 0
-  anim: {fileID: 8927683913148525849}
-  shieldTemp: {fileID: 7383818346270251463, guid: 53db4d4734790e6489064c444bb2a6d0,
-    type: 3}
---- !u!114 &5004491684890124201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5004491684890124213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edf8387ec5bb0ec4cb4e19353d2a1357, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 0
-  SkyHammer: {fileID: 6981962925071982693, guid: bb269431ab0e2fe4d97f44ae3d1f05e9,
-    type: 3}
-  anim: {fileID: 8927683913148525849}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 311
 --- !u!114 &5004491684890124216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1475,6 +1426,157 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 311
+--- !u!114 &6997039946982392921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004491684890124213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790c898de1a020147bf19fe999fddca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  anim: {fileID: 8927683913148525849}
+  shieldTemp: {fileID: 7383818346270251463, guid: 53db4d4734790e6489064c444bb2a6d0,
+    type: 3}
+--- !u!114 &5592577192024083935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004491684890124213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61679f345d071be4da9fc1df08c896f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+--- !u!114 &7979313453317872640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004491684890124213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff424e3c704d97446b263b504ae5fdeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  Shield: {fileID: 0}
+--- !u!114 &1844576334460709028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004491684890124213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4acebca92457d534ebcb514e8d515d42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+--- !u!114 &5677541753909824412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004491684890124213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58f4172f761dd094e9271465323f0e4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+--- !u!114 &5004491684890124214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004491684890124213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 293688ff0cad59042b8a3fd2d3b2f844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  anim: {fileID: 8927683913148525849}
+  numForward: 80
+  numUp: 80
+  particleLanding: {fileID: 4039727760110134509, guid: b3aa5b74d95e6b5418ea39d92116aaad,
+    type: 3}
+  model: {fileID: 8927683913148525848}
+--- !u!114 &4452070408759178479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004491684890124213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42a2db40ea1e062409c4926e50a5f789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+--- !u!114 &3690964678292186687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004491684890124213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0181e4801701833498b69eb393b092e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  Banner: {fileID: 0}
+--- !u!114 &5004491684890124201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004491684890124213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf8387ec5bb0ec4cb4e19353d2a1357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  SkyHammer: {fileID: 6981962925071982693, guid: bb269431ab0e2fe4d97f44ae3d1f05e9,
+    type: 3}
+  anim: {fileID: 8927683913148525849}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 311
+--- !u!114 &5004491684890124215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004491684890124213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4871ba67613af7747a5524ceefeae9a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  anim: {fileID: 8927683913148525849}
+  particleSmash: {fileID: 4039727760110134509, guid: b3aa5b74d95e6b5418ea39d92116aaad,
+    type: 3}
+  HammerHead: {fileID: 3113034461151589566}
 --- !u!114 &5852880707114821232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1488,20 +1590,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 8927683913148525849}
---- !u!136 &1061082241
-CapsuleCollider:
+--- !u!114 &2392544577265998281
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004491684890124213}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 7.453149
-  m_Height: 18.64753
-  m_Direction: 1
-  m_Center: {x: 0.2702445, y: 8.797863, z: 0.52168274}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a7be062c9c8b2144bd60cf463a706b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0
+  speed: 0
+  cooldown: 0
+  anim: {fileID: 0}
 --- !u!1 &5194022097309799633
 GameObject:
   m_ObjectHideFlags: 0
@@ -2412,7 +2516,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8927683912655949984}
-  m_LocalRotation: {x: -0.06851349, y: 0.00049869705, z: 0.12924954, w: 0.98924226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2475,7 +2579,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8927683913148525848}
-  m_LocalRotation: {x: -0.06851349, y: 0.00049869705, z: 0.12924954, w: 0.98924226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

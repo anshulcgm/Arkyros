@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3189701106256196816}
   - component: {fileID: 3363496496458907857}
   - component: {fileID: 1675396080436659987}
-  - component: {fileID: 8457463234902114328}
   - component: {fileID: 3479082434172503969}
+  - component: {fileID: 8410338972089716798}
   m_Layer: 0
   m_Name: MementoMoriProjectile
   m_TagString: Untagged
@@ -124,49 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199ce044559b2f74596683e2cbba5996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8457463234902114328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7221904468566208928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a71b16b373c6f64dbed93a1d3723676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ghostSound: {fileID: 3479082434172503969}
-  Cleave: {fileID: 0}
-  EnhancedCleave: {fileID: 0}
-  CullingStrike: {fileID: 0}
-  EnhancedCullingStrike: {fileID: 0}
-  SpiritBlade: {fileID: 0}
-  EnhancedSpiritBlade: {fileID: 0}
-  DFCombined: {fileID: 0}
-  LeapInTheDark: {fileID: 0}
-  ShadowRush: {fileID: 0}
-  HSSprout: {fileID: 0}
-  HSHeal: {fileID: 0}
-  EtherealFormDodge: {fileID: 0}
-  BansheesWail: {fileID: 0}
-  ShadowsWing: {fileID: 0}
-  SOTDDamage: {fileID: 0}
-  SOTDFloating: {fileID: 0}
-  MMThrow: {fileID: 8300000, guid: be6570852f4980146b8a544d0849b2ea, type: 3}
-  MMReturn: {fileID: 8300000, guid: 94179f44a81085d4ba48260153c8ef47, type: 3}
-  NPKTeleport: {fileID: 0}
-  NPKVoiceLine: {fileID: 0}
-  SpiritSummons: {fileID: 0}
-  NowYouSeeMe: {fileID: 0}
-  Onslaught: {fileID: 0}
-  SoulReaperResurrect: {fileID: 0}
-  CloakSlapCharge: {fileID: 0}
-  CloakSlapRelease: {fileID: 0}
-  HoDRise: {fileID: 0}
-  HoDDive: {fileID: 0}
-  P3LSprout: {fileID: 0}
-  P3LHeal: {fileID: 0}
 --- !u!82 &3479082434172503969
 AudioSource:
   m_ObjectHideFlags: 0
@@ -263,3 +220,98 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8410338972089716798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7221904468566208928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b9c23e5acb79243b6263fd5a0e040d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sound: {fileID: 3479082434172503969}
+  Clips:
+  - {fileID: 8300000, guid: 18a28668ea7908e4699f7f89741f768e, type: 3}
+  - {fileID: 8300000, guid: 0212df2a71e16c840a9979199df7f73d, type: 3}
+  - {fileID: 8300000, guid: 9db3a9f494bd98f44b7398161c326c02, type: 3}
+  - {fileID: 8300000, guid: a01dee26713a0c14f9f7b7e1e91c22ea, type: 3}
+  - {fileID: 8300000, guid: 45a17d8d02382d843ac664196a2e8622, type: 3}
+  - {fileID: 8300000, guid: 4973b6f43d60ec64fa101153752148b5, type: 3}
+  - {fileID: 8300000, guid: 97f27a82dcf76ac4fbfa1302bbc89486, type: 3}
+  - {fileID: 8300000, guid: c37dcc4b6410a4a43b0de22cb3f2af97, type: 3}
+  - {fileID: 8300000, guid: 3b0bfa5db6936b544b549dcd24fe72f1, type: 3}
+  - {fileID: 8300000, guid: 50d7542794dfe184fad7eefcb50e4c6f, type: 3}
+  - {fileID: 8300000, guid: 621cb1de9cc88fa49836418da7afff65, type: 3}
+  - {fileID: 8300000, guid: 1c24ee2e01b068a4fbfb3bb57e23e13f, type: 3}
+  - {fileID: 8300000, guid: 0f20e7aaa0fa28d4883458fc6a7c7bc7, type: 3}
+  - {fileID: 8300000, guid: b5e9e38a25caec344a62b638e23ff1be, type: 3}
+  - {fileID: 8300000, guid: db8d20388b3f0724a9301e89266dc922, type: 3}
+  - {fileID: 8300000, guid: 94f86b1fad7706d4a990d01ad4ced377, type: 3}
+  - {fileID: 8300000, guid: 6d50e546a9141ee4f9bc253f358e81d8, type: 3}
+  - {fileID: 8300000, guid: d0cdf5edfbb935549b36c5f3fb9cbb95, type: 3}
+  - {fileID: 8300000, guid: be6570852f4980146b8a544d0849b2ea, type: 3}
+  - {fileID: 8300000, guid: 94179f44a81085d4ba48260153c8ef47, type: 3}
+  - {fileID: 8300000, guid: 2df2ab82db8a01842ac805b89acc0147, type: 3}
+  - {fileID: 8300000, guid: d96399ca483c2ef47b3719ef36bb1a3b, type: 3}
+  - {fileID: 8300000, guid: 1a3c7d4078edddb4584bc4b0040c2f8f, type: 3}
+  - {fileID: 8300000, guid: aa41f4ca38b1b6540888144aa9206794, type: 3}
+  - {fileID: 8300000, guid: 5fa6499731607d64daf247a014c2ac81, type: 3}
+  - {fileID: 8300000, guid: 20c9584464d515e4aaf301d11edfd5a9, type: 3}
+  - {fileID: 8300000, guid: ae08dac6dd752d141b6b56f4f489361e, type: 3}
+  - {fileID: 8300000, guid: a90d31b9b5a7cfd40806582a32e8256a, type: 3}
+  - {fileID: 8300000, guid: f23ca54777d32854786436af28d9309f, type: 3}
+  - {fileID: 8300000, guid: 097a8f6afb620104e9853c689f5ea36e, type: 3}
+  - {fileID: 8300000, guid: 3879e3b76e3b5f54fb0877859a30df8b, type: 3}
+  - {fileID: 8300000, guid: 6dc230533d80bdc4db9b980f47ad2c0e, type: 3}
+  - {fileID: 8300000, guid: c3f006eb0865d6140a28200d6af87a98, type: 3}
+  - {fileID: 8300000, guid: 4e74f10874c112b42b0fb81997bec16b, type: 3}
+  - {fileID: 8300000, guid: fc6879fa36d35214e8380919ae70be75, type: 3}
+  - {fileID: 8300000, guid: 76c7d29a642a29d4bbbb221d6bf7ea07, type: 3}
+  - {fileID: 8300000, guid: 08b98d75ab08b6b49bcea0a8366d7093, type: 3}
+  - {fileID: 8300000, guid: 35dc0ebc37d646a4a8429786199c27fd, type: 3}
+  - {fileID: 8300000, guid: e4d20c890f4f4bd4f951576fa919c005, type: 3}
+  - {fileID: 8300000, guid: 5d4f1aa195ae9f64d824490f2520b2fe, type: 3}
+  ClipNames:
+  - Cleave
+  - CullingStrike
+  - SpiritBlade
+  - DarkflightTakeoff
+  - DarkflightFlight
+  - DarkflightLanding
+  - LeapInTheDark
+  - Shadowrush
+  - EnhancedCleave
+  - EnhancedCullingStrike
+  - EnhancedSpiritBlade
+  - EtherealFormDodge
+  - HarvestSeasonSprout
+  - HarvestSeasonHeal
+  - BansheesWail
+  - ShadowsWing
+  - SoulsOfDamnedFloating
+  - SoulsOfDamnedDamage
+  - MementoMoriThrow
+  - MementoMoriReturn
+  - NPKTeleport
+  - NPKVoiceLine
+  - SpiritSummons
+  - NowYouSeeMe
+  - Onslaught
+  - SoulReaperResurrect
+  - CloakSlapCharge
+  - CloakSlapRelease
+  - P3LSprout
+  - P3LHeal
+  - HeartofDarknessDivebomb
+  - HeartofDarknessTeleport
+  - BasicScytheAttack
+  - TakeDamage
+  - CapeFlutter
+  - Jump
+  - Land
+  - Sprint
+  - Walk
+  - Idle

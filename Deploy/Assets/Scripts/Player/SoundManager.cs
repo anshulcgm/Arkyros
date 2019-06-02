@@ -33,15 +33,31 @@ public class SoundManager : MonoBehaviour
         Sound.PlayOneShot(SoundsDictionary[soundname]);
     }
 
+    public void playOneShot(string soundname, float volume)
+    {
+        Sound.PlayOneShot(SoundsDictionary[soundname], volume);
+    }
+
     public void play(string soundname)
     {
         if (Sound.clip != SoundsDictionary[soundname])
         {
+            Sound.volume = 1.0f;
             Sound.clip = SoundsDictionary[soundname];
             Sound.Play();
         }
         
         
+    }
+    //overloaded
+    public void play(string soundname, float volume)
+    {
+        if (Sound.clip != SoundsDictionary[soundname])
+        {
+            Sound.volume = 0.5f;
+            Sound.clip = SoundsDictionary[soundname];
+            Sound.Play();
+        }
     }
 
     public void stop()

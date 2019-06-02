@@ -9,7 +9,8 @@ public class MementoMori : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
+    public GameObject model;
 
     DateTime start;
 
@@ -29,7 +30,7 @@ public class MementoMori : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
 
         rigidbody = GetComponent<Rigidbody>();
@@ -44,7 +45,7 @@ public class MementoMori : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetKey("f") && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
@@ -59,8 +60,8 @@ public class MementoMori : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-
-            GameObject clone = Instantiate(MementoMoriProjectile, transform.position + transform.forward, Quaternion.identity);
+            model.transform.rotation = camera.transform.rotation;
+            GameObject clone = Instantiate(MementoMoriProjectile, model.transform.position + model.transform.forward, Quaternion.identity);
 
             float x = Screen.width / 2f;
             float y = Screen.height / 2f;

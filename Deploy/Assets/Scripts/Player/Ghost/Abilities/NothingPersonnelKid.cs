@@ -25,11 +25,13 @@ public class NothingPersonnelKid : MonoBehaviour
     SoundManager soundManager;
     //public GameObject ParticleTrail;
     public GameObject ParticleHit;
+    public GameObject model;
 
     GameObject enemy;
     GameObject clone;
     bool cloneSpawned;
     bool particleSpawned;
+    bool voiceLinePlayed;
 
     // Start is called before the first frame update
     void Start()
@@ -46,11 +48,12 @@ public class NothingPersonnelKid : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetKey("f") && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false;
             cloneSpawned = false;
             particleSpawned = false;
+            voiceLinePlayed = false;
             start = DateTime.Now;
             //anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
             enemy = tcs.getTarget();
@@ -74,7 +77,8 @@ public class NothingPersonnelKid : MonoBehaviour
             if(Vector3.Distance(enemy.transform.position, transform.position) < 200)
             {
 
-                transform.position = enemy.transform.position + enemy.transform.forward;
+                transform.position = enemy.transform.position - enemy.transform.forward * 3;
+
                 if (!particleSpawned)
                 {
                     Instantiate(ParticleHit, enemy.transform.position, enemy.transform.rotation);
@@ -83,13 +87,18 @@ public class NothingPersonnelKid : MonoBehaviour
                 
 
                 
-                transform.LookAt(enemy.transform);
+                model.transform.LookAt(enemy.transform);
                 camera.transform.LookAt(enemy.transform); //might not spin camera around
                 
                 
-                anim.StartOverlayAnim("Swing_Heavy_1", 0.5f, 1.1f);
-                soundManager.playOneShot("NPKTeleport");
-                soundManager.playOneShot("NPKVoiceLine");
+                anim.StartOverlayAnim("Swing_Heavy_1", 0.5f, 0.3f);
+                if (!voiceLinePlayed)
+                {
+                    soundManager.playOneShot("NPKTeleport");
+                    soundManager.playOneShot("NPKVoiceLine");
+                    voiceLinePlayed = true;
+                }
+                
 
                 stats.dealDamage(enemy, 600);
                 Debug.Log("REEEEEEE");

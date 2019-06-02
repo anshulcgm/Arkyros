@@ -8,10 +8,12 @@ public class GhostAnimsAndSound : MonoBehaviour
     public AnimationController anim;
     SoundManager soundManager;
     int attackDelay;
+    bool first;
     // Start is called before the first frame update
     void Start()
     {
         soundManager = GetComponent<SoundManager>();
+        first = true;
     }
 
     // Update is called once per frame
@@ -22,7 +24,17 @@ public class GhostAnimsAndSound : MonoBehaviour
         {
             //Debug.Log("Attack was pressed");
             //setAllTriggersFalse();
-            anim.StartOverlayAnim("Swing_Heavy_1", 0.5f, 0.6f);
+            if (first)
+            {
+                anim.StartOverlayAnim("Swing_Heavy_1", 0.5f, 0.5f);
+                first = false;
+            }
+            else if (!first)
+            {
+                anim.StartOverlayAnim("Swing_Heavy_2", 0.5f, 0.3f);
+                first = true;
+            }
+            
             soundManager.playOneShot("BasicScytheAttack");
             //attackStart = DateTime.Now;
             attackDelay = 60; //can attack 60 frames later
@@ -54,7 +66,7 @@ public class GhostAnimsAndSound : MonoBehaviour
         else if (!GetComponent<Movement>().isMoving)
         {
             anim.PlayLoopingAnim("Idle");
-            soundManager.play("Idle");
+            soundManager.play("Idle", 0.5f);
         }
     }
 }
