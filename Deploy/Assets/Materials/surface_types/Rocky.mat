@@ -94,8 +94,8 @@ Material:
     - _WireframeThickness: 1
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _Emission: {r: 0.078431375, g: 0.078431375, b: 0.078431375, a: 1}
+    - _Color: {r: 1, g: 0.9333334, b: 0, a: 1}
+    - _Emission: {r: 0.27058825, g: 0, b: 0.49411765, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _WireframeColor: {r: 0.20000002, g: 0.20000002, b: 0.20000002, a: 1}
+    - _WireframeColor: {r: 1, g: 0.93506396, b: 0, a: 1}

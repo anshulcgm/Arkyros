@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 33782670786144964}
   - component: {fileID: 23761489199414176}
   - component: {fileID: 7577953532626759827}
+  - component: {fileID: 3880145800424395556}
   m_Layer: 0
   m_Name: empty
   m_TagString: Untagged
@@ -100,9 +101,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1245182664536732}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bae489c02763ba44ab5de01fb24fee61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToDeactivation: 2500
+--- !u!114 &3880145800424395556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245182664536732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e61b66b640f4b04bb40eb8941d5ac45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  biome: 

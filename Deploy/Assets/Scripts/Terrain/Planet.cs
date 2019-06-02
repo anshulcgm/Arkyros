@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Planet : IClass
 {
-    public List<EventSystem> eventSystems = new List<EventSystem>();
+    public EventSystemMono eventSystem;
 
     //seed for this planet
     private int seed;
@@ -15,8 +15,10 @@ public class Planet : IClass
     private System.Random r;
 
     //vars to store points and connections
-    private List<Vector3> points;
+    private readonly List<Vector3> points;
     private List<int[]> connections;
+
+    private List<int>[] map;
     public List<Triangle> triangles;
 
     private float radius;
@@ -46,50 +48,66 @@ public class Planet : IClass
      */
     public int[] GeneratePlanet(DateTime start, out List<int>[] map, out List<Vector3> pts, out List<int>[][] trianglesHash)
     {
-        Debug.Log("planet mesh creation time (sec): " + (DateTime.Now - start).TotalSeconds);// -> 9
         map = ObjectUpdate.GetMap(connections);
-        pts = points;
+        pts = Points;
         Debug.Log(pts.Count);
         
-        Debug.Log("planet mesh creation time (sec): " + (DateTime.Now - start).TotalSeconds);// -> 16
-        triangles = new ObjectUpdate().GetTrianglesFromConnections(points, map, out trianglesHash);
-        Debug.Log("planet mesh creation time (sec): " + (DateTime.Now - start).TotalSeconds);// -> 20
-        Debug.Log(triangles.Count + " numtri");
-        ObjectHandler.cacheObjMap = new List<CacheObjTuple>[points.Count][];
-        Debug.Log("planet mesh creation time (sec): " + (DateTime.Now - start).TotalSeconds);//-> 21
-        Debug.Log(pts.Count + " pts");
-        int[] mesh = MeshBuilder3D.GetMeshFrom(points, triangles, map, trianglesHash);
-        Debug.Log("planet mesh creation time (sec): " + (DateTime.Now - start).TotalSeconds);
-        Debug.Log(pts.Count + " pts");
+        triangles = new ObjectUpdate().GetTrianglesFromConnections(Points, map, out trianglesHash);
+        EventSystemMono.cacheObjMap = new List<int>[Points.Count];
+        List<Vector3> pointsCopy = new List<Vector3>();
+        foreach(Vector3 v in Points){
+            pointsCopy.Add(v);
+        }
+        EventSystemMono.SetPoints(pointsCopy);
+        EventSystemMono.map = map;
+        int[] mesh = MeshBuilder3D.GetMeshFrom(Points, triangles, map, trianglesHash);
         return mesh;
     }
 
-    public ObjectUpdate MakeObjectsOnSurface(Vector3 planetCenter, string pathToObject, int numObjs, float scale, ObjectPlacementDirection placeDir, bool isCache)
-    {
-        ObjectUpdate o = new ObjectUpdate();
-        LayerMask mask = ~LayerMask.GetMask(new string[] { "ocean" });
-        for (int i = 0; i < numObjs; i++)
+    public void MakeObjectsOnSurface(List<Vector3> points, List<Triangle> triangles, ObjectPlacementDirection placeDir, string pathToObject, EntityGenerator e, int numObjs, int numInCache)
+    {        
+        List<Vector3> posns = new List<Vector3>();
+        List<Quaternion> rots = new List<Quaternion>();
+        List<int> closestPoints = new List<int>();
+        for(int i = 0; i < numObjs; i++)
         {
-            Vector3 dir = new Vector3((float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f).normalized;
-            Vector3 randomUp = new Vector3((float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f).normalized;
-            RaycastHit hit;
-            Physics.Raycast(planetCenter + dir * (2 * radius + 2 * variance) * scale, -dir, out hit, Mathf.Infinity, mask);
-            Vector3 forward;
-            if (placeDir == ObjectPlacementDirection.UP) { forward = dir; }
-            else if(placeDir == ObjectPlacementDirection.NORMAL){ forward = hit.normal; }
-            else if(placeDir == ObjectPlacementDirection.RANDOM) { forward = new Vector3((float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f).normalized; }
-            else { throw new Exception("ObjectPlacementDirection parameter is invalid"); }            
-            o.AddInstantiationRequest(new InstantiationRequest(pathToObject, hit.point, Quaternion.LookRotation(forward, randomUp), triangles[hit.triangleIndex].points));
-        }
-        return o;
-    }
+            int triangle = r.Next(triangles.Count);
+            Vector3 point = (Vector3.Lerp(points[triangles[triangle].points[0]], points[triangles[triangle].points[1]], (float)r.NextDouble()) + 
+            
+                            Vector3.Lerp(points[triangles[triangle].points[0]], points[triangles[triangle].points[2]], (float)r.NextDouble())) / 2;
 
+            int closestPoint = -1;
+            float leastDist = float.MaxValue;
+            for(int i1 = 0; i1 < 3; i1++)
+            {
+                float dist = Vector3.SqrMagnitude(points[triangles[triangle].points[i1]] - point);
+                if(dist < leastDist){
+                    leastDist = dist;
+                    closestPoint = triangles[triangle].points[i1];
+                }
+            }
+
+            Vector3 forward;
+            if (placeDir == ObjectPlacementDirection.UP) { forward = point.normalized; }
+            else if(placeDir == ObjectPlacementDirection.NORMAL){ forward = triangles[triangle].plane.normal * triangles[triangle].GetDirInt(); }
+            else if(placeDir == ObjectPlacementDirection.RANDOM) { forward = new Vector3((float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f).normalized; }
+            else { throw new Exception("ObjectPlacementDirection parameter is invalid"); }
+            Vector3 randomUp = new Vector3((float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f).normalized;
+            rots.Add(Quaternion.LookRotation(forward, randomUp));
+            posns.Add(point);
+            closestPoints.Add(closestPoint);                  
+        }
+        Vector3 scale = ((GameObject)Resources.Load(pathToObject)).transform.localScale;
+        for(int i = 0; i < posns.Count; i++){
+            e.CreateEntity(posns[i], rots[i], scale, closestPoints[i]);
+        }
+    }
     public void RenderDebugLines()
     {
         List<int[]> edgesToRender = PlanetGenerator.shownCons;
         foreach(int[] edge in edgesToRender)
         {
-            Debug.DrawLine(points[edge[0]], points[edge[1]], Color.red, 1000000);
+            Debug.DrawLine(Points[edge[0]], Points[edge[1]], Color.red, 1000000);
         }
     }
 
@@ -99,6 +117,22 @@ public class Planet : IClass
         get 
         {
             return typeof(PlanetMono);
+        }
+    }
+
+    public List<Vector3> Points
+    {
+        get
+        {
+            return points;
+        }
+    }
+
+    public List<Vector3> Points1
+    {
+        get
+        {
+            return points;
         }
     }
 }
