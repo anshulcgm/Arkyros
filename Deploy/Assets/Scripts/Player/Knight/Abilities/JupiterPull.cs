@@ -14,6 +14,7 @@ public class JupiterPull : MonoBehaviour
     private GameObject camera;
 
     public AnimationController anim;
+    public GameObject model;
 
     DateTime start;
     //public GameObject damageDealt;
@@ -33,7 +34,7 @@ public class JupiterPull : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)
+        if (Input.GetKey("r") && cooldown == 0)
         {
             cast = false;
             start = DateTime.Now;

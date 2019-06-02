@@ -1054,7 +1054,7 @@ MonoBehaviour:
   Clips:
   - {fileID: 8300000, guid: 18a28668ea7908e4699f7f89741f768e, type: 3}
   - {fileID: 8300000, guid: 0212df2a71e16c840a9979199df7f73d, type: 3}
-  - {fileID: 8300000, guid: 9db3a9f494bd98f44b7398161c326c02, type: 3}
+  - {fileID: 8300000, guid: 0a27580c99aaee648b9d6b94ac3be889, type: 3}
   - {fileID: 8300000, guid: a01dee26713a0c14f9f7b7e1e91c22ea, type: 3}
   - {fileID: 8300000, guid: 45a17d8d02382d843ac664196a2e8622, type: 3}
   - {fileID: 8300000, guid: 4973b6f43d60ec64fa101153752148b5, type: 3}
@@ -1082,7 +1082,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a90d31b9b5a7cfd40806582a32e8256a, type: 3}
   - {fileID: 8300000, guid: f23ca54777d32854786436af28d9309f, type: 3}
   - {fileID: 8300000, guid: 097a8f6afb620104e9853c689f5ea36e, type: 3}
-  - {fileID: 8300000, guid: 3879e3b76e3b5f54fb0877859a30df8b, type: 3}
+  - {fileID: 8300000, guid: 758f5125ddcf6674586b501eca543c19, type: 3}
   - {fileID: 8300000, guid: 6dc230533d80bdc4db9b980f47ad2c0e, type: 3}
   - {fileID: 8300000, guid: c3f006eb0865d6140a28200d6af87a98, type: 3}
   - {fileID: 8300000, guid: 4e74f10874c112b42b0fb81997bec16b, type: 3}
@@ -1091,7 +1091,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 08b98d75ab08b6b49bcea0a8366d7093, type: 3}
   - {fileID: 8300000, guid: 35dc0ebc37d646a4a8429786199c27fd, type: 3}
   - {fileID: 8300000, guid: e4d20c890f4f4bd4f951576fa919c005, type: 3}
-  - {fileID: 8300000, guid: 5d4f1aa195ae9f64d824490f2520b2fe, type: 3}
+  - {fileID: 8300000, guid: cc1281dd1fe8b0440b523dc5bb328108, type: 3}
   ClipNames:
   - Cleave
   - CullingStrike
@@ -1274,7 +1274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   anim: {fileID: 6115156436900278675}
-  SpiritBladeEnergySlash: {fileID: 5559208315928233343, guid: 1fbbf96edc8466744b86f0196250fc07,
+  SpiritBladeEnergySlash: {fileID: 4622583958716229715, guid: 8aab8b5660ac279488a22dcf97bbf84c,
     type: 3}
   model: {fileID: 6115156436900278672}
 --- !u!114 &8168160284631342558
@@ -1384,8 +1384,9 @@ MonoBehaviour:
   cooldown: 0
   anim: {fileID: 6115156436900278675}
   model: {fileID: 6115156436900278672}
-  MementoMoriProjectile: {fileID: 7221904468566208928, guid: be64e16490fd30a40ae0c9a54617a8b7,
+  MementoMoriProjectile: {fileID: 2597004770093498091, guid: 924bb8a9eca097947a6295044dcd3213,
     type: 3}
+  self: {fileID: 0}
 --- !u!114 &638630974841400562
 MonoBehaviour:
   m_ObjectHideFlags: 0

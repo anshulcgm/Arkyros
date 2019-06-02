@@ -11,6 +11,7 @@ public class HammerDown : MonoBehaviour
     public GameObject SkyHammer;
 
     public AnimationController anim;
+    public GameObject model;
     DateTime start;
 
 
@@ -64,7 +65,7 @@ public class HammerDown : MonoBehaviour
                 if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, 200f, layerMask)) {
                     Vector3 target = hit.point;
                     GameObject skyHammerObj = Instantiate(SkyHammer, target + transform.up * 100, transform.rotation);
-                    skyHammerObj.GetComponent<Rigidbody>().AddForce(-transform.position.normalized * 100, ForceMode.Impulse);
+                    skyHammerObj.GetComponent<Rigidbody>().AddForce(-transform.position.normalized * 150, ForceMode.Impulse);
                 }
 
             //}

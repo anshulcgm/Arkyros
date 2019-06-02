@@ -9,7 +9,8 @@ public class Intimidate : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
+    public GameObject model;
     DateTime start;
 
 
@@ -25,7 +26,7 @@ public class Intimidate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
 
         rigidbody = GetComponent<Rigidbody>();

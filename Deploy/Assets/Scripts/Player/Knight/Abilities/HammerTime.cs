@@ -10,6 +10,8 @@ public class HammerTime : MonoBehaviour
     private GameObject camera;
 
     public AnimationController anim;
+    public GameObject model;
+
     DateTime start;
     DateTime hammerSwing;
     DateTime firstSwing;
@@ -47,7 +49,7 @@ public class HammerTime : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("r") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetKey("f") && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;

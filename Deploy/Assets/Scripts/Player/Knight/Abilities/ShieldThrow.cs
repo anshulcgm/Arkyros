@@ -10,7 +10,8 @@ public class ShieldThrow : MonoBehaviour
     private GameObject camera;
     public GameObject Shield;
     private float projectileSpeed;
-    private AnimationController anim;
+    public AnimationController anim;
+    public GameObject model;
     DateTime start;
 
 
@@ -26,7 +27,7 @@ public class ShieldThrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
 
         rigidbody = GetComponent<Rigidbody>();
@@ -43,7 +44,7 @@ public class ShieldThrow : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetMouseButtonDown(1) && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;

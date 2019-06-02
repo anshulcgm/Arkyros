@@ -1132,6 +1132,7 @@ GameObject:
   - component: {fileID: 1339353795962491827}
   - component: {fileID: 2140964412979006224}
   - component: {fileID: 5004491684890124216}
+  - component: {fileID: 5852880707114821232}
   - component: {fileID: 6997039946982392921}
   - component: {fileID: 5592577192024083935}
   - component: {fileID: 7979313453317872640}
@@ -1142,7 +1143,6 @@ GameObject:
   - component: {fileID: 3690964678292186687}
   - component: {fileID: 5004491684890124201}
   - component: {fileID: 5004491684890124215}
-  - component: {fileID: 5852880707114821232}
   - component: {fileID: 2392544577265998281}
   m_Layer: 9
   m_Name: KnightTankWithHammerMoving
@@ -1285,7 +1285,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6d733be80989fa3459394624ecf16fcf, type: 3}
   - {fileID: 8300000, guid: 606afbb07f6f1b24eaaf7fa764150a23, type: 3}
   - {fileID: 8300000, guid: d3f1b27807b8a854ba565d1728e923f6, type: 3}
-  - {fileID: 8300000, guid: 3c8eeedd726974246ba77160ed7cb8a5, type: 3}
+  - {fileID: 8300000, guid: 2df46a8d5264b7e45927c6ae8039e073, type: 3}
   - {fileID: 8300000, guid: 1a71934d0ef4e77448098c4889ecc42f, type: 3}
   - {fileID: 8300000, guid: 429ccf9a739014946a9199310070daf6, type: 3}
   - {fileID: 8300000, guid: daf303ff1b4ba6d4db3fb83267383034, type: 3}
@@ -1295,7 +1295,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4414460817237f64c9cd642a2dbc3def, type: 3}
   - {fileID: 8300000, guid: 623e81c226c27eb429d2b0f82b8e291e, type: 3}
   - {fileID: 8300000, guid: 901a4475376f43b4c8e21f8953f516ec, type: 3}
-  - {fileID: 8300000, guid: 4a2f4bf3eb0720c409b84b18877461bb, type: 3}
+  - {fileID: 8300000, guid: 97a76e64c04ba2246ac3f96fc31943f4, type: 3}
   - {fileID: 8300000, guid: bf48b205559deac4a947b77efb128675, type: 3}
   - {fileID: 8300000, guid: df7d5713c51d2bf44ab1dd23a8af83c8, type: 3}
   - {fileID: 8300000, guid: 91dfe3342b4617d4ca957ef2afc47d4c, type: 3}
@@ -1426,6 +1426,19 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 311
+--- !u!114 &5852880707114821232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004491684890124213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2212a4969925709479bcac3ac1d56a8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 8927683913148525849}
 --- !u!114 &6997039946982392921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1440,6 +1453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   anim: {fileID: 8927683913148525849}
+  model: {fileID: 8927683913148525848}
   shieldTemp: {fileID: 7383818346270251463, guid: 53db4d4734790e6489064c444bb2a6d0,
     type: 3}
 --- !u!114 &5592577192024083935
@@ -1449,12 +1463,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004491684890124213}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61679f345d071be4da9fc1df08c896f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  anim: {fileID: 8927683913148525849}
+  model: {fileID: 8927683913148525848}
 --- !u!114 &7979313453317872640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1462,13 +1478,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004491684890124213}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff424e3c704d97446b263b504ae5fdeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  Shield: {fileID: 0}
+  Shield: {fileID: 8927683913148525848}
+  anim: {fileID: 8927683913148525849}
+  model: {fileID: 0}
 --- !u!114 &1844576334460709028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1476,12 +1494,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004491684890124213}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4acebca92457d534ebcb514e8d515d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  anim: {fileID: 8927683913148525849}
+  model: {fileID: 8927683913148525848}
 --- !u!114 &5677541753909824412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1489,12 +1509,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004491684890124213}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58f4172f761dd094e9271465323f0e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  anim: {fileID: 8927683913148525849}
+  model: {fileID: 8927683913148525848}
 --- !u!114 &5004491684890124214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1527,6 +1549,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  anim: {fileID: 8927683913148525849}
+  model: {fileID: 8927683913148525848}
 --- !u!114 &3690964678292186687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1540,6 +1564,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  anim: {fileID: 8927683913148525849}
+  model: {fileID: 8927683913148525848}
   Banner: {fileID: 0}
 --- !u!114 &5004491684890124201
 MonoBehaviour:
@@ -1557,6 +1583,7 @@ MonoBehaviour:
   SkyHammer: {fileID: 6981962925071982693, guid: bb269431ab0e2fe4d97f44ae3d1f05e9,
     type: 3}
   anim: {fileID: 8927683913148525849}
+  model: {fileID: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 311
@@ -1567,29 +1594,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004491684890124213}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4871ba67613af7747a5524ceefeae9a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
   anim: {fileID: 8927683913148525849}
+  model: {fileID: 8927683913148525848}
   particleSmash: {fileID: 4039727760110134509, guid: b3aa5b74d95e6b5418ea39d92116aaad,
     type: 3}
   HammerHead: {fileID: 3113034461151589566}
---- !u!114 &5852880707114821232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5004491684890124213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2212a4969925709479bcac3ac1d56a8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 8927683913148525849}
 --- !u!114 &2392544577265998281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1605,7 +1620,8 @@ MonoBehaviour:
   radius: 0
   speed: 0
   cooldown: 0
-  anim: {fileID: 0}
+  anim: {fileID: 8927683913148525849}
+  model: {fileID: 8927683913148525848}
 --- !u!1 &5194022097309799633
 GameObject:
   m_ObjectHideFlags: 0
