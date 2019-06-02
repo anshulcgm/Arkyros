@@ -5,51 +5,56 @@ using UnityEngine;
 
 public class SkyHammerScript : MonoBehaviour
 {
-    public float cooldown;
 
     private GameObject camera;
-    public GameObject SkyHammer;
 
-    private AnimationController anim;
     DateTime start;
-
-
-    Rigidbody rigidbody;
-    Stats stats;
-    TargetCenterScreen tcs;
-
-    private bool buffActive;
-    private bool cast;
-
     SoundManager soundManager;
+    public GameObject particleBoom;
+    bool exploded;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        exploded = false;
+        soundManager = GetComponent<SoundManager>();
+        start = DateTime.Now;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if((DateTime.Now - start).TotalSeconds > 30)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
-    void onCollisionEnter(Collision collision) {
-        if (collision.gameObject.tag.Equals("planet")) {
-            //soundManager.playOneShot("HammerDown");
-            Collider[] hits = Physics.OverlapSphere(transform.position, 20);
+    void OnCollisionEnter(Collision collision)
+    {
+        if (/*collision.gameObject.tag.Equals("planet") && */ !exploded)
+        {
+        
+            Instantiate(particleBoom, transform.position, transform.rotation);
+            Debug.Log("SkyHammer Down");
+            Collider[] hits = Physics.OverlapSphere(transform.position, 60);
             foreach (Collider hit in hits)
             {
                 if (hit.gameObject.tag == "Enemy")
                 {
-                    stats.dealDamage(hit.gameObject, 20);
+                    hit.gameObject.GetComponent<StatManager>().changeHealth(600);
 
                 }
             }
+
+        soundManager.playOneShot("HammerDown");
+        exploded = true;
+
         }
     }
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
        
     }
 }

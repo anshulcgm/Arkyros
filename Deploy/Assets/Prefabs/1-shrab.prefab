@@ -78,8 +78,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100038, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
-  - {fileID: 2100040, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
+  - {fileID: 2100000, guid: a2e25987efd84a84c8d342cd91c3a751, type: 2}
+  - {fileID: 2100000, guid: adc8f629e6b20774eb00df2fdd66c46f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -203,8 +203,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100026, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
-  - {fileID: 2100028, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
+  - {fileID: 2100000, guid: a2e25987efd84a84c8d342cd91c3a751, type: 2}
+  - {fileID: 2100000, guid: adc8f629e6b20774eb00df2fdd66c46f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -435,8 +435,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100022, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
-  - {fileID: 2100024, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
+  - {fileID: 2100000, guid: a2e25987efd84a84c8d342cd91c3a751, type: 2}
+  - {fileID: 2100000, guid: adc8f629e6b20774eb00df2fdd66c46f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -624,7 +624,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100014, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
+  - {fileID: 2100000, guid: adc8f629e6b20774eb00df2fdd66c46f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -749,8 +749,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100010, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
-  - {fileID: 2100012, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
+  - {fileID: 2100000, guid: 5e59c00e22ea22641bc30d0e248a2854, type: 2}
+  - {fileID: 2100000, guid: a2e25987efd84a84c8d342cd91c3a751, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -834,11 +834,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4202194166852568307}
+  - component: {fileID: 8517697227333292104}
   - component: {fileID: 3491866323074090721}
   - component: {fileID: 7600728329128811324}
   - component: {fileID: 5833343331906928011}
   - component: {fileID: 3444825276652991976}
-  - component: {fileID: 8517697227333292104}
   m_Layer: 0
   m_Name: 1-shrab
   m_TagString: Enemy
@@ -855,7 +855,7 @@ Transform:
   m_GameObject: {fileID: 5838973325038508718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.416354, y: 2.213, z: 4.9270277}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4107188130051161127}
   - {fileID: 3700221111307057571}
@@ -874,6 +874,68 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8517697227333292104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5838973325038508718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa1fc3738f7d924c9ab633b27a7da06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyName: Shrab
+  kamikazeMaxHP: 0
+  kamikazeDefense: 0
+  kamikazeMovementSpeed: 0
+  kamikazeIQ: 0
+  golemMaxHp: 0
+  golemDefense: 0
+  golemMovementSpeed: 0
+  golemChargeSpeed: 0
+  golemProjectileSpeed: 0
+  golemKnockbackDmg: 0
+  golemGroundPoundDmg: 0
+  golemProjectileDmg: 0
+  IRMaxHp: 0
+  IRDefense: 0
+  IRMovementSpeed: 0
+  IRRadiusAffect: 0
+  IRSpeedBuff: 0
+  IRMaxHpBuff: 0
+  IRAttackBuff: 0
+  IRPlayerAttackDebuff: 0
+  IRPlayerSpeedDebuff: 0
+  shlyMaxHp: 0
+  shlyDefense: 0
+  shlyMovementSpeed: 0
+  aggregateNumberofShlies: 0
+  bullChargeSpeed: 0
+  speedDebuffProportion: 0
+  pelletDamage: 0
+  bullChargeDamage: 0
+  shrabMaxHp: 30
+  shrabDefense: 10
+  shrabMovementSpeed: 10
+  aggregateNumberofShrabs: 1
+  shrabPincerDmg: 10
+  shrabEruptionRadius: 100
+  starshipMaxHp: 0
+  starshipDefense: 0
+  starshipMovementSpeed: 0
+  IRHealthSpawnStart: 0
+  bombDamage: 0
+  bombRadius: 0
+  rayDamage: 0
+  rayWidth: 0
+  turretDamage: 0
+  brokenKamikaze: {fileID: 1531583384, guid: 23c8eb42d2e4bf240aa4de2828b242e5, type: 3}
+  brokenGolem: {fileID: 266699126, guid: 78a65ee2976308247821c28d54b93dc3, type: 3}
+  brokenShly: {fileID: 1257030116, guid: af8fead65e20d7747aed19c3aeb0fe33, type: 3}
+  brokenShrab: {fileID: 1785281474, guid: 5465cab4bff5f7c4d85ff736ae8ec4c1, type: 3}
+  healthTimer: 5
 --- !u!95 &3491866323074090721
 Animator:
   serializedVersion: 3
@@ -924,12 +986,14 @@ MonoBehaviour:
   shurikenRange: 30
   pincerMovementRange: 10
   pincer_R_Top: {fileID: 4557612403389848504}
-  player: {fileID: 0}
   projectile: {fileID: 4560942895118958702, guid: 89f07b51d18d0b442b44951002cdeede,
     type: 3}
-  leftPlayerLeg: {fileID: 0}
-  rightPlayerLeg: {fileID: 0}
+  distanceAbovePlanetSurface: 0
   timer: 0.33
+  idleRadius: 200
+  attackRadius: 100
+  idleTimer: 10
+  maxIdleDistance: 25
 --- !u!135 &3444825276652991976
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -937,60 +1001,12 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5838973325038508718}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e8548062ca5a396438dbd3779b7661ae, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.83381295
-  m_Center: {x: -1.8854306, y: 1.1665161, z: 1.5966585}
---- !u!114 &8517697227333292104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5838973325038508718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fa1fc3738f7d924c9ab633b27a7da06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyName: Shrab
-  kamikazeMaxHP: 0
-  kamikazeDefense: 0
-  kamikazeMovementSpeed: 0
-  kamikazeIQ: 0
-  golemMaxHp: 0
-  golemDefense: 0
-  golemMovementSpeed: 0
-  golemChargeSpeed: 0
-  golemProjectileSpeed: 0
-  golemKnockbackDmg: 0
-  golemGroundPoundDmg: 0
-  golemProjectileDmg: 0
-  IRMaxHp: 0
-  IRDefense: 0
-  IRMovementSpeed: 0
-  IRRadiusAffect: 0
-  IRSpeedBuff: 0
-  IRMaxHpBuff: 0
-  IRAttackBuff: 0
-  IRPlayerAttackDebuff: 0
-  IRPlayerSpeedDebuff: 0
-  shlyMaxHp: 0
-  shlyDefense: 0
-  shlyMovementSpeed: 0
-  aggregateNumberofShlies: 0
-  bullChargeSpeed: 0
-  speedDebuffProportion: 0
-  pelletDamage: 0
-  bullChargeDamage: 0
-  shrabMaxHp: 30
-  shrabDefense: 10
-  shrabMovementSpeed: 20
-  aggregateNumberofShrabs: 1
-  shrabPincerDmg: 10
-  shrabEruptionRadius: 100
+  m_Radius: 0.6065299
+  m_Center: {x: -1.7561595, y: 1.95, z: 1.2640818}
 --- !u!1 &5870792295336468862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,8 +1055,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100030, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
-  - {fileID: 2100032, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
+  - {fileID: 2100000, guid: a2e25987efd84a84c8d342cd91c3a751, type: 2}
+  - {fileID: 2100000, guid: adc8f629e6b20774eb00df2fdd66c46f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1165,8 +1181,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100018, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
-  - {fileID: 2100020, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
+  - {fileID: 2100000, guid: a2e25987efd84a84c8d342cd91c3a751, type: 2}
+  - {fileID: 2100000, guid: adc8f629e6b20774eb00df2fdd66c46f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1259,8 +1275,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100034, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
-  - {fileID: 2100036, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
+  - {fileID: 2100000, guid: a2e25987efd84a84c8d342cd91c3a751, type: 2}
+  - {fileID: 2100000, guid: adc8f629e6b20774eb00df2fdd66c46f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1383,8 +1399,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100006, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
-  - {fileID: 2100008, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
+  - {fileID: 2100000, guid: 414ef30a2015a5747a5fe46968356109, type: 2}
+  - {fileID: 2100000, guid: adc8f629e6b20774eb00df2fdd66c46f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1477,7 +1493,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
+  - {fileID: 2100000, guid: adc8f629e6b20774eb00df2fdd66c46f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1600,8 +1616,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100002, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
-  - {fileID: 2100004, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
+  - {fileID: 2100000, guid: 414ef30a2015a5747a5fe46968356109, type: 2}
+  - {fileID: 2100000, guid: adc8f629e6b20774eb00df2fdd66c46f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1695,7 +1711,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100016, guid: 2a32d6689ee16ad45b4bdfd27afb51b8, type: 3}
+  - {fileID: 2100000, guid: adc8f629e6b20774eb00df2fdd66c46f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

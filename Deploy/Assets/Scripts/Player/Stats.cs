@@ -107,7 +107,7 @@ public class Stats : MonoBehaviour
     {
         health -= damage;
         health = Mathf.Clamp(health, 0, maxHealth); //might be moved to update
-        soundManager.playOneShot("TakeDamage");
+        //soundManager.playOneShot("TakeDamage");
     }
 
     public void heal(float healAmount)
@@ -125,6 +125,11 @@ public class Stats : MonoBehaviour
         buffs[buff] += duration;
     }
 
+    public void setBuffDuration(int buff, int duration)
+    {
+        buffs[buff] = duration;
+    }
+
     public void addStatus(int status, int duration)
     {
         //statusAilment[status] += duration;
@@ -132,13 +137,19 @@ public class Stats : MonoBehaviour
 
     public void dealDamage(GameObject target, float damage)
     {
-        //deals dmg to target
-
-        //not sure if this works exactly to detect if its been killed
-        if (target == null)
+        Debug.Log("REEEE1");
+        if (target.tag == "Enemy")
         {
-            //trigger onKill() passives
+            
+            target.GetComponent<StatManager>().changeHealth(-damage);
+            Debug.Log("REEEE2");
+            //not sure if this works exactly to detect if its been killed
+            if (target == null)
+            {
+                //trigger onKill() passives
+            }
         }
+
     }
 
 }

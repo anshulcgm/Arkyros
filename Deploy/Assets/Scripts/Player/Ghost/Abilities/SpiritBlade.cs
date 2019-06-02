@@ -9,7 +9,7 @@ public class SpiritBlade : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
 
 
     private bool buffActive;
@@ -24,13 +24,14 @@ public class SpiritBlade : MonoBehaviour
 
     private int projectileSpeed = 40;
     private bool cast;
+    public GameObject model;
 
     SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
@@ -44,12 +45,11 @@ public class SpiritBlade : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetMouseButton(1) && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false;
             start = DateTime.Now;
-            anim.StartOverlayAnim("Swing_Light", 0.5f, 0.5f);
-            soundManager.playOneShot("SpiritBlade");
+            
 
             //put any setup code here, before the ability is actually cast
             
@@ -58,8 +58,11 @@ public class SpiritBlade : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            
-            GameObject clone = Instantiate(SpiritBladeEnergySlash, transform.position + transform.forward, Quaternion.identity);
+            model.transform.rotation = camera.transform.rotation;
+            anim.StartOverlayAnim("Swing_Light", 0.5f, 0.5f);
+            soundManager.playOneShot("SpiritBlade");
+
+            GameObject clone = Instantiate(SpiritBladeEnergySlash, model.transform.position + model.transform.forward, model.transform.rotation);
 
             float x = Screen.width / 2f;
             float y = Screen.height / 2f;

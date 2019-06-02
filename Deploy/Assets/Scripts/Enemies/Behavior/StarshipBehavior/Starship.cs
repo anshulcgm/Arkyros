@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Starship : Enemy
 {
-    private float iRHealthSpawnStart;
-    private float bombDamage;
-    private float bombRadius;
-    private float rayDamage;
-    private float rayWidth;
-    private float turretDamage;
+    public float iRHealthSpawnStart;
+    public float bombDamage;
+    public float bombRadius;
+    public float rayDamage;
+    public float rayWidth;
+    public float turretDamage;
 
 
     //Constructor

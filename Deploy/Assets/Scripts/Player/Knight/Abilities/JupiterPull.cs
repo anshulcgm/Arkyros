@@ -13,7 +13,7 @@ public class JupiterPull : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
 
     DateTime start;
     //public GameObject damageDealt;
@@ -23,9 +23,10 @@ public class JupiterPull : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         soundManager = GetComponent<SoundManager>();
+        speed = 40;
 
     }
 
@@ -53,12 +54,13 @@ public class JupiterPull : MonoBehaviour
 
         if((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
+            anim.StartOverlayAnim("Pull", 0.5f, 1f);
             Collider[] hits = Physics.OverlapSphere(transform.position, radius);
             Debug.Log("Gottem");
             //camera.GetComponent<cameraSoundManager>().jupiterPullCast = true;
             foreach (Collider hit in hits)
             {
-                // Detects if the object is an "enemy" and if so destroys it
+                // Detects if the object is an "enemy" and if so pulls it
                 if (hit.gameObject.tag == "Enemy")
                 {
                     Debug.Log(hit.gameObject.name);

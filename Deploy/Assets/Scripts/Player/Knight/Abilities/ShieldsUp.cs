@@ -9,7 +9,7 @@ public class ShieldsUp : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
     DateTime start;
 
 
@@ -22,11 +22,12 @@ public class ShieldsUp : MonoBehaviour
 
     SoundManager soundManager;
     //might not always be Ghost, need different one for each class.
+    public GameObject shieldTemp;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
 
         rigidbody = GetComponent<Rigidbody>();
@@ -41,13 +42,13 @@ public class ShieldsUp : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetMouseButtonDown(1) && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
             
 
-            anim.StartOverlayAnim("ShieldsUp", 0.5f, 2f); // mostly only for movement, probably not used in an ability
+            
 
 
             //put any setup code here, before the ability is actually cast
@@ -58,14 +59,8 @@ public class ShieldsUp : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-
-            /*
-             * All the code for the ability that you want to write
-             * transform.forward for the direction the player is 
-             * maybe setting colliders
-             * instantiating new objects
-             * to damage enemy, EnemyGameObject.GetComponent<StatManager>().changeHealth(amount), amount can be positive or negative
-             */
+            anim.StartOverlayAnim("Stance", 0.5f, 4f); // mostly only for movement, probably not used in an ability
+            Instantiate(shieldTemp, transform.position + transform.forward * 4, transform.rotation);
 
 
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds

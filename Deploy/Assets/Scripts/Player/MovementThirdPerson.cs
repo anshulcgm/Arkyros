@@ -33,6 +33,7 @@ public class MovementThirdPerson : MonoBehaviour
     {
         InputMagnitude();
 
+        /*
         isGrounded = controller.isGrounded;
         if (isGrounded)
         {
@@ -44,7 +45,7 @@ public class MovementThirdPerson : MonoBehaviour
         }
         moveVector = new Vector3(0, verticalVel, 0);
         controller.Move(moveVector);
-
+        */
         
     }
 
@@ -66,10 +67,9 @@ public class MovementThirdPerson : MonoBehaviour
         desiredMoveDirection = forward * InputZ + right * InputX;
         controller.Move(desiredMoveDirection);
         
-        if(blockRotationPlayer == false)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
-        }
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
+
     }
 
     void InputMagnitude()

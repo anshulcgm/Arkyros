@@ -9,7 +9,8 @@ public class LeapintheDark : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
+    public GameObject model;
     DateTime start;
 
 
@@ -26,7 +27,7 @@ public class LeapintheDark : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
 
         rigidbody = GetComponent<Rigidbody>();
@@ -41,16 +42,12 @@ public class LeapintheDark : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetKey("q") && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            anim.StartOverlayAnim("AnimationName", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
 
-            //or
-
-            anim.PlayLoopingAnim("AnimationName"); // mostly only for movement, probably not used in an ability
-            soundManager.playOneShot("LeapInTheDark");
+            
 
             //put any setup code here, before the ability is actually cast
 
@@ -60,11 +57,12 @@ public class LeapintheDark : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-
-            Vector3 newpos = transform.position + transform.forward * 10;
+            soundManager.playOneShot("LeapInTheDark", 0.5f);
+            model.transform.rotation = camera.transform.rotation;
+            Vector3 newpos = model.transform.position + model.transform.forward * 40;
             transform.position = newpos;
             // the attack will be taken care by the animation??
-            anim.StartOverlayAnim("Swing_Heavy_1", 0.5f, 1f);
+            anim.StartOverlayAnim("Swing_Heavy_1", 0.5f, 0.5f);
 
 
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds

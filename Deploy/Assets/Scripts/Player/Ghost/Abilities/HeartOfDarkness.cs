@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 
 public class HeartOfDarkness : MonoBehaviour
 {
@@ -9,9 +10,10 @@ public class HeartOfDarkness : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
 
     DateTime start;
+    DateTime lastCast;
 
     Rigidbody rigidbody;
     Stats stats;
@@ -21,49 +23,66 @@ public class HeartOfDarkness : MonoBehaviour
     private bool cast = false;
 
     SoundManager soundManager;
+    public GameObject reee;
+
+    float sat;
+
+    Vector3 target;
+    bool u_gottem = false;
+    bool gottem_r = false;
+    Vector3 lastPosn = Vector3.zero;
+
+    public LayerMask self;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         soundManager = GetComponent<SoundManager>();
         cooldown = 0;
+
+        sat = 1;
     }
 
 
-    Vector3 target;
-    bool u_gottem = false;
-    Vector3 lastPosn = Vector3.zero;
+    
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("r") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetKey("r") && cooldown == 0 && !gottem_r)      //place key, any key can be pressed.
         {
+            gottem_r = true;
             cast = true; //ability not yet cast
             start = DateTime.Now;
-            rigidbody.AddForce(transform.position.normalized * 1000);
+            rigidbody.AddForce(transform.position.normalized * 5000);
             soundManager.playOneShot("HeartofDarknessTeleport");
             anim.PlayLoopingAnim("Fly_Forward");
-            stats.addBuff((int)buff.Gravityless, 240);
+            stats.setBuffDuration((int)buff.Gravityless, 240);
+            
         }
         if (cast)
         {
+            
+            sat = Mathf.Max(1 - (float)(DateTime.Now - start).TotalSeconds, 0);
+            lastCast = DateTime.Now;
+
+            camera.GetComponent<ColorCorrectionCurves>().saturation = sat;
             if ((DateTime.Now - start).TotalSeconds < 4)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit))
+                    if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, Mathf.Infinity, self))
                     {
                         target = hit.point;
                         u_gottem = true;
                         cast = false;
-                        Debug.Log("hhhhhhhhhh");
+                        
                     }
-                    cooldown = 1000;
+                    cooldown = 300;
                 }
                 if ((DateTime.Now - start).TotalSeconds > 1)
                 {
@@ -74,23 +93,44 @@ public class HeartOfDarkness : MonoBehaviour
             }
             else
             {
-                cooldown = 500;
+                cooldown = 300;
                 cast = false;
+                
             }
+        }
+        else
+        {
+
+            sat = Mathf.Min((float)(DateTime.Now - lastCast).TotalSeconds, 1);
+            camera.GetComponent<ColorCorrectionCurves>().saturation = sat;
+            gottem_r = false;
         }
 
 
         if (u_gottem)
         {
+            stats.setBuffDuration((int)buff.Gravityless, 0);
+            Debug.Log("HoD");
+
+            rigidbody.isKinematic = true;
             transform.position = target;
+            Instantiate(reee, transform.position, Quaternion.identity);
             soundManager.playOneShot("HeartofDarknessDivebomb");
 
+            rigidbody.isKinematic = false;
+            u_gottem = false;
             Collider[] stuff = Physics.OverlapSphere(target, 20);
             foreach (Collider c in stuff)
             {
-                stats.dealDamage(c.gameObject, float.MaxValue);
+                if(c.gameObject.tag == "Enemy")
+                {
+                    stats.dealDamage(c.gameObject, 1000);
+                }
+                
             }
-            u_gottem = false;
+            
+            
+            
         }
 
         if (cooldown > 0) //counts down for the cooldown

@@ -25,8 +25,9 @@ public class SpiritBladeProjectile : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            //other. take damage
-            
+            other.gameObject.GetComponent<StatManager>().changeHealth(-20);
+
+
         }
         Destroy(this.gameObject);
     }

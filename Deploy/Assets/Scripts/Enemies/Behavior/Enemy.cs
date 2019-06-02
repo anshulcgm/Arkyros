@@ -237,5 +237,6 @@ public enum EnemyType
     Brawler,
     IrradiatedEnemy,
     Shrab,
-    Shly
+    Shly,
+    Starship
 }

@@ -8,6 +8,8 @@ public class SphericalMovement : MonoBehaviour {
     private Rigidbody rb;
     private GameObject player;
 
+    public float distanceAbovePlanetSurface;
+
     public float gravity = -10f;
   
 	void Start () {
@@ -23,18 +25,92 @@ public class SphericalMovement : MonoBehaviour {
         //Attract();
         //moveOnSphere(player.transform.position);
 
-        //This code moves the golem towards the player using plane-logic
-        Plane2 plane = new Plane2(transform.position.normalized, transform.position);
+        
+       if(GetComponent<StatManager>().enemyName == "Golem")
+        {
+            golemSphereMovement();
+        }
+       else if(GetComponent<StatManager>().enemyName == "Shrab")
+        {
+            shrabSphereMovement(player.transform.position);
+        }
 
+    }
+    public void shrabSphereMovement(Vector3 target)
+    {
+        //This code moves the golem towards the player using plane-logic
+        //For shrab, instead of transform.position.normalized, raycast to the center of the planet and use hit.normal 
+        Vector3 targetPosition = findRaycastPointOnSphere(target);
+        Vector3 planeInstantiationPoint = Vector3.zero;
+        RaycastHit planeHit;
+        if(Physics.Raycast(transform.position.normalized * 5f + transform.position, (-transform.position).normalized, out planeHit, Mathf.Infinity))
+        {
+            planeInstantiationPoint = planeHit.normal;
+            //if(Vector3.Distance(transform.position, planeHit.point) >= 2.0f)
+            //{
+                transform.position = planeHit.point + transform.position.normalized * distanceAbovePlanetSurface;
+            //}
+        }
+        
+        Debug.Log("Plane instantiation point is " + planeInstantiationPoint);
+        Plane2 plane = new Plane2(planeInstantiationPoint, transform.position);
+
+        Vector2 mappedPoint = plane.GetMappedPoint(target) - plane.GetMappedPoint(transform.position);
+        if (mappedPoint.magnitude > 1)
+            transform.LookAt(mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir + transform.position, transform.position.normalized);
+        /*
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, (planet.transform.position - transform.position).normalized, out hit, Mathf.Infinity))
+        {
+            Plane2 alignPlane = new Plane2(hit.normal, transform.position);
+            //Vector2 mappedPoint2 = alignPlane.GetMappedPoint(player.transform.position) - alignPlane.GetMappedPoint(transform.position);
+            //rb.AddForce((mappedPoint2.x * alignPlane.xDir + mappedPoint2.y * alignPlane.yDir).normalized * speed);
+            if (Vector3.Distance(hit.point, transform.position) >= 1f)
+            {
+                rb.AddForce(transform.position.normalized * gravity * 2);
+                //rb.AddForce((mappedPoint2.x * alignPlane.xDir + mappedPoint2.y * alignPlane.yDir).normalized * speed/-2f);
+            }
+        }
+        */
+        //adding force towards gravity, adding force towards direction faced
+        //float step = Time.deltaTime * speed;
+        rb.AddForce((mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir).normalized * speed); 
+        //transform.position = Vector3.MoveTowards(transform.position, (mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir), step);
+        //rb.velocity = (mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir) * speed;
+        //rb.AddForce((mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir) * speed);
+
+        //rb.AddForce(transform.position.normalized * gravity * rb.mass);
+
+        Debug.DrawLine(transform.position, transform.position + mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir, Color.red);
+
+    }
+
+    public Vector3 findRaycastPointOnSphere(Vector3 point)
+    {
+        RaycastHit hit;
+        Vector3 pointToReturn = Vector3.zero;
+        if (Physics.Raycast(point + point.normalized * 5.0f, (-point).normalized, out hit, Mathf.Infinity))
+        {
+            pointToReturn = hit.point;
+        }
+        return pointToReturn;
+    }
+    public void golemSphereMovement()
+    {
+        //This code moves the golem towards the player using plane-logic
+        //For shrab, instead of transform.position.normalized, raycast to the center of the planet and use hit.normal 
+        Plane2 plane = new Plane2(transform.position.normalized, transform.position);
+        
         Vector2 mappedPoint = plane.GetMappedPoint(player.transform.position) - plane.GetMappedPoint(transform.position);
         if (mappedPoint.magnitude > 1)
             transform.LookAt(mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir + transform.position, transform.position.normalized);
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, (planet.transform.position - transform.position).normalized, out hit, Mathf.Infinity)){
+        if (Physics.Raycast(transform.position, (planet.transform.position - transform.position).normalized, out hit, Mathf.Infinity))
+        {
             Plane2 alignPlane = new Plane2(hit.normal, transform.position);
             //Vector2 mappedPoint2 = alignPlane.GetMappedPoint(player.transform.position) - alignPlane.GetMappedPoint(transform.position);
             //rb.AddForce((mappedPoint2.x * alignPlane.xDir + mappedPoint2.y * alignPlane.yDir).normalized * speed);
-            if(Vector3.Distance(hit.point, transform.position) >= 1f)
+            if (Vector3.Distance(hit.point, transform.position) >= 1f)
             {
                 rb.AddForce(transform.position.normalized * gravity * 2);
                 //rb.AddForce((mappedPoint2.x * alignPlane.xDir + mappedPoint2.y * alignPlane.yDir).normalized * speed/-2f);
@@ -42,9 +118,8 @@ public class SphericalMovement : MonoBehaviour {
         }
         //adding force towards gravity, adding force towards direction faced
         rb.AddForce(transform.forward * speed);
-               
-        rb.AddForce(transform.position.normalized * gravity);
 
+        rb.AddForce(transform.position.normalized * gravity);
     }
 
     //Method is not in use right now

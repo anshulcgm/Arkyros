@@ -7,10 +7,10 @@ public class Darkflight : MonoBehaviour
 {
     public float cooldown;
 
-    private GameObject camera;
+     GameObject camera;
 
-    private AnimationController anim;
-
+    public AnimationController anim;
+    public GameObject model;
 
     SoundManager soundManager;
     Rigidbody rigidbody;
@@ -22,7 +22,7 @@ public class Darkflight : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         soundManager = GetComponent<SoundManager>();
@@ -33,7 +33,7 @@ public class Darkflight : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetKey("q") && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false;
             start = DateTime.Now;
@@ -46,14 +46,14 @@ public class Darkflight : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            rigidbody.AddForce(transform.up * 1000, ForceMode.Impulse); //jumps super high
+            rigidbody.AddForce(transform.up * 40, ForceMode.Impulse); //jumps super high
 
-            soundManager.playOneShot("DarkFlightTakeoff");
+            soundManager.playOneShot("DarkflightTakeoff");
             anim.PlayLoopingAnim("Fly_Forward");
 
             stats.buffs[(int)buff.Gravityless] += 240; //lets you fly
 
-            soundManager.play("DarkFlightFlight");
+            soundManager.play("DarkflightFlight");
 
             cooldown = 240;
             cast = true;
@@ -67,9 +67,9 @@ public class Darkflight : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.Equals("planet") && cast) //lands back on the ground
+        if (/*collision.gameObject.tag.Equals("planet") &&*/ cast) //lands back on the ground
         {
-            soundManager.playOneShot("DarkFlightLanding");
+            soundManager.playOneShot("DarkflightLanding");
             anim.PlayLoopingAnim("Idle");
         }
     }

@@ -9,7 +9,7 @@ public class Landfall : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
     DateTime start;
 
 
@@ -20,18 +20,22 @@ public class Landfall : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
-    private int numForward = 700;
-    private int numUp = 400;
+    public int numForward = 80;
+    public int numUp = 80;
     private int sphereRadius = 20;
-    private int enemySetback = 400;
+    private int enemySetback = 200;
 
+    public GameObject particleLanding;
+    bool particleSpawned;
+
+    public GameObject model;
 
     SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
 
         rigidbody = GetComponent<Rigidbody>();
@@ -51,26 +55,27 @@ public class Landfall : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            anim.StartOverlayAnim("Landfall", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
-
-            //or
-
-            anim.PlayLoopingAnim("Landfall"); // mostly only for movement, probably not used in an ability
+            particleSpawned = false;
+            //transform.rotation = camera.transform.rotation;
 
 
             //put any setup code here, before the ability is actually cast
-            soundManager.playOneShot("LandfallJump");
+
 
 
 
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
-        {
+        {            
+            //anim.PlayLoopingAnim("Flight"); //this tells the animator to play the right animation, what strength, what duration
+            anim.StartOverlayAnim("Jump", 0.5f, 1f);
+            soundManager.playOneShot("LandfallJump");
+            //soundManager.play("LandfallSustain");
 
-            soundManager.play("LandfallSustain");
-            GetComponent<Rigidbody>().AddForce(transform.forward * numForward);
-            GetComponent<Rigidbody>().AddForce(transform.up * numUp);
+            model.transform.rotation = camera.transform.rotation;
+            rigidbody.AddForce(model.transform.forward * numForward, ForceMode.Impulse);
+            rigidbody.AddForce(transform.up * numUp, ForceMode.Impulse);
 
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
             cast = true;
@@ -84,15 +89,29 @@ public class Landfall : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.Equals("planet") && cast) //lands back on the ground
-        {
-            soundManager.stop();
+        
+        if (/*collision.gameObject.tag.Equals("planet") &&*/ cast) //lands back on the ground
+        { 
+            if (!particleSpawned)
+            {
+                Instantiate(particleLanding, transform.position + transform.up, transform.rotation);//particle effect once
+                particleSpawned = true;
+            }
+            
+            anim.PlayLoopingAnim("Standard"); //Idle
+            //soundManager.stop();
             soundManager.playOneShot("LandfallFall");
+
             Collider[] enemies = Physics.OverlapSphere(transform.position, sphereRadius);
             foreach(Collider col in enemies)
             {
-                //collision.gameObject.GetComponent<StatManager>().changeHealth(20);
-                collision.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * -enemySetback);
+                if (col.gameObject.tag == "Enemy")
+                {
+                    stats.dealDamage(col.gameObject, 600);
+                    //knockbacks
+                    collision.gameObject.GetComponent<Rigidbody>().AddForce((collision.gameObject.transform.position - transform.position).normalized * enemySetback, ForceMode.Impulse);
+                }
+                
             }
         }
     }

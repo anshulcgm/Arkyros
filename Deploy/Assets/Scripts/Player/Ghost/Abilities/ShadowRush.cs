@@ -9,13 +9,14 @@ public class ShadowRush: MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
-
+    public AnimationController anim;
+    public GameObject model;
 
     private bool buffActive;
 
     Rigidbody rigidbody;
     Stats stats;
+    private bool cast;
 
     DateTime start;
 
@@ -24,7 +25,7 @@ public class ShadowRush: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
@@ -34,23 +35,33 @@ public class ShadowRush: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetKey("q") && cooldown == 0)      //place key, any key can be pressed.
         {
             start = DateTime.Now;
-            //anim.SetBool("ShadowRush", true); //this tells the animator to play the right animation
-            cooldown = 360;                   //placeholder time, divide by 60 for cooldown in seconds
+            cast = false;
+            
+        }
+
+        if((DateTime.Now - start).TotalSeconds < 1 && !cast)
+        {
+
             stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] *= 2; //double speed
             buffActive = true;
-            soundManager.play("ShadowRush");
+            Debug.Log("start");
+            soundManager.playOneShot("Shadowrush");
+
+            cooldown = 360;
+            cast = true;
         }
-        if ((DateTime.Now - start).TotalSeconds > 6) //when duration of ability is over, set back to original speed
+
+        if ((DateTime.Now - start).TotalSeconds > 6 && buffActive) //when duration of ability is over, set back to original speed
         {
-            if (buffActive)
-            {
-                stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] /= 2; //original speed
-                soundManager.stop();
-                buffActive = false;
-            }
+
+            stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] /= 2; //original speed
+            soundManager.stop();
+            Debug.Log("end");
+            buffActive = false;
+
         }
         if (cooldown > 0)
         {

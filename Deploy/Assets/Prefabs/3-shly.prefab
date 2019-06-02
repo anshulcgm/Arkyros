@@ -90,6 +90,25 @@ MonoBehaviour:
   speedDebuffProportion: 0.2
   pelletDamage: 20
   bullChargeDamage: 50
+  shrabMaxHp: 0
+  shrabDefense: 0
+  shrabMovementSpeed: 0
+  aggregateNumberofShrabs: 0
+  shrabPincerDmg: 0
+  shrabEruptionRadius: 0
+  starshipMaxHp: 0
+  starshipDefense: 0
+  starshipMovementSpeed: 0
+  IRHealthSpawnStart: 0
+  bombDamage: 0
+  bombRadius: 0
+  rayDamage: 0
+  rayWidth: 0
+  turretDamage: 0
+  brokenKamikaze: {fileID: 0}
+  brokenGolem: {fileID: 0}
+  brokenShly: {fileID: 0}
+  brokenShrab: {fileID: 0}
 --- !u!114 &1937832379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,12 +122,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 30
+  bullChargeSpeed: 0
   pelletDropStoppingDistance: 0
   searchRadius: 20
   sprainEffectRadius: 3
+  explosion: {fileID: 0}
   pelletTimer: 0
+  neutralMovementTimer: 0
   projectile: {fileID: 4560942895118958702, guid: 89f07b51d18d0b442b44951002cdeede,
     type: 3}
+  maxDisToTravel: 0
+  idleBehaviorRadius: 0
+  attackRadius: 0
 --- !u!1001 &1507446445041829984
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -216,6 +241,10 @@ PrefabInstance:
       propertyPath: m_RootBone
       value: 
       objectReference: {fileID: 1507446445041701602}
+    - target: {fileID: 13700004, guid: b051bfab332f3ba4e94c08d706fb3a8c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a608af8b397bd5247b609509e27a4893, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b051bfab332f3ba4e94c08d706fb3a8c, type: 3}
 --- !u!4 &1507446445041701614 stripped
@@ -349,6 +378,14 @@ PrefabInstance:
       propertyPath: m_RootBone
       value: 
       objectReference: {fileID: 8167679439587815412}
+    - target: {fileID: 13700004, guid: b051bfab332f3ba4e94c08d706fb3a8c, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 540d4987af84cf84a8674a9ba501b3aa, type: 2}
+    - target: {fileID: 13700004, guid: b051bfab332f3ba4e94c08d706fb3a8c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a608af8b397bd5247b609509e27a4893, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b051bfab332f3ba4e94c08d706fb3a8c, type: 3}
 --- !u!4 &8167679439587815416 stripped
@@ -482,6 +519,10 @@ PrefabInstance:
       propertyPath: m_RootBone
       value: 
       objectReference: {fileID: 8612496906396347640}
+    - target: {fileID: 13700004, guid: b051bfab332f3ba4e94c08d706fb3a8c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a608af8b397bd5247b609509e27a4893, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b051bfab332f3ba4e94c08d706fb3a8c, type: 3}
 --- !u!4 &8612496906396347636 stripped

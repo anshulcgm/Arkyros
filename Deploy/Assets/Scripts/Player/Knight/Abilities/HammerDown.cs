@@ -10,7 +10,7 @@ public class HammerDown : MonoBehaviour
     private GameObject camera;
     public GameObject SkyHammer;
 
-    private AnimationController anim;
+    public AnimationController anim;
     DateTime start;
 
 
@@ -22,11 +22,12 @@ public class HammerDown : MonoBehaviour
     private bool cast;
 
     SoundManager soundManager;
+    public LayerMask layerMask;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
 
         rigidbody = GetComponent<Rigidbody>();
@@ -42,11 +43,11 @@ public class HammerDown : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetKey("f") && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            anim.StartOverlayAnim("HammerDown", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
+            
                
 
 
@@ -56,16 +57,17 @@ public class HammerDown : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            soundManager.playOneShot("HammerDown");
-            if (Input.GetMouseButtonDown(0)) {
+            anim.StartOverlayAnim("BuffActivation", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
+            //soundManager.playOneShot("HammerDown");
+            //if (Input.GetMouseButtonDown(0)) {
                 RaycastHit hit;
-                if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit)) {
+                if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, 200f, layerMask)) {
                     Vector3 target = hit.point;
-                    GameObject skyHammerObj = Instantiate(SkyHammer, target + transform.up * 100, Quaternion.identity);
-                    skyHammerObj.GetComponent<Rigidbody>().AddForce(-transform.position.normalized * 50, ForceMode.Impulse);
+                    GameObject skyHammerObj = Instantiate(SkyHammer, target + transform.up * 100, transform.rotation);
+                    skyHammerObj.GetComponent<Rigidbody>().AddForce(-transform.position.normalized * 100, ForceMode.Impulse);
                 }
 
-            }
+            //}
              
           
 

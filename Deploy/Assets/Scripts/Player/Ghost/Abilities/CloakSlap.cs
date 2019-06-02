@@ -9,7 +9,8 @@ public class CloakSlap : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
+    public GameObject model;
 
 
     private bool buffActive;
@@ -26,7 +27,7 @@ public class CloakSlap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
@@ -37,7 +38,7 @@ public class CloakSlap : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetKey("r") && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false;
             start = DateTime.Now;
@@ -49,7 +50,7 @@ public class CloakSlap : MonoBehaviour
             buffActive = true;
             soundManager.play("CloakSlapCharge");
         }
-        if ((DateTime.Now - start).TotalSeconds >= 4 && Input.GetKey("e") && !cast)
+        if ((DateTime.Now - start).TotalSeconds >= 4 && Input.GetKey("r") && !cast)
         {
             soundManager.stop();
             //when charged for at least 4 seconds - set cooldown and do release

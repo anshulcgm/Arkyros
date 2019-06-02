@@ -60,7 +60,7 @@ public class Template : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-
+            soundManager.play("Soundname");
             /*
              * All the code for the ability that you want to write
              * transform.forward for the direction the player is 

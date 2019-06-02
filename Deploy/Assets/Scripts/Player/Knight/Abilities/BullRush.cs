@@ -75,7 +75,7 @@ public class BullRush : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy" && !cast)
         {
-            //collision.gameObject.GetComponent<Stats>().heal(20);
+            collision.gameObject.GetComponent<StatManager>().changeHealth(20);
             collision.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * -enemySetback);
         }
     }

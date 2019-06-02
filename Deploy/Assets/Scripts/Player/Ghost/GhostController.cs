@@ -24,18 +24,19 @@ public class GhostController : MonoBehaviour
     private AnimationController anim;
     DateTime attackStart;
 
-    // System vars
+    public float InputX;
+    public float InputZ;
+    public Vector3 desiredMoveDirection;
 
+    // System vars
+    Camera cam;
     bool grounded;
     Vector3 moveAmount;
     Vector3 smoothMoveVelocity;
     float verticalLookRotation;
-    Transform cameraTransform;
+
     Rigidbody rigidbody;
 
-    cameraSoundManager sound;
-    legSound movementSound;
-    hammerSound attackSound;
 
     SoundManager soundManager;
 
@@ -44,43 +45,68 @@ public class GhostController : MonoBehaviour
         //enemies = GameObject.FindGameObjectsWithTag("enemy");
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        cameraTransform = Camera.main.transform;
+
         rigidbody = GetComponent<Rigidbody>();
         anim = GetComponent<AnimationController>();
-        sound = Camera.main.GetComponent<cameraSoundManager>();
-        movementSound = GameObject.Find("L_Foot_IK").GetComponent<legSound>();
-        attackSound = GameObject.Find("Hammer_Head").GetComponent<hammerSound>();
+        soundManager = GetComponent<SoundManager>();
+        cam = Camera.main;
+
+        anim.PlayLoopingAnim("Idle");
+
+
     }
 
     void Update()
     {
 
         // Look rotation:
-
+        /*
         transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivityX);
         verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
         verticalLookRotation = Mathf.Clamp(verticalLookRotation, -60, 60);
         cameraTransform.localEulerAngles = Vector3.left * verticalLookRotation;
+        */
 
         // Calculate movement:
-        float inputX = Input.GetAxisRaw("Horizontal");
-        float inputY = Input.GetAxisRaw("Vertical");
+        InputX = Input.GetAxis("Horizontal");
+        InputZ = Input.GetAxis("Vertical");
 
-        Vector3 moveDir = new Vector3(inputX, 0, inputY).normalized;
+        var forward = cam.transform.forward;
+        var right = cam.transform.right;
+
+        forward.y = 0f;
+        right.y = 0f;
+
+        forward.Normalize();
+        right.Normalize();
+
+        desiredMoveDirection = forward * InputZ + right * InputX;
+
+        Vector3 moveDir = desiredMoveDirection.normalized;
+        //finalSpeed = stats.get((int)stat.Speed);
         finalSpeed = walkSpeed * speed_Multiplier;
         Vector3 targetMoveAmount = moveDir * finalSpeed;
+
+        
+
+
+
+        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), 0.3f);
+
+
+
+        /*
         if (Math.Abs(moveDir.x) > Math.Abs(moveDir.z))
         {
             if (!Input.GetButtonDown("Jump"))
             {
                 if (moveDir.x > 0)
                 {
-                    //setAllTriggersFalse();
                     anim.PlayLoopingAnim("Move_Right");
                 }
                 else
                 {
-                    //setAllTriggersFalse();
+
                     anim.PlayLoopingAnim("Move_Left");
                 }
             }
@@ -93,8 +119,7 @@ public class GhostController : MonoBehaviour
                 {
                     if (isSprinting)
                     {
-                        movementSound.isWalking = false;
-                        movementSound.isSprinting = true;
+
                         soundManager.play("Sprint");
                         //setAllTriggersFalse();
                         anim.PlayLoopingAnim("Move_ForwardLunge");
@@ -103,8 +128,7 @@ public class GhostController : MonoBehaviour
                     }
                     else
                     {
-                        movementSound.isWalking = true;
-                        movementSound.isSprinting = false;
+
                         soundManager.play("walk");
                         anim.PlayLoopingAnim("Move_Forward");
                         Camera.main.transform.localPosition = new Vector3(0f, 16f, 3.1f);
@@ -118,6 +142,7 @@ public class GhostController : MonoBehaviour
             }
 
         }
+        */
 
         if (moveDir.x <= 0.01f && moveDir.z <= 0.01f)
         {
@@ -129,10 +154,9 @@ public class GhostController : MonoBehaviour
             anim.SetBool("WalkForwardBool", false);
             */
 
-            anim.PlayLoopingAnim("Idle");
+            //anim.PlayLoopingAnim("Idle");
 
-            movementSound.isWalking = false;
-            movementSound.isSprinting = false;
+
             soundManager.playOneShot("CapeFlutter");
         }
         moveAmount = Vector3.SmoothDamp(moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
@@ -151,7 +175,6 @@ public class GhostController : MonoBehaviour
         if ((DateTime.Now - attackStart).TotalSeconds < 1)
         {
 
-            attackSound.isSwinging = true;
             soundManager.playOneShot("BasicScytheAttack");
             Collider[] hits = Physics.OverlapSphere(transform.position + transform.forward * 20, 50);
             Debug.Log("REEEEEEEEE");
@@ -171,7 +194,7 @@ public class GhostController : MonoBehaviour
         else
         {
             //anim.SetBool("Swing_HeavyBool", false);
-            attackSound.isSwinging = false;
+
         }
 
         if (attackDelay > 0)
@@ -191,13 +214,10 @@ public class GhostController : MonoBehaviour
                 //setAllTriggersFalse();
                 //anim.SetBool("JumpBool", true);
                 rigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-                sound.isJumping = true;
+
             }
         }
-        else
-        {
-            sound.isJumping = false;
-        }
+
 
         //Sprint
         if (Input.GetKeyDown(KeyCode.CapsLock))
