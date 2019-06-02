@@ -4,12 +4,6 @@ using System.Collections.Generic;
 
 public class ObjectHandler
 {
-<<<<<<< HEAD
-
-    public static Server server;
-    public static List<CacheObjTuple>[][] cacheObjMap;
-
-=======
     public static Server server;
     private class CacheObject
     {         
@@ -30,7 +24,6 @@ public class ObjectHandler
             this.resource = resource;
         }
     }
->>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
     static List<CacheObject> cachedObjects = new List<CacheObject>();
 
     static int currCachedObjIndex = 0;

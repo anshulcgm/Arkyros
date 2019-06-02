@@ -1,39 +1,10 @@
-<<<<<<< HEAD
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-=======
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
->>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
 using UnityEngine;
 
 public class Server
 {
-<<<<<<< HEAD
-    private UDP udp;
-    private List<Player> players;
-    private List<GameObject> gameObjectsToUpdate;
-    public bool debug = true;
-    
-    public Server(UDP udp)
-    {
-        this.udp = udp;
-        players = new List<Player>();
-        gameObjectsToUpdate = new List<GameObject>();
-        if (debug == true)
-        {
-           // Debug.Log("SERVER: new istance was created");
-        }
-    }
-    
-    ///@TODO this function needs to be finished. It should send a broadcast on the LAN with all the things
-    ///required by the UnityHandler.Create function.
-    public void Create(GameObject g, string resourcePath)
-=======
     private Vector3 spawn;
     private UDP udp;
     private List<PlayerClient> players;
@@ -55,7 +26,6 @@ public class Server
     
     // this function sends a broadcast on the LAN with all the things necessary for client to creat the new object
     public void Create(GameObject g, string resourcePath, string ip = "")
->>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
     {
         string message = "C{" + resourcePath + "|" + g.transform.position.ToString() + "|" + g.transform.rotation.ToString() + "}";
         if (debug == true)
@@ -67,9 +37,6 @@ public class Server
         //sending to all clients
         foreach (string clientIP in clientIPs)
         {
-<<<<<<< HEAD
-            udp.Send(message, clientIP);
-=======
             if (clientIP.Equals(ip))
             {
                 udp.Send("C{player}", ip);
@@ -78,28 +45,18 @@ public class Server
             {
                 udp.Send(message, clientIP);
             }
->>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
         }
 
         //add the new object to the list of objects that need to be updated.
         gameObjectsToUpdate.Add(g);
     }
 
-<<<<<<< HEAD
-    ///@TODO this function needs to be finished. It should send a broadcast on the LAN for 
-    ///each gameObject in gameObjectsToUpdate with all the things required by the UnityHandler.Update function.
-=======
     //this function sends all the necessary things for the clinet to update the objrct
->>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
     public void UpdateGameObjects()
     {
         //loops through each gameObject in the list of game objects to update and sends a broadcast for updating them to the clients
         for (int g = 0; g < gameObjectsToUpdate.Count(); g += 1) {
-<<<<<<< HEAD
-            if(gameObjectsToUpdate[g] == null) { continue; }
-=======
             if(gameObjectsToUpdate[g] == null) { continue; } //skip if it has been destroyed            
->>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
             string message = "U{" + g.ToString() + "|" + gameObjectsToUpdate[g].transform.position.ToString() + "|" + gameObjectsToUpdate[g].transform.rotation.ToString() + "}";
 
             //sending to all clients
@@ -114,10 +71,6 @@ public class Server
         }
 
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
     //the destroy function
     public void Destroy(GameObject g)
     {
@@ -143,8 +96,6 @@ public class Server
         }
     }
 
-<<<<<<< HEAD
-=======
     public void SendAnimation(int index, string animation_name, bool isOverlay, float strength = 0, float duration = 0)
     {
         string message;        
@@ -163,7 +114,6 @@ public class Server
         }
     }
 
->>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
     public List<string> clientIPs = new List<string>();
     public void GetClients()
     {
@@ -176,26 +126,6 @@ public class Server
             {
                 clientIPs.Add(message);
             }
-<<<<<<< HEAD
-        }        
-    }
-
-    ///@TODO this function needs to be finished. It should take all of the data recieved by players and move them accordingly.
-    public void HandlePlayerInputs()
-    {
-
-    }
-
-    //private because we only want to access it from here
-    private class Player
-    {
-        string ipAddr;
-        GameObject playerGameObject;
-        public Player(string ipAddr, GameObject playerGameObject)
-        {
-            this.ipAddr = ipAddr;
-            this.playerGameObject = playerGameObject;
-=======
             
         }        
     }
@@ -239,7 +169,6 @@ public class Server
             this.ipAddr = ipAddr;
             this.playerGameObject = playerGameObject;
             this.classPath = classPath;
->>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
         }
     }
 }

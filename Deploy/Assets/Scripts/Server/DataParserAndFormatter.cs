@@ -1,24 +1,9 @@
-<<<<<<< HEAD
-﻿using System.Collections.Generic;
-=======
 ﻿using System;
 using System.Collections.Generic;
->>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
 using UnityEngine;
 
 public class DataParserAndFormatter
 {
-<<<<<<< HEAD
-    //these are for the client inputs to the server
-    static string beginKeyInput = "{{";
-    static string endKeyInput = "}}";
-    static string beginOrientationInput = "[[";
-    static string endOrientationInput = "]]";
-
-    //these are for the server outputs to the client
-    static string beginServerMessageOutput = "{";
-    static string endServerMessageOutput = "}";
-=======
     //these are for the client inputs to the server, not used for now
     static string beginKeyInput = "{{";
     static string endKeyInput = "}}";
@@ -42,7 +27,6 @@ public class DataParserAndFormatter
     static string beginCamPosInput = "%%";
 
     static string endCamPosInput = "$$";
->>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
 
     #region parsing
     public static Vector3 StringToVector3(string vector)
@@ -86,12 +70,6 @@ public class DataParserAndFormatter
 
         return result;
     }
-<<<<<<< HEAD
-    #endregion
-
-    #region formatting
-    public static string GetClientInputFormatted(string keysPressed, string rotation)
-=======
 
     public static string GetKeysIn(string clientInput){
         return clientInput.Split(new string[] {beginKeyInput}, StringSplitOptions.None)[1].Split(new string[] {endKeyInput}, StringSplitOptions.None)[0];
@@ -145,16 +123,10 @@ public class DataParserAndFormatter
 
     #region formatting
     public static string GetClientInputFormatted(string keysPressed, bool m1Down, bool m2Down, Quaternion rotation, Quaternion camRotation, Vector3 camPosition, string ipAddr)
->>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
     {
         string fullString = beginKeyInput;
         fullString += keysPressed;
         fullString += endKeyInput;
-<<<<<<< HEAD
-        fullString += beginOrientationInput;
-        fullString += rotation;
-        fullString += endOrientationInput;
-=======
         fullString += beginMouseInput;
         fullString += m1Down ? "T" : "F";
         fullString += m2Down ? "T" : "F";
@@ -170,7 +142,6 @@ public class DataParserAndFormatter
         fullString += beginIpInput;
         fullString += ipAddr;
         fullString += endIpInput;
->>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
         return fullString;
     }
 
@@ -201,8 +172,6 @@ public class DataParserAndFormatter
             {
                 m = new Message(ServerMessageType.DESTROY, messageText);
             }
-<<<<<<< HEAD
-=======
             else if (messageType.Equals("T"))
             {
                 m = new Message(ServerMessageType.TERRAIN, messageText);
@@ -211,7 +180,6 @@ public class DataParserAndFormatter
             {
                 m = new Message(ServerMessageType.ANIMATION, messageText);
             }
->>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
             messages.Add(m);
         }
         return messages;
