@@ -158,7 +158,7 @@ public class PlanetMono : MonoBehaviour, IMono
             newObj.GetComponent<MeshCollider>().sharedMesh = newObj.GetComponent<MeshFilter>().mesh;
             n++;
         }
-        
+        /*
 
         int numIslands = r.Next(5, 20);
         for (int i = 0; i < numIslands; i++)
@@ -183,7 +183,7 @@ public class PlanetMono : MonoBehaviour, IMono
             g.GetComponent<MeshCollider>().sharedMesh = gameObject.GetComponent<MeshFilter>().mesh;
 
             g.GetComponent<MeshRenderer>().material = biomeMats[r.Next(biomeMats.Length)];
-        }
+        }*/
 
         int numCities = r.Next(10, 20);
         for (int i = 0; i < numCities; i++)

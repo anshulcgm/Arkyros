@@ -1247,7 +1247,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 790282273}
-  m_LocalRotation: {x: 0.34042522, y: -0.00000001094041, z: 0.0000000039609733, w: 0.9402717}
+  m_LocalRotation: {x: 0.34042522, y: -0.000000011005772, z: 0.0000000039846384, w: 0.9402717}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2463,7 +2463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1402860883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3428,18 +3428,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 836f8d42ef79a7548aa353ff2e756748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMoving: 0
-  isAirborne: 0
-  mouseSensitivity: 1
-  playerModel: {fileID: 1828400450}
-  playerDir: {fileID: 474994422}
-  c: {fileID: 2028396837}
-  r: {fileID: 0}
-  slerpSpeed: 5
-  jumpForce: 30
-  gravity: 20
-  moveSpeed: 10
-  grounded: 0
 --- !u!135 &1952862806
 SphereCollider:
   m_ObjectHideFlags: 0

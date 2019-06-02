@@ -53,13 +53,13 @@ public class Planet : IClass
         Debug.Log(pts.Count);
         
         triangles = new ObjectUpdate().GetTrianglesFromConnections(Points, map, out trianglesHash);
-        EventSystemMono.cacheObjMap = new List<int>[Points.Count];
+        //EventSystemMono.cacheObjMap = new List<int>[Points.Count];
         List<Vector3> pointsCopy = new List<Vector3>();
         foreach(Vector3 v in Points){
             pointsCopy.Add(v);
         }
-        EventSystemMono.SetPoints(pointsCopy);
-        EventSystemMono.map = map;
+        //EventSystemMono.SetPoints(pointsCopy);
+        //EventSystemMono.map = map;
         int[] mesh = MeshBuilder3D.GetMeshFrom(Points, triangles, map, trianglesHash);
         return mesh;
     }
