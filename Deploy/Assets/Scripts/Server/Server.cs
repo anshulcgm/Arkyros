@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
 using UnityEngine;
 
 public class Server
@@ -10,18 +8,20 @@ public class Server
     private Vector3 spawn;
     private UDP udp;
     private List<PlayerClient> players;
-    private List<GameObject> gameObjectsToUpdate;
+    public static List<GameObject> gameObjectsToUpdate;
     public bool debug = false;
+
+    public static bool serverExists = false;
+
+    public static Server instance = null;
     
     public Server(UDP udp)
     {
+        serverExists = true;
         this.udp = udp;
         players = new List<PlayerClient>();
         gameObjectsToUpdate = new List<GameObject>();
-        if (debug == true)
-        {
-           // Debug.Log("SERVER: new istance was created");
-        }
+        instance = this;
     }
     
     // this function sends a broadcast on the LAN with all the things necessary for client to creat the new object
@@ -37,13 +37,13 @@ public class Server
         //sending to all clients
         foreach (string clientIP in clientIPs)
         {
-            if (clientIP == ip)
+            if (clientIP.Equals(ip))
             {
-                udp.Send("C{ignore}", ip);
+                udp.Send("C{player}", ip);
             }
             else
             {
-            udp.Send(message, clientIP);
+                udp.Send(message, clientIP);
             }
         }
 
@@ -97,16 +97,16 @@ public class Server
         }
     }
 
-    public void SendAnimation(GameObject Object, string animation_name, bool isOverlay, float strength = 0, float duration = 0)
+    public void SendAnimation(int index, string animation_name, bool isOverlay, float strength = 0, float duration = 0)
     {
         string message;        
         if (isOverlay)
         {
-            message = "A{" + gameObjectsToUpdate.IndexOf(Object).ToString() + "|" + "T" + "|" + animation_name + strength.ToString() + duration.ToString() +"}"; // gameobject index with animation and false char
+            message = "A{" + index + "|" + "T" + "|" + animation_name + strength.ToString() + duration.ToString() +"}"; // gameobject index with animation and false char
         }
         else
         {
-            message = "A{" + gameObjectsToUpdate.IndexOf(Object).ToString() + "|" + "F" + "|" + animation_name + "}"; //game obj, and other overlay parameters
+            message = "A{" + index + "|" + "F" + "|" + animation_name + "}"; //game obj, and other overlay parameters
         }
         
         foreach (string clientIP in clientIPs)
@@ -131,19 +131,17 @@ public class Server
         }        
     }
 
-
     public void CreatePlayers(){
         List<string> messages = udp.ReadMessages();
         foreach(string message in messages){
             string ip = DataParserAndFormatter.GetIP(message);
             string classPath = DataParserAndFormatter.GetClassPath(message);
             int[] abilityIds = DataParserAndFormatter.GetAbilityIds(message);
-            GameObject player = GameObject.Instantiate(Resources.Load(classPath) as GameObject, spawn, Quaternion.identity);
-            
-           // player.GetComponent<PlayerScript>().SetAbilityIds(abilityIds);
-           players.Add(new PlayerClient(ip, player, classPath));
-           udp.Send("P{" + gameObjectsToUpdate.Count + "}", ip);
-           Create(player, classPath);  
+            GameObject player = GameObject.Instantiate(Resources.Load(classPath) as GameObject, spawn, Quaternion.identity);            
+            player.GetComponent<PlayerScript>().SetAbilities(abilityIds);
+            players.Add(new PlayerClient(ip, player, classPath));
+            udp.Send("P{" + gameObjectsToUpdate.Count + "}", ip);
+            Create(player, classPath);  
         }
     }
 
@@ -153,10 +151,9 @@ public class Server
             string ip = DataParserAndFormatter.GetIP(message);
             for(int i = 0; i < players.Count; i++){
                 if(players[i].ipAddr.Equals(ip)){
-                    players[i].playerGameObject.transform.rotation = DataParserAndFormatter.GetOrientationIn(message);
-
-                    //need player script that can take in key input and mouse input and do stuff to the player.
-                    //players[i].playerGameObject.GetComponent<PlayerScript>().HandleInput(DataParserAndFormatter.GetKeysIn(message), DataParserAndFormatter.GetMouseIn(message));
+                    Quaternion[] rots = DataParserAndFormatter.GetRotationIn(message);
+                    players[i].playerGameObject.transform.rotation = rots[0];
+                    players[i].playerGameObject.GetComponent<PlayerScript>().HandleInput(DataParserAndFormatter.GetKeysIn(message), rots[0], DataParserAndFormatter.GetCamPos(message), DataParserAndFormatter.GetMouseIn(message));
                 }
             }
         }

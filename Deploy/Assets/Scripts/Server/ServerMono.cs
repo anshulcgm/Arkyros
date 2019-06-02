@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class ServerMono : MonoBehaviour
 {
-    public UDP udp = new UDP();
     public Server server;
     public bool waitForClients = true;
+    public bool waitForClientCreateMessages = true;
     public bool hasSentTerrainSeed = false;
+
+    public bool hasCreatedPlayers = false;
 
     private void Awake()
     {
@@ -25,6 +27,7 @@ public class ServerMono : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UDP udp = GameObject.FindGameObjectWithTag("UDP").GetComponent<UDPContainer>().udp;
         //start the server
         server = new Server(udp);
     }
@@ -63,7 +66,14 @@ public class ServerMono : MonoBehaviour
             hasSentTerrainSeed = true;
             return;
         }
-
+        else if(waitForClientCreateMessages){
+            return;
+        }
+        else if(!hasCreatedPlayers){
+            server.CreatePlayers();
+            hasCreatedPlayers = true;
+            return;
+        }
         //after getting clients and sending terrain, just continue updating all gameObjects for all clients.
         server.UpdateGameObjects();
         server.HandleClientInput();

@@ -4,8 +4,6 @@ using UnityEngine;
 public static class UnityHandler
 {
     public static GameObject player;
-    
-    public static int playerIndex = -1;
 
     private static List<GameObject> gameObjects = new List<GameObject>();
     public static bool debug = false;
@@ -51,9 +49,6 @@ public static class UnityHandler
         {
             Animate(m.messageText);
         }
-        else if(m.messageType == ServerMessageType.PLAYER){
-            Player(m.messageText);
-        }      
     }
 
 
@@ -68,7 +63,8 @@ public static class UnityHandler
         int index = 0; // will be easier when mostRecentMessage gets larger
         Debug.Log(data[index] + " jjjjkklkkf " + gameObjects.Count);
         
-        if(int.Parse(data[index]) == playerIndex){
+        //if it's a player, just update the position.
+        if(gameObjects[int.Parse(data[index])].Equals(player)){
             player.transform.position = DataParserAndFormatter.StringToVector3(data[index + 1]);
             return;
         }
@@ -91,15 +87,9 @@ public static class UnityHandler
     {
         string[] data; // for splitting string
         int index = 0; // will be easier when mostRecentMessage gets larger
-        
-        if(gameObjects.Count == playerIndex){
-            gameObjects.Add(null);
-            return;
-        }
 
         data = message.Substring(1, message.Length - 2).Split('|'); //split each object into an array
-        if (data[index] != "ignore"){        //if this create message is for me then add a null object and move on
-        
+        if (!data[index].Equals("player")){        //if this create message is for me then add a null object and move on
             string resourcePath = data[index];
             Debug.Log(resourcePath + " <- that's it");
             Vector3 position = DataParserAndFormatter.StringToVector3(data[index + 1]); //parse and update position
@@ -116,7 +106,7 @@ public static class UnityHandler
             }
         }
         else {
-            gameObjects.Add(null);
+            gameObjects.Add(player);
         }
     }
     
@@ -125,8 +115,7 @@ public static class UnityHandler
         string data = message.Substring(1, message.Length - 2);
         int index = int.Parse(data);
         GameObject.Destroy(gameObjects[index]); //destroy the object then set it to a null
-        gameObjects[index] = null;      
-    
+        gameObjects[index] = null;     
     }
     
     private static void Terrain(string message)
@@ -147,18 +136,11 @@ public static class UnityHandler
         if (data[index + 1] == "T")        //call overlay depending on True or False
         {
             //call overlay when true
-            gameObjects[int.Parse(data[index])].GetComponent<AnimController>().StartOverlayAnim(data[index+2], float.Parse(data[index+3]), float.Parse(data[index+4]));
+            gameObjects[int.Parse(data[index])].GetComponent<AnimationController>().StartOverlayAnim(data[index+2], float.Parse(data[index+3]), float.Parse(data[index+4]));
         }
         else
         {
-            gameObjects[int.Parse(data[index])].GetComponent<AnimController>().PlayLoopingAnim(data[index+2]);
-        }        
-        
-    }
-
-    private static void Player(string message){
-        string string_num = message.Substring(1, message.Length - 2); // retrieve seed from string
-        int player_num = int.Parse(string_num);
-        playerIndex = player_num;
+            gameObjects[int.Parse(data[index])].GetComponent<AnimationController>().PlayLoopingAnim(data[index+2]);
+        }       
     }
 }

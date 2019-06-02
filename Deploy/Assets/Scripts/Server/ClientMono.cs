@@ -5,19 +5,28 @@ using UnityEngine;
 public class ClientMonoBehaviour : MonoBehaviour {
     Client client;
     UDP udp;
-    public string server_ipaddr; //have the user enter the server_ipaddr for now
+    public string server_ipaddr;
 	// Use this for initialization
 	void Start () {
-		UnityHandler.player = gameObject;
-		udp = new UDP();
+		server_ipaddr = System.IO.File.ReadAllText("ipAddr.txt");
+		udp = GameObject.FindGameObjectWithTag("UDP").GetComponent<UDPContainer>().udp;
         udp.StartUDP(); 
         client = new Client(server_ipaddr, gameObject, udp);
         udp.Send(UDP.GetLocalIPAddress().ToString(), server_ipaddr);
 	}
+	bool hasBeenCreated = false;
+	//call whenever we send the create player data
+	public void SendPlayerCreateData(string classPath, int[] abilityIds)
+	{
+		client.SendClassData(classPath, abilityIds);
+		hasBeenCreated = true;
+	}
 	
 	// Update is called once per frame
 	void Update () {
-        client.SendKeysAndOrientation();
+		if(hasBeenCreated){			
+			client.SendPlayerData();     
+		}   
 		client.HandleServerOutput();
 	}
 }

@@ -24,6 +24,10 @@ public class DataParserAndFormatter
 
     static string endClassPathInput = "&&";
 
+    static string beginCamPosInput = "%%";
+
+    static string endCamPosInput = "$$";
+
     #region parsing
     public static Vector3 StringToVector3(string vector)
     {
@@ -67,10 +71,6 @@ public class DataParserAndFormatter
         return result;
     }
 
-    public static Quaternion GetOrientationIn(string clientInput){
-        return StringToQuaternion(clientInput.Split(new string[] {beginOrientationInput}, StringSplitOptions.None)[1].Split(new string[] {endOrientationInput}, StringSplitOptions.None)[0]);
-    }
-
     public static string GetKeysIn(string clientInput){
         return clientInput.Split(new string[] {beginKeyInput}, StringSplitOptions.None)[1].Split(new string[] {endKeyInput}, StringSplitOptions.None)[0];
     }
@@ -78,6 +78,18 @@ public class DataParserAndFormatter
         String mouseIn = clientInput.Split(new string[] {beginMouseInput}, StringSplitOptions.None)[1].Split(new string[] {endMouseInput}, StringSplitOptions.None)[0];
         char[] mouseVals = mouseIn.ToCharArray();
         return new bool[]{mouseVals[0] == 'T', mouseVals[1] == 'T'};
+    }
+
+    public static Quaternion[] GetRotationIn(string clientInput){
+        String rotIn = clientInput.Split(new string[] {beginOrientationInput}, StringSplitOptions.None)[1].Split(new string[] {endOrientationInput}, StringSplitOptions.None)[0];
+        String rotation = rotIn.Split(',')[0];
+        String camRotation = rotIn.Split(',')[1];
+        return new Quaternion[]{StringToQuaternion(rotation), StringToQuaternion(camRotation)};
+    }
+
+    public static Vector3 GetCamPos(string clientInput){
+        String posIn = clientInput.Split(new string[] {beginCamPosInput}, StringSplitOptions.None)[1].Split(new string[] {endCamPosInput}, StringSplitOptions.None)[0];
+        return StringToVector3(posIn);
     }
 
     public static string GetIP(string clientInput){
@@ -110,7 +122,7 @@ public class DataParserAndFormatter
     #endregion
 
     #region formatting
-    public static string GetClientInputFormatted(string keysPressed, bool m1Down, bool m2Down, Quaternion rotation, string ipAddr)
+    public static string GetClientInputFormatted(string keysPressed, bool m1Down, bool m2Down, Quaternion rotation, Quaternion camRotation, Vector3 camPosition, string ipAddr)
     {
         string fullString = beginKeyInput;
         fullString += keysPressed;
@@ -121,7 +133,12 @@ public class DataParserAndFormatter
         fullString += endMouseInput;
         fullString += beginOrientationInput;
         fullString += rotation;
+        fullString += ",";
+        fullString += camRotation;
         fullString += endOrientationInput;
+        fullString += beginCamPosInput;
+        fullString += camPosition;
+        fullString += endCamPosInput;
         fullString += beginIpInput;
         fullString += ipAddr;
         fullString += endIpInput;
@@ -162,9 +179,6 @@ public class DataParserAndFormatter
             else if (messageType.Equals("A"))
             {
                 m = new Message(ServerMessageType.ANIMATION, messageText);
-            }
-            else if (messageType.Equals("P")){
-                m = new Message(ServerMessageType.PLAYER, messageText);
             }
             messages.Add(m);
         }

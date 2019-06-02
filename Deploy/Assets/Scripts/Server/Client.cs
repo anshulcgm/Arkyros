@@ -10,6 +10,7 @@ public class Client
 
     UDP udp;
     GameObject player;
+    GameObject camera;
     string serverIP;
     public bool debug = false;
 
@@ -23,9 +24,9 @@ public class Client
            // Debug.Log("CLIENT: new instance created");
         }
     }
-    public void SendKeysAndOrientation()
+    public void SendPlayerData()
     {        
-        string clientData = DataParserAndFormatter.GetClientInputFormatted(Input.inputString, Input.GetMouseButtonDown(0), Input.GetMouseButtonDown(1), player.transform.rotation, UDP.GetLocalIPAddress());
+        string clientData = DataParserAndFormatter.GetClientInputFormatted(Input.inputString, Input.GetMouseButtonDown(0), Input.GetMouseButtonDown(1), player.transform.rotation, camera.transform.rotation, camera.transform.position, UDP.GetLocalIPAddress());
         udp.Send(clientData, serverIP); //send position and orientation and ipaddr of client to server for update
     }
 
