@@ -1,8 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Deploy/Assets/Animations/Crystal Controller.controller.meta
 guid: 94397a68ba3ae6e4a886e6b78426fa2b
+=======
+guid: fc430febec9d59f4d89f98f6e1b9d4cb
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25:Deploy/Assets/Materials/glowCrystal.mat.meta
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 9100000
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

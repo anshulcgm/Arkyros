@@ -7,10 +7,19 @@ using UnityEngine;
 // it also processes and sends the data from the server to the UnityHandler object.
 public class Client
 {
+<<<<<<< HEAD
     UDP udp;
     GameObject player;
     string serverIP;
     public bool debug = true;
+=======
+
+    UDP udp;
+    GameObject player;
+    GameObject camera;
+    string serverIP;
+    public bool debug = false;
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
 
     public Client(string serverIP, GameObject player, UDP udp)
     {
@@ -22,6 +31,7 @@ public class Client
            // Debug.Log("CLIENT: new instance created");
         }
     }
+<<<<<<< HEAD
 
     //sends player input to the serverIP
     public void SendPlayerInput()
@@ -43,6 +53,16 @@ public class Client
         {
            // Debug.Log("Sent player input to " + serverIP);
         }
+=======
+    public void SendPlayerData()
+    {        
+        string clientData = DataParserAndFormatter.GetClientInputFormatted(Input.inputString, Input.GetMouseButtonDown(0), Input.GetMouseButtonDown(1), player.transform.rotation, camera.transform.rotation, camera.transform.position, UDP.GetLocalIPAddress());
+        udp.Send(clientData, serverIP); //send position and orientation and ipaddr of client to server for update
+    }
+
+    public void SendClassData(String classPath, int[] abilityIds){
+        udp.Send(DataParserAndFormatter.GetClassPathAndAbilityIdsFormatted(classPath, abilityIds), serverIP);
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
     }
 
     //reads in server output and does what the server says

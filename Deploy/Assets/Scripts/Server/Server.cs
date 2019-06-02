@@ -1,12 +1,19 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+=======
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
 using UnityEngine;
 
 public class Server
 {
+<<<<<<< HEAD
     private UDP udp;
     private List<Player> players;
     private List<GameObject> gameObjectsToUpdate;
@@ -26,6 +33,29 @@ public class Server
     ///@TODO this function needs to be finished. It should send a broadcast on the LAN with all the things
     ///required by the UnityHandler.Create function.
     public void Create(GameObject g, string resourcePath)
+=======
+    private Vector3 spawn;
+    private UDP udp;
+    private List<PlayerClient> players;
+    public static List<GameObject> gameObjectsToUpdate;
+    public bool debug = false;
+
+    public static bool serverExists = false;
+
+    public static Server instance = null;
+    
+    public Server(UDP udp)
+    {
+        serverExists = true;
+        this.udp = udp;
+        players = new List<PlayerClient>();
+        gameObjectsToUpdate = new List<GameObject>();
+        instance = this;
+    }
+    
+    // this function sends a broadcast on the LAN with all the things necessary for client to creat the new object
+    public void Create(GameObject g, string resourcePath, string ip = "")
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
     {
         string message = "C{" + resourcePath + "|" + g.transform.position.ToString() + "|" + g.transform.rotation.ToString() + "}";
         if (debug == true)
@@ -37,20 +67,39 @@ public class Server
         //sending to all clients
         foreach (string clientIP in clientIPs)
         {
+<<<<<<< HEAD
             udp.Send(message, clientIP);
+=======
+            if (clientIP.Equals(ip))
+            {
+                udp.Send("C{player}", ip);
+            }
+            else
+            {
+                udp.Send(message, clientIP);
+            }
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
         }
 
         //add the new object to the list of objects that need to be updated.
         gameObjectsToUpdate.Add(g);
     }
 
+<<<<<<< HEAD
     ///@TODO this function needs to be finished. It should send a broadcast on the LAN for 
     ///each gameObject in gameObjectsToUpdate with all the things required by the UnityHandler.Update function.
+=======
+    //this function sends all the necessary things for the clinet to update the objrct
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
     public void UpdateGameObjects()
     {
         //loops through each gameObject in the list of game objects to update and sends a broadcast for updating them to the clients
         for (int g = 0; g < gameObjectsToUpdate.Count(); g += 1) {
+<<<<<<< HEAD
             if(gameObjectsToUpdate[g] == null) { continue; }
+=======
+            if(gameObjectsToUpdate[g] == null) { continue; } //skip if it has been destroyed            
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
             string message = "U{" + g.ToString() + "|" + gameObjectsToUpdate[g].transform.position.ToString() + "|" + gameObjectsToUpdate[g].transform.rotation.ToString() + "}";
 
             //sending to all clients
@@ -65,6 +114,10 @@ public class Server
         }
 
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
     //the destroy function
     public void Destroy(GameObject g)
     {
@@ -90,6 +143,27 @@ public class Server
         }
     }
 
+<<<<<<< HEAD
+=======
+    public void SendAnimation(int index, string animation_name, bool isOverlay, float strength = 0, float duration = 0)
+    {
+        string message;        
+        if (isOverlay)
+        {
+            message = "A{" + index + "|" + "T" + "|" + animation_name + strength.ToString() + duration.ToString() +"}"; // gameobject index with animation and false char
+        }
+        else
+        {
+            message = "A{" + index + "|" + "F" + "|" + animation_name + "}"; //game obj, and other overlay parameters
+        }
+        
+        foreach (string clientIP in clientIPs)
+        {
+            udp.Send(message, clientIP);
+        }
+    }
+
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
     public List<string> clientIPs = new List<string>();
     public void GetClients()
     {
@@ -102,6 +176,7 @@ public class Server
             {
                 clientIPs.Add(message);
             }
+<<<<<<< HEAD
         }        
     }
 
@@ -120,6 +195,51 @@ public class Server
         {
             this.ipAddr = ipAddr;
             this.playerGameObject = playerGameObject;
+=======
+            
+        }        
+    }
+
+    public void CreatePlayers(){
+        List<string> messages = udp.ReadMessages();
+        foreach(string message in messages){
+            string ip = DataParserAndFormatter.GetIP(message);
+            string classPath = DataParserAndFormatter.GetClassPath(message);
+            int[] abilityIds = DataParserAndFormatter.GetAbilityIds(message);
+            GameObject player = GameObject.Instantiate(Resources.Load(classPath) as GameObject, spawn, Quaternion.identity);            
+            player.GetComponent<PlayerScript>().SetAbilities(abilityIds);
+            players.Add(new PlayerClient(ip, player, classPath));
+            udp.Send("P{" + gameObjectsToUpdate.Count + "}", ip);
+            Create(player, classPath);  
+        }
+    }
+
+    public void HandleClientInput(){
+        List<string> messages = udp.ReadMessages();
+        foreach(string message in messages){
+            string ip = DataParserAndFormatter.GetIP(message);
+            for(int i = 0; i < players.Count; i++){
+                if(players[i].ipAddr.Equals(ip)){
+                    Quaternion[] rots = DataParserAndFormatter.GetRotationIn(message);
+                    players[i].playerGameObject.transform.rotation = rots[0];
+                    players[i].playerGameObject.GetComponent<PlayerScript>().HandleInput(DataParserAndFormatter.GetKeysIn(message), rots[0], DataParserAndFormatter.GetCamPos(message), DataParserAndFormatter.GetMouseIn(message));
+                }
+            }
+        }
+    }
+
+    //private because we only want to access it from here
+    private class PlayerClient
+    {
+        public string ipAddr;
+        public GameObject playerGameObject;
+        public string classPath;
+        public PlayerClient(string ipAddr, GameObject playerGameObject, string classPath)
+        {
+            this.ipAddr = ipAddr;
+            this.playerGameObject = playerGameObject;
+            this.classPath = classPath;
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
         }
     }
 }

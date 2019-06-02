@@ -4,11 +4,21 @@ using UnityEngine;
 
 public class ServerMono : MonoBehaviour
 {
+<<<<<<< HEAD
     public UDP udp = new UDP();
     public Server server;
     public bool waitForClients = true;
     public bool hasSentTerrainSeed = false;
 
+=======
+    public Server server;
+    public bool waitForClients = true;
+    public bool waitForClientCreateMessages = true;
+    public bool hasSentTerrainSeed = false;
+
+    public bool hasCreatedPlayers = false;
+
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
     private void Awake()
     {
         //deactivate all gameObjects except yourself
@@ -25,6 +35,10 @@ public class ServerMono : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+<<<<<<< HEAD
+=======
+        UDP udp = GameObject.FindGameObjectWithTag("UDP").GetComponent<UDPContainer>().udp;
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
         //start the server
         server = new Server(udp);
     }
@@ -63,8 +77,22 @@ public class ServerMono : MonoBehaviour
             hasSentTerrainSeed = true;
             return;
         }
+<<<<<<< HEAD
 
         //after getting clients and sending terrain, just continue updating all gameObjects for all clients.
         server.UpdateGameObjects();
+=======
+        else if(waitForClientCreateMessages){
+            return;
+        }
+        else if(!hasCreatedPlayers){
+            server.CreatePlayers();
+            hasCreatedPlayers = true;
+            return;
+        }
+        //after getting clients and sending terrain, just continue updating all gameObjects for all clients.
+        server.UpdateGameObjects();
+        server.HandleClientInput();
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
     }
 }

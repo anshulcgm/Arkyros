@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class PlanetMono : MonoBehaviour, IMono
 {
+<<<<<<< HEAD
     private Planet planet;
 
     public GameObject building;
@@ -55,6 +56,14 @@ public class PlanetMono : MonoBehaviour, IMono
         List<int>[][] trianglesHash;
         List<Triangle> triangles;
 
+=======
+    private Planet planet;    
+
+    public void Create(int seed)
+    {
+        System.Random r = new System.Random(seed);
+        planet = new Planet(r, 1, 1.1f, 0.1f, 0.3f, 24, 25);
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
         //make the planet
         int[] mesh = planet.GeneratePlanet(start, out map, out pts, out trianglesHash);
         triangles = planet.triangles;
@@ -95,6 +104,7 @@ public class PlanetMono : MonoBehaviour, IMono
             List<int> trisToEval = new List<int>();
             trisToEval.Add(randomStartTri);
 
+<<<<<<< HEAD
             List<Triangle> biomeTriangles = new List<Triangle>();
                         
             while(trisInBiome.Count < biomeSize && numTrianglesUsed < triangles.Count && trisToEval.Count > 0)
@@ -162,6 +172,9 @@ public class PlanetMono : MonoBehaviour, IMono
 
         int numIslands = r.Next(5, 20);
         for (int i = 0; i < numIslands; i++)
+=======
+        for (int i = 0; i < r.Next(5, 20); i++)
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25
         {
             List<Vector3> points = new List<Vector3>();
             List<int[]> cons = new List<int[]>();
