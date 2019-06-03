@@ -22,6 +22,8 @@ public class TotemOfWar : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
+    GameObject totem;
+
     SoundManager soundManager;
     //might not always be Ghost, need different one for each class.
 
@@ -37,7 +39,6 @@ public class TotemOfWar : MonoBehaviour
         soundManager = GetComponent<SoundManager>();
 
         cooldown = 0;
-
     }
 
     // Update is called once per frame
@@ -62,15 +63,10 @@ public class TotemOfWar : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            soundManager.play("Soundname");
-            /*
-             * All the code for the ability that you want to write
-             * transform.forward for the direction the player is 
-             * maybe setting colliders
-             * instantiating new objects
-             * to damage enemy, EnemyGameObject.GetComponent<StatManager>().changeHealth(amount), amount can be positive or negative
-             */
+            soundManager.playOneShot("2Totem of War Better");
+            anim.StartOverlayAnim("TotemSummon", 0.5f, 1.0f);
 
+            Instantiate(totem, transform.position, transform.rotation);
 
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
             cast = true;

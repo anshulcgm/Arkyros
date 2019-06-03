@@ -63,7 +63,9 @@ public class TotemOfLife : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            soundManager.play("Soundname");
+            soundManager.playOneShot("2TotemOfLife");
+            anim.StartOverlayAnim("TotemSummon", 0.5f, 1.0f);
+
             Instantiate(totem, transform.position, transform.rotation);
 
 
