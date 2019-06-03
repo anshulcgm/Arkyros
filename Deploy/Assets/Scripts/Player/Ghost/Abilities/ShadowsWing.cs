@@ -6,6 +6,7 @@ using UnityEngine;
 public class ShadowsWing : MonoBehaviour
 {
     public float cooldown = 0;
+    public float maxCooldown = 480;
 
     private GameObject camera;
 
@@ -55,7 +56,7 @@ public class ShadowsWing : MonoBehaviour
             buffActive = true;
 
             cast = true;
-            cooldown = 360;
+            cooldown = maxCooldown;
         }
         if((DateTime.Now - start).TotalSeconds > 5 /*&& !Input.GetKey("e")*/ && cast && buffActive)
         {

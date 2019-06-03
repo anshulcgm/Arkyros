@@ -6,12 +6,13 @@ using UnityEngine;
 public class LeapintheDark : MonoBehaviour
 {
     public float cooldown;
-    public int maxCooldown = 240;
+    public float maxCooldown = 300;
 
     private GameObject camera;
 
     public AnimationController anim;
     public GameObject model;
+
     DateTime start;
 
 

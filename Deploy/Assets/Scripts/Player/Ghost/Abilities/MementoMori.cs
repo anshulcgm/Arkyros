@@ -6,7 +6,7 @@ using UnityEngine;
 public class MementoMori : MonoBehaviour
 {
     public float cooldown;
-    public int maxCooldown = 480;
+    public float maxCooldown = 480;
 
     private GameObject camera;
 
@@ -64,7 +64,7 @@ public class MementoMori : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
             model.transform.rotation = camera.transform.rotation;
-            GameObject clone = Instantiate(MementoMoriProjectile, model.transform.position + model.transform.forward * 5 + transform.up * 6, Quaternion.identity);
+            GameObject clone = Instantiate(MementoMoriProjectile, model.transform.position + model.transform.forward * 5 + transform.up * 6, Quaternion.Euler(90,90,90));
 
             float x = Screen.width / 2f;
             float y = Screen.height / 2f;
@@ -75,7 +75,7 @@ public class MementoMori : MonoBehaviour
             clone.GetComponent<MementoMoriProjectile>().SetSource(self);
 
 
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cooldown = maxCooldown;
             cast = true;
 
         }

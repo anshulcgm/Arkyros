@@ -6,7 +6,7 @@ using UnityEngine;
 public class BansheesWail : MonoBehaviour
 {
     public float cooldown;
-    public int maxCooldown = 720;
+    public float maxCooldown = 600;
 
     private GameObject camera;
 
@@ -25,9 +25,7 @@ public class BansheesWail : MonoBehaviour
     SoundManager soundManager;
 
     public GameObject BansheeWailParticleEffect;
-
-    //might not always be Ghost, need different one for each class.
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -68,10 +66,7 @@ public class BansheesWail : MonoBehaviour
                     col.gameObject.GetComponent<StatManager>().enemyMultiplySpeed(0.5f);
                 }
             }
-
-
         }
-
 
         if (cooldown > 0) //counts down for the cooldown
         {

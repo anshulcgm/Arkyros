@@ -6,12 +6,13 @@ using UnityEngine;
 public class PastPastPastLife : MonoBehaviour
 {
     public float cooldown;
-    public int maxCooldown = 2400;
+    public float maxCooldown = 1800;
 
     private GameObject camera;
 
     public AnimationController anim;
     public GameObject model;
+
     DateTime start;
 
 

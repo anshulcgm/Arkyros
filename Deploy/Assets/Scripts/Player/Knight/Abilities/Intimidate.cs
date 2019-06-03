@@ -6,11 +6,13 @@ using UnityEngine;
 public class Intimidate : MonoBehaviour
 {
     public float cooldown;
+    public float maxCooldown = 600;
 
     private GameObject camera;
 
     public AnimationController anim;
     public GameObject model;
+
     DateTime start;
 
 
@@ -53,7 +55,7 @@ public class Intimidate : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cooldown = maxCooldown;
             cast = true;
 
             anim.StartOverlayAnim("Intimidate", 0.5f, 1f); 
@@ -66,10 +68,6 @@ public class Intimidate : MonoBehaviour
                     col.gameObject.GetComponent<StatManager>().enemyMultiplySpeed(0.75f);
                 }
             }
-
-
-            
-
         }
 
 
