@@ -15,43 +15,56 @@ public class CustomTimer : MonoBehaviour
 
     public GameObject golem;
 
+    public GameObject player;
+
+    public GameObject shrabPrefab;
+    public GameObject golemPrefab;
+    public GameObject shlyPrefab;
+    public GameObject kamikazePrefab; 
+
     public float shlyTimer;
     public float kamikazeTimer;
-    public float starshipTimer;
+    public float shrabTimer;
+    public float golemTimer;
 
+    public float oShlyTimer;
+    public float oKamikazeTimer;
+    public float oShrabTimer;
+    public float oGolemTimer;
+
+    /*
     public float shrab1Timer;
     public float shrab2Timer;
     public float shrab3Timer;
     public float shrab4Timer;
-
-    public float golemTimer;
-
+    */
     private bool activateShly = true;
     private bool activateKamikaze = true;
     private bool activateStarship = true;
-
-    private bool activateShrab1 = true;
-    private bool activateShrab2 = true;
-    private bool activateShrab3 = true;
-    private bool activateShrab4 = true;
+    private bool activateShrab = true; 
+    //private bool activateShrab1 = true;
+    //private bool activateShrab2 = true;
+    //private bool activateShrab3 = true;
+    //private bool activateShrab4 = true;
 
     private bool activateGolem = true; 
 
     private float oStarshipTimer;
 
     private Vector3 starshipInstantionPoint;
-
+    
     // Start is called before the first frame update
     void Start()
     {
-        starshipInstantionPoint = new Vector3(879.4f, 4007.4f, 376.5f);
-        oStarshipTimer = starshipTimer;
+        //starshipInstantionPoint = new Vector3(879.4f, 4007.4f, 376.5f);
+        //oStarshipTimer = starshipTimer;
     }
 
     // Update is called once per frame
     void Update()
     {
         //Assumes that the timers are in the order presented above
+        /*
         shlyTimer -= Time.deltaTime;
         if(shlyTimer <= 0 && activateShly)
         {
@@ -110,6 +123,43 @@ public class CustomTimer : MonoBehaviour
             activateGolem = false;
 
         }
+        */
+        shlyTimer -= Time.deltaTime;
+        if(shlyTimer <= 0 && activateShly)
+        {
+            for(int i = 1; i <= 3; i++)
+            {
+                RandomEnemySpawn.spawnEnemyWithinRadius(EnemyType.Shly, shlyPrefab, 20.0f, player.transform.position + new Vector3(0f, 30f, 0f), 1.0f);
+            }
+            shlyTimer = oShlyTimer;
+        }
+        shrabTimer -= Time.deltaTime;
+        if(shrabTimer <= 0 && activateShrab)
+        {
+            for(int i = 1; i <= 10; i++)
+            {
+                RandomEnemySpawn.spawnEnemyWithinRadius(EnemyType.Shrab, shrabPrefab, 20.0f, player.transform.position + new Vector3(0f, 30f, 0f), 1.0f);
+            }
+            shrabTimer = oShrabTimer; 
+        }
+        kamikazeTimer -= Time.deltaTime;
+        if(kamikazeTimer <= 0 && activateKamikaze)
+        {
+            for(int i = 1; i <= 3; i++)
+            {
+                RandomEnemySpawn.spawnEnemyWithinRadius(EnemyType.FlyingKamikaze, kamikazePrefab, 20f, player.transform.position + new Vector3(0f, 30f, 0f), 1.0f);
+            }
+            kamikazeTimer = oKamikazeTimer;
 
+        }
+        golemTimer -= Time.deltaTime;
+        if (golemTimer <= 0 && activateGolem)
+        {
+            for(int i = 1; i <= 4; i++)
+            {
+                RandomEnemySpawn.spawnEnemyWithinRadius(EnemyType.Brawler, golemPrefab, 20f, player.transform.position + new Vector3(0f, 30f, 0f), 1.0f);
+            }
+            golemTimer = oGolemTimer;
+        }
     }
 }

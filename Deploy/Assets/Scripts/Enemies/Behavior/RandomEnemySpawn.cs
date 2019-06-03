@@ -239,6 +239,19 @@ public class RandomEnemySpawn: MonoBehaviour {
             }
          }
     }
+    public static void SpawnEnemy(GameObject enemy, string resource_path, string animation_name = "")
+    {
+        //for spawning
+
+        Server.instance.Create(enemy, resource_path);
+
+        //for animations
+        int index = Server.gameObjectsToUpdate.IndexOf(enemy);
+        if (animation_name != "")
+        {
+            Server.instance.SendAnimation(index, animation_name, false);
+        }
+    }
 
     //This method is for IRenemies so that they can spawn squishy enemies to defend themselves, the squishy enemies will likely not be at full health
     public static void spawnEnemyWithinRadius(EnemyType type,GameObject enemy, float radius, Vector3 spawnPos, float maxHPProportion)
@@ -251,6 +264,7 @@ public class RandomEnemySpawn: MonoBehaviour {
            Vector3 instantiationPoint = Random.insideUnitSphere * radius + spawnPos + new Vector3(0, 30f, 0);
            ObjectUpdate o = new ObjectUpdate();
            GameObject bird = Instantiate(enemy, instantiationPoint, Quaternion.identity);
+           SpawnEnemy(bird, "Kamikaze");
             if(type == EnemyType.FlyingKamikaze)
             {
                 bird.GetComponent<StatManager>().kamikazeMaxHP *= maxHPProportion;
@@ -277,12 +291,14 @@ public class RandomEnemySpawn: MonoBehaviour {
             { 
                 Debug.Log("Instantiating golem in RandomEnemySpawn");
                 GameObject golem = Instantiate(enemy, instanPoint, Quaternion.identity);
+                SpawnEnemy(golem, "Golem");
                 golem.GetComponent<StatManager>().golemMaxHp *= maxHPProportion;
             }
             else if(type == EnemyType.Shrab)
             {
                 Debug.Log("Instantinating shrab in RandomEnemySpawn");
                 GameObject shrab = Instantiate(enemy, instanPoint, Quaternion.identity);
+                SpawnEnemy(shrab, "Shrab");
                 shrab.GetComponent<StatManager>().shrabMaxHp *= maxHPProportion;
             }
         }

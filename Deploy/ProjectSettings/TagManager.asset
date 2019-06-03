@@ -10,6 +10,10 @@ TagManager:
   - RightLeg
   - FxTemporaire
   - Center
+  - planet
+  - playercam
+  - ocean
+  - CollisionHandler
   layers:
   - Default
   - TransparentFX
