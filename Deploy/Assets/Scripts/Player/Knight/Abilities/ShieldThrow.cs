@@ -40,7 +40,7 @@ public class ShieldThrow : MonoBehaviour
 
         soundManager = GetComponent<SoundManager>();
 
-        projectileSpeed = 40; //placeholder value 
+        projectileSpeed = 80; //placeholder value 
         cooldown = 0;
 
     }
