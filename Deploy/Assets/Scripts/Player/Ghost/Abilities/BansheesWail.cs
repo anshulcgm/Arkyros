@@ -23,6 +23,9 @@ public class BansheesWail : MonoBehaviour
     private bool cast;
 
     SoundManager soundManager;
+
+    public GameObject BansheeWailParticleEffect;
+
     //might not always be Ghost, need different one for each class.
 
     // Start is called before the first frame update
@@ -48,7 +51,7 @@ public class BansheesWail : MonoBehaviour
             cast = false; //ability not yet cast
             start = DateTime.Now;
             anim.StartOverlayAnim("Summon_Area", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
-            
+            GameObject particleEffect = Instantiate(BansheeWailParticleEffect, transform.position, Quaternion.identity);
             soundManager.playOneShot("BansheesWail");
         }
 

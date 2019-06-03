@@ -1359,7 +1359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05693fa051b369442b0de8c729044cc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 6115156436900278675}
+  anim: {fileID: 0}
   scythe: {fileID: 1358403568}
 --- !u!114 &8246840471494153956
 MonoBehaviour:
@@ -1374,7 +1374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  anim: {fileID: 6115156436900278675}
+  anim: {fileID: 0}
   maxCooldown: 240
   scythe: {fileID: 1358403568}
 --- !u!114 &1221869867
@@ -1391,7 +1391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   maxCooldown: 240
-  anim: {fileID: 6115156436900278675}
+  anim: {fileID: 0}
   scythe: {fileID: 1358403568}
 --- !u!114 &1221869868
 MonoBehaviour:
@@ -1407,7 +1407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   maxCooldown: 240
-  anim: {fileID: 6115156436900278675}
+  anim: {fileID: 0}
   SpiritBladeEnergySlash: {fileID: 4622583958716229715, guid: 8aab8b5660ac279488a22dcf97bbf84c,
     type: 3}
   model: {fileID: 6115156436900278672}
@@ -1425,7 +1425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   maxCooldown: 240
-  anim: {fileID: 6115156436900278675}
+  anim: {fileID: 0}
   model: {fileID: 6115156436900278672}
   particleExplosion: {fileID: 0}
   scythe: {fileID: 1358403568}
@@ -1442,7 +1442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  anim: {fileID: 6115156436900278675}
+  anim: {fileID: 0}
   model: {fileID: 6115156436900278672}
 --- !u!114 &572507427672565550
 MonoBehaviour:
@@ -1457,7 +1457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  anim: {fileID: 6115156436900278675}
+  anim: {fileID: 0}
   model: {fileID: 6115156436900278672}
 --- !u!114 &8668597939576566971
 MonoBehaviour:
@@ -1472,7 +1472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  anim: {fileID: 6115156436900278675}
+  anim: {fileID: 0}
   model: {fileID: 6115156436900278672}
 --- !u!114 &5508223987319189779
 MonoBehaviour:
@@ -1488,8 +1488,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   maxCooldown: 720
-  anim: {fileID: 6115156436900278675}
+  anim: {fileID: 0}
   model: {fileID: 6115156436900278672}
+  BansheeWailParticleEffect: {fileID: 8727974851830962205, guid: 87ab521865cbc624088cdb0df9b68e4a,
+    type: 3}
 --- !u!114 &5471886445940555602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1503,7 +1505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  anim: {fileID: 6115156436900278675}
+  anim: {fileID: 0}
   model: {fileID: 6115156436900278672}
   SoulsOfTheDamnedProjectile: {fileID: 1445912041631301893, guid: d7977e476dd97cd459b87dc3094c9e03,
     type: 3}
@@ -1521,7 +1523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   maxCooldown: 480
-  anim: {fileID: 6115156436900278675}
+  anim: {fileID: 0}
   model: {fileID: 6115156436900278672}
   MementoMoriProjectile: {fileID: 2597004770093498091, guid: 924bb8a9eca097947a6295044dcd3213,
     type: 3}
@@ -1540,7 +1542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   maxCooldown: 600
-  anim: {fileID: 6115156436900278675}
+  anim: {fileID: 0}
   model: {fileID: 6115156436900278672}
 --- !u!114 &8246840471494153953
 MonoBehaviour:
@@ -1556,7 +1558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   maxCooldown: 600
-  anim: {fileID: 6115156436900278675}
+  anim: {fileID: 0}
   ParticleHit: {fileID: 973864921190199927, guid: 7d3c94594af65124595ccaa982e50c7a,
     type: 3}
   model: {fileID: 6115156436900278672}
@@ -1575,7 +1577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   maxCooldown: 4800
-  anim: {fileID: 6115156436900278675}
+  anim: {fileID: 0}
   reee: {fileID: 1651180266, guid: ad021eb4027393c49bd70d3962f95c29, type: 3}
   self:
     serializedVersion: 2
@@ -1594,7 +1596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   maxCooldown: 2400
-  anim: {fileID: 6115156436900278675}
+  anim: {fileID: 0}
   model: {fileID: 6115156436900278672}
 --- !u!114 &8868132841318975052
 MonoBehaviour:
@@ -1610,7 +1612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   maxCooldown: 1800
-  anim: {fileID: 6115156436900278675}
+  anim: {fileID: 0}
   model: {fileID: 6115156436900278672}
   self:
     serializedVersion: 2
