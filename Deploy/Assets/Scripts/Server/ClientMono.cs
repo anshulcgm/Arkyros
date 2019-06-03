@@ -8,7 +8,9 @@ public class ClientMono : MonoBehaviour {
 
     public GameObject planet;
 
-    public GameObject player;
+    public GameObject playerPosition;
+
+    public GameObject playerRotation;
 
     public GameObject cam;
 
@@ -24,9 +26,9 @@ public class ClientMono : MonoBehaviour {
         udp = new UDP();
         udp.StartUDP();
 
-        UnityHandler.player = player;
+        UnityHandler.player = playerPosition;
         
-        client = new Client(server_ipaddr, player, cam, udp);
+        client = new Client(server_ipaddr, playerRotation, cam, udp);
         udp.Send(UDP.GetLocalIPAddress().ToString(), server_ipaddr);
 	}
 	public bool hasBeenCreated = false;
