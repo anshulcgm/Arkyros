@@ -82,14 +82,16 @@ public class DataParserAndFormatter
 
     public static Quaternion[] GetRotationIn(string clientInput){
         String rotIn = clientInput.Split(new string[] {beginOrientationInput}, StringSplitOptions.None)[1].Split(new string[] {endOrientationInput}, StringSplitOptions.None)[0];
-        String rotation = rotIn.Split(',')[0];
-        String camRotation = rotIn.Split(',')[1];
+        String rotation = rotIn.Split('|')[0];
+        String camRotation = rotIn.Split('|')[1];
         return new Quaternion[]{StringToQuaternion(rotation), StringToQuaternion(camRotation)};
     }
 
-    public static Vector3 GetCamPos(string clientInput){
+    public static Vector3[] GetPosIn(string clientInput){
         String posIn = clientInput.Split(new string[] {beginCamPosInput}, StringSplitOptions.None)[1].Split(new string[] {endCamPosInput}, StringSplitOptions.None)[0];
-        return StringToVector3(posIn);
+        String position = posIn.Split('|')[1];
+        String camPosition = posIn.Split('|')[0];
+        return new Vector3[] {StringToVector3(position), StringToVector3(camPosition)};
     }
 
     public static string GetIP(string clientInput){
@@ -122,7 +124,7 @@ public class DataParserAndFormatter
     #endregion
 
     #region formatting
-    public static string GetClientInputFormatted(string keysPressed, bool m1Down, bool m2Down, Quaternion rotation, Quaternion camRotation, Vector3 camPosition, string ipAddr)
+    public static string GetClientInputFormatted(string keysPressed, bool m1Down, bool m2Down, Quaternion rotation, Vector3 position, Quaternion camRotation, Vector3 camPosition, string ipAddr)
     {
         string fullString = beginKeyInput;
         fullString += keysPressed;
@@ -133,11 +135,13 @@ public class DataParserAndFormatter
         fullString += endMouseInput;
         fullString += beginOrientationInput;
         fullString += rotation;
-        fullString += ",";
+        fullString += "|";
         fullString += camRotation;
         fullString += endOrientationInput;
         fullString += beginCamPosInput;
         fullString += camPosition;
+        fullString += "|";
+        fullString += position;
         fullString += endCamPosInput;
         fullString += beginIpInput;
         fullString += ipAddr;

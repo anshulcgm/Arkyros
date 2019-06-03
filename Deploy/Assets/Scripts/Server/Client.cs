@@ -9,14 +9,16 @@ public class Client
 {
 
     UDP udp;
+    UDP udpListen;
     GameObject player;
     GameObject camera;
     string serverIP;
     public bool debug = false;
 
-    public Client(string serverIP, GameObject player, GameObject camera, UDP udp)
+    public Client(string serverIP, GameObject player, GameObject camera, UDP udp, UDP udpListen)
     {
         this.udp = udp;
+        this.udpListen = udpListen;
         this.player = player;
         this.camera = camera;
         this.serverIP = serverIP;
@@ -26,8 +28,21 @@ public class Client
         }
     }
     public void SendPlayerData()
-    {        
-        string clientData = DataParserAndFormatter.GetClientInputFormatted(Input.inputString, Input.GetMouseButtonDown(0), Input.GetMouseButtonDown(1), player.transform.rotation, camera.transform.rotation, camera.transform.position, UDP.GetLocalIPAddress());
+    {
+        string keysPressed = "";
+        for(int i = 33; i <= 122; i++)
+        {
+            if(Input.GetKey(((char)i).ToString().ToLower() + ""))
+            {
+                string input = ((char)i).ToString().ToLower();
+                if (!keysPressed.Contains(input))
+                {
+                    keysPressed += input;
+                }                
+            }
+        }
+
+        string clientData = DataParserAndFormatter.GetClientInputFormatted(keysPressed, Input.GetMouseButtonDown(0), Input.GetMouseButtonDown(1), player.transform.rotation, player.transform.position, camera.transform.rotation, camera.transform.position, UDP.GetLocalIPAddress());
         udp.Send(clientData, serverIP); //send position and orientation and ipaddr of client to server for update
     }
 
@@ -38,18 +53,13 @@ public class Client
     //reads in server output and does what the server says
     public void HandleServerOutput()
     {
-        List<string> serverOutput = udp.ReadMessages();
+        List<string> serverOutput = udpListen.ReadMessages();
        
         //get the whole output in one string, from oldest to newest messages
         string fullOutput = "";
         foreach (string s in serverOutput)
         {
             fullOutput += s;
-        }
-
-        if (debug == true)
-        {
-            Debug.Log("CLIENT: recieved stuff from server: \n" + fullOutput);
         }
 
         //turn the string into a nice list of messages

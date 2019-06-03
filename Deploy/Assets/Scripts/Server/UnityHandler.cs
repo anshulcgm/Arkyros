@@ -61,11 +61,9 @@ public static class UnityHandler
         //all the vars we'll need 
         string[] data = message.Substring(1, message.Length - 2).Split('|');  // for splitting string
         int index = 0; // will be easier when mostRecentMessage gets larger
-        Debug.Log(data[index] + " jjjjkklkkf " + gameObjects.Count);
         
         //if it's a player, just update the position.
         if(gameObjects[int.Parse(data[index])].Equals(player)){
-            player.transform.position = DataParserAndFormatter.StringToVector3(data[index + 1]);
             return;
         }
 
@@ -74,7 +72,8 @@ public static class UnityHandler
         //ignore if null
         if (Object != null)
         {
-            Object.transform.position = DataParserAndFormatter.StringToVector3(data[index + 1]); //parse and update position
+            Vector3 target = DataParserAndFormatter.StringToVector3(data[index + 1]); //parse and update position
+            Object.transform.gameObject.GetComponent<Rigidbody>().velocity = target - Object.transform.position;
             Object.transform.rotation = DataParserAndFormatter.StringToQuaternion(data[index + 2]); //parse and update rotation
             if (debug == true)
             {

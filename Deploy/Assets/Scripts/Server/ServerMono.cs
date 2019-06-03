@@ -13,13 +13,17 @@ public class ServerMono : MonoBehaviour
     public bool hasCreatedPlayers = false;
 
     public static UDP udp;
+    public static UDP udpListen;
 
     // Start is called before the first frame update
     void Start()
     {
-        udp = new UDP();
+        udp = new UDP(15000);
+        udpListen = new UDP(15001);
+        udp.StartUDP();
+        udpListen.StartUDP();
         //start the server
-        server = new Server(udp);
+        server = new Server(udp, udpListen);
     }
     int seed = 0;
     // Update is called once per frame
