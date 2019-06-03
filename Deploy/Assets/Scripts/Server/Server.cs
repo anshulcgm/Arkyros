@@ -19,6 +19,7 @@ public class Server
     {
         serverExists = true;
         this.udp = udp;
+        udp.StartUDP();
         players = new List<PlayerClient>();
         gameObjectsToUpdate = new List<GameObject>();
         //instance = this;
@@ -78,7 +79,7 @@ public class Server
         gameObjectsToUpdate[gindex] = null; //sets the gameobject to null
 
         //create the message and send to all the clients
-        string message = "D{" + gindex.ToString() + "}";
+        string message = "D{" + gindex.ToString() + "1}";
 
         foreach (string clientIP in clientIPs)
         {
@@ -88,10 +89,11 @@ public class Server
 
     public void SendTerrainSeed(int seed)
     {
-        string message = "T{" + seed + "}";
+        string message = "T{" + seed + "1}";
 
         foreach (string clientIP in clientIPs)
         {
+            Debug.Log("sent " + message + " to " + clientIP);
             udp.Send(message, clientIP);
         }
     }
@@ -139,8 +141,7 @@ public class Server
             GameObject player = GameObject.Instantiate(Resources.Load(classPath) as GameObject, spawn, Quaternion.identity);            
             player.GetComponent<PlayerScript>().SetAbilities(abilityIds);
             players.Add(new PlayerClient(ip, player, classPath));
-            udp.Send("P{" + gameObjectsToUpdate.Count + "}", ip);
-            Create(player, classPath);  
+            Create(player, classPath, ip);
         }
     }
 

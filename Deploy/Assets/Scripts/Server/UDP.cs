@@ -54,6 +54,9 @@ public class UDP
     //start listening on port, call recieve function when we've recieved the packet of info.
     private void StartListening()
     {
+        Debug.Log(
+            "listening"
+        );
         ar_ = udp.BeginReceive(Receive, new object());
     }
     //recieve our packet of info.
