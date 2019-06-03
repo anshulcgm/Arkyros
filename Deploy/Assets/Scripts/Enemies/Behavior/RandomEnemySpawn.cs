@@ -248,9 +248,16 @@ public class RandomEnemySpawn: MonoBehaviour {
                 Debug.Log("Raycast hit not detected");
             }
             if(type == EnemyType.Brawler)
-            {
+            { 
+                Debug.Log("Instantiating golem in RandomEnemySpawn");
                 GameObject golem = Instantiate(enemy, instanPoint, Quaternion.identity);
                 golem.GetComponent<StatManager>().golemMaxHp *= maxHPProportion;
+            }
+            else if(type == EnemyType.Shrab)
+            {
+                Debug.Log("Instantinating shrab in RandomEnemySpawn");
+                GameObject shrab = Instantiate(enemy, instanPoint, Quaternion.identity);
+                shrab.GetComponent<StatManager>().shrabMaxHp *= maxHPProportion;
             }
         }
         

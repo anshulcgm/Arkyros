@@ -29,6 +29,8 @@ public class BullRush : MonoBehaviour
     SoundManager soundManager;
     //might not always be Ghost, need different one for each class.
 
+    public GameObject BullRushParticleEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,21 +54,19 @@ public class BullRush : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
+            GameObject particleEffect = Instantiate(BullRushParticleEffect, transform.position, Quaternion.Euler(0, 0, 0));
             anim.StartOverlayAnim("Charge", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
 
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
+            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cast = true;
             model.transform.rotation = camera.transform.rotation;
             rigidbody.AddForce(camera.transform.forward * dashNum, ForceMode.Impulse); //dash forward
             dashing = true;
             soundManager.playOneShot("BullRush");
-
-
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
-            cast = true;
-
         }
 
         if ((DateTime.Now - start).TotalSeconds > 2 && cast)

@@ -1405,7 +1405,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246840471494153957}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86efcc6fd020f69498b0eb74065d01a3, type: 3}
   m_Name: 
@@ -1448,7 +1448,8 @@ MonoBehaviour:
   maxCooldown: 240
   anim: {fileID: 7331146257471279517}
   model: {fileID: 6115156436900278672}
-  particleExplosion: {fileID: 0}
+  LeapDarkParticleEffect: {fileID: 8036763298143632788, guid: 8be8d9d7467594b478d3d72867f54b4e,
+    type: 3}
   scythe: {fileID: 1358403568}
 --- !u!114 &8497731169406125742
 MonoBehaviour:
@@ -1465,6 +1466,8 @@ MonoBehaviour:
   cooldown: 0
   anim: {fileID: 0}
   model: {fileID: 6115156436900278672}
+  DarkFlightParticleEffect: {fileID: 110866814954138435, guid: 57da881bd579a014da8df9785f8f848f,
+    type: 3}
 --- !u!114 &572507427672565550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1472,7 +1475,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246840471494153957}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5eb7c1a7a1418340a69097d62aeb609, type: 3}
   m_Name: 
@@ -1511,6 +1514,8 @@ MonoBehaviour:
   maxCooldown: 720
   anim: {fileID: 7331146257471279517}
   model: {fileID: 6115156436900278672}
+  BansheeWailParticleEffect: {fileID: 8727974851830962205, guid: 87ab521865cbc624088cdb0df9b68e4a,
+    type: 3}
 --- !u!114 &5471886445940555602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1535,7 +1540,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246840471494153957}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 652be6915ca01ac418f92ea230e9519b, type: 3}
   m_Name: 
@@ -1563,6 +1568,8 @@ MonoBehaviour:
   maxCooldown: 600
   anim: {fileID: 7331146257471279517}
   model: {fileID: 6115156436900278672}
+  SpiritBombParticleEffect: {fileID: 4223293047912137983, guid: 20dd714ae7983d342bda0ca886c9efac,
+    type: 3}
 --- !u!114 &8246840471494153953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1617,6 +1624,8 @@ MonoBehaviour:
   maxCooldown: 2400
   anim: {fileID: 0}
   model: {fileID: 6115156436900278672}
+  P3LParticleEffect: {fileID: 5336846018335181194, guid: d115a42822ce63d4a98867dd7e02258f,
+    type: 3}
 --- !u!114 &8868132841318975052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1624,7 +1633,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246840471494153957}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34a34d7c1995c474b96fd2ab03f65f39, type: 3}
   m_Name: 
@@ -2322,7 +2331,7 @@ GameObject:
   - component: {fileID: 8246840472298758456}
   m_Layer: 9
   m_Name: GhostCenter
-  m_TagString: Center
+  m_TagString: PlayerCenter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

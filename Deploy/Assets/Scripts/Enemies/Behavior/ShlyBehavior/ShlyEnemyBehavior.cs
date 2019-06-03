@@ -52,7 +52,7 @@ public class ShlyEnemyBehavior : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         oPelletTimer = pelletTimer;
         pelletTimer = -0.01f;
-        player = GameObject.FindGameObjectWithTag("Center");
+        player = GameObject.FindGameObjectWithTag("PlayerCenter");
         Debug.Log(player.name);
         finalPos = Random.insideUnitSphere * maxDisToTravel + transform.position;
         

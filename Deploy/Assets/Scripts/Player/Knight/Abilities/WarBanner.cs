@@ -24,6 +24,8 @@ public class WarBanner : MonoBehaviour
 
     SoundManager soundManager;
 
+    public GameObject WarBannerParticleEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +49,7 @@ public class WarBanner : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-
+            GameObject particleEffect = Instantiate(WarBannerParticleEffect, transform.position, Quaternion.Euler(90, 0, 0));
 
             //put any setup code here, before the ability is actually cast
 
@@ -57,14 +59,11 @@ public class WarBanner : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
+            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cast = true;
             soundManager.playOneShot("WarBanner");
             anim.StartOverlayAnim("BannerPlant", 0.5f, 1f);
             Instantiate(Banner, model.transform.position + model.transform.forward, Quaternion.identity);
-
-
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
-            cast = true;
-
         }
 
 

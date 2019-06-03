@@ -91,8 +91,14 @@ public class ShrabBehavior : MonoBehaviour
                 searchForNewIdlePoint = true;
             }
         }
-        RaycastHit hit; 
-        if (Physics.Raycast(transform.position + transform.position.normalized * 10.0f, (planet.transform.position - transform.position).normalized, out hit, Mathf.Infinity))
+        else if(raycastDistancePlayer > idleRadius)
+        {
+            rb.velocity = Vector3.zero;
+            //rb.freezeRotation = true;
+        }
+        RaycastHit hit;
+        int layerMask = ~LayerMask.GetMask("Self");
+        if (Physics.Raycast(transform.position + transform.position.normalized * 10.0f, (planet.transform.position - transform.position).normalized, out hit, Mathf.Infinity, layerMask))
         {
             transform.position = hit.point;
         }
@@ -188,10 +194,10 @@ public class ShrabBehavior : MonoBehaviour
         if (mappedPoint.magnitude > 1)
             transform.LookAt(mappedPoint3D + transform.position, transform.position.normalized);
         RaycastHit hit;
-        if (Physics.Raycast(transform.position + transform.position.normalized * 10.0f, (planet.transform.position - transform.position).normalized, out hit, Mathf.Infinity))
-        {
-            Plane2 alignPlane = new Plane2(hit.normal, transform.position);
-            transform.position = hit.point;
+        //if (Physics.Raycast(transform.position + transform.position.normalized * 10.0f, (planet.transform.position - transform.position).normalized, out hit, Mathf.Infinity))
+        //{
+            //Plane2 alignPlane = new Plane2(hit.normal, transform.position);
+            //transform.position = hit.point;
             //Vector2 mappedPoint2 = alignPlane.GetMappedPoint(player.transform.position) - alignPlane.GetMappedPoint(transform.position);
             //rb.AddForce((mappedPoint2.x * alignPlane.xDir + mappedPoint2.y * alignPlane.yDir).normalized * speed);
             //if (Vector3.Distance(hit.point, transform.position) >= 1f)
@@ -199,7 +205,7 @@ public class ShrabBehavior : MonoBehaviour
               //  rb.AddForce(transform.position.normalized * gravity);
                 //rb.AddForce((mappedPoint2.x * alignPlane.xDir + mappedPoint2.y * alignPlane.yDir).normalized * speed/-2f);
             //}
-        }
+        //}
         //adding force towards gravity, adding force towards direction faced
         rb.velocity = transform.forward * shrabMovementSpeed;
     }
@@ -276,7 +282,7 @@ public class ShrabBehavior : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Center")
+        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "PlayerCenter")
         {
             Physics.IgnoreCollision(GetComponent<Collider>(), collision.gameObject.GetComponent<Collider>());
         }

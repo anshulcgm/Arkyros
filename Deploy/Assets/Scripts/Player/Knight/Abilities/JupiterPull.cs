@@ -22,6 +22,8 @@ public class JupiterPull : MonoBehaviour
     SoundManager soundManager;
     Stats stats;
 
+    public GameObject JupiterPullParticleEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,8 @@ public class JupiterPull : MonoBehaviour
             start = DateTime.Now;
             //anim.SetBool("JupiterPullBool", true);
             soundManager.playOneShot("JPCharge");
+            GameObject particleEffect = Instantiate(JupiterPullParticleEffect, transform.position, Quaternion.Euler(90, 0, 0));
+
 
             Collider[] hits = Physics.OverlapSphere(transform.position, radius);
             foreach (Collider hit in hits)
@@ -57,6 +61,8 @@ public class JupiterPull : MonoBehaviour
 
         if((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
+            cooldown = 240; // divide by 60 for cooldown in second
+            cast = true;
             anim.StartOverlayAnim("Pull", 0.5f, 1f);
             Collider[] hits = Physics.OverlapSphere(transform.position, 400);
             Debug.Log("Gottem");
@@ -73,8 +79,7 @@ public class JupiterPull : MonoBehaviour
                 }
             }
 
-            cooldown = 240; // divide by 60 for cooldown in second
-            cast = true;
+            
         }
 
 

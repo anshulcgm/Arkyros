@@ -135,6 +135,7 @@ ModelImporter:
     7400036: Swing_Light
     7400038: Target_Summon
     9500000: //RootNode
+    11100000: //RootNode
     13700000: Cone
     13700002: Cube
     13700004: Cube_001
@@ -224,10 +225,10 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

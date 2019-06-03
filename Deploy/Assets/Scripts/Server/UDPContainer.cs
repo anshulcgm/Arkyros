@@ -6,6 +6,6 @@ public class UDPContainer : MonoBehaviour
 {
     public UDP udp;
     public void Awake(){
-        udp = new UDP();
+        udp = new UDP(1000);
     }
 }

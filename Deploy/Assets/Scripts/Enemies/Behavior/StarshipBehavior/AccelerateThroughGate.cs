@@ -42,7 +42,7 @@ public class AccelerateThroughGate : MonoBehaviour
 
         if (pushedThrough)
         {
-            speed = 10f;
+            speed = 0f;
         }
         else
         {
