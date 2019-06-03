@@ -102,6 +102,7 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
+        moveSpeed = stats.getFinal((int)stat.Speed);
         // Apply movement to rigidbody
         Vector3 localMove = moveAmount * Time.fixedDeltaTime * moveSpeed;
         Debug.DrawLine(transform.position, transform.position + moveAmount, Color.red);

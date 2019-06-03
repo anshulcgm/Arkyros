@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8660376059260c94ab41679bf25e040f
+guid: 2656fe1ee7c8d764fb87a1de8bb9e13d
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -117,23 +117,24 @@ ModelImporter:
     7400000: Default Take
     7400002: Circle_strike_2
     7400004: CircleSwing
-    7400006: Culling_Strike
-    7400008: Fly_Forward
-    7400010: Idle
-    7400012: Move_Backward
-    7400014: Move_Forward
-    7400016: Move_ForwardLunge
-    7400018: Move_Left
-    7400020: Move_Right
-    7400022: Slap
-    7400024: Summon_Area
-    7400026: Swing_Circle
-    7400028: Swing_Heavy_1
-    7400030: Swing_Heavy_2
-    7400032: Swing_Light
-    7400034: Target_Summon
+    7400006: Culling_strike
+    7400008: Culling_Strike
+    7400010: Fly_Forward
+    7400012: Idle
+    7400014: Move_Backward
+    7400016: Move_Forward
+    7400018: Move_ForwardLunge
+    7400020: Move_Left
+    7400022: Move_Right
+    7400024: SlapEnding
+    7400026: SlapWindup
+    7400028: Summon_Area
+    7400030: Swing_Circle
+    7400032: Swing_Heavy_1
+    7400034: Swing_Heavy_2
+    7400036: Swing_Light
+    7400038: Target_Summon
     9500000: //RootNode
-    11100000: //RootNode
     13700000: Cone
     13700002: Cube
     13700004: Cube_001
@@ -146,7 +147,6 @@ ModelImporter:
     13700018: Cube_008
     13700020: Cube_009
     13700022: Cube_010
-    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -224,10 +224,10 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 1
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

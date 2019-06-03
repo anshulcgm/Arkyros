@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 196247846156414477}
   - component: {fileID: 4839160208113720415}
   - component: {fileID: 6875680298105417910}
+  - component: {fileID: 759119468496232052}
   m_Layer: 0
   m_Name: ScytheMementoMori
   m_TagString: Untagged
@@ -30,13 +31,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2597004770093498091}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.8742985, y: 1.885915, z: 0.39518702}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 0.8742985, y: 1.9189725, z: 0.40764377}
+  m_LocalScale: {x: 0.7, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -90}
 --- !u!33 &6877253395842582821
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -108,7 +109,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!82 &196247846156414477
 AudioSource:
@@ -219,6 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sound: {fileID: 196247846156414477}
+  Sound2: {fileID: 0}
   Clips:
   - {fileID: 8300000, guid: 18a28668ea7908e4699f7f89741f768e, type: 3}
   - {fileID: 8300000, guid: 0212df2a71e16c840a9979199df7f73d, type: 3}
@@ -309,8 +311,27 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2597004770093498091}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.7489095, y: 5.220361, z: 0.16492805}
-  m_Center: {x: -0.2174072, y: 1.9087014, z: 1.2974241e-15}
+  m_Size: {x: 0.6242563, y: 5.3434362, z: 0.16492805}
+  m_Center: {x: -0.9182364, y: 1.9702392, z: 0}
+--- !u!114 &759119468496232052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2597004770093498091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1347817507220a4384f3ff6f7c24546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveUnitsPerSecond:
+    value: {x: 0, y: 0, z: 0}
+    space: 1
+  rotateDegreesPerSecond:
+    value: {x: 60, y: 60, z: 60}
+    space: 0
+  ignoreTimescale: 0

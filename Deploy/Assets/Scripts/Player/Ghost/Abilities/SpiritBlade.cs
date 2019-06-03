@@ -6,6 +6,7 @@ using UnityEngine;
 public class SpiritBlade : MonoBehaviour
 {
     public float cooldown;
+    public int maxCooldown = 240;
 
     private GameObject camera;
 
@@ -71,7 +72,7 @@ public class SpiritBlade : MonoBehaviour
 
             clone.GetComponent<Rigidbody>().velocity = ray.direction * projectileSpeed;
 
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cooldown = maxCooldown;
             cast = true;
 
         }

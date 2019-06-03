@@ -23,7 +23,7 @@ public class Landfall : MonoBehaviour
     public int numForward = 80;
     public int numUp = 80;
     private int sphereRadius = 20;
-    private int enemySetback = 200;
+    private int enemySetback = 150;
 
     public GameObject particleLanding;
     bool particleSpawned;
@@ -71,11 +71,13 @@ public class Landfall : MonoBehaviour
             //anim.PlayLoopingAnim("Flight"); //this tells the animator to play the right animation, what strength, what duration
             anim.StartOverlayAnim("Jump", 0.5f, 1f);
             soundManager.playOneShot("LandfallJump");
-            //soundManager.play("LandfallSustain");
+            soundManager.play("LandfallSustain");
 
             model.transform.rotation = camera.transform.rotation;
             rigidbody.AddForce(model.transform.forward * numForward, ForceMode.Impulse);
             rigidbody.AddForce(transform.up * numUp, ForceMode.Impulse);
+
+            anim.PlayLoopingAnim("Flight");
 
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
             cast = true;
@@ -91,16 +93,18 @@ public class Landfall : MonoBehaviour
     {
         
         if (/*collision.gameObject.tag.Equals("planet") &&*/ cast) //lands back on the ground
-        { 
+        {
+            //soundManager.stop();
             if (!particleSpawned)
             {
                 Instantiate(particleLanding, transform.position + transform.up, transform.rotation);//particle effect once
+                soundManager.playOneShot("LandfallFall");
                 particleSpawned = true;
             }
             
             anim.PlayLoopingAnim("Standard"); //Idle
             //soundManager.stop();
-            soundManager.playOneShot("LandfallFall");
+            
 
             Collider[] enemies = Physics.OverlapSphere(transform.position, sphereRadius);
             foreach(Collider col in enemies)

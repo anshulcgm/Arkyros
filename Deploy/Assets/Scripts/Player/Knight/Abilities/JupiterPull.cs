@@ -20,6 +20,7 @@ public class JupiterPull : MonoBehaviour
     //public GameObject damageDealt;
     private bool cast;
     SoundManager soundManager;
+    Stats stats;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,8 @@ public class JupiterPull : MonoBehaviour
         //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         soundManager = GetComponent<SoundManager>();
-        speed = 40;
+        stats = GetComponent<Stats>();
+        speed = 200;
 
     }
 
@@ -56,30 +58,25 @@ public class JupiterPull : MonoBehaviour
         if((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
             anim.StartOverlayAnim("Pull", 0.5f, 1f);
-            Collider[] hits = Physics.OverlapSphere(transform.position, radius);
+            Collider[] hits = Physics.OverlapSphere(transform.position, 400);
             Debug.Log("Gottem");
-            //camera.GetComponent<cameraSoundManager>().jupiterPullCast = true;
             foreach (Collider hit in hits)
             {
                 // Detects if the object is an "enemy" and if so pulls it
                 if (hit.gameObject.tag == "Enemy")
                 {
                     Debug.Log(hit.gameObject.name);
-
+                    stats.dealDamage(hit.gameObject, 600);
                     hit.gameObject.GetComponent<Rigidbody>().AddForce(-speed * (hit.gameObject.transform.position - this.gameObject.transform.position).normalized, ForceMode.Impulse);
 
-                    //Instantiate(damageDealt, hit.gameObject.transform.position, Quaternion.identity);
+                    soundManager.playOneShot("JPGravity");
                 }
             }
 
             cooldown = 240; // divide by 60 for cooldown in second
             cast = true;
         }
-        else
-        {
-            //camera.GetComponent<cameraSoundManager>().jupiterPullCast = false;
 
-        }
 
 
         if (cooldown > 0)

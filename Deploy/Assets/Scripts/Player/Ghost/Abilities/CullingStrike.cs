@@ -6,13 +6,13 @@ using UnityEngine;
 public class CullingStrike : MonoBehaviour
 {
     public float cooldown;
+    public int maxCooldown = 240;
 
     private GameObject camera;
 
     public AnimationController anim;
 
     DateTime start;
-
 
     Rigidbody rigidbody;
     Stats stats;
@@ -22,6 +22,7 @@ public class CullingStrike : MonoBehaviour
     private bool cast;
 
     SoundManager soundManager;
+    public ScytheCollider scythe;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +34,6 @@ public class CullingStrike : MonoBehaviour
         soundManager = GetComponent<SoundManager>();
 
         cooldown = 0;
-
     }
 
     // Update is called once per frame
@@ -43,24 +43,16 @@ public class CullingStrike : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            anim.StartOverlayAnim("Culling_Strike", 0.5f, 1f); //this tells the animator to play the right animation
-            soundManager.playOneShot("CullingStrike");
-
-            //put any setup code here, before the ability is actually cast
-
-
-
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
-        {
+        {            
+            scythe.setActive(40);
+            anim.StartOverlayAnim("Culling_Strike", 0.5f, 1f); //this tells the animator to play the right animation
+            soundManager.playOneShot("CullingStrike");
 
-            
-
-
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cooldown = maxCooldown;
             cast = true;
-
         }
 
 
