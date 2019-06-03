@@ -6,11 +6,14 @@ using UnityEngine;
 public class ShieldBash : MonoBehaviour
 {
     public float cooldown;
+    public float maxCooldown = 240;
 
     private GameObject camera;
 
     public AnimationController anim;
     public GameObject model;
+    public ShieldCollider shield;
+
     DateTime start;
 
 
@@ -49,23 +52,17 @@ public class ShieldBash : MonoBehaviour
             anim.StartOverlayAnim("ShieldBash", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
             soundManager.playOneShot("ShieldBash");
             
+            
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-
-            /*
-             * All the code for the ability that you want to write
-             * transform.forward for the direction the player is 
-             * maybe setting colliders
-             * instantiating new objects
-             * to damage enemy, EnemyGameObject.GetComponent<StatManager>().changeHealth(amount), amount can be positive or negative
-             */
-
-
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cooldown = maxCooldown;
             cast = true;
 
+            anim.StartOverlayAnim("ShieldBash", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
+            soundManager.playOneShot("ShieldBash");
+            shield.setActive(20);
         }
 
 

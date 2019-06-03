@@ -6,8 +6,9 @@ using UnityEngine;
 public class Darkflight : MonoBehaviour
 {
     public float cooldown;
+    public float maxCooldown = 540;
 
-     GameObject camera;
+    private GameObject camera;
 
     public AnimationController anim;
     public GameObject model;
@@ -49,7 +50,6 @@ public class Darkflight : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            cooldown = 240;
             cast = true;
 
             rigidbody.AddForce(transform.up * 20, ForceMode.Impulse); //jumps super high
@@ -61,7 +61,7 @@ public class Darkflight : MonoBehaviour
 
             soundManager.play("DarkflightFlight");
 
-            
+            cooldown = maxCooldown;
         }
 
         if (cooldown > 0) //counts down for the cooldown

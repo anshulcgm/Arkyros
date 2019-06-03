@@ -31,6 +31,7 @@ public class TotemPole : MonoBehaviour
     {
         // anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
+        
 
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
@@ -59,11 +60,9 @@ public class TotemPole : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast && totem != null)
         {
-            anim.StartOverlayAnim("AnimationName", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
-            //or
-            anim.PlayLoopingAnim("AnimationName"); // mostly only for movement, probably not used in an ability
-            soundManager.play("Soundname");
-            if(totem.name == "TotemOfResolve")
+            soundManager.playOneShot("5TotemPole");
+
+            if (totem.name == "TotemOfResolve")
             {
                 totem.GetComponent<TotemOfResolveScript>().augment();
             }

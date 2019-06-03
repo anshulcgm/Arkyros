@@ -6,11 +6,12 @@ using UnityEngine;
 public class CullingStrike : MonoBehaviour
 {
     public float cooldown;
-    public int maxCooldown = 240;
+    public float maxCooldown = 240;
 
     private GameObject camera;
 
     public AnimationController anim;
+    public GameObject model;
 
     DateTime start;
 
@@ -48,8 +49,9 @@ public class CullingStrike : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {            
             scythe.setActive(40);
-            anim.StartOverlayAnim("Culling_Strike", 0.5f, 1f); //this tells the animator to play the right animation
+            anim.StartOverlayAnim("Culling_strike", 0.5f, 1f); //this tells the animator to play the right animation
             soundManager.playOneShot("CullingStrike");
+            scythe.setActive(40);
 
             cooldown = maxCooldown;
             cast = true;

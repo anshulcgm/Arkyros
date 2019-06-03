@@ -6,11 +6,13 @@ using UnityEngine;
 public class ShieldSurf : MonoBehaviour
 {
     public float cooldown;
+    public float maxCooldown = 480;
 
     private GameObject camera;
 
     public AnimationController anim;
     public GameObject model;
+
     DateTime start;
 
 
@@ -50,7 +52,7 @@ public class ShieldSurf : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            cooldown = 360;
+            cooldown = maxCooldown;
             cast = true;
             anim.StartOverlayAnim("Surf", 0.5f, 5f);
             stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] *= 2; //double speed

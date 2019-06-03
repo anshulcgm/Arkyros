@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class NothingPersonnelKid : MonoBehaviour
 {
-    public float cooldown = 0;
-    public int maxCooldown = 600;
+    public float cooldown;
+    public float maxCooldown = 600;
 
     private GameObject camera;
-
+    
     public AnimationController anim;
-
+    public GameObject model;
 
     private bool buffActive;
 
@@ -26,7 +26,7 @@ public class NothingPersonnelKid : MonoBehaviour
     SoundManager soundManager;
     //public GameObject ParticleTrail;
     public GameObject ParticleHit;
-    public GameObject model;
+
 
     GameObject enemy;
     GameObject clone;
@@ -100,23 +100,15 @@ public class NothingPersonnelKid : MonoBehaviour
                     soundManager.playOneShot("NPKTeleport");
                     soundManager.playOneShot("NPKVoiceLine");
                     voiceLinePlayed = true;
-                }
-                
+                }               
 
                 //stats.dealDamage(enemy, 600);
                 Debug.Log("REEEEEEE");
             }
-
-
             cooldown = maxCooldown;
             cast = true;
         }
-
-
-
-
-
-
+        
         if (cooldown > 0) //counts down for the cooldown
         {
             cooldown--;

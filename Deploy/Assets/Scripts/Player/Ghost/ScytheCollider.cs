@@ -18,7 +18,7 @@ public class ScytheCollider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (active && (DateTime.Now -  start).TotalSeconds > 0.8)//turns off collider after one second
+        if (active && (DateTime.Now -  start).TotalSeconds > 1)//turns off collider after one second
         {
             active = false;
         }

@@ -59,6 +59,9 @@ public class Punishment : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
+            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cast = true;
+
             anim.StartOverlayAnim("Punishment", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
             soundManager.play("1Punishment");
 
@@ -75,8 +78,7 @@ public class Punishment : MonoBehaviour
 
 
 
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
-            cast = true;
+            
 
         }
 

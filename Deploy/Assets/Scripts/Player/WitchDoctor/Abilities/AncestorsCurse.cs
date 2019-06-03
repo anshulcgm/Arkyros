@@ -59,6 +59,9 @@ public class AncestorsCurse : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
+            soundManager.playOneShot("4AncestorsCurse");
+            anim.StartOverlayAnim("AncestorsCurse", 0.5f, 1.0f);
+
             DateTime abilityStart = DateTime.Now;
             while ((DateTime.Now - abilityStart).TotalSeconds < 9)
             {

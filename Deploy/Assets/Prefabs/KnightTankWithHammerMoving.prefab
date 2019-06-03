@@ -1,82 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1336300951
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1336300952}
-  - component: {fileID: 1336300955}
-  - component: {fileID: 1336300954}
-  m_Layer: 9
-  m_Name: TankCenter
-  m_TagString: PlayerCenter
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1336300952
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1336300951}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.56, y: 9.51, z: -2.19}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8652570232259177776}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1336300955
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1336300951}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1336300954
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1336300951}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!1 &192528168595687614
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,9 +48,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100002, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
-  - {fileID: 2100004, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
-  - {fileID: 2100006, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
+  - {fileID: 2100000, guid: 642411e053b164643b0623ccdb1499aa, type: 2}
+  - {fileID: 2100000, guid: 56d2f700779ca974cbd33db1581a0542, type: 2}
+  - {fileID: 2100000, guid: d35de52e80dba334caa53afe4985a83f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -491,10 +414,10 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100008, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
-  - {fileID: 2100010, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
-  - {fileID: 2100012, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
-  - {fileID: 2100014, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
+  - {fileID: 2100000, guid: 56d2f700779ca974cbd33db1581a0542, type: 2}
+  - {fileID: 2100000, guid: d35de52e80dba334caa53afe4985a83f, type: 2}
+  - {fileID: 2100000, guid: 0a4588e84684c94458f3da661f8e4126, type: 2}
+  - {fileID: 2100000, guid: d35de52e80dba334caa53afe4985a83f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -571,6 +494,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8675062305928087052}
+  - component: {fileID: 581754894}
+  - component: {fileID: 581754895}
   m_Layer: 9
   m_Name: Shield
   m_TagString: Untagged
@@ -593,6 +518,34 @@ Transform:
   m_Father: {fileID: 7549196278180455116}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &581754894
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3014018888537227412}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.475525, y: 7.381996, z: 1.0682007}
+  m_Center: {x: -0.13569453, y: -0.061251573, z: -1.0341016}
+--- !u!114 &581754895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3014018888537227412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caea28929da42634cabd62423649f6fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDamage: 0
+  active: 0
+  stats: {fileID: 1339353795962491827}
 --- !u!1 &3113034461151589566
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,7 +655,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100002, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
+  - {fileID: 2100000, guid: 642411e053b164643b0623ccdb1499aa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -913,7 +866,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100004, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
+  - {fileID: 2100000, guid: 56d2f700779ca974cbd33db1581a0542, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1029,7 +982,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
+  - {fileID: 2100000, guid: 56d2f700779ca974cbd33db1581a0542, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1243,7 +1196,6 @@ Transform:
   - {fileID: 8927683912655949985}
   - {fileID: 8927683913148525851}
   - {fileID: 8927683913069232709}
-  - {fileID: 1336300952}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 7.7830005, y: -1.0810001, z: -14.961}
@@ -1525,10 +1477,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 8.429125
-  m_Height: 16.85825
+  m_Radius: 7.453149
+  m_Height: 18.64753
   m_Direction: 1
-  m_Center: {x: -2.1896706, y: 4.7298565, z: 0.61646175}
+  m_Center: {x: 0.2702445, y: 8.797863, z: 0.52168274}
 --- !u!54 &1897814018563279708
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1628,6 +1580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  maxCooldown: 240
   anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
   shieldTemp: {fileID: 7383818346270251463, guid: 53db4d4734790e6489064c444bb2a6d0,
@@ -1645,8 +1598,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  maxCooldown: 240
   anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
+  shield: {fileID: 581754895}
 --- !u!114 &7979313453317872640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1660,6 +1615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  maxCooldown: 240
   Shield: {fileID: 1643946491907285633, guid: 02a44a8008dc5f44db67ec5c64793142, type: 3}
   anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
@@ -1670,15 +1626,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004491684890124213}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4acebca92457d534ebcb514e8d515d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  maxCooldown: 300
   anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
-  BullRushParticleEffect: {fileID: 0}
+  BullRushParticleEffect: {fileID: 4223293047912137983, guid: 2cd843115fc9cb549a1d739bb4c9df4f,
+    type: 3}
 --- !u!114 &5677541753909824412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1692,6 +1650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  maxCooldown: 480
   anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
 --- !u!114 &5004491684890124214
@@ -1701,35 +1660,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004491684890124213}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 293688ff0cad59042b8a3fd2d3b2f844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  maxCooldown: 480
   anim: {fileID: 3252196111515945593}
+  model: {fileID: 8927683913148525848}
   numForward: 80
   numUp: 80
   particleLanding: {fileID: 4039727760110134509, guid: b3aa5b74d95e6b5418ea39d92116aaad,
     type: 3}
-  model: {fileID: 8927683913148525848}
 --- !u!114 &4452070408759178479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5004491684890124213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a2db40ea1e062409c4926e50a5f789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 0
-  anim: {fileID: 0}
-  model: {fileID: 8927683913148525848}
-  IntimidateParticleEffect: {fileID: 0}
---- !u!114 &3690964678292186687
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1738,14 +1682,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 5004491684890124213}
   m_Enabled: 0
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42a2db40ea1e062409c4926e50a5f789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  maxCooldown: 600
+  anim: {fileID: 3252196111515945593}
+  model: {fileID: 8927683913148525848}
+  IntimidateParticleEffect: {fileID: 2976327252393877240, guid: a9fe79327ff7c3f4b96cb1223a2463fe,
+    type: 3}
+--- !u!114 &3690964678292186687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004491684890124213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0181e4801701833498b69eb393b092e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  maxCooldown: 1080
   anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
   Banner: {fileID: 431684446, guid: d8b476724eb91394c8825e7df9db22eb, type: 3}
-  WarBannerParticleEffect: {fileID: 0}
+  WarBannerParticleEffect: {fileID: 7985014866405909593, guid: 7bce85989b4bd33468ad2cd36602ce99,
+    type: 3}
 --- !u!114 &5004491684890124201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1759,6 +1723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  maxCooldown: 480
   SkyHammer: {fileID: 6981962925071982693, guid: bb269431ab0e2fe4d97f44ae3d1f05e9,
     type: 3}
   anim: {fileID: 3252196111515945593}
@@ -1779,6 +1744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  maxCooldown: 480
   anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
   particleSmash: {fileID: 4039727760110134509, guid: b3aa5b74d95e6b5418ea39d92116aaad,
@@ -1799,9 +1765,11 @@ MonoBehaviour:
   radius: 0
   speed: 0
   cooldown: 0
+  maxCooldown: 1800
   anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
-  JupiterPullParticleEffect: {fileID: 0}
+  JupiterPullParticleEffect: {fileID: 6488789781963714480, guid: fdc91de734501b243a439274ba3e4e3a,
+    type: 3}
 --- !u!1 &5194022097309799633
 GameObject:
   m_ObjectHideFlags: 0
@@ -2221,7 +2189,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100002, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
+  - {fileID: 2100000, guid: 642411e053b164643b0623ccdb1499aa, type: 2}
   - {fileID: 2100006, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -2620,7 +2588,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100002, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
+  - {fileID: 2100000, guid: 642411e053b164643b0623ccdb1499aa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2882,7 +2850,7 @@ MonoBehaviour:
   - Intimidate
   - Charge
   - Surf
-  - Bash
+  - ShieldBash
   loopingAnims:
   - Flight
   - RunForward

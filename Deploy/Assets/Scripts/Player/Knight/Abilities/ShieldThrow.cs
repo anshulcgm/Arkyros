@@ -6,12 +6,15 @@ using UnityEngine;
 public class ShieldThrow : MonoBehaviour
 {
     public float cooldown;
+    public float maxCooldown = 240;
 
     private GameObject camera;
     public GameObject Shield;
     private float projectileSpeed;
+
     public AnimationController anim;
     public GameObject model;
+
     DateTime start;
 
 
@@ -37,7 +40,7 @@ public class ShieldThrow : MonoBehaviour
 
         soundManager = GetComponent<SoundManager>();
 
-        projectileSpeed = 10; //placeholder value 
+        projectileSpeed = 40; //placeholder value 
         cooldown = 0;
 
     }
@@ -49,18 +52,15 @@ public class ShieldThrow : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            anim.StartOverlayAnim("ShieldThrow", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
-
-            //put any setup code here, before the ability is actually cast
-
-
-
+            
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-
-            GameObject shieldObj = Instantiate(Shield, model.transform.position + transform.forward * 2 + transform.up * 8, Quaternion.identity);
+            model.transform.rotation = camera.transform.rotation;
+            anim.StartOverlayAnim("ShieldThrow", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
+            soundManager.playOneShot("ShieldThrow");
+            GameObject shieldObj = Instantiate(Shield, model.transform.position + model.transform.forward * 12 + transform.up * 8, Quaternion.identity);
 
             float x = Screen.width / 2f;
             float y = Screen.height / 2f;
@@ -69,10 +69,8 @@ public class ShieldThrow : MonoBehaviour
 
             shieldObj.GetComponent<Rigidbody>().velocity = ray.direction * projectileSpeed;
 
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cooldown = maxCooldown;
             cast = true;
-
-
         }
 
 

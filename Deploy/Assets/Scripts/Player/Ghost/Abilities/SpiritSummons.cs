@@ -7,7 +7,7 @@ using UnityEngine;
 public class SpiritSummons : MonoBehaviour
 {
     public float cooldown;
-    public int maxCooldown = 600;
+    public float maxCooldown = 600;
 
     private GameObject camera;
 

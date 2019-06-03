@@ -6,12 +6,14 @@ using UnityEngine;
 public class WarBanner : MonoBehaviour
 {
     public float cooldown;
+    public float maxCooldown = 1080;
 
     private GameObject camera;
 
     public AnimationController anim;
     public GameObject model;
     public GameObject Banner;
+
     DateTime start;
 
 
@@ -50,20 +52,16 @@ public class WarBanner : MonoBehaviour
             cast = false; //ability not yet cast
             start = DateTime.Now;
             GameObject particleEffect = Instantiate(WarBannerParticleEffect, transform.position, Quaternion.Euler(90, 0, 0));
-
-            //put any setup code here, before the ability is actually cast
-
-
-
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cooldown = maxCooldown;
             cast = true;
             soundManager.playOneShot("WarBanner");
             anim.StartOverlayAnim("BannerPlant", 0.5f, 1f);
-            Instantiate(Banner, model.transform.position + model.transform.forward, Quaternion.identity);
+            model.transform.rotation = camera.transform.rotation;
+            Instantiate(Banner, model.transform.position + model.transform.forward * 15, Quaternion.identity);
         }
 
 

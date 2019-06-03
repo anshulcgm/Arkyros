@@ -877,7 +877,7 @@ MonoBehaviour:
   playerPosition: {fileID: 1363149}
   playerRotation: {fileID: 796385097}
   cam: {fileID: 2122683472}
-  server_ipaddr: 192.168.1.35
+  server_ipaddr: 192.168.1.12
   hasBeenCreated: 0
 --- !u!4 &1303365297
 Transform:
