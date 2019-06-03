@@ -40,10 +40,7 @@ public class ClientMono : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(client == null)
-        {
-            Debug.Log("uh oh");
-        }
+
         if (sendDefault && planet.GetComponent<PlanetMono>().created)
         {
             SendPlayerCreateData("default", new int[] { 0, 0, 0, 0, 0, 0, 0 });

@@ -133,7 +133,7 @@ public class DataParserAndFormatter
         fullString += endMouseInput;
         fullString += beginOrientationInput;
         fullString += rotation;
-        fullString += ",";
+        fullString += "|";
         fullString += camRotation;
         fullString += endOrientationInput;
         fullString += beginCamPosInput;

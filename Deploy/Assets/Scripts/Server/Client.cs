@@ -26,8 +26,21 @@ public class Client
         }
     }
     public void SendPlayerData()
-    {        
-        string clientData = DataParserAndFormatter.GetClientInputFormatted(Input.inputString, Input.GetMouseButtonDown(0), Input.GetMouseButtonDown(1), player.transform.rotation, camera.transform.rotation, camera.transform.position, UDP.GetLocalIPAddress());
+    {
+        string keysPressed = "";
+        for(int i = 33; i <= 122; i++)
+        {
+            if(Input.GetKey(((char)i).ToString().ToLower() + ""))
+            {
+                string input = ((char)i).ToString().ToLower();
+                if (!keysPressed.Contains(input))
+                {
+                    keysPressed += input;
+                }                
+            }
+        }
+
+        string clientData = DataParserAndFormatter.GetClientInputFormatted(keysPressed, Input.GetMouseButtonDown(0), Input.GetMouseButtonDown(1), player.transform.rotation, camera.transform.rotation, camera.transform.position, UDP.GetLocalIPAddress());
         udp.Send(clientData, serverIP); //send position and orientation and ipaddr of client to server for update
     }
 
@@ -45,11 +58,6 @@ public class Client
         foreach (string s in serverOutput)
         {
             fullOutput += s;
-        }
-
-        if (debug == true)
-        {
-            Debug.Log("CLIENT: recieved stuff from server: \n" + fullOutput);
         }
 
         //turn the string into a nice list of messages
