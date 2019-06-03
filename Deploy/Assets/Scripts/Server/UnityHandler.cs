@@ -89,7 +89,7 @@ public static class UnityHandler
         int index = 0; // will be easier when mostRecentMessage gets larger
 
         data = message.Substring(1, message.Length - 2).Split('|'); //split each object into an array
-        if (!data[index].Equals("player")){        //if this create message is for me then add a null object and move on
+        if (!data[index].Equals("playe")){        //if this create message is for me then add a null object and move on
             string resourcePath = data[index];
             Debug.Log(resourcePath + " <- that's it");
             Vector3 position = DataParserAndFormatter.StringToVector3(data[index + 1]); //parse and update position
@@ -106,6 +106,7 @@ public static class UnityHandler
             }
         }
         else {
+            Debug.Log("made player");
             gameObjects.Add(player);
         }
     }

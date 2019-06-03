@@ -47,11 +47,6 @@ public class WarBanner : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            anim.StartOverlayAnim("AnimationName", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
-
-            //or
-
-            anim.PlayLoopingAnim("AnimationName"); // mostly only for movement, probably not used in an ability
 
 
             //put any setup code here, before the ability is actually cast
@@ -62,8 +57,9 @@ public class WarBanner : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-
-            Instantiate(Banner, transform.position + transform.forward, Quaternion.identity);
+            soundManager.playOneShot("WarBanner");
+            anim.StartOverlayAnim("BannerPlant", 0.5f, 1f);
+            Instantiate(Banner, model.transform.position + model.transform.forward, Quaternion.identity);
 
 
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds

@@ -6,11 +6,15 @@ public class ClientMono : MonoBehaviour {
     public bool sendDefault = false;
     public bool readFromFile = false;
 
-    public GameObject player;
+    public GameObject planet;
+
+    public GameObject playerPosition;
+
+    public GameObject playerRotation;
 
     public GameObject cam;
 
-    Client client;
+    private Client client;
     UDP udp;
     public string server_ipaddr;
 	// Use this for initialization
@@ -21,24 +25,31 @@ public class ClientMono : MonoBehaviour {
         }		
         udp = new UDP();
         udp.StartUDP();
-        client = new Client(server_ipaddr, player, cam, udp);
+
+        UnityHandler.player = playerPosition;
+        
+        client = new Client(server_ipaddr, playerRotation, cam, udp);
         udp.Send(UDP.GetLocalIPAddress().ToString(), server_ipaddr);
-        if (sendDefault)
-        {
-            client.SendClassData("default", new int[] { 0, 0, 0, 0, 0, 0, 0 });
-        }
 	}
-	bool hasBeenCreated = false;
+	public bool hasBeenCreated = false;
 	//call whenever we send the create player data
 	public void SendPlayerCreateData(string classPath, int[] abilityIds)
 	{
 		client.SendClassData(classPath, abilityIds);
-		hasBeenCreated = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(hasBeenCreated){			
+        if(client == null)
+        {
+            Debug.Log("uh oh");
+        }
+        if (sendDefault && planet.GetComponent<PlanetMono>().created)
+        {
+            SendPlayerCreateData("default", new int[] { 0, 0, 0, 0, 0, 0, 0 });
+            sendDefault = false;
+        }
+        if (hasBeenCreated){			
 			client.SendPlayerData();     
 		}   
 		client.HandleServerOutput();

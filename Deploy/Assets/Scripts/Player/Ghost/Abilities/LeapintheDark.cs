@@ -6,6 +6,7 @@ using UnityEngine;
 public class LeapintheDark : MonoBehaviour
 {
     public float cooldown;
+    public int maxCooldown = 240;
 
     private GameObject camera;
 
@@ -22,7 +23,10 @@ public class LeapintheDark : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
+    public GameObject particleExplosion;
+
     SoundManager soundManager;
+    public ScytheCollider scythe;
     //might not always be Ghost, need different one for each class.
 
     // Start is called before the first frame update
@@ -47,34 +51,27 @@ public class LeapintheDark : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-
-            
-
-            //put any setup code here, before the ability is actually cast
-
-
-
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
+            cast = true;
 
             model.transform.rotation = camera.transform.rotation;
             Vector3 newpos = model.transform.position + model.transform.forward * 100;
             RaycastHit hit;
-            if (Physics.Raycast(model.transform.position, model.transform.forward, out hit, 100))
+            if (Physics.Raycast(model.transform.position + transform.up * 8, model.transform.forward, out hit, 100))
             {
                 newpos = hit.point;          
             }
             soundManager.playOneShot("LeapInTheDark", 0.5f);
             transform.position = newpos;
+            //Instantiate(particleExplosion, transform.position, Quaternion.identity);
             // the attack will be taken care by the animation??
+            scythe.setActive(30); 
             anim.StartOverlayAnim("Swing_Heavy_1", 0.5f, 0.5f);
 
-
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
-            cast = true;
-
+            cooldown = maxCooldown;
         }
 
 

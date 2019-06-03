@@ -1126,6 +1126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8652570232259177776}
   - component: {fileID: 253643272353335891}
+  - component: {fileID: 1034770013054457780}
   - component: {fileID: 9222162044601352173}
   - component: {fileID: 1061082241}
   - component: {fileID: 1897814018563279708}
@@ -1264,6 +1265,102 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!82 &1034770013054457780
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004491684890124213}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &9222162044601352173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1277,6 +1374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sound: {fileID: 253643272353335891}
+  Sound2: {fileID: 1034770013054457780}
   Clips:
   - {fileID: 8300000, guid: cbf851916d9b5c04b9e4d74722c93e7a, type: 3}
   - {fileID: 8300000, guid: ad0bd87440441ef448644caa5e267e99, type: 3}
@@ -1384,7 +1482,6 @@ MonoBehaviour:
   regenTimer: 0
   maxHealth: 0
   health: 0
-  damageMultiplier: 0
   buffs: 000000000000000000000000
 --- !u!114 &2140964412979006224
 MonoBehaviour:
@@ -1446,7 +1543,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004491684890124213}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 790c898de1a020147bf19fe999fddca6, type: 3}
   m_Name: 
@@ -1478,15 +1575,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004491684890124213}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff424e3c704d97446b263b504ae5fdeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  Shield: {fileID: 8927683913148525848}
+  Shield: {fileID: 0}
   anim: {fileID: 8927683913148525849}
-  model: {fileID: 0}
+  model: {fileID: 8927683913148525848}
 --- !u!114 &1844576334460709028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1558,7 +1655,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004491684890124213}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0181e4801701833498b69eb393b092e5, type: 3}
   m_Name: 
@@ -1566,7 +1663,7 @@ MonoBehaviour:
   cooldown: 0
   anim: {fileID: 8927683913148525849}
   model: {fileID: 8927683913148525848}
-  Banner: {fileID: 0}
+  Banner: {fileID: 431684446, guid: d8b476724eb91394c8825e7df9db22eb, type: 3}
 --- !u!114 &5004491684890124201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1583,7 +1680,7 @@ MonoBehaviour:
   SkyHammer: {fileID: 6981962925071982693, guid: bb269431ab0e2fe4d97f44ae3d1f05e9,
     type: 3}
   anim: {fileID: 8927683913148525849}
-  model: {fileID: 0}
+  model: {fileID: 8927683913148525848}
   layerMask:
     serializedVersion: 2
     m_Bits: 311
@@ -2215,6 +2312,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3041717507901613118}
+  - component: {fileID: 1743584969057624044}
+  - component: {fileID: 1349755564336488762}
   m_Layer: 9
   m_Name: Hammer_Base
   m_TagString: Untagged
@@ -2237,6 +2336,34 @@ Transform:
   m_Father: {fileID: 3903739872358047597}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1743584969057624044
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7716748051775766544}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 26.427977, y: 3.1578918, z: 6.3242364}
+  m_Center: {x: -4.1313186, y: 0.18672837, z: -0.08329379}
+--- !u!114 &1349755564336488762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7716748051775766544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 926a0c04c3e929740ba4eceb8d2b0bc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDamage: 0
+  active: 0
+  stats: {fileID: 1339353795962491827}
 --- !u!1 &7751739986386493941
 GameObject:
   m_ObjectHideFlags: 0
@@ -2669,15 +2796,15 @@ MonoBehaviour:
   - Pull
   - BannerPlant
   - Intimidate
+  - Charge
+  - Surf
   loopingAnims:
   - Flight
   - RunForward
-  - Surf
   - WalkForward
   - WalkBackwards
   - WalkLeft
   - WalkRight
-  - Charge
   - Standard
   currentLoopingAnim: 
   currentOverlayAnim: 

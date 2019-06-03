@@ -2,38 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoulReaper : Passive
+public class SoulReaper : Passives
 {
-    public int tier = 6;
-    public bool isActive;
+    Stats stats;
 
-    private int storedLifeForce = 0;
-
-    //SoundManager soundManager = GetComponent<SoundManager>();
-
-    public override void On()
+    private void Start()
     {
-        isActive = true;
+        stats = GetComponent<Stats>();
     }
-    public override void Off()
+
+    void Update()
     {
-        isActive = false;
+
     }
-    void FixedUpdate()
+
+    public new void onKill()
     {
-        if (isActive)
-        {
-/* 
-            {
-                storedLifeForce += 1; //life force increases with damage done to enemy
-            }
-            if()//health reaches 0 && storedLifeForce >= threshold
-            {
-                ghostSoundManager.playSoulReaperResurrect();
-                //increase health by % that scales with storedLifeForce
-                storedLifeForce = 0;
-            }
-            */
-        }
+        stats.heal(100); // arbitrary amount as of rn
+    }
+
+    public new void damageTaken(float damage)
+    {
+
     }
 }

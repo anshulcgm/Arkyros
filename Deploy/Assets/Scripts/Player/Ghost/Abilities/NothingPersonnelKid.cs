@@ -6,6 +6,7 @@ using UnityEngine;
 public class NothingPersonnelKid : MonoBehaviour
 {
     public float cooldown = 0;
+    public int maxCooldown = 600;
 
     private GameObject camera;
 
@@ -32,6 +33,7 @@ public class NothingPersonnelKid : MonoBehaviour
     bool cloneSpawned;
     bool particleSpawned;
     bool voiceLinePlayed;
+    public ScytheCollider scythe;
 
     // Start is called before the first frame update
     void Start()
@@ -91,7 +93,8 @@ public class NothingPersonnelKid : MonoBehaviour
                 camera.transform.LookAt(enemy.transform); //might not spin camera around
                 
                 
-                anim.StartOverlayAnim("Swing_Heavy_1", 0.5f, 0.3f);
+                anim.StartOverlayAnim("Swing_Heavy_1", 0.5f, 0.5f);
+                scythe.setActive(40);//hits 3 times lol
                 if (!voiceLinePlayed)
                 {
                     soundManager.playOneShot("NPKTeleport");
@@ -100,12 +103,12 @@ public class NothingPersonnelKid : MonoBehaviour
                 }
                 
 
-                stats.dealDamage(enemy, 600);
+                //stats.dealDamage(enemy, 600);
                 Debug.Log("REEEEEEE");
             }
 
-            
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+
+            cooldown = maxCooldown;
             cast = true;
         }
 

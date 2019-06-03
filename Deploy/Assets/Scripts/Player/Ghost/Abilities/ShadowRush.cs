@@ -46,6 +46,7 @@ public class ShadowRush: MonoBehaviour
         {
 
             stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] *= 2; //double speed
+            stats.buffs[(int)buff.Invisible] += 360;
             buffActive = true;
             Debug.Log("start");
             soundManager.playOneShot("Shadowrush");

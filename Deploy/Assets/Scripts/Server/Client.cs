@@ -32,7 +32,7 @@ public class Client
     }
 
     public void SendClassData(String classPath, int[] abilityIds){
-        udp.Send(DataParserAndFormatter.GetClassPathAndAbilityIdsFormatted(classPath, abilityIds), serverIP);
+        udp.Send(DataParserAndFormatter.GetClassPathAndAbilityIdsFormatted(classPath, abilityIds, UDP.GetLocalIPAddress()), serverIP);
     }
 
     //reads in server output and does what the server says

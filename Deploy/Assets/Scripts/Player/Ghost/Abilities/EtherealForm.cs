@@ -3,34 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class EtherealForm : Passive
+public class EtherealForm : Passives
 {
     //ADD passive ability's tier - check from ability log
-    public int tier = 0;
-    public bool isActive;
+    Stats stats;
 
-    public override void On()
+    float chance = 10;
+    float rand;
+
+    private void Start()
     {
-        isActive = true;
-    }
-    public override void Off()
-    {
-        isActive = false;
+        stats = GetComponent<Stats>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        if (isActive)
+
+    }
+
+    public new void onKill()
+    {
+
+    }
+
+    public new void damageTaken(float damage)
+    {
+        rand = Random.value;
+        chance *= rand;
+
+        if (chance < 1)
         {
-            if(true) //(damage is dealt and target is ghost)
-            {
-                Random rnd = new Random();
-                //int num = rnd.Next(1, 5);
-                if(1 == 1)
-                {
-                    //stats - don't deal damage
-                }
-            }
-        }
+            stats.heal(damage);
+            // Don't know if this prevents death (dipping in and out of death range)
+        }        
     }
 }

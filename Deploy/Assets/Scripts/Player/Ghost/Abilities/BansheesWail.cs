@@ -6,6 +6,7 @@ using UnityEngine;
 public class BansheesWail : MonoBehaviour
 {
     public float cooldown;
+    public int maxCooldown = 720;
 
     private GameObject camera;
 
@@ -49,34 +50,20 @@ public class BansheesWail : MonoBehaviour
             anim.StartOverlayAnim("Summon_Area", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
             
             soundManager.playOneShot("BansheesWail");
-
-            //put any setup code here, before the ability is actually cast
-
-
-
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            Collider[] hits = Physics.OverlapSphere(transform.position, 20);
-            foreach (Collider hit in hits)
+            foreach (Collider col in Physics.OverlapSphere(transform.position, 100))
             {
-                // Detects if the object is an "enemy" and if so slows it
-                if (hit.gameObject.tag == "Enemy")
+                if (col.gameObject.tag == "Enemy")
                 {
-                    // channel for 1.2 seconds
-                    // lower enemy speed by 60% of their base speed
-                    // slow lasts 3.5 seconds
-                    // animation will be something like a warcry, i can get footage of Merveil doing it
-                    // cooldown = 12 seconds???
-
-                    //hit.gameObject.GetComponent<StatManager>().enemyMultiplySpeed(0.4);
-
+                    col.gameObject.GetComponent<StatManager>().enemyMultiplySpeed(0.5f);
                 }
             }
 
 
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cooldown = maxCooldown;
             cast = true;
 
         }
