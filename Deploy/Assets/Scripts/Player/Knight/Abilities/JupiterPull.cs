@@ -40,7 +40,7 @@ public class JupiterPull : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("r") && cooldown == 0)
+        if (GetComponent<PlayerScript>().IsPressed("r") && cooldown == 0)
         {
             cast = false;
             start = DateTime.Now;

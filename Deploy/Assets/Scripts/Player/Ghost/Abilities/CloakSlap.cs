@@ -43,7 +43,7 @@ public class CloakSlap : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("r") && cooldown == 0)      //place key, any key can be pressed.
+        if (GetComponent<PlayerScript>().IsPressed("r") && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false;
             start = DateTime.Now;
@@ -60,7 +60,7 @@ public class CloakSlap : MonoBehaviour
             soundManager.playOneShot("CloakSlapCharge");
             stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] /= 3f; //decrease speed
         }
-        if (((DateTime.Now - start).TotalSeconds >= 3 && Input.GetKey("r") && cast) || ((DateTime.Now - start).TotalSeconds >= 8 && cast))//earliest release is 3 seconds, max is 7
+        if (((DateTime.Now - start).TotalSeconds >= 3 && GetComponent<PlayerScript>().IsPressed("r") && cast) || ((DateTime.Now - start).TotalSeconds >= 8 && cast))//earliest release is 3 seconds, max is 7
         {
             cast = false;
             soundManager.stop();

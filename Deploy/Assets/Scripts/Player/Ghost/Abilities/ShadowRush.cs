@@ -36,7 +36,7 @@ public class ShadowRush: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("q") && cooldown == 0)      //place key, any key can be pressed.
+        if (GetComponent<PlayerScript>().IsPressed("q") && cooldown == 0)      //place key, any key can be pressed.
         {
             start = DateTime.Now;
             cast = false;

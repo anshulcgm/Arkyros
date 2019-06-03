@@ -46,7 +46,7 @@ public class PastPastPastLife : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("r") && cooldown == 0)      //place key, any key can be pressed.
+        if (GetComponent<PlayerScript>().IsPressed("r") && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;

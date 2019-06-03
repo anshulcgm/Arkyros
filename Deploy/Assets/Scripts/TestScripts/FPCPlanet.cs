@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.Utility;
 using System;
 
@@ -56,7 +55,7 @@ public class FPCPlanet : MonoBehaviour {
 		}
 		desiredVertRot = verticalLookRotation;
 	
-	    if(!Input.GetMouseButton(1)){
+	    if(!GetComponent<PlayerScript>().M2Down()){
 			sm.rotationDamping = 30;
 			sm.heightDamping = 30;
 
@@ -78,7 +77,7 @@ public class FPCPlanet : MonoBehaviour {
 		{
 			//turn mouse-based movement on and off
 			Vector3 localMove;
-			if(Input.GetMouseButton(0)){
+			if(GetComponent<PlayerScript>().M1Down()){
 				localMove = cameraTransform.TransformDirection(moveAmount) * Time.fixedDeltaTime;		    
 			}else{
 				localMove = transform.TransformDirection(moveAmount) * Time.fixedDeltaTime;

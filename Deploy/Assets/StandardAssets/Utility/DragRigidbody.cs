@@ -68,7 +68,7 @@ namespace UnityStandardAssets.Utility
             m_SpringJoint.connectedBody.drag = k_Drag;
             m_SpringJoint.connectedBody.angularDrag = k_AngularDrag;
             var mainCamera = FindCamera();
-            while (Input.GetMouseButton(0))
+            while (GetComponent<PlayerScript>().M1Down())
             {
                 var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
                 m_SpringJoint.transform.position = ray.GetPoint(distance);

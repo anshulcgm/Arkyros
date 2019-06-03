@@ -27,19 +27,19 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
         float moveUp = 0.0f;
         /*
-        if (Input.GetKeyDown(KeyCode.Q) && !isSprinting)
+        if (GetComponent<PlayerScript>().IsPressedDown(KeyCode.Q) && !isSprinting)
         {
             speed_Multiplier *= sprint_Speed;
             isSprinting = true;
         }
-        if (Input.GetKeyDown(KeyCode.Q) && isSprinting)
+        if (GetComponent<PlayerScript>().IsPressedDown(KeyCode.Q) && isSprinting)
         {
             speed_Multiplier /= sprint_Speed;
             isSprinting = false;
         }
         */
-
-        if (Input.GetKeyDown(KeyCode.Q))
+/*
+        if (GetComponent<PlayerScript>().IsPressedDown(KeyCode.Q))
         {
             if (!isSprinting)
             {
@@ -53,14 +53,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (isGrounded() && Input.GetKeyDown(KeyCode.Space))
+        if (isGrounded() && GetComponent<PlayerScript>().IsPressedDown(KeyCode.Space))
         {
             Jump();
         }
 		Vector3 targetDirection = new Vector3(moveHorizontal * getSpeed(), moveUp, moveVertical*getSpeed());
 		targetDirection = Camera.main.transform.TransformDirection(targetDirection);
 		targetDirection.y = 0.0f;
-        rb.AddForce(targetDirection);
+        rb.AddForce(targetDirection);*/
     }
     float getSpeed() {
         return speed * speed_Multiplier;
