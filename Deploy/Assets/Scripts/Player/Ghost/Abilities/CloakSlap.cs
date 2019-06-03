@@ -6,7 +6,7 @@ using UnityEngine;
 public class CloakSlap : MonoBehaviour
 {
     public float cooldown = 0;
-    public int maxCooldown = 1800;
+    public float maxCooldown = 1800;
 
     private GameObject camera;
 
@@ -17,6 +17,7 @@ public class CloakSlap : MonoBehaviour
     private bool buffActive;
 
     private bool cast;
+    //bool slowed;
 
     Rigidbody rigidbody;
     Stats stats;
@@ -35,6 +36,7 @@ public class CloakSlap : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         soundManager = GetComponent<SoundManager>();
+        //slowed = false;
 
     }
 
@@ -50,20 +52,22 @@ public class CloakSlap : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
             cast = true;
-            stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] /= 3f; //decrease speed
+            cooldown = maxCooldown;
 
-            //Split Windup animation for here
-            anim.StartOverlayAnim("SlapWindUp", 0.5f, 8f);
+
+            anim.StartOverlayAnim("SlapWindup", 0.5f, 8f);
             Debug.Log("start");
             soundManager.playOneShot("CloakSlapCharge");
+            stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] /= 3f; //decrease speed
         }
         if (((DateTime.Now - start).TotalSeconds >= 3 && Input.GetKey("r") && cast) || ((DateTime.Now - start).TotalSeconds >= 8 && cast))//earliest release is 3 seconds, max is 7
         {
             cast = false;
             soundManager.stop();
             stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] *= 3;
+
             Debug.Log("end");
-            anim.StartOverlayAnim("SlapEnd", 0.5f, 1f); //this tells the animator to play the right animation
+            anim.StartOverlayAnim("SlapEnding", 0.5f, 1f); //this tells the animator to play the right animation
             cloak.setActive(100);
             soundManager.playOneShot("CloakSlapRelease");
 
@@ -76,7 +80,7 @@ public class CloakSlap : MonoBehaviour
                 hit.transform.gameObject.GetComponent<Rigidbody>().AddForce(hit.transform.position - transform.position, ForceMode.Impulse);
             }
             */
-            cooldown = maxCooldown;
+            
         }
 
         if (cooldown > 0) //counts down for the cooldown

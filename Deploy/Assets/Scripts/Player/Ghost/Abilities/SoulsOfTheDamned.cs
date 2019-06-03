@@ -6,6 +6,7 @@ using UnityEngine;
 public class SoulsOfTheDamned : MonoBehaviour
 {
     public float cooldown;
+    public float maxCooldown = 480;
 
     private GameObject camera;
 
@@ -63,10 +64,10 @@ public class SoulsOfTheDamned : MonoBehaviour
             Instantiate(SoulsOfTheDamnedProjectile, transform.position + distance * transform.right - distance * transform.forward + transform.up * distance, transform.rotation);
             Instantiate(SoulsOfTheDamnedProjectile, transform.position - distance * transform.right + distance * transform.forward + transform.up * distance, transform.rotation);
             Instantiate(SoulsOfTheDamnedProjectile, transform.position - distance * transform.right - distance * transform.forward + transform.up * distance, transform.rotation);
-            
-            
 
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+
+
+            cooldown = maxCooldown;
             cast = true;
 
         }

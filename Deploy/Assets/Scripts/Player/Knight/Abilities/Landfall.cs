@@ -6,10 +6,12 @@ using UnityEngine;
 public class Landfall : MonoBehaviour
 {
     public float cooldown;
+    public float maxCooldown = 480;
 
     private GameObject camera;
 
     public AnimationController anim;
+    public GameObject model;
     DateTime start;
 
 
@@ -27,8 +29,6 @@ public class Landfall : MonoBehaviour
 
     public GameObject particleLanding;
     bool particleSpawned;
-
-    public GameObject model;
 
     SoundManager soundManager;
 

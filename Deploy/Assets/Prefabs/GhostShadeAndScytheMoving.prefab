@@ -183,7 +183,7 @@ MonoBehaviour:
   - {fileID: 8246840471878609519}
   attackAnims:
   - Circle_strike_2
-  - Culling_Strike
+  - Culling_strike
   - SlapEnding
   - Summon_Area
   - Swing_Heavy_1
@@ -1370,14 +1370,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246840471494153957}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81d2f846493c43f4abd45d56f26514fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  anim: {fileID: 7331146257471279517}
   maxCooldown: 240
+  anim: {fileID: 7331146257471279517}
+  model: {fileID: 6115156436900278672}
   scythe: {fileID: 1358403568}
 --- !u!114 &1221869867
 MonoBehaviour:
@@ -1386,7 +1387,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246840471494153957}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86efcc6fd020f69498b0eb74065d01a3, type: 3}
   m_Name: 
@@ -1394,6 +1395,7 @@ MonoBehaviour:
   cooldown: 0
   maxCooldown: 240
   anim: {fileID: 7331146257471279517}
+  model: {fileID: 6115156436900278672}
   scythe: {fileID: 1358403568}
 --- !u!114 &1221869868
 MonoBehaviour:
@@ -1410,9 +1412,9 @@ MonoBehaviour:
   cooldown: 0
   maxCooldown: 240
   anim: {fileID: 7331146257471279517}
+  model: {fileID: 6115156436900278672}
   SpiritBladeEnergySlash: {fileID: 4622583958716229715, guid: 8aab8b5660ac279488a22dcf97bbf84c,
     type: 3}
-  model: {fileID: 6115156436900278672}
 --- !u!114 &8168160284631342558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1445,7 +1447,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  anim: {fileID: 0}
+  maxCooldown: 540
+  anim: {fileID: 7331146257471279517}
   model: {fileID: 6115156436900278672}
   DarkFlightParticleEffect: {fileID: 110866814954138435, guid: 57da881bd579a014da8df9785f8f848f,
     type: 3}
@@ -1462,6 +1465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  maxCooldown: 300
   anim: {fileID: 7331146257471279517}
   model: {fileID: 6115156436900278672}
 --- !u!114 &8668597939576566971
@@ -1471,12 +1475,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246840471494153957}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dde70264e78e9144ba86df86ffed7f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  maxCooldown: 480
   anim: {fileID: 7331146257471279517}
   model: {fileID: 6115156436900278672}
 --- !u!114 &5508223987319189779
@@ -1486,7 +1491,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246840471494153957}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20379b48c9913ef48a573bfa30b78889, type: 3}
   m_Name: 
@@ -1510,6 +1515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  maxCooldown: 480
   anim: {fileID: 7331146257471279517}
   model: {fileID: 6115156436900278672}
   SoulsOfTheDamnedProjectile: {fileID: 6439657295659459073, guid: 80a5c91c3d6d6344ca72233746d8c2d6,
@@ -1565,10 +1571,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   maxCooldown: 600
-  anim: {fileID: 0}
+  anim: {fileID: 7331146257471279517}
+  model: {fileID: 6115156436900278672}
   ParticleHit: {fileID: 973864921190199927, guid: 7d3c94594af65124595ccaa982e50c7a,
     type: 3}
-  model: {fileID: 6115156436900278672}
   scythe: {fileID: 1358403568}
 --- !u!114 &8246840471494153959
 MonoBehaviour:
@@ -1585,6 +1591,7 @@ MonoBehaviour:
   cooldown: 0
   maxCooldown: 4800
   anim: {fileID: 7331146257471279517}
+  model: {fileID: 0}
   reee: {fileID: 1651180266, guid: ad021eb4027393c49bd70d3962f95c29, type: 3}
   self:
     serializedVersion: 2
@@ -1596,7 +1603,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246840471494153957}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44e0c7e242c774c49ae69c90142e5141, type: 3}
   m_Name: 
@@ -1614,7 +1621,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246840471494153957}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34a34d7c1995c474b96fd2ab03f65f39, type: 3}
   m_Name: 
@@ -2466,8 +2473,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.2108407, y: 1, z: 2.4470613}
-  m_Center: {x: -3.2061481, y: 0.000018585075, z: -0.6194718}
+  m_Size: {x: 2.9780962, y: 1, z: 3.0635118}
+  m_Center: {x: -3.5897696, y: 0.000021755946, z: -0.92769355}
 --- !u!114 &1891978349
 MonoBehaviour:
   m_ObjectHideFlags: 0

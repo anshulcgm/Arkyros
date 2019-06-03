@@ -9,7 +9,9 @@ public class JupiterPull : MonoBehaviour
     // radius of ability
     public float radius;
     public float speed;
+
     public float cooldown;
+    public float maxCooldown = 1800;
 
     private GameObject camera;
 
@@ -61,7 +63,7 @@ public class JupiterPull : MonoBehaviour
 
         if((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            cooldown = 240; // divide by 60 for cooldown in second
+            cooldown = maxCooldown;
             cast = true;
             anim.StartOverlayAnim("Pull", 0.5f, 1f);
             Collider[] hits = Physics.OverlapSphere(transform.position, 400);
@@ -77,12 +79,8 @@ public class JupiterPull : MonoBehaviour
 
                     soundManager.playOneShot("JPGravity");
                 }
-            }
-
-            
+            }            
         }
-
-
 
         if (cooldown > 0)
         {

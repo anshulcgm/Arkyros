@@ -6,13 +6,14 @@ using UnityEngine;
 public class Cleave : MonoBehaviour
 {
     public float cooldown;
+    public float maxCooldown = 240;
 
     private GameObject camera;
 
     public AnimationController anim;
+    public GameObject model;
+    
     DateTime start;
-    public int maxCooldown = 240;
-
 
     Rigidbody rigidbody;
     Stats stats;
@@ -44,14 +45,6 @@ public class Cleave : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            //Debug.Log("reee");
-            
-            
-
-            //put any setup code here, before the ability is actually cast
-
-
-
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
@@ -61,26 +54,9 @@ public class Cleave : MonoBehaviour
             soundManager.playOneShot("Cleave");
             Debug.Log("Cleave");
 
-            /*
-            //temporary damage dealer
-            Collider[] hits = Physics.OverlapSphere(transform.position, 10);
-            foreach (Collider hit in hits)
-            {
-                if (hit.gameObject.tag == "Enemy")
-                {
-                    stats.dealDamage(hit.gameObject, 600);
-
-                }
-            }
-            */
-
-
             cooldown = maxCooldown;
             cast = true;
-
         }
-
-
 
         if (cooldown > 0) //counts down for the cooldown
         {

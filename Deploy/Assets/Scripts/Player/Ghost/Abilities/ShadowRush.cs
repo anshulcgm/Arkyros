@@ -6,6 +6,7 @@ using UnityEngine;
 public class ShadowRush: MonoBehaviour
 {
     public float cooldown;
+    public float maxCooldown = 300;
 
     private GameObject camera;
 
@@ -51,7 +52,7 @@ public class ShadowRush: MonoBehaviour
             Debug.Log("start");
             soundManager.playOneShot("Shadowrush");
 
-            cooldown = 360;
+            cooldown = maxCooldown;
             cast = true;
         }
 
