@@ -93,8 +93,7 @@ public class Movement : MonoBehaviour
         if(stats.buffs[(int)buff.Gravityless] == 0)
         {
             r.AddForce(-gravity * transform.position.normalized);
-        }
-        
+        }        
 
         isMoving = moving;
         isAirborne = !Physics.Raycast(transform.position + transform.up, -transform.up, 10f, layerMask);
