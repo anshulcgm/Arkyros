@@ -1500,8 +1500,6 @@ MonoBehaviour:
   maxCooldown: 720
   anim: {fileID: 7331146257471279517}
   model: {fileID: 6115156436900278672}
-  BansheeWailParticleEffect: {fileID: 8727974851830962205, guid: 87ab521865cbc624088cdb0df9b68e4a,
-    type: 3}
 --- !u!114 &5471886445940555602
 MonoBehaviour:
   m_ObjectHideFlags: 0
