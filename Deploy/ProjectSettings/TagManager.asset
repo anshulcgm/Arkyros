@@ -12,6 +12,8 @@ TagManager:
   - FxTemporaire
   - ocean
   - Center
+  - CollisionHandler
+  - UDP
   layers:
   - Default
   - TransparentFX

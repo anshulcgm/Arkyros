@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using UnityEngine;
@@ -21,7 +21,7 @@ public class Server
         this.udp = udp;
         players = new List<PlayerClient>();
         gameObjectsToUpdate = new List<GameObject>();
-        instance = this;
+        //instance = this;
     }
     
     // this function sends a broadcast on the LAN with all the things necessary for client to creat the new object

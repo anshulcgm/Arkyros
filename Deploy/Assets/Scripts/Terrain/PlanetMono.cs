@@ -147,6 +147,7 @@ public class PlanetMono : MonoBehaviour, IMono
         foreach (int[] biome in biomes)
         {
             GameObject newObj = Instantiate((GameObject)Resources.Load("Empty"), Vector3.zero, Quaternion.identity);
+            newObj.transform.parent = transform;
             newObj.GetComponent<MeshFilter>().mesh = new Mesh();
             newObj.GetComponent<MeshFilter>().mesh.subMeshCount = biomes.Count;
             newObj.GetComponent<MeshFilter>().mesh.SetVertices(pointsPerBiome[n]);
@@ -205,6 +206,7 @@ public class PlanetMono : MonoBehaviour, IMono
                 if (Physics.Raycast(trueCenter, -normal, out hit, Mathf.Infinity))
                 {
                     GameObject g = Instantiate(Resources.Load("Building") as GameObject, trueCenter, randomQuaternion);
+                    g.transform.parent = transform;
                     g.transform.localScale = new Vector3(rect.getWidth() * 0.6f, rect.getHeight() * 0.6f, (rect.getWidth() * 2));
                     g.transform.position = hit.point;
                     int rand = r.Next(4);

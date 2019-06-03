@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClientMonoBehaviour : MonoBehaviour {
+public class ClientMono : MonoBehaviour {
     Client client;
     UDP udp;
     public string server_ipaddr;

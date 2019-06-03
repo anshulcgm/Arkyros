@@ -4,30 +4,19 @@ using UnityEngine;
 
 public class ServerMono : MonoBehaviour
 {
-    public Server server;
+    public static Server server = null;
     public bool waitForClients = true;
     public bool waitForClientCreateMessages = true;
     public bool hasSentTerrainSeed = false;
 
     public bool hasCreatedPlayers = false;
 
-    private void Awake()
-    {
-        //deactivate all gameObjects except yourself
-        GameObject[] gameObjects = FindObjectsOfType<GameObject>();
-        foreach(GameObject g in gameObjects)
-        {
-            if (!g.Equals(gameObject))
-            {
-                g.SetActive(false);
-            }
-        }
-    }
+    public static UDP udp;
 
     // Start is called before the first frame update
     void Start()
     {
-        UDP udp = GameObject.FindGameObjectWithTag("UDP").GetComponent<UDPContainer>().udp;
+        udp = new UDP();
         //start the server
         server = new Server(udp);
     }
@@ -35,6 +24,9 @@ public class ServerMono : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(server == null){
+            Debug.Log("this is sad");
+        }
         //wait for clients to enter the game, save each client.
         if (waitForClients)
         {
@@ -50,18 +42,10 @@ public class ServerMono : MonoBehaviour
 
             //find the planet, make it active, set the seed and generate it.
             GameObject planet = GameObject.FindGameObjectWithTag("planet");
-            planet.SetActive(true);
             planet.GetComponent<PlanetMono>().Create(seed);
 
             //activate all the pther objects
-            GameObject[] gameObjects = FindObjectsOfType<GameObject>();
-            foreach (GameObject g in gameObjects)
-            {
-                if (!g.Equals(gameObject) && !g.Equals(planet))
-                {
-                    g.SetActive(true);
-                }
-            }
+
             
             hasSentTerrainSeed = true;
             return;
