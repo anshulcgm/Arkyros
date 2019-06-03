@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 6115156436900278673}
   - component: {fileID: 7331146257471279517}
   - component: {fileID: 6115156436900278674}
-  - component: {fileID: 4966409134996800700}
   m_Layer: 9
   m_Name: playerModel
   m_TagString: Untagged
@@ -218,7 +217,7 @@ Animation:
   - {fileID: 7400006, guid: 2656fe1ee7c8d764fb87a1de8bb9e13d, type: 3}
   - {fileID: 7400024, guid: c51ed63391444a54789da1be0ff3f220, type: 3}
   - {fileID: 7400026, guid: c51ed63391444a54789da1be0ff3f220, type: 3}
-  - {fileID: 7400028, guid: c51ed63391444a54789da1be0ff3f220, type: 3}
+  - {fileID: 7400032, guid: 2656fe1ee7c8d764fb87a1de8bb9e13d, type: 3}
   - {fileID: 7400032, guid: c51ed63391444a54789da1be0ff3f220, type: 3}
   - {fileID: 7400008, guid: c51ed63391444a54789da1be0ff3f220, type: 3}
   - {fileID: 7400010, guid: c51ed63391444a54789da1be0ff3f220, type: 3}
@@ -235,24 +234,6 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &4966409134996800700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6115156436900278672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0bc1d2649fab9c4d8059880dad5fc60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  attackTransforms: []
-  attackAnims: []
-  loopingAnims: []
-  currentLoopingAnim: 
-  currentOverlayAnim: 
 --- !u!1 &8246840471226850414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,7 +1309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenTargets: []
-  enemies: []
+  array: []
 --- !u!114 &8246840471494153958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1389,7 +1370,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246840471494153957}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81d2f846493c43f4abd45d56f26514fb, type: 3}
   m_Name: 
@@ -1475,7 +1456,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246840471494153957}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5eb7c1a7a1418340a69097d62aeb609, type: 3}
   m_Name: 
@@ -1490,7 +1471,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246840471494153957}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dde70264e78e9144ba86df86ffed7f7, type: 3}
   m_Name: 
@@ -1540,7 +1521,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246840471494153957}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 652be6915ca01ac418f92ea230e9519b, type: 3}
   m_Name: 
@@ -1615,14 +1596,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246840471494153957}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44e0c7e242c774c49ae69c90142e5141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
   maxCooldown: 2400
-  anim: {fileID: 0}
+  anim: {fileID: 7331146257471279517}
   model: {fileID: 6115156436900278672}
   P3LParticleEffect: {fileID: 5336846018335181194, guid: d115a42822ce63d4a98867dd7e02258f,
     type: 3}

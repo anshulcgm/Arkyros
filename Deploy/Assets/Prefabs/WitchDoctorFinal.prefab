@@ -3910,6 +3910,37 @@ Transform:
   m_Father: {fileID: 4160353159418735259}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5819100675244936564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1513503290466547658}
+  m_Layer: 9
+  m_Name: playerModel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1513503290466547658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5819100675244936564}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6024261912044075363}
+  m_Father: {fileID: 4308940430666139231}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5872637255165956501
 GameObject:
   m_ObjectHideFlags: 0
@@ -5245,7 +5276,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7683873447285365562}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5293,9 +5324,9 @@ Transform:
   - {fileID: 7227840552662318030}
   - {fileID: 1180048549615817607}
   - {fileID: 1591700176252405990}
-  m_Father: {fileID: 4308940430666139231}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 1513503290466547658}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!111 &7683873447285365564
 Animation:
   m_ObjectHideFlags: 0
@@ -6238,7 +6269,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3164028773983196111}
-  - {fileID: 6024261912044075363}
+  - {fileID: 1513503290466547658}
   - {fileID: 7489302636348051303}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -6597,6 +6628,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7683873447285365563}
+  fireball: {fileID: 0}
+  model: {fileID: 0}
 --- !u!114 &9222171157336489633
 MonoBehaviour:
   m_ObjectHideFlags: 0
