@@ -17,6 +17,9 @@ public class AnimationController : MonoBehaviour
     {
         foreach (string animStr in attackAnims)
         {
+            if(anim[animStr] == null){
+                Debug.Log(animStr + " is broken");
+            }
             anim.AddClip(anim[animStr].clip, animStr + "-a");
             anim[animStr].wrapMode = WrapMode.ClampForever;
             anim[animStr + "-a"].wrapMode = WrapMode.ClampForever;

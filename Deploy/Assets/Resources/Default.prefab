@@ -101,7 +101,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2188224351220514322}
   - component: {fileID: 751522049583230490}
-  - component: {fileID: 8445460902180098769}
   - component: {fileID: 791796034359003345}
   - component: {fileID: 6644394731811003904}
   m_Layer: 0
@@ -138,28 +137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb1a7d37816e4ac479e77f36aa8c4a58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8445460902180098769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5335235703296967702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eb9733694183b1438376015245bb18b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isMoving: 0
-  isAirborne: 0
-  player: {fileID: 5335235703296967702}
-  r: {fileID: 6644394731811003904}
-  jumpForce: 20.12
-  gravity: 10
-  moveSpeed: 10
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!114 &791796034359003345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +152,6 @@ MonoBehaviour:
   regenTimer: 0
   maxHealth: 0
   health: 0
-  damageMultiplier: 0
   buffs: 000000000000000000000000
 --- !u!54 &6644394731811003904
 Rigidbody:

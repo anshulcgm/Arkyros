@@ -15,7 +15,7 @@ public class RandomEnemySpawn: MonoBehaviour {
     public GameObject threeShly;
     public GameObject sixShly;
 
-    public GameObject Player;
+    private GameObject Player;
     
 
     public int kamikazePerSpawn = 5;
@@ -40,15 +40,20 @@ public class RandomEnemySpawn: MonoBehaviour {
     private List<Vector3> kamikazeInstantiationPoints;
     private List<Vector3> golemInstantiationPoints;
     private List<Vector3> IREnemies;
-    private List<Vector3> shrabPoints; 
+    private List<Vector3> shrabPoints;
+
+    public static GameObject[] playerList;
+    public static GameObject[] playerCenterList;
 
     public void Start()
     {
         //Receives information about the planet
+        playerList = GameObject.FindGameObjectsWithTag("Player");
+        playerCenterList = GameObject.FindGameObjectsWithTag("PlayerCenter");
         planet = GameObject.FindGameObjectWithTag("planet");
         planetCenter = planet.transform.position;
         planetRadius = (1.25f * planet.transform.localScale.x);
-
+        Player = playerList[0];
         //Instantiates enemies
         //instantiateGolems(false);
         //InstantiateKamikazeNearPlayer(flyingKamikaze, 1, 3); //alternatively use kamikazeInstantiation()
@@ -56,6 +61,27 @@ public class RandomEnemySpawn: MonoBehaviour {
 
 
     }
+    private void Update()
+    {
+        
+    }
+    public static Transform getClosestPlayer(Transform selfTransform, GameObject[] playerList)
+    {
+        Transform tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = selfTransform.position;
+        foreach (GameObject p in playerList)
+        {
+            float squaredDist = Vector3.SqrMagnitude(selfTransform.position - p.transform.position);
+            if (squaredDist < minDist)
+            {
+                tMin = p.transform;
+                minDist = squaredDist;
+            }
+        }
+        return tMin;
+    }
+
     public Vector3 GetRandomInstantiationPointOnSphere()
     {
         return (Random.onUnitSphere * planetRadius + planetCenter);

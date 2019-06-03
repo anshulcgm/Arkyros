@@ -62,7 +62,7 @@ public class ShlyEnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = PlayerAttack.getClosestPlayer(transform, GolemAttackBehavior.playerCenterlist).gameObject;
+        player = RandomEnemySpawn.getClosestPlayer(transform, RandomEnemySpawn.playerCenterList).gameObject;
         float disToPlayer = Vector3.Distance(transform.position, player.transform.position);
         transform.rotation = Quaternion.LookRotation(rb.velocity);
         //Debug.Log("Player position is " + player.transform.position);

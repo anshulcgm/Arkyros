@@ -49,14 +49,14 @@ public class GolemAttackBehavior : MonoBehaviour {
         //player = GameObject.FindGameObjectWithTag("PlayerCenter");
         anim = transform.GetChild(0).GetComponent<Animator>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        playerCenterlist = GameObject.FindGameObjectsWithTag("PlayerCenter");
+        //playerCenterlist = GameObject.FindGameObjectsWithTag("PlayerCenter");
         oIdleTimer = idleTimer;
         targetPoint = randomPointInRadius();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        player = PlayerAttack.getClosestPlayer(transform, playerCenterlist).gameObject;
+        player = RandomEnemySpawn.getClosestPlayer(transform, RandomEnemySpawn.playerCenterList).gameObject;
         //Logic for running behaviors, ground pound is a close range attack, charge is mid-range attack and projectile launch is far range-attack
         float playerDist = Vector3.Distance(player.transform.position, transform.position);
         if (playerDist < groundPoundRange)

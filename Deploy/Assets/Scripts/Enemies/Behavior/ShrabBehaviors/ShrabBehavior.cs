@@ -70,9 +70,9 @@ public class ShrabBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = PlayerAttack.getClosestPlayer(transform, PlayerAttack.playerList).gameObject;
-        leftPlayerLeg = PlayerAttack.getClosestPlayer(transform, leftLegList).gameObject;
-        rightPlayerLeg = PlayerAttack.getClosestPlayer(transform, rightLegList).gameObject;
+        player = RandomEnemySpawn.getClosestPlayer(transform, RandomEnemySpawn.playerList).gameObject;
+        leftPlayerLeg = RandomEnemySpawn.getClosestPlayer(transform, leftLegList).gameObject;
+        rightPlayerLeg = RandomEnemySpawn.getClosestPlayer(transform, rightLegList).gameObject;
         shrabMovementSpeed = GetComponent<StatManager>().shrabMovementSpeed;
         float raycastDistancePlayer = Vector3.Distance(transform.position, findRaycastPointOnSphere(player.transform.position));
         //transform.LookAt(player.transform);
