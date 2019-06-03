@@ -23,7 +23,7 @@ public class PlayerAttack : MonoBehaviour {
 	void Start () {
         speed = GetComponent<StatManager>().kamikazeMovementSpeed;
         r = GetComponent<Rigidbody>();
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");    
         anim = GetComponent<Animator>();
         oTime = timer;
         final = Random.insideUnitSphere * maxDis + transform.position;
@@ -37,7 +37,9 @@ public class PlayerAttack : MonoBehaviour {
         diveSpeed = GetComponent<StatManager>().flyingKam.getDiveSpeed();
         transform.LookAt(player.transform); //Ensures they're always looking at the player
         Vector3 playerPos = player.transform.position;
-        Vector3 enemyPos = this.gameObject.transform.position;
+        Vector3 enemyPos = transform.position;
+        //Debug.Log("Player position is " + playerPos);
+        //Debug.Log("Distance between player and kamikaze is " + Vector3.Distance(playerPos, enemyPos));
         if (Vector3.Distance(playerPos, enemyPos) < distance){
             anim.SetTrigger("Dive");
             Debug.Log("Player is at " + playerPos);

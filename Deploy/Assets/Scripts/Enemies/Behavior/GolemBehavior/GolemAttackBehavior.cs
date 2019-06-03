@@ -41,10 +41,10 @@ public class GolemAttackBehavior : MonoBehaviour {
 	void Start () {
 
         rb = GetComponent<Rigidbody>();
-        chargeSpeed = 30;
-        speed = 10;
+        chargeSpeed = 50;
+        speed = 20;
         planet = GameObject.FindGameObjectWithTag("planet");
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("PlayerCenter");
         anim = transform.GetChild(0).GetComponent<Animator>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         oIdleTimer = idleTimer;
@@ -98,6 +98,8 @@ public class GolemAttackBehavior : MonoBehaviour {
     public void groundPound()
     {
         rb.velocity = Vector3.zero;
+        rb.freezeRotation = true;
+        orientEnemy(player.transform.position);
         //sphericalMovement(player.transform.position, speed);
         Debug.Log("In groundPound");
         anim.SetTrigger("GroundPound");
@@ -110,10 +112,21 @@ public class GolemAttackBehavior : MonoBehaviour {
                 col.gameObject.GetComponent<Stats>().takeDamage(GetComponent<StatManager>().golem.getGroundPoundDmg());
             }
         }
+        /*
+        if (Vector3.Distance(player.transform.position, transform.position) <= 20f)
+        {
+            while (Vector3.Distance(player.transform.position, transform.position) <= 30f)
+            {
+                rb.velocity = (-(findRaycastPointOnSphere(player.transform.position) - transform.position).normalized * 45f);
+            }
+
+        }
+        */
     }
 
     public void charge()
     {
+        rb.freezeRotation = false; 
         Debug.Log("In charge function");
         anim.SetTrigger("Charge");
         //Debug.Log("Charge trigger set");
@@ -130,25 +143,25 @@ public class GolemAttackBehavior : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Center")
+        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "PlayerCenter")
         {
             collision.gameObject.GetComponent<Stats>().takeDamage(GetComponent<StatManager>().golem.getChargeDmg());
-            //Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
         }
     }
     public void sphericalMovement(Vector3 target, float speed)
     {
-        Plane2 plane = new Plane2(transform.position.normalized, transform.position);
+        orientEnemy(target);
         target = findRaycastPointOnSphere(target);
-        Vector2 mappedPoint = plane.GetMappedPoint(target) - plane.GetMappedPoint(transform.position);
-        Vector3 mappedPoint3D = mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir;
-        if (mappedPoint.magnitude > 1)
-            transform.LookAt(mappedPoint3D + transform.position, transform.position.normalized);
         RaycastHit hit;
         if (Physics.Raycast(transform.position + transform.position.normalized * 10.0f, (planet.transform.position - transform.position).normalized, out hit, Mathf.Infinity))
         {
             Plane2 alignPlane = new Plane2(hit.normal, transform.position);
-            transform.position = hit.point;
+            if(hit.transform.gameObject.tag != "Player")
+            {
+                transform.position = hit.point + hit.point.normalized * 0.75f;
+            }
+           
             //Vector2 mappedPoint2 = alignPlane.GetMappedPoint(player.transform.position) - alignPlane.GetMappedPoint(transform.position);
             //rb.AddForce((mappedPoint2.x * alignPlane.xDir + mappedPoint2.y * alignPlane.yDir).normalized * speed);
             //if (Vector3.Distance(hit.point, transform.position) >= 1f)
@@ -160,18 +173,25 @@ public class GolemAttackBehavior : MonoBehaviour {
         //adding force towards gravity, adding force towards direction faced
         //rb.AddForce(transform.forward * speed);
         //rb.velocity = (findRaycastPointOnSphere(target) - transform.position).normalized * speed;
-        if(Vector3.Distance(player.transform.position, transform.position) <= 10f)
-        {
-            rb.velocity = -(findRaycastPointOnSphere(target) - transform.position).normalized * speed;
-        }
-        else
-        {
-            rb.velocity = (findRaycastPointOnSphere(target) - transform.position).normalized * speed;
-        }
+        Debug.Log("Distance between target and position is " + Vector3.Distance(target, transform.position));
+        
+       
+        //else
+        //{
+            rb.velocity = (target - transform.position).normalized * speed;
+        //}
         
         //rb.AddForce(transform.position.normalized * gravity);
     }
-
+    public void orientEnemy(Vector3 target)
+    {
+        Plane2 plane = new Plane2(transform.position.normalized, transform.position);
+        Vector2 mappedPoint = plane.GetMappedPoint(target) - plane.GetMappedPoint(transform.position);
+        Vector3 mappedPoint3D = mappedPoint.x * plane.xDir + mappedPoint.y * plane.yDir;
+        Debug.Log("Mapped point magnitude is " + mappedPoint.magnitude);
+        if (mappedPoint.magnitude > 1)
+            transform.LookAt(mappedPoint3D + transform.position, transform.position.normalized);
+    }
     public Vector3 findRaycastPointOnSphere(Vector3 point)
     {
         RaycastHit hit;
