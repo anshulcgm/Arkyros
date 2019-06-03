@@ -9,14 +9,16 @@ public class Client
 {
 
     UDP udp;
+    UDP udpListen;
     GameObject player;
     GameObject camera;
     string serverIP;
     public bool debug = false;
 
-    public Client(string serverIP, GameObject player, GameObject camera, UDP udp)
+    public Client(string serverIP, GameObject player, GameObject camera, UDP udp, UDP udpListen)
     {
         this.udp = udp;
+        this.udpListen = udpListen;
         this.player = player;
         this.camera = camera;
         this.serverIP = serverIP;
@@ -38,7 +40,7 @@ public class Client
     //reads in server output and does what the server says
     public void HandleServerOutput()
     {
-        List<string> serverOutput = udp.ReadMessages();
+        List<string> serverOutput = udpListen.ReadMessages();
        
         //get the whole output in one string, from oldest to newest messages
         string fullOutput = "";

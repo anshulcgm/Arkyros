@@ -82,8 +82,8 @@ public class DataParserAndFormatter
 
     public static Quaternion[] GetRotationIn(string clientInput){
         String rotIn = clientInput.Split(new string[] {beginOrientationInput}, StringSplitOptions.None)[1].Split(new string[] {endOrientationInput}, StringSplitOptions.None)[0];
-        String rotation = rotIn.Split(',')[0];
-        String camRotation = rotIn.Split(',')[1];
+        String rotation = rotIn.Split('|')[0];
+        String camRotation = rotIn.Split('|')[1];
         return new Quaternion[]{StringToQuaternion(rotation), StringToQuaternion(camRotation)};
     }
 

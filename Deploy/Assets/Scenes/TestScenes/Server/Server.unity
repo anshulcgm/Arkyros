@@ -144,6 +144,7 @@ MonoBehaviour:
   waitForClients: 1
   waitForClientCreateMessages: 1
   hasSentTerrainSeed: 0
+  createdTerrain: 0
   hasCreatedPlayers: 0
 --- !u!4 &1511806751
 Transform:

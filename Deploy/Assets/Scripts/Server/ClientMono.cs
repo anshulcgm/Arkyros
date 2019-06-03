@@ -16,6 +16,7 @@ public class ClientMono : MonoBehaviour {
 
     private Client client;
     UDP udp;
+    UDP udpListen;
     public string server_ipaddr;
 	// Use this for initialization
 	void Start () {
@@ -23,12 +24,14 @@ public class ClientMono : MonoBehaviour {
         {
             server_ipaddr = System.IO.File.ReadAllText("ipAddr.txt");
         }		
-        udp = new UDP();
+        udp = new UDP(15001);
+        udpListen = new UDP(15000);
         udp.StartUDP();
+        udpListen.StartUDP();
 
         UnityHandler.player = playerPosition;
         
-        client = new Client(server_ipaddr, playerRotation, cam, udp);
+        client = new Client(server_ipaddr, playerRotation, cam, udp, udpListen);
         udp.Send(UDP.GetLocalIPAddress().ToString(), server_ipaddr);
 	}
 	public bool hasBeenCreated = false;

@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Server
 {
-    private Vector3 spawn;
+    private Vector3 spawn = new Vector3(0,5000,0);
     private UDP udp;
+    private UDP udpListen;
     private List<PlayerClient> players;
     public static List<GameObject> gameObjectsToUpdate;
     public bool debug = false;
@@ -15,11 +16,11 @@ public class Server
 
     public static Server instance = null;
     
-    public Server(UDP udp)
+    public Server(UDP udp, UDP updListen)
     {
         serverExists = true;
         this.udp = udp;
-        udp.StartUDP();
+        this.udpListen = updListen;
         players = new List<PlayerClient>();
         gameObjectsToUpdate = new List<GameObject>();
         //instance = this;
@@ -119,7 +120,7 @@ public class Server
     public List<string> clientIPs = new List<string>();
     public void GetClients()
     {
-        List<string> messages = udp.ReadMessages();
+        List<string> messages = udpListen.ReadMessages();
         foreach(string message in messages)
         {
             //if the client message is an ip address, then add it to the list of clients. Otherwise, ignore.
@@ -133,7 +134,7 @@ public class Server
     }
 
     public void CreatePlayers(){
-        List<string> messages = udp.ReadMessages();
+        List<string> messages = udpListen.ReadMessages();
         foreach(string message in messages){
             string ip = DataParserAndFormatter.GetIP(message);
             string classPath = DataParserAndFormatter.GetClassPath(message);
@@ -142,11 +143,11 @@ public class Server
             player.GetComponent<PlayerScript>().SetAbilities(abilityIds);
             players.Add(new PlayerClient(ip, player, classPath));
             Create(player, classPath, ip);
-        }
+         }
     }
 
     public void HandleClientInput(){
-        List<string> messages = udp.ReadMessages();
+        List<string> messages = udpListen.ReadMessages();
         foreach(string message in messages){
             string ip = DataParserAndFormatter.GetIP(message);
             for(int i = 0; i < players.Count; i++){
