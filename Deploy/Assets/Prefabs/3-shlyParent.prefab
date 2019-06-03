@@ -97,6 +97,7 @@ MonoBehaviour:
   brokenGolem: {fileID: 266699126, guid: 78a65ee2976308247821c28d54b93dc3, type: 3}
   brokenShly: {fileID: 1257030116, guid: af8fead65e20d7747aed19c3aeb0fe33, type: 3}
   brokenShrab: {fileID: 1785281474, guid: 5465cab4bff5f7c4d85ff736ae8ec4c1, type: 3}
+  healthTimer: 5
 --- !u!114 &7228260067136529742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,11 +173,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7228260067136529743}
     m_Modifications:
-    - target: {fileID: 5231319878289874105, guid: 010b5a65a06814442a520f6a9991f1a0,
-        type: 3}
-      propertyPath: m_Name
-      value: 3-shly
-      objectReference: {fileID: 0}
     - target: {fileID: 2557895862616085371, guid: 010b5a65a06814442a520f6a9991f1a0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -231,6 +227,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5231319878289874105, guid: 010b5a65a06814442a520f6a9991f1a0,
+        type: 3}
+      propertyPath: m_Name
+      value: 3-shly
       objectReference: {fileID: 0}
     - target: {fileID: 8612496906384358874, guid: 010b5a65a06814442a520f6a9991f1a0,
         type: 3}

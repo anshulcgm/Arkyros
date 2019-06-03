@@ -24,6 +24,8 @@ public class PastPastPastLife : MonoBehaviour
 
     SoundManager soundManager;
 
+    public GameObject P3LParticleEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +49,7 @@ public class PastPastPastLife : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            
+            GameObject particleEffect = Instantiate(P3LParticleEffect, transform.position, Quaternion.Euler(-90, 0, 0));
 
 
             //put any setup code here, before the ability is actually cast
@@ -58,6 +60,9 @@ public class PastPastPastLife : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
+            cooldown = maxCooldown;
+            cast = true;
+
             anim.StartOverlayAnim("Swing_Circle", 0.5f, 2f);
             soundManager.playOneShot("P3LSprout");
             soundManager.play("P3LHeal"); //duration
@@ -81,8 +86,7 @@ public class PastPastPastLife : MonoBehaviour
 
                 }   
             }
-            cooldown = maxCooldown;
-            cast = true;
+            
         }
 
         if (cooldown > 0) //counts down for the cooldown

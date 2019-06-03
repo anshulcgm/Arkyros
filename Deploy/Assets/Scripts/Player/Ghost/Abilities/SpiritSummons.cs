@@ -25,6 +25,8 @@ public class SpiritSummons : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
+    public GameObject SpiritBombParticleEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +50,9 @@ public class SpiritSummons : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
+            Debug.Log("here");
+            GameObject particleEffect = Instantiate(SpiritBombParticleEffect, new Vector3(transform.position.x, transform.position.y + 4.5f, transform.position.z), Quaternion.Euler(0, 0, 0));
+
 
 
             //put any setup code here, before the ability is actually cast

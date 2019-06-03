@@ -6,7 +6,7 @@ public class TargetCenterScreen : MonoBehaviour
 {
     public List<GameObject> screenTargets = new List<GameObject>();
 
-    public GameObject[] enemies;
+    public GameObject[] array;
 
     // Start is called before the first frame update
     void Start()
@@ -44,9 +44,9 @@ public class TargetCenterScreen : MonoBehaviour
 
     public GameObject getTarget()
     {
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        array = GameObject.FindGameObjectsWithTag("Enemy");
 
-        foreach (GameObject potentialEnemy in enemies)
+        foreach (GameObject potentialEnemy in array)
         {
             Vector3 position = Camera.main.WorldToViewportPoint(potentialEnemy.transform.position);
             if (position.x > 0 && position.y < 1)
@@ -67,6 +67,39 @@ public class TargetCenterScreen : MonoBehaviour
             return null;
         }
             
+
+        return screenTargets[targetIndex()];
+    }
+
+    public GameObject getAlly() //type is the tag
+    {
+        array = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject potentialTarget in array)
+        {
+            Vector3 position = Camera.main.WorldToViewportPoint(potentialTarget.transform.position);
+            if (position.x > 0 && position.y < 1)
+            {
+                if (position.y > 0 && position.y < 1)
+                {
+                    if (position.z > 0)
+                    {
+                        if(!(potentialTarget == this.gameObject))
+                        {
+                            screenTargets.Add(potentialTarget);
+                        }
+                        
+                    }
+                }
+            }
+        }
+
+
+        if (screenTargets.Count < 1)
+        {
+            return null;
+        }
+
 
         return screenTargets[targetIndex()];
     }

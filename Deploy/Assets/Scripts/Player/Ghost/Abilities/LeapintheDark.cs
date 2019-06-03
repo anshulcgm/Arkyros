@@ -23,7 +23,7 @@ public class LeapintheDark : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
-    public GameObject particleExplosion;
+    public GameObject LeapDarkParticleEffect;
 
     SoundManager soundManager;
     public ScytheCollider scythe;
@@ -51,12 +51,13 @@ public class LeapintheDark : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
+            GameObject particleEffect = Instantiate(LeapDarkParticleEffect, transform.position, Quaternion.Euler(90, 0, 0));
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
+            cooldown = maxCooldown;
             cast = true;
-
             model.transform.rotation = camera.transform.rotation;
             Vector3 newpos = model.transform.position + model.transform.forward * 100;
             RaycastHit hit;
@@ -70,8 +71,6 @@ public class LeapintheDark : MonoBehaviour
             // the attack will be taken care by the animation??
             scythe.setActive(30); 
             anim.StartOverlayAnim("Swing_Heavy_1", 0.5f, 0.5f);
-
-            cooldown = maxCooldown;
         }
 
 

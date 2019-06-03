@@ -4,16 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - RightLeg
-  - LeftLeg
   - Enemy
-  - planet
-  - playercam
+  - PlayerCenter
+  - LeftLeg
+  - RightLeg
   - FxTemporaire
-  - ocean
-  - Center
-  - CollisionHandler
-  - UDP
   layers:
   - Default
   - TransparentFX
@@ -23,8 +18,8 @@ TagManager:
   - UI
   - 
   - 
-  - ocean
-  - Self
+  - 
+  - 
   - 
   - 
   - 

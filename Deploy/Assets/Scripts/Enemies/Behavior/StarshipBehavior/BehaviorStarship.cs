@@ -6,7 +6,7 @@ public class BehaviorStarship : MonoBehaviour
 {
     //flyinglanding fields
     public float speed;
-    public GameObject planet;
+    private GameObject planet;
     public float height;
     public float fTime;
     public float lTime;
@@ -24,24 +24,45 @@ public class BehaviorStarship : MonoBehaviour
     private Renderer rend;
     private bool endgameCheck;
     private GameObject endgamePrefab;
-    private bool EndgameAlreadyHappened;
 
-    public float timer;
+    public float endgameTimer;
+    private float oEndgameTimer;
 
-    public Material starshipMaterial;
+    public GameObject nuke1;
+    public GameObject nuke2;
+
+    private Renderer nuke1Render;
+    private Renderer nuke2Render;
+
+    private Color initialColor;
 
     //charged ray fields
     private float rayTimer;
     public GameObject ChargedRay;
     public float maxLength;
+
     //button, shortened to butt - Toma
     private bool butt;
+
+    private Transform instantiationPoint;
+
+    //Enemy prefabs for spawning
+    public GameObject kamikazePrefab;
+    public GameObject shlyPrefab;
+    public GameObject shrabPrefab;
+    public GameObject golemPrefab;
+
+    private float spawnTimer = 1.0f;
+
+    private bool landSpawingCheck = false;
+
+    public GameObject chargedRayParticlePrefab;
 
     void Start()
     {
         //flyinglanding start
         rb = GetComponent<Rigidbody>();
-
+        //endgameRb = GetComponent<Rigidbody>(); 
         oPos = transform.position;
 
         checkL = false;
@@ -58,12 +79,24 @@ public class BehaviorStarship : MonoBehaviour
         rend.material = starshipMaterial;
 		*/
         //charged ray start
-        ChargedRay = this.gameObject.transform.GetChild(0).gameObject;
+        ChargedRay = this.gameObject.transform.GetChild(5).gameObject;
         ChargedRay.transform.position = this.transform.position;
         butt = false;
         rayTimer = Random.Range(1.0f, 5.0f);
 
+        endgameCheck = true;
+        endgamePrefab = transform.GetChild(4).gameObject;
 
+        nuke1Render = nuke1.GetComponent<Renderer>();
+        nuke2Render = nuke2.GetComponent<Renderer>();
+
+        oEndgameTimer = endgameTimer;
+
+        initialColor = nuke1Render.material.color;
+
+        instantiationPoint = transform.GetChild(6);
+
+        planet = GameObject.FindGameObjectWithTag("planet");
         //make low health
         //GetComponent<StatManager>().changeHealth(-96);
 
@@ -78,6 +111,7 @@ public class BehaviorStarship : MonoBehaviour
 		}
 		*/
         //the timer runs
+        /*
         rayTimer -= Time.deltaTime;
         if (rayTimer <= 0)
         {
@@ -90,6 +124,14 @@ public class BehaviorStarship : MonoBehaviour
 
 
         flyingLanding();
+        */
+        flyingLanding();
+        /*
+        if(GetComponent<StatManager>().ship.enemyStats.getHealth() <= 0.1f * GetComponent<StatManager>().ship.enemyStats.getMaxHealth())
+        {
+            endgame();
+        }
+       */
     }
 
     void flyingLanding()
@@ -99,6 +141,10 @@ public class BehaviorStarship : MonoBehaviour
         if (checkF && !checkL)
         {
             lTime -= Time.deltaTime;
+            if(lTime >= 0.5f * oTimeL)
+            {
+                flySpawning();
+            }
             if (lTime < 0)
             {
                 checkF = false;
@@ -111,11 +157,13 @@ public class BehaviorStarship : MonoBehaviour
 
 
             rb.velocity = (planet.transform.position - transform.position).normalized * speed;
+            //endgameRb.velocity = (planet.transform.position - endgamePrefab.transform.position).normalized * speed;
 
             if (Vector3.Distance(transform.position, hit.point + (transform.position - planet.transform.position).normalized * height) < 0.5f)
             {
                 checkL = true;
                 rb.velocity = Vector3.zero;
+                //endgameRb.velocity = Vector3.zero;
             }
         }
         if (!checkF && checkL)
@@ -123,6 +171,9 @@ public class BehaviorStarship : MonoBehaviour
             fTime -= Time.deltaTime;
             if (fTime < 0)
             {
+                chargedRay(true);
+                Instantiate(chargedRayParticlePrefab, transform.position, Quaternion.Euler(new Vector3(transform.localRotation.x -90f, transform.localRotation.y, transform.localRotation.z)));
+                landSpawning();
                 fTime = oTimeF;
                 checkF = true;
 
@@ -131,11 +182,12 @@ public class BehaviorStarship : MonoBehaviour
         if (checkF && checkL)
         {
             rb.velocity = (oPos - transform.position).normalized * speed;
-
+            //endgameRb.velocity = (oPos - endgamePrefab.transform.position).normalized * speed;
             if (Vector3.Distance(transform.position, oPos) < 0.5f)
             {
                 checkL = false;
                 rb.velocity = Vector3.zero;
+                //endgameRb.velocity = Vector3.zero;
             }
         }
 
@@ -144,8 +196,8 @@ public class BehaviorStarship : MonoBehaviour
     {
 
         RaycastHit hit;
-        LineRenderer LR = ChargedRay.GetComponent<LineRenderer>();
-        LR.useWorldSpace = true;
+       LineRenderer LR = ChargedRay.GetComponent<LineRenderer>();
+        //LR.useWorldSpace = true;
         LR.SetPosition(0, transform.position);
         LR.SetPosition(1, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z));
         //raycast(origin, 0,-1,0...)
@@ -153,6 +205,7 @@ public class BehaviorStarship : MonoBehaviour
         if (button)
         {
             LR.SetPosition(0, transform.position);
+            
 
             if (Physics.Raycast(transform.position, (LR.GetPosition(1) - transform.position).normalized, out hit, Mathf.Infinity))
             {
@@ -180,24 +233,72 @@ public class BehaviorStarship : MonoBehaviour
     void endgame()
     {
 
-        if (timer > 0)
+        //Color of ship = new color(this.getcolor.red + 1, this.getcolor blue, fdbhjlfdsafjhl)
+        if (endgameTimer > 0)
         {
-            timer -= Time.deltaTime;
-            rend.material.color = Color.Lerp(starshipMaterial.color, Color.red, Time.time / timer);
-            Debug.Log("timer > 0");
+            endgameTimer -= Time.deltaTime;
+            //nuke1Render.materials[0].color = Color.Lerp(initialColor, Color.red, Time.time / timer);
+            Color toSet = new Color(1/oEndgameTimer * Time.time, 0, 0);
+            nuke1Render.material.SetColor("_Emission", toSet);
+            nuke2Render.material.SetColor("_Emission", toSet);
+            //Debug.Log("Setting emission color as " + toSet);
         }
         else
         {
             if (endgameCheck)
             {
-                Debug.Log("endgame happened");
-                endgamePrefab.SetActive(true);
-                endgameCheck = false;
+               Rigidbody endgameRb =  endgamePrefab.AddComponent<Rigidbody>();
+               endgameRb.useGravity = true; 
+               endgameCheck = false;
             }
         }
     }
-    void spawn()
+    public void flySpawning()
     {
-        //anshul late
+        
+        spawnTimer -= Time.deltaTime;
+        if(spawnTimer <= 0)
+        {
+            /*
+            int numKamikaze = (int)Random.Range(1.0f, 5.0f);
+            int numShlies = (int)Random.Range(1.0f, 5.0f);
+
+            for (int i = 1; i <= numKamikaze; i++)
+            {
+                RandomEnemySpawn.spawnEnemyWithinRadius(EnemyType.FlyingKamikaze, kamikazePrefab, 2.0f, instantiationPoint.position, 1.0f);
+            }
+            for (int i = 1; i <= numShlies; i++)
+            {
+                RandomEnemySpawn.spawnEnemyWithinRadius(EnemyType.Shly, shlyPrefab, 0.5f, instantiationPoint.position, 1.0f);
+            }
+            */
+            //System.Random rand = new System.Random();
+            int randomNum = (int)(Random.Range(0.0f, 1.0f) + 0.5f);
+            if(randomNum == 0)
+            {
+                Instantiate(shlyPrefab, instantiationPoint.position, Quaternion.identity);
+            }
+            else if(randomNum == 1)
+            {
+                Instantiate(kamikazePrefab, instantiationPoint.position, Quaternion.identity);
+            }
+            spawnTimer = 1.0f;
+        }
+        
+    }
+    public void landSpawning()
+    {
+        Debug.Log("In landSpawning function");
+        int numGolems = (int)(Random.Range(1, 3) + 0.5f);
+        int numShrabs = 1;
+        for(int i = 1; i <= numGolems; i++)
+        {
+            RandomEnemySpawn.spawnEnemyWithinRadius(EnemyType.Brawler, golemPrefab, 2.0f, instantiationPoint.position, 1.0f);
+        }
+        for(int i = 1; i <= numShrabs; i++)
+        {
+            RandomEnemySpawn.spawnEnemyWithinRadius(EnemyType.Shrab, shrabPrefab, 4.0f, instantiationPoint.position, 1.0f);
+        }
+        landSpawingCheck = false;
     }
 }

@@ -23,6 +23,8 @@ public class Intimidate : MonoBehaviour
 
     SoundManager soundManager;
 
+    public GameObject IntimidateParticleEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +48,7 @@ public class Intimidate : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-
+            GameObject particleEffect = Instantiate(IntimidateParticleEffect, transform.position, Quaternion.Euler(90, 0, 0));
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
