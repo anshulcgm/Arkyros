@@ -30,7 +30,7 @@ PrefabInstance:
     - target: {fileID: 312697399652480797, guid: ee5a9f2299cc4fb4888e22003390f7fa,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 312697399652480797, guid: ee5a9f2299cc4fb4888e22003390f7fa,
         type: 3}
@@ -40,7 +40,7 @@ PrefabInstance:
     - target: {fileID: 312697399652480797, guid: ee5a9f2299cc4fb4888e22003390f7fa,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 312697399652480797, guid: ee5a9f2299cc4fb4888e22003390f7fa,
         type: 3}
@@ -65,7 +65,42 @@ PrefabInstance:
     - target: {fileID: 312697399652480797, guid: ee5a9f2299cc4fb4888e22003390f7fa,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 312697399652480797, guid: ee5a9f2299cc4fb4888e22003390f7fa,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 312697399652480797, guid: ee5a9f2299cc4fb4888e22003390f7fa,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 312697399652480797, guid: ee5a9f2299cc4fb4888e22003390f7fa,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4440833227374220459, guid: ee5a9f2299cc4fb4888e22003390f7fa,
+        type: 3}
+      propertyPath: EmissionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4440833227374220459, guid: ee5a9f2299cc4fb4888e22003390f7fa,
+        type: 3}
+      propertyPath: InitialModule.size3D
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4440833227374220459, guid: ee5a9f2299cc4fb4888e22003390f7fa,
+        type: 3}
+      propertyPath: ShapeModule.m_Rotation.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4440833227374220459, guid: ee5a9f2299cc4fb4888e22003390f7fa,
+        type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee5a9f2299cc4fb4888e22003390f7fa, type: 3}

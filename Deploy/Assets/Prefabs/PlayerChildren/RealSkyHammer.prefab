@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3150717727682455565}
   - component: {fileID: 1757604484045085482}
   - component: {fileID: 6453596429744052752}
+  - component: {fileID: 5819333261770784799}
   m_Layer: 0
   m_Name: RealSkyHammer
   m_TagString: Untagged
@@ -62,10 +63,10 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 59c7465b2416ef04595affdd6f61552b, type: 3}
-  - {fileID: 2100002, guid: 59c7465b2416ef04595affdd6f61552b, type: 3}
-  - {fileID: 2100004, guid: 59c7465b2416ef04595affdd6f61552b, type: 3}
-  - {fileID: 2100006, guid: 59c7465b2416ef04595affdd6f61552b, type: 3}
+  - {fileID: 2100000, guid: a608af8b397bd5247b609509e27a4893, type: 2}
+  - {fileID: 2100000, guid: d35de52e80dba334caa53afe4985a83f, type: 2}
+  - {fileID: 2100000, guid: d35de52e80dba334caa53afe4985a83f, type: 2}
+  - {fileID: 2100000, guid: d35de52e80dba334caa53afe4985a83f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,7 +111,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -238,6 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sound: {fileID: 1757604484045085482}
+  Sound2: {fileID: 0}
   Clips:
   - {fileID: 8300000, guid: cbf851916d9b5c04b9e4d74722c93e7a, type: 3}
   - {fileID: 8300000, guid: ad0bd87440441ef448644caa5e267e99, type: 3}
@@ -300,3 +302,15 @@ MonoBehaviour:
   - Walk
   - BasicAttack
   - TankTakeDamage
+--- !u!114 &5819333261770784799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6981962925071982693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5ceec634b2bcaf4ba8510bc3798657b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
