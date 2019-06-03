@@ -154,7 +154,7 @@ public class StatManager : MonoBehaviour
             changeHealth(-600);
         }
         */
-        if(defaultEnemy.enemyStats.getHealth() <= 0 /*&& (type != EnemyType.IrradiatedEnemy || type != EnemyType.Starship)*/)
+        if(defaultEnemy.enemyStats.getHealth() <= 0 && (type != EnemyType.IrradiatedEnemy || type != EnemyType.Starship))
         {
             Instantiate(defaultBroken, transform.position, transform.rotation);
             Destroy(this.gameObject);

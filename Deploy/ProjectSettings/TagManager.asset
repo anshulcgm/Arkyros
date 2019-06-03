@@ -12,6 +12,8 @@ TagManager:
   - FxTemporaire
   - ocean
   - Center
+  - Fire
+  - PlayerCenter
   layers:
   - Default
   - TransparentFX
