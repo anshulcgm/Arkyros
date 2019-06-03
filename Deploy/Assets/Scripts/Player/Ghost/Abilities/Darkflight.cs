@@ -19,6 +19,8 @@ public class Darkflight : MonoBehaviour
     Stats stats;
     private bool cast;
 
+    public GameObject DarkFlightParticleEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,26 +39,29 @@ public class Darkflight : MonoBehaviour
         {
             cast = false;
             start = DateTime.Now;
+            GameObject particleEffect = Instantiate(DarkFlightParticleEffect, transform.position, Quaternion.Euler(90, 0, 0));
             //anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
-                                      //placeholder time, divide by 60 for cooldown in seconds
+            //placeholder time, divide by 60 for cooldown in seconds
 
 
-            
+
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            rigidbody.AddForce(transform.up * 40, ForceMode.Impulse); //jumps super high
+            cooldown = 240;
+            cast = true;
+
+            rigidbody.AddForce(transform.up * 20, ForceMode.Impulse); //jumps super high
 
             soundManager.playOneShot("DarkflightTakeoff");
-            anim.PlayLoopingAnim("Fly_Forward");
+            //anim.PlayLoopingAnim("Fly_Forward");
 
             stats.buffs[(int)buff.Gravityless] += 240; //lets you fly
 
             soundManager.play("DarkflightFlight");
 
-            cooldown = 240;
-            cast = true;
+            
         }
 
         if (cooldown > 0) //counts down for the cooldown
@@ -71,6 +76,7 @@ public class Darkflight : MonoBehaviour
         {
             soundManager.playOneShot("DarkflightLanding");
             anim.PlayLoopingAnim("Idle");
+            cast = false;
         }
     }
 }

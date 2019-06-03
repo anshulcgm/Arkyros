@@ -7,6 +7,7 @@ using UnityStandardAssets.ImageEffects;
 public class HeartOfDarkness : MonoBehaviour
 {
     public float cooldown;
+    public int maxCooldown = 4800;
 
     private GameObject camera;
 
@@ -60,17 +61,16 @@ public class HeartOfDarkness : MonoBehaviour
             rigidbody.AddForce(transform.position.normalized * 5000);
             soundManager.playOneShot("HeartofDarknessTeleport");
             anim.PlayLoopingAnim("Fly_Forward");
-            stats.setBuffDuration((int)buff.Gravityless, 240);
+            stats.setBuffDuration((int)buff.Gravityless, 360);
             
         }
         if (cast)
-        {
-            
+        {            
             sat = Mathf.Max(1 - (float)(DateTime.Now - start).TotalSeconds, 0);
             lastCast = DateTime.Now;
 
             camera.GetComponent<ColorCorrectionCurves>().saturation = sat;
-            if ((DateTime.Now - start).TotalSeconds < 4)
+            if ((DateTime.Now - start).TotalSeconds < 6)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -80,7 +80,6 @@ public class HeartOfDarkness : MonoBehaviour
                         target = hit.point;
                         u_gottem = true;
                         cast = false;
-                        
                     }
                     cooldown = 300;
                 }
@@ -94,8 +93,7 @@ public class HeartOfDarkness : MonoBehaviour
             else
             {
                 cooldown = 300;
-                cast = false;
-                
+                cast = false;                
             }
         }
         else
@@ -124,13 +122,9 @@ public class HeartOfDarkness : MonoBehaviour
             {
                 if(c.gameObject.tag == "Enemy")
                 {
-                    stats.dealDamage(c.gameObject, 1000);
-                }
-                
+                    stats.dealDamage(c.gameObject, 50);
+                }                
             }
-            
-            
-            
         }
 
         if (cooldown > 0) //counts down for the cooldown

@@ -11,6 +11,7 @@ public class Cleave : MonoBehaviour
 
     public AnimationController anim;
     DateTime start;
+    public int maxCooldown = 240;
 
 
     Rigidbody rigidbody;
@@ -21,6 +22,7 @@ public class Cleave : MonoBehaviour
     private bool cast;
 
     SoundManager soundManager;
+    public ScytheCollider scythe;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,10 +56,12 @@ public class Cleave : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
+            scythe.setActive(24);
             anim.StartOverlayAnim("Circle_strike_2", 0.5f, 1f); //this tells the animator to play the right animation
             soundManager.playOneShot("Cleave");
             Debug.Log("Cleave");
 
+            /*
             //temporary damage dealer
             Collider[] hits = Physics.OverlapSphere(transform.position, 10);
             foreach (Collider hit in hits)
@@ -68,9 +72,10 @@ public class Cleave : MonoBehaviour
 
                 }
             }
+            */
 
 
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cooldown = maxCooldown;
             cast = true;
 
         }

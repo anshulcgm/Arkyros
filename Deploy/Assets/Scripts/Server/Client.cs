@@ -7,59 +7,59 @@ using UnityEngine;
 // it also processes and sends the data from the server to the UnityHandler object.
 public class Client
 {
-    UDP udp;
-    GameObject player;
-    string serverIP;
-    public bool debug = true;
 
-    public Client(string serverIP, GameObject player, UDP udp)
+    UDP udp;
+    UDP udpListen;
+    GameObject player;
+    GameObject camera;
+    string serverIP;
+    public bool debug = false;
+
+    public Client(string serverIP, GameObject player, GameObject camera, UDP udp, UDP udpListen)
     {
         this.udp = udp;
+        this.udpListen = udpListen;
         this.player = player;
+        this.camera = camera;
         this.serverIP = serverIP;
         if (debug == true)
         {
            // Debug.Log("CLIENT: new instance created");
         }
     }
-
-    //sends player input to the serverIP
-    public void SendPlayerInput()
+    public void SendPlayerData()
     {
-        string allKeysPressed = "";
-        //loop through all ASCII chars, if the char is pressed, add it to string of keys pressed.
-        for (int i = 0; i < 128; i++)
+        string keysPressed = "";
+        for(int i = 33; i <= 122; i++)
         {
-            string keyPressed = Convert.ToChar(i) + "";
-            if (Input.GetKeyDown(keyPressed))
+            if(Input.GetKey(((char)i).ToString().ToLower() + ""))
             {
-                allKeysPressed += keyPressed;
+                string input = ((char)i).ToString().ToLower();
+                if (!keysPressed.Contains(input))
+                {
+                    keysPressed += input;
+                }                
             }
         }
-        string rotationStr = player.transform.rotation.ToString();
-        string formattedInput = DataParserAndFormatter.GetClientInputFormatted(allKeysPressed, rotationStr);
-        udp.Send(formattedInput, serverIP);
-        if (debug == true)
-        {
-           // Debug.Log("Sent player input to " + serverIP);
-        }
+
+        string clientData = DataParserAndFormatter.GetClientInputFormatted(keysPressed, Input.GetMouseButtonDown(0), Input.GetMouseButtonDown(1), player.transform.rotation, player.transform.position, camera.transform.rotation, camera.transform.position, UDP.GetLocalIPAddress());
+        udp.Send(clientData, serverIP); //send position and orientation and ipaddr of client to server for update
+    }
+
+    public void SendClassData(String classPath, int[] abilityIds){
+        udp.Send(DataParserAndFormatter.GetClassPathAndAbilityIdsFormatted(classPath, abilityIds, UDP.GetLocalIPAddress()), serverIP);
     }
 
     //reads in server output and does what the server says
     public void HandleServerOutput()
     {
-        List<string> serverOutput = udp.ReadMessages();
+        List<string> serverOutput = udpListen.ReadMessages();
        
         //get the whole output in one string, from oldest to newest messages
         string fullOutput = "";
         foreach (string s in serverOutput)
         {
             fullOutput += s;
-        }
-
-        if (debug == true)
-        {
-            Debug.Log("CLIENT: recieved stuff from server: \n" + fullOutput);
         }
 
         //turn the string into a nice list of messages

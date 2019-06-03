@@ -13,7 +13,7 @@ using System;
 
 //For the following stat arrays, [0] is the base, [1] is the multiplier, and [2] is the flat
 public enum statModifier { Base, Multiplier, Flat };
-public enum stat { HealthRegen, /*ManaRegen*/ Speed, Attack, AttackSpeed, Defense };
+public enum stat { HealthRegen, /*ManaRegen*/ Speed, Attack, /*AttackSpeed,*/ Defense };
 public enum buff { Invisible, Gravityless, Unstoppable };
 
 public class Stats : MonoBehaviour
@@ -26,13 +26,13 @@ public class Stats : MonoBehaviour
     public float health;
     //public float maxMana;
     //public float mana;
-    public float damageMultiplier;
+    //public float damageMultiplier;
 
     //Might be easier to use two enums and have a 2D array
 
 
 
-    public float[,] allStats = new float[5, 3]; //first column is base stats, second multiplier, third flat. Each 
+    public float[,] allStats = new float[4, 3]; //first column is base stats, second multiplier, third flat. Each 
     public int[] buffs = new int[3];            //number changes with number of positive buffs
 
 
@@ -61,10 +61,18 @@ public class Stats : MonoBehaviour
 
     public void Update()
     {
+        for (int i = 0; i < buffs.Length; i++)
+        {
+            if (buffs[i] > 0)
+            {
+                buffs[i]--;
+            }
+
+        }
         //Regen should be every half second
         //Health Regen
         regenTimer++;
-        if (regenTimer == 30) //half second
+        if (regenTimer >= 60) //half second
         {
             heal(getFinal((int)stat.HealthRegen));
             regenTimer = 0;
@@ -78,26 +86,20 @@ public class Stats : MonoBehaviour
 
         if(buffs[(int)buff.Invisible] > 0)
         {
-            //go transparent, invisible
+            //GetComponent<MeshRenderer>().enabled = false;
         }
-
-
-
-
-
-
-
-
-        for(int i = 0; i < buffs.Length; i++)
+        else
         {
-            if (buffs[i] > 0)
-            {
-                buffs[i]--;
-            }
-            
+           //GetComponent<MeshRenderer>().enabled = true;
         }
 
-        //need one for negative buffs too
+
+
+
+
+
+
+
 
     }
     /////////////// 
@@ -146,6 +148,7 @@ public class Stats : MonoBehaviour
             //not sure if this works exactly to detect if its been killed
             if (target == null)
             {
+                Debug.Log("target eliminated");
                 //trigger onKill() passives
             }
         }

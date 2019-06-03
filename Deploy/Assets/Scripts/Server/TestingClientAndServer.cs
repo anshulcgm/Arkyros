@@ -11,10 +11,10 @@ public class TestingClientAndServer : MonoBehaviour {
     GameObject cube = null;
     // Use this for initialization
     void Start () {
-        udp = new UDP();
+        udp = new UDP(1000);
         udp.StartUDP();
-        client = new Client(server_ipaddr, gameObject, udp); //start a new client with the current IP and gameobject
-        server = new Server(udp);
+        //client = new Client(server_ipaddr, gameObject, udp); //start a new client with the current IP and gameobject
+        server = new Server(udp, udp);
 
         GameObject resource = (GameObject)Resources.Load("cube");
         cube = GameObject.Instantiate(resource, Vector3.zero, Quaternion.identity);
@@ -24,7 +24,7 @@ public class TestingClientAndServer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         server.UpdateGameObjects();
-        client.HandleServerOutput();
+        //client.HandleServerOutput();
 
         if(cube != null && destroyCube)
         {

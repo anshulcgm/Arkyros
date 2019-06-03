@@ -10,6 +10,7 @@ public class ShieldsUp : MonoBehaviour
     private GameObject camera;
 
     public AnimationController anim;
+    public GameObject model;
     DateTime start;
 
 

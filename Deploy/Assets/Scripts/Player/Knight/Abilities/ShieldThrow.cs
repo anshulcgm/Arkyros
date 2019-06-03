@@ -10,7 +10,8 @@ public class ShieldThrow : MonoBehaviour
     private GameObject camera;
     public GameObject Shield;
     private float projectileSpeed;
-    private AnimationController anim;
+    public AnimationController anim;
+    public GameObject model;
     DateTime start;
 
 
@@ -23,10 +24,11 @@ public class ShieldThrow : MonoBehaviour
 
     SoundManager soundManager;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
 
         rigidbody = GetComponent<Rigidbody>();
@@ -43,7 +45,7 @@ public class ShieldThrow : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetMouseButtonDown(1) && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
@@ -58,7 +60,7 @@ public class ShieldThrow : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
 
-            GameObject shieldObj = Instantiate(Shield, transform.position + transform.forward, Quaternion.identity);
+            GameObject shieldObj = Instantiate(Shield, model.transform.position + transform.forward * 2 + transform.up * 8, Quaternion.identity);
 
             float x = Screen.width / 2f;
             float y = Screen.height / 2f;

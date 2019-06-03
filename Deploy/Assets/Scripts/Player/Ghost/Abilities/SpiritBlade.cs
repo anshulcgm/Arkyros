@@ -6,6 +6,7 @@ using UnityEngine;
 public class SpiritBlade : MonoBehaviour
 {
     public float cooldown;
+    public int maxCooldown = 240;
 
     private GameObject camera;
 
@@ -59,10 +60,10 @@ public class SpiritBlade : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
             model.transform.rotation = camera.transform.rotation;
-            anim.StartOverlayAnim("Swing_Light", 0.5f, 0.5f);
+            anim.StartOverlayAnim("Swing_Light", 0.5f, 1f);
             soundManager.playOneShot("SpiritBlade");
 
-            GameObject clone = Instantiate(SpiritBladeEnergySlash, model.transform.position + model.transform.forward, model.transform.rotation);
+            GameObject clone = Instantiate(SpiritBladeEnergySlash, model.transform.position + model.transform.forward * 5 + transform.up * 6, model.transform.rotation);
 
             float x = Screen.width / 2f;
             float y = Screen.height / 2f;
@@ -71,7 +72,7 @@ public class SpiritBlade : MonoBehaviour
 
             clone.GetComponent<Rigidbody>().velocity = ray.direction * projectileSpeed;
 
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cooldown = maxCooldown;
             cast = true;
 
         }

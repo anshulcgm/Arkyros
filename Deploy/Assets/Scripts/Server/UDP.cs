@@ -9,16 +9,20 @@ using UnityEngine;
 public class UDP
 {
     //the port number
-    private const int PORT_NUMBER = 15000;
+    private int PORT_NUMBER = 1500;
     //the asynchronous thread we'll be working on
     private Thread t = null;
     //our most recent message
     private string mostRecentMessage = "";
     private List<string> allMessages = new List<string>();
     //the UdpClient
-    private readonly UdpClient udp = new UdpClient(PORT_NUMBER);
-
+    private readonly UdpClient udp;
     public string broadcastAddr = null;
+
+    public UDP(int port){
+        this.PORT_NUMBER = port;
+        udp = new UdpClient(PORT_NUMBER);
+    }
 
     #region start and stop functions
     //starts the udp client
@@ -62,9 +66,6 @@ public class UDP
         IPEndPoint ip = new IPEndPoint(IPAddress.Any, PORT_NUMBER);
         byte[] bytes = udp.EndReceive(ar, ref ip);
         mostRecentMessage = Encoding.ASCII.GetString(bytes);
-        string concat = mostRecentMessage + " that's the message";
-        Debug.Log(concat);
-        Debug.Log("hello");
         allMessages.Add(mostRecentMessage);
         StartListening();
     }

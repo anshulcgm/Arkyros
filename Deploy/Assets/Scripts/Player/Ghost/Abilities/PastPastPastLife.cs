@@ -6,6 +6,7 @@ using UnityEngine;
 public class PastPastPastLife : MonoBehaviour
 {
     public float cooldown;
+    public int maxCooldown = 2400;
 
     private GameObject camera;
 
@@ -22,6 +23,8 @@ public class PastPastPastLife : MonoBehaviour
     private bool cast;
 
     SoundManager soundManager;
+
+    public GameObject P3LParticleEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +49,7 @@ public class PastPastPastLife : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            
+            GameObject particleEffect = Instantiate(P3LParticleEffect, transform.position, Quaternion.Euler(-90, 0, 0));
 
 
             //put any setup code here, before the ability is actually cast
@@ -57,50 +60,38 @@ public class PastPastPastLife : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            anim.StartOverlayAnim("Swing_Circle", 0.5f, 1.5f);
+            cooldown = maxCooldown;
+            cast = true;
+
+            anim.StartOverlayAnim("Swing_Circle", 0.5f, 2f);
             soundManager.playOneShot("P3LSprout");
-            soundManager.playOneShot("P3LHeal"); //duration
+            soundManager.play("P3LHeal"); //duration
 
-            int initdmg = 1000;
-            int heal = 1000;
-            int radius = 50;
-
-            /*
-             * All the code for the ability that you want to write
-             * transform.forward for the direction the player is 
-             * maybe setting colliders
-             * instantiating new objects
-             * to damage enemy, EnemyGameObject.GetComponent<StatManager>().changeHealth(amount), amount can be positive or negative
-             */
+            int initdmg = 80;
+            int heal = 80;
+            int radius = 150;
 
             Collider[] Colliders = Physics.OverlapSphere(transform.position, radius);
             for (int i = 0; i < Colliders.Length; i++)
             {
+                if (Colliders[i].tag == "Enemy")
                 {
-                    if (Colliders[i].tag == "Enemy" && radius >= Vector3.Distance(transform.position, Colliders[i].gameObject.transform.position))
-                    {
-                        stats.dealDamage(Colliders[i].gameObject, 20);
-
-                    }
-                    else if (Colliders[i].tag == "Allies")
-                    {
-                        Colliders[i].gameObject.GetComponent<Stats>().heal(20);
-                        //heal them
-
-                    }
-
-
-                    cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
-                    cast = true;
+                    stats.dealDamage(Colliders[i].gameObject, 20);
 
                 }
-
-
-                if (cooldown > 0) //counts down for the cooldown
+                else if (Colliders[i].tag == "Allies")
                 {
-                    cooldown--;
-                }
+                    Colliders[i].gameObject.GetComponent<Stats>().heal(20);
+                    //heal them
+
+                }   
             }
+            
+        }
+
+        if (cooldown > 0) //counts down for the cooldown
+        {
+            cooldown--;
         }
     }
 }

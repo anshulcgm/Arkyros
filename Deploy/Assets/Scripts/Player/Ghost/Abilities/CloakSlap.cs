@@ -6,6 +6,7 @@ using UnityEngine;
 public class CloakSlap : MonoBehaviour
 {
     public float cooldown = 0;
+    public int maxCooldown = 1800;
 
     private GameObject camera;
 
@@ -23,6 +24,8 @@ public class CloakSlap : MonoBehaviour
     DateTime start;
 
     SoundManager soundManager;
+    public LayerMask self;
+    public CloakCollider cloak;
 
     // Start is called before the first frame update
     void Start()
@@ -42,36 +45,40 @@ public class CloakSlap : MonoBehaviour
         {
             cast = false;
             start = DateTime.Now;
-
-            
-
-            //slow down while charging
-            stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] /= 3; //decrease speed
-            buffActive = true;
-            soundManager.play("CloakSlapCharge");
         }
-        if ((DateTime.Now - start).TotalSeconds >= 4 && Input.GetKey("r") && !cast)
+
+        if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            soundManager.stop();
-            //when charged for at least 4 seconds - set cooldown and do release
-            cooldown = 600;     //set cooldown, placeholder time
             cast = true;
-            //maybe set collider to scythe
-            anim.StartOverlayAnim("CloakSlap", 0.5f, 1.0f); //this tells the animator to play the right animation
+            stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] /= 3f; //decrease speed
 
-            soundManager.playOneShot("CloakSlapRelease");
-            //damage enemy
-            //EnemyGameObject.GetComponent<StatManager>().changeHealth(amount);
-            //add knockback
-            //EnemyGameObject.GetComponent<StatManager>().RigidBody().addForce(amount);
+            //Split Windup animation for here
+            anim.StartOverlayAnim("SlapWindUp", 0.5f, 8f);
+            Debug.Log("start");
+            soundManager.playOneShot("CloakSlapCharge");
         }
-        //when key released and the seconds held less than 4, return to normal speed
-        if ((DateTime.Now - start).TotalSeconds <= 4 && !Input.GetKey("e") && buffActive && !cast)
+        if (((DateTime.Now - start).TotalSeconds >= 3 && Input.GetKey("r") && cast) || ((DateTime.Now - start).TotalSeconds >= 8 && cast))//earliest release is 3 seconds, max is 7
         {
+            cast = false;
             soundManager.stop();
-            stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] *= 3; //return speed
-            buffActive = false;
+            stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] *= 3;
+            Debug.Log("end");
+            anim.StartOverlayAnim("SlapEnd", 0.5f, 1f); //this tells the animator to play the right animation
+            cloak.setActive(100);
+            soundManager.playOneShot("CloakSlapRelease");
+
+            /*
+            RaycastHit hit;
+            if(Physics.SphereCast(model.transform.position + transform.up * 5, 100, model.transform.forward, out hit, 100f, self))
+            {
+                Debug.Log("Slapped");
+                stats.dealDamage(hit.transform.gameObject, 1000);
+                hit.transform.gameObject.GetComponent<Rigidbody>().AddForce(hit.transform.position - transform.position, ForceMode.Impulse);
+            }
+            */
+            cooldown = maxCooldown;
         }
+
         if (cooldown > 0) //counts down for the cooldown
         {
             cooldown--;

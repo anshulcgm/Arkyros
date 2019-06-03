@@ -7,28 +7,35 @@ using UnityEngine;
 public class SpiritSummons : MonoBehaviour
 {
     public float cooldown;
+    public int maxCooldown = 600;
 
     private GameObject camera;
 
-    private Animator anim;
+    public AnimationController anim;
+    public GameObject model;
+
     DateTime start;
 
 
     Rigidbody rigidbody;
     Stats stats;
     TargetCenterScreen tcs;
+    SoundManager soundManager;
 
     private bool buffActive;
     private bool cast;
 
+    public GameObject SpiritBombParticleEffect;
+
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
         tcs = GetComponent<TargetCenterScreen>();
+        soundManager = GetComponent<SoundManager>();
 
 
 
@@ -39,11 +46,13 @@ public class SpiritSummons : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetKey("f") && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            anim.SetBool("NAME OF ANIMATION", true); //this tells the animator to play the right animation
+            Debug.Log("here");
+            GameObject particleEffect = Instantiate(SpiritBombParticleEffect, new Vector3(transform.position.x, transform.position.y + 4.5f, transform.position.z), Quaternion.Euler(0, 0, 0));
+
 
 
             //put any setup code here, before the ability is actually cast
@@ -54,35 +63,20 @@ public class SpiritSummons : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            /*
-            int initdmg = 1000;
-            int heal = 1000;
+            cast = true;
+            cooldown = 240;
+            anim.StartOverlayAnim("Summon_Area", 0.5f, 1f);
+            soundManager.playOneShot("SpiritSummons");
+            
             int radius = 50;
-            /*
-             * All the code for the ability that you want to write
-             * transform.forward for the direction the player is 
-             * maybe setting colliders
-             * instantiating new objects
-             * to damage enemy, EnemyGameObject.GetComponent<StatManager>().changeHealth(amount), amount can be positive or negative
-             
-            Collider collider = Physics.OverlapSphere(transform.position, radius);
+            Collider[] Colliders = Physics.OverlapSphere(transform.position, radius);
             for (int i = 0; i < Colliders.Length; i++)
             {
+                if (Colliders[i].tag == "Enemy")
                 {
-                    if (radius >= Vector3.Distance(transform.position, Enemy.position))
-                    {
-                        Enemy.GetComponent(HealthScript).addDamage(100);
-
-                    }
-
-                    cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
-                    cast = true;
-
+                    stats.dealDamage(Colliders[i].gameObject, 40);
                 }
-
-
-                
-            }*/
+            }
         }
 
         if (cooldown > 0) //counts down for the cooldown
