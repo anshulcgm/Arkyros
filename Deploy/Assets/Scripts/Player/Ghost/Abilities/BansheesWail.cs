@@ -51,12 +51,16 @@ public class BansheesWail : MonoBehaviour
             cast = false; //ability not yet cast
             start = DateTime.Now;
             anim.StartOverlayAnim("Summon_Area", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
-            GameObject particleEffect = Instantiate(BansheeWailParticleEffect, transform.position, Quaternion.identity);
+
+            GameObject particleEffect = Instantiate(BansheeWailParticleEffect, transform.position, Quaternion.Euler(90, 0, 0));
             soundManager.playOneShot("BansheesWail");
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
+            cooldown = maxCooldown;
+            cast = true;
+            Debug.Log("reee");
             foreach (Collider col in Physics.OverlapSphere(transform.position, 100))
             {
                 if (col.gameObject.tag == "Enemy")
@@ -65,9 +69,6 @@ public class BansheesWail : MonoBehaviour
                 }
             }
 
-
-            cooldown = maxCooldown;
-            cast = true;
 
         }
 

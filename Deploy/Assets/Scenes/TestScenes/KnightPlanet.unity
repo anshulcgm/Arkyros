@@ -320,6 +320,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 103217158605673867, guid: cbc2bbd9fb0ad5b47a0e7f4f6831d939,
+        type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 1045747619}
+    - target: {fileID: 103217158605673867, guid: cbc2bbd9fb0ad5b47a0e7f4f6831d939,
+        type: 3}
+      propertyPath: m_LookAt
+      value: 
+      objectReference: {fileID: 1045747619}
     - target: {fileID: 4161096225316013241, guid: cbc2bbd9fb0ad5b47a0e7f4f6831d939,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -338,12 +348,12 @@ PrefabInstance:
     - target: {fileID: 4161096225316013241, guid: cbc2bbd9fb0ad5b47a0e7f4f6831d939,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.15491708
+      value: 0.15491705
       objectReference: {fileID: 0}
     - target: {fileID: 4161096225316013241, guid: cbc2bbd9fb0ad5b47a0e7f4f6831d939,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.040731583
+      value: 0.04073155
       objectReference: {fileID: 0}
     - target: {fileID: 4161096225316013241, guid: cbc2bbd9fb0ad5b47a0e7f4f6831d939,
         type: 3}
@@ -408,12 +418,12 @@ PrefabInstance:
     - target: {fileID: 1709795942620863123, guid: cbc2bbd9fb0ad5b47a0e7f4f6831d939,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.021861598
+      value: 0.02186165
       objectReference: {fileID: 0}
     - target: {fileID: 1709795942620863123, guid: cbc2bbd9fb0ad5b47a0e7f4f6831d939,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.19470903
+      value: 0.19470902
       objectReference: {fileID: 0}
     - target: {fileID: 1709795942620863123, guid: cbc2bbd9fb0ad5b47a0e7f4f6831d939,
         type: 3}
@@ -423,18 +433,8 @@ PrefabInstance:
     - target: {fileID: 1709795942620863123, guid: cbc2bbd9fb0ad5b47a0e7f4f6831d939,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.10941459
+      value: 0.10941461
       objectReference: {fileID: 0}
-    - target: {fileID: 103217158605673867, guid: cbc2bbd9fb0ad5b47a0e7f4f6831d939,
-        type: 3}
-      propertyPath: m_Follow
-      value: 
-      objectReference: {fileID: 1045747619}
-    - target: {fileID: 103217158605673867, guid: cbc2bbd9fb0ad5b47a0e7f4f6831d939,
-        type: 3}
-      propertyPath: m_LookAt
-      value: 
-      objectReference: {fileID: 1045747619}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbc2bbd9fb0ad5b47a0e7f4f6831d939, type: 3}
 --- !u!114 &506505946 stripped
@@ -621,11 +621,53 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5004491684890124214, guid: dfc3f89a86ed9d940b54f5d907a2094d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5004491684890124216, guid: dfc3f89a86ed9d940b54f5d907a2094d,
         type: 3}
       propertyPath: c
       value: 
       objectReference: {fileID: 506505946}
+    - target: {fileID: 7979313453317872640, guid: dfc3f89a86ed9d940b54f5d907a2094d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844576334460709028, guid: dfc3f89a86ed9d940b54f5d907a2094d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844576334460709028, guid: dfc3f89a86ed9d940b54f5d907a2094d,
+        type: 3}
+      propertyPath: BullRushParticleEffect
+      value: 
+      objectReference: {fileID: 4223293047912137983, guid: 2cd843115fc9cb549a1d739bb4c9df4f,
+        type: 3}
+    - target: {fileID: 4452070408759178479, guid: dfc3f89a86ed9d940b54f5d907a2094d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452070408759178479, guid: dfc3f89a86ed9d940b54f5d907a2094d,
+        type: 3}
+      propertyPath: IntimidateParticleEffect
+      value: 
+      objectReference: {fileID: 2976327252393877240, guid: a9fe79327ff7c3f4b96cb1223a2463fe,
+        type: 3}
+    - target: {fileID: 5004491684890124201, guid: dfc3f89a86ed9d940b54f5d907a2094d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2392544577265998281, guid: dfc3f89a86ed9d940b54f5d907a2094d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfc3f89a86ed9d940b54f5d907a2094d, type: 3}
 --- !u!4 &1045747619 stripped
