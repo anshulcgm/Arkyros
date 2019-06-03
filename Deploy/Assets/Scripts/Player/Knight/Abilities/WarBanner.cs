@@ -60,7 +60,8 @@ public class WarBanner : MonoBehaviour
             cast = true;
             soundManager.playOneShot("WarBanner");
             anim.StartOverlayAnim("BannerPlant", 0.5f, 1f);
-            Instantiate(Banner, model.transform.position + model.transform.forward, Quaternion.identity);
+            model.transform.rotation = camera.transform.rotation;
+            Instantiate(Banner, model.transform.position + model.transform.forward * 15, Quaternion.identity);
         }
 
 

@@ -31,6 +31,7 @@ public class TotemPole : MonoBehaviour
     {
         // anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
+        
 
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();

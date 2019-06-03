@@ -12,6 +12,7 @@ public class ShieldBash : MonoBehaviour
 
     public AnimationController anim;
     public GameObject model;
+    public ShieldCollider shield;
 
     DateTime start;
 
@@ -51,12 +52,17 @@ public class ShieldBash : MonoBehaviour
             anim.StartOverlayAnim("ShieldBash", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
             soundManager.playOneShot("ShieldBash");
             
+            
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
             cooldown = maxCooldown;
             cast = true;
+
+            anim.StartOverlayAnim("ShieldBash", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
+            soundManager.playOneShot("ShieldBash");
+            shield.setActive(20);
         }
 
 
