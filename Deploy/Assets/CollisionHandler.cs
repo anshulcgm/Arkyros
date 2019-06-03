@@ -18,9 +18,7 @@ public class CollisionHandler : MonoBehaviour
 
     public static bool initialized = false;
 
-
-    
-    public static int numObjectsCache = 5;
+    public static int numObjectsCache = 2;
 
     public static void Initialize(List<Vector3> points, List<int>[] map){
         CollisionHandler.points = points;
@@ -48,16 +46,21 @@ public class CollisionHandler : MonoBehaviour
             List<StaticEntity[]> closestEntitiesOfType = new List<StaticEntity[]>();
             foreach(List<StaticEntity>[] entities in staticEntities){
                 StaticEntity[] closestEntities = new StaticEntity[numObjectsCache];
-                float closestEntitySqrDist = float.MaxValue;             
-                if(entities[closestPoints[i]] != null){
-                    entities[closestPoints[i]].Sort((p1, p2) => -Vector3.SqrMagnitude(p1.position - transforms[i].position).CompareTo(Vector3.SqrMagnitude(p2.position - transforms[i].position)));
-                    for(int i1 = 0; i1 < numObjectsCache; i1++){
-                        if(i1 >= entities[closestPoints[i]].Count){
-                            break;
-                        }
-                        closestEntities[i1] = entities[closestPoints[i]][i1];
-                    }
+                List<StaticEntity> staticEnts = new List<StaticEntity>();
+                if(entities[closestPoints[i]] != null)
+                    staticEnts.AddRange(entities[closestPoints[i]]);
+
+                foreach(int a in map[closestPoints[i]]){
+                    if(entities[a] != null)
+                        staticEnts.AddRange(entities[a]);
                 }
+                staticEnts.Sort((p2, p1) => -Vector3.SqrMagnitude(p1.position - transforms[i].position).CompareTo(Vector3.SqrMagnitude(p2.position - transforms[i].position)));
+                for(int i1 = 0; i1 < staticEnts.Count; i1++){
+                    if(i1 >= numObjectsCache){
+                        break;
+                    }
+                    closestEntities[i1] = staticEnts[i1];
+                }            
                 closestEntitiesOfType.Add(closestEntities);
             }
 

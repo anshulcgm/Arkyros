@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Deploy/Assets/AddToCollisionHandler.cs.meta
 guid: 28ddbc1b95aa76d46a1ae946550e2d90
+=======
+guid: 03730bc0a2a67f347ab3ba226bf68258
+>>>>>>> b873df93343e0b7a58bc826d57d8259e1bd7cd25:Deploy/Assets/AnimationController.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

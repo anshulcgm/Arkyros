@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class Planet : IClass
 {
-    public EventSystemMono eventSystem;
 
     //seed for this planet
     private int seed;
@@ -40,7 +39,7 @@ public class Planet : IClass
         int varianceSeed = r.Next(int.MinValue, int.MaxValue);
 
         //make the planet, store results in points and connections.
-        PlanetGenerator.MakePlanet(radius, variance, varianceSeed, latPoints, longPoints, out points, out connections);
+        PlanetGenerator.MakePlanet(radius, variance, r, latPoints, longPoints, out points, out connections);
     }
 
     /* parameters: None

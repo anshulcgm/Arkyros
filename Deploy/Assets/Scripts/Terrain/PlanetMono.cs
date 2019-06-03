@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlanetMono : MonoBehaviour, IMono
 {
+    public bool created = false;
+
     private Planet planet;
 
     public GameObject building;
@@ -30,7 +32,6 @@ public class PlanetMono : MonoBehaviour, IMono
 
     public string[] biomeNames;
 
-    public EventSystemMono e;
 
 
     public void Start(){
@@ -42,13 +43,14 @@ public class PlanetMono : MonoBehaviour, IMono
 
     public void Create(int seed)
     {
+        Debug.Log("true seed reeeeeeeeeeeeeeeeeeeeeeeeeeee: " + seed);
+        created = true;
         DateTime start = DateTime.Now;
         System.Random r = new System.Random(seed);
         
         int minRad = 4000;
         int maxRad = 4000;
         planet = new Planet(r, minRad, maxRad, 40f, 50f, 91, 91);
-        planet.eventSystem = e;
 
         List<Vector3> pts = null;
         List<int>[] map = null;
@@ -149,6 +151,7 @@ public class PlanetMono : MonoBehaviour, IMono
         foreach (int[] biome in biomes)
         {
             GameObject newObj = Instantiate((GameObject)Resources.Load("Empty"), Vector3.zero, Quaternion.identity);
+            newObj.transform.parent = transform;
             newObj.GetComponent<MeshFilter>().mesh = new Mesh();
             newObj.GetComponent<MeshFilter>().mesh.subMeshCount = biomes.Count;
             newObj.GetComponent<MeshFilter>().mesh.SetVertices(pointsPerBiome[n]);
@@ -158,8 +161,8 @@ public class PlanetMono : MonoBehaviour, IMono
             newObj.GetComponent<MeshCollider>().sharedMesh = newObj.GetComponent<MeshFilter>().mesh;
             n++;
         }
-        /*
-
+        
+/*
         int numIslands = r.Next(5, 20);
         for (int i = 0; i < numIslands; i++)
         {
@@ -183,8 +186,8 @@ public class PlanetMono : MonoBehaviour, IMono
             g.GetComponent<MeshCollider>().sharedMesh = gameObject.GetComponent<MeshFilter>().mesh;
 
             g.GetComponent<MeshRenderer>().material = biomeMats[r.Next(biomeMats.Length)];
-        }*/
-
+        }
+*/
         int numCities = r.Next(10, 20);
         for (int i = 0; i < numCities; i++)
         {
@@ -207,6 +210,7 @@ public class PlanetMono : MonoBehaviour, IMono
                 if (Physics.Raycast(trueCenter, -normal, out hit, Mathf.Infinity))
                 {
                     GameObject g = Instantiate(Resources.Load("Building") as GameObject, trueCenter, randomQuaternion);
+                    g.transform.parent = transform;
                     g.transform.localScale = new Vector3(rect.getWidth() * 0.6f, rect.getHeight() * 0.6f, (rect.getWidth() * 2));
                     g.transform.position = hit.point;
                     int rand = r.Next(4);

@@ -37,8 +37,20 @@ public class AnimationController : MonoBehaviour
     int overlayIndex = -1;
     string currentStopAnim = "";
     bool cancel = false;
+
+    int gameObjectId = -1;
+
     void Update()
     {
+        if(Server.serverExists && gameObjectId == -1){
+            for(int i = 0; i < Server.gameObjectsToUpdate.Count; i++){
+                if(Server.gameObjectsToUpdate[i].Equals(gameObject)){
+                    gameObjectId = i;
+                    break;
+                }
+            }
+        }
+
         if ((DateTime.Now - start).TotalSeconds < duration)
         {
             PlayOverlayAnim(animation, strength);
@@ -77,6 +89,9 @@ public class AnimationController : MonoBehaviour
         anim.Blend(animation, 1.0f, 0.1f);
         anim.CrossFade(animation, 0.3f);
         currentLoopingAnim = animation;
+        if(Server.serverExists){
+            Server.instance.SendAnimation(gameObjectId, animation, false);
+        }
     }
 
     private void PlayOverlayAnim(string overlayAnim, float strength)
@@ -135,6 +150,9 @@ public class AnimationController : MonoBehaviour
         this.animation = animation;
         this.strength = strength;
         this.duration = duration;
-        start = DateTime.Now;
+        start = DateTime.Now;        
+        if(Server.serverExists){
+            Server.instance.SendAnimation(gameObjectId, animation, true, strength, duration);
+        }            
     }
 }

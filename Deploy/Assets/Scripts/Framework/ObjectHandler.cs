@@ -4,10 +4,26 @@ using System.Collections.Generic;
 
 public class ObjectHandler
 {
-
     public static Server server;
-    public static List<CacheObjTuple>[][] cacheObjMap;
+    private class CacheObject
+    {         
+        public static float maxTimeHandlingCache = 5.0f;
+        public static float maxCacheRenderDist = 1000.0f;
 
+        public string name;
+        public List<Vector3> positions = new List<Vector3>();
+        public List<Quaternion> orientations = new List<Quaternion>();
+        public List<GameObject> objs = new List<GameObject>();
+        public int numInCache = 1000;
+        public GameObject resource = null;
+        public CacheObject(string name, List<Vector3> positions, List<Quaternion> orientations, GameObject resource)
+        {
+            this.name = name;
+            this.positions.AddRange(positions);
+            this.orientations.AddRange(orientations);
+            this.resource = resource;
+        }
+    }
     static List<CacheObject> cachedObjects = new List<CacheObject>();
 
     static int currCachedObjIndex = 0;
