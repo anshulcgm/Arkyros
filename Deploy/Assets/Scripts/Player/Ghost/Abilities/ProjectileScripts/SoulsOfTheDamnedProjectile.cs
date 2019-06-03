@@ -10,11 +10,12 @@ public class SoulsOfTheDamnedProjectile : MonoBehaviour
     private GameObject[] enemies;
     private Transform[] enemyTransform;
 
-    GhostSoundManager ghostSoundManager;
+    SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = GetComponent<SoundManager>();
         start = DateTime.Now;
         enemies = GameObject.FindGameObjectsWithTag("Enemy"); //takes all enemies, puts their transforms into an array
         enemyTransform = new Transform[enemies.Length];
@@ -25,17 +26,19 @@ public class SoulsOfTheDamnedProjectile : MonoBehaviour
         }
 
         target = GetClosestEnemy(enemyTransform); //sets target to nearest enemy
+        
+        soundManager.playOneShot("SoulsOfDamnedFloating");
     }
 
     // Update is called once per frame
     void Update()
     {
-        ghostSoundManager.playSOTDFloating();
+
         if ((DateTime.Now - start).TotalSeconds > 8)//bullet lifetime of 8 seconds
         {
             Destroy(this.gameObject);
         }
-        transform.position = Vector3.MoveTowards(transform.position, target.position, .03f);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, .12f);
     }
 
     Transform GetClosestEnemy(Transform[] enemies)
@@ -61,10 +64,12 @@ public class SoulsOfTheDamnedProjectile : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
+            
             other.gameObject.GetComponent<StatManager>().changeHealth(20);
-            ghostSoundManager.playSOTDDamage();
+            
             
         }
+        soundManager.playOneShot("SoulsOfDamnedDamage");
         Destroy(this.gameObject);//gets destroyed on contact, even terrain
     }
 }

@@ -7,10 +7,12 @@ using UnityEngine;
 // it also processes and sends the data from the server to the UnityHandler object.
 public class Client
 {
+
     UDP udp;
     GameObject player;
+    GameObject camera;
     string serverIP;
-    public bool debug = true;
+    public bool debug = false;
 
     public Client(string serverIP, GameObject player, UDP udp)
     {
@@ -22,27 +24,14 @@ public class Client
            // Debug.Log("CLIENT: new instance created");
         }
     }
+    public void SendPlayerData()
+    {        
+        string clientData = DataParserAndFormatter.GetClientInputFormatted(Input.inputString, Input.GetMouseButtonDown(0), Input.GetMouseButtonDown(1), player.transform.rotation, camera.transform.rotation, camera.transform.position, UDP.GetLocalIPAddress());
+        udp.Send(clientData, serverIP); //send position and orientation and ipaddr of client to server for update
+    }
 
-    //sends player input to the serverIP
-    public void SendPlayerInput()
-    {
-        string allKeysPressed = "";
-        //loop through all ASCII chars, if the char is pressed, add it to string of keys pressed.
-        for (int i = 0; i < 128; i++)
-        {
-            string keyPressed = Convert.ToChar(i) + "";
-            if (Input.GetKeyDown(keyPressed))
-            {
-                allKeysPressed += keyPressed;
-            }
-        }
-        string rotationStr = player.transform.rotation.ToString();
-        string formattedInput = DataParserAndFormatter.GetClientInputFormatted(allKeysPressed, rotationStr);
-        udp.Send(formattedInput, serverIP);
-        if (debug == true)
-        {
-           // Debug.Log("Sent player input to " + serverIP);
-        }
+    public void SendClassData(String classPath, int[] abilityIds){
+        udp.Send(DataParserAndFormatter.GetClassPathAndAbilityIdsFormatted(classPath, abilityIds), serverIP);
     }
 
     //reads in server output and does what the server says

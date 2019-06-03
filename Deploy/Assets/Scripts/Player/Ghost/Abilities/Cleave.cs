@@ -9,7 +9,7 @@ public class Cleave : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
     DateTime start;
 
 
@@ -24,7 +24,7 @@ public class Cleave : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
@@ -74,6 +74,7 @@ public class Cleave : MonoBehaviour
             cast = true;
 
         }
+
 
 
         if (cooldown > 0) //counts down for the cooldown

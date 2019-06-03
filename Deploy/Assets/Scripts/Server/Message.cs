@@ -12,4 +12,4 @@ public class Message
 }
 
 //enum for holding the types of messages
-public enum ServerMessageType { UPDATE, CREATE, DESTROY};
+public enum ServerMessageType { UPDATE, CREATE, DESTROY, TERRAIN, ANIMATION};

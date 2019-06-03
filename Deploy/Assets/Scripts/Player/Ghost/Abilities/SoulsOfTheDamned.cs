@@ -9,7 +9,8 @@ public class SoulsOfTheDamned : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
+    public GameObject model;
 
     DateTime start;
 
@@ -28,7 +29,7 @@ public class SoulsOfTheDamned : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<Stats>();
@@ -57,11 +58,11 @@ public class SoulsOfTheDamned : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            int distance = 3; //spawns orbs in an square around you
-            Instantiate(SoulsOfTheDamnedProjectile, transform.position + distance * transform.right + distance * transform.forward, Quaternion.identity);
-            Instantiate(SoulsOfTheDamnedProjectile, transform.position + distance * transform.right - distance * transform.forward, Quaternion.identity);
-            Instantiate(SoulsOfTheDamnedProjectile, transform.position - distance * transform.right + distance * transform.forward, Quaternion.identity);
-            Instantiate(SoulsOfTheDamnedProjectile, transform.position - distance * transform.right - distance * transform.forward, Quaternion.identity);
+            int distance = 8; //spawns orbs in an square around you
+            Instantiate(SoulsOfTheDamnedProjectile, transform.position + distance * transform.right + distance * transform.forward + transform.up * distance, transform.rotation);
+            Instantiate(SoulsOfTheDamnedProjectile, transform.position + distance * transform.right - distance * transform.forward + transform.up * distance, transform.rotation);
+            Instantiate(SoulsOfTheDamnedProjectile, transform.position - distance * transform.right + distance * transform.forward + transform.up * distance, transform.rotation);
+            Instantiate(SoulsOfTheDamnedProjectile, transform.position - distance * transform.right - distance * transform.forward + transform.up * distance, transform.rotation);
             
             
 

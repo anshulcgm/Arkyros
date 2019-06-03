@@ -9,7 +9,8 @@ public class BullRush : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
+    public GameObject model;
     DateTime start;
 
 
@@ -29,7 +30,7 @@ public class BullRush : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
 
         rigidbody = GetComponent<Rigidbody>();
@@ -45,7 +46,7 @@ public class BullRush : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetKey("q") && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;

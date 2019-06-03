@@ -79,7 +79,9 @@ public class StatManager : MonoBehaviour
     public GameObject brokenShrab;
 
     private Enemy defaultEnemy;
-    private GameObject defaultBroken; 
+    private GameObject defaultBroken;
+
+    public float healthTimer = 5.0f;
 
     //private Enemy defaultEnemy;
     //Start function sets enemytype for the script so that the right variables are changed
@@ -145,7 +147,14 @@ public class StatManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(defaultEnemy.enemyStats.getHealth() <= 0 && (type != EnemyType.IrradiatedEnemy || type != EnemyType.Starship))
+        /*
+        healthTimer -= Time.deltaTime; 
+        if(healthTimer <= 0)
+        {
+            changeHealth(-600);
+        }
+        */
+        if(defaultEnemy.enemyStats.getHealth() <= 0 /*&& (type != EnemyType.IrradiatedEnemy || type != EnemyType.Starship)*/)
         {
             Instantiate(defaultBroken, transform.position, transform.rotation);
             Destroy(this.gameObject);

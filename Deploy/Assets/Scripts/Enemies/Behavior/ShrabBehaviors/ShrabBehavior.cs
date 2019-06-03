@@ -91,6 +91,11 @@ public class ShrabBehavior : MonoBehaviour
                 searchForNewIdlePoint = true;
             }
         }
+        RaycastHit hit; 
+        if (Physics.Raycast(transform.position + transform.position.normalized * 10.0f, (planet.transform.position - transform.position).normalized, out hit, Mathf.Infinity))
+        {
+            transform.position = hit.point;
+        }
        /* if(Vector3.Distance(transform.position, player.transform.position) > 3.0f)
         {
             waterShurikenAttack();
@@ -217,18 +222,18 @@ public class ShrabBehavior : MonoBehaviour
         Vector3 rightLegRaycast = findRaycastPointOnSphere(rightPlayerLeg.transform.position);
         if (Vector3.Distance(transform.position, leftLegRaycast) < Vector3.Distance(transform.position, rightLegRaycast))
         {
-            Debug.Log("going for left leg");
-            Debug.Log("Distance between enemy and left leg is " + Vector3.Distance(transform.position, leftLegRaycast));
-            if (Vector3.Distance(transform.position, leftLegRaycast) > 4.0f)
+            //Debug.Log("going for left leg");
+            //Debug.Log("Distance between enemy and left leg is " + Vector3.Distance(transform.position, leftLegRaycast));
+            if (Vector3.Distance(transform.position, leftLegRaycast) > 4.5f)
             {
-                Debug.Log("Moving towards left leg");
+                //Debug.Log("Moving towards left leg");
                 anim.SetBool("Moving", true);
                 anim.SetBool("Attack", false);
                 shrabSphereMovement(leftLegRaycast);
             }
             else
             {
-                Debug.Log("Trying to stop at left leg");
+                //Debug.Log("Trying to stop at left leg");
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 anim.SetBool("Moving", false);
@@ -238,18 +243,18 @@ public class ShrabBehavior : MonoBehaviour
         }
         else
         {
-            Debug.Log("going for right leg");
-            Debug.Log("Distance between enemy and right leg is " + Vector3.Distance(transform.position, rightLegRaycast));
-            if (Vector3.Distance(transform.position, rightLegRaycast) > 4.0f)
+            //Debug.Log("going for right leg");
+            //Debug.Log("Distance between enemy and right leg is " + Vector3.Distance(transform.position, rightLegRaycast));
+            if (Vector3.Distance(transform.position, rightLegRaycast) > 4.5f)
             {
-                Debug.Log("Moving towards right leg");
+                //Debug.Log("Moving towards right leg");
                 anim.SetBool("Moving", true);
                 anim.SetBool("Attack", false);
                 shrabSphereMovement(rightLegRaycast);
             }
             else
             {
-                Debug.Log("Trying to stop at right leg");
+                //Debug.Log("Trying to stop at right leg");
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 anim.SetBool("Moving", false);
@@ -271,7 +276,7 @@ public class ShrabBehavior : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy")
+        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Center")
         {
             Physics.IgnoreCollision(GetComponent<Collider>(), collision.gameObject.GetComponent<Collider>());
         }

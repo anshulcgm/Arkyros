@@ -9,7 +9,7 @@ public class Landfall : MonoBehaviour
 
     private GameObject camera;
 
-    private AnimationController anim;
+    public AnimationController anim;
     DateTime start;
 
 
@@ -20,21 +20,22 @@ public class Landfall : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
-    private int numForward = 200;
-    private int numUp = 200;
+    public int numForward = 80;
+    public int numUp = 80;
     private int sphereRadius = 20;
     private int enemySetback = 200;
 
     public GameObject particleLanding;
     bool particleSpawned;
 
+    public GameObject model;
 
     SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<AnimationController>();
+        //anim = GetComponent<AnimationController>();
         camera = GameObject.FindGameObjectWithTag("MainCamera");
 
         rigidbody = GetComponent<Rigidbody>();
@@ -50,16 +51,16 @@ public class Landfall : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (Input.GetKey("q") && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
             particleSpawned = false;
-
+            //transform.rotation = camera.transform.rotation;
 
 
             //put any setup code here, before the ability is actually cast
-            
+
 
 
 
@@ -70,9 +71,10 @@ public class Landfall : MonoBehaviour
             //anim.PlayLoopingAnim("Flight"); //this tells the animator to play the right animation, what strength, what duration
             anim.StartOverlayAnim("Jump", 0.5f, 1f);
             soundManager.playOneShot("LandfallJump");
-            soundManager.play("LandfallSustain");
-            transform.rotation = camera.transform.rotation;
-            rigidbody.AddForce(transform.forward * numForward, ForceMode.Impulse);
+            //soundManager.play("LandfallSustain");
+
+            model.transform.rotation = camera.transform.rotation;
+            rigidbody.AddForce(model.transform.forward * numForward, ForceMode.Impulse);
             rigidbody.AddForce(transform.up * numUp, ForceMode.Impulse);
 
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
@@ -88,7 +90,7 @@ public class Landfall : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         
-        if (collision.gameObject.tag.Equals("planet") && cast) //lands back on the ground
+        if (/*collision.gameObject.tag.Equals("planet") &&*/ cast) //lands back on the ground
         { 
             if (!particleSpawned)
             {
@@ -97,7 +99,7 @@ public class Landfall : MonoBehaviour
             }
             
             anim.PlayLoopingAnim("Standard"); //Idle
-            soundManager.stop();
+            //soundManager.stop();
             soundManager.playOneShot("LandfallFall");
 
             Collider[] enemies = Physics.OverlapSphere(transform.position, sphereRadius);
