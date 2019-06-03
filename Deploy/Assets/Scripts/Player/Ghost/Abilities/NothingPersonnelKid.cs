@@ -94,7 +94,7 @@ public class NothingPersonnelKid : MonoBehaviour
                 
                 
                 anim.StartOverlayAnim("Swing_Heavy_1", 0.5f, 0.5f);
-                scythe.setActive(40);//hits 3 times lol
+                scythe.setActive(120);
                 if (!voiceLinePlayed)
                 {
                     soundManager.playOneShot("NPKTeleport");
