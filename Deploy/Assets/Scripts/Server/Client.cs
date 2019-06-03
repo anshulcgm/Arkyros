@@ -14,10 +14,11 @@ public class Client
     string serverIP;
     public bool debug = false;
 
-    public Client(string serverIP, GameObject player, UDP udp)
+    public Client(string serverIP, GameObject player, GameObject camera, UDP udp)
     {
         this.udp = udp;
         this.player = player;
+        this.camera = camera;
         this.serverIP = serverIP;
         if (debug == true)
         {
