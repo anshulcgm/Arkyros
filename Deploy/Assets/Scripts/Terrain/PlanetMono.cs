@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlanetMono : MonoBehaviour, IMono
 {
+    public bool created = false;
+
     private Planet planet;
 
     public GameObject building;
@@ -41,6 +43,8 @@ public class PlanetMono : MonoBehaviour, IMono
 
     public void Create(int seed)
     {
+        Debug.Log("true seed reeeeeeeeeeeeeeeeeeeeeeeeeeee: " + seed);
+        created = true;
         DateTime start = DateTime.Now;
         System.Random r = new System.Random(seed);
         

@@ -8,16 +8,15 @@ public class PlanetGenerator
     public static List<int[]> shownCons = new List<int[]>();
     //radius is (minimum) radius of the planet AKA distance from core to surface corners/points
     //variance is maximum radius - minimum, AKA variance is maximum radius added at any 1 point/corner
-    //variance seed is just the random seed
+    //variance seed is just the rom seed
     //numPointsLat is number of points around (horizontally) on the sphere
     //numPointsLong is number of layers of points (layers horizontal and vertical in a way too)
     //points is an output bascially
     //cons (connections) is another output basically
-    public static void MakePlanet(float radius, float variance, int varianceSeed, int numPointsLat, int numPointsLong, out List<Vector3> points, out List<int[]> cons)
+    public static void MakePlanet(float radius, float variance, System.Random r, int numPointsLat, int numPointsLong, out List<Vector3> points, out List<int[]> cons)
     {
         points = new List<Vector3>();
         cons = new List<int[]>();
-        System.Random rand = new System.Random(varianceSeed);
 
         float thetaSlerp = 0;
         double rot = 0;
@@ -70,53 +69,53 @@ public class PlanetGenerator
 
         
         //valley
-        int num = rand.Next(10, 15);
+        int num = r.Next(10, 15);
         for (int i = 0; i < num; i++)
         {
-            int index = rand.Next(0, points.Count);
+            int index = r.Next(0, points.Count);
             points[index] = points[index].normalized * radius * 0.75f;
             points = Smooth(index, 5, 0.6f, map, points);
         }        
 
         //hill
-        num = rand.Next(5, 8);
+        num = r.Next(5, 8);
         for (int i = 0; i < num; i++)
         {
-            int index = rand.Next(0, points.Count);
+            int index = r.Next(0, points.Count);
             points[index] = points[index].normalized * radius * 1.2f;
             points = Smooth(index, 5, 0.65f, map, points);
         }
 
         //plateau
-        num = rand.Next(5, 8);
+        num = r.Next(5, 8);
         for (int i = 0; i < num; i++)
         {
-            int index = rand.Next(0, points.Count);
+            int index = r.Next(0, points.Count);
             points[index] = points[index].normalized * radius * 1.2f;
             points = Smooth(index, 2, 1f, map, points);
         }
 
         //flat
-        num = rand.Next(1, 3);
+        num = r.Next(1, 3);
         for (int i = 0; i < num; i++)
         {
-            int index = rand.Next(0, points.Count);
+            int index = r.Next(0, points.Count);
             points[index] = points[index].normalized * radius * 1.1f;
             points = Smooth(index, 5, 0.95f, map, points);
         }
 
         //rolling hill
-        num = rand.Next(5, 8);
+        num = r.Next(5, 8);
         for (int i = 0; i < num; i++)
         {
-            int index = rand.Next(0, points.Count);
+            int index = r.Next(0, points.Count);
             points[index] = points[index].normalized * radius * 1f;
             points = Smooth(index, 5, 0.3f, map, points);
         }
 
         for(int i = 0; i < points.Count; i++)
         {
-            points[i] += points[i].normalized * variance * (float)rand.NextDouble();
+            points[i] += points[i].normalized * variance * (float)r.NextDouble();
         }
     }
 

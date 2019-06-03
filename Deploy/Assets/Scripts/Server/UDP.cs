@@ -9,7 +9,7 @@ using UnityEngine;
 public class UDP
 {
     //the port number
-    private const int PORT_NUMBER = 15000;
+    private const int PORT_NUMBER = 1500;
     //the asynchronous thread we'll be working on
     private Thread t = null;
     //our most recent message
@@ -84,6 +84,7 @@ public class UDP
     //sends string message to person w/ipAddress whatever
     public void Send(string message, string ipAddr)
     {
+        Debug.Log(message + " sent to " + ipAddr);
         UdpClient client = new UdpClient();
         IPEndPoint ip = new IPEndPoint(IPAddress.Parse(ipAddr), PORT_NUMBER);
         byte[] bytes = Encoding.ASCII.GetBytes(message);

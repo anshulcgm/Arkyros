@@ -110,13 +110,13 @@ public class DataParserAndFormatter
         return abilityIds;
     }
 
-    public static String GetClassPathAndAbilityIdsFormatted(string classpath, int[] abilityIds){
+    public static String GetClassPathAndAbilityIdsFormatted(string classpath, int[] abilityIds, string clientIp){
         String ids = "";
         foreach(int id in abilityIds){
             ids += id + "|";
         }        
         ids = ids.Substring(0, ids.Length - 1);
-        return beginClassPathInput + classpath + endClassPathInput + beginAbilityIdInput + ids + endAbilityIdInput;
+        return beginClassPathInput + classpath + endClassPathInput + beginAbilityIdInput + ids + endAbilityIdInput + beginIpInput + clientIp + endIpInput;
     }
 
     #endregion
