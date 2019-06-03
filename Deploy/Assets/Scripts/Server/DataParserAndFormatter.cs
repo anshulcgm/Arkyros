@@ -87,11 +87,11 @@ public class DataParserAndFormatter
         return new Quaternion[]{StringToQuaternion(rotation), StringToQuaternion(camRotation)};
     }
 
-    public static Vector3 GetPosIn(string clientInput){
+    public static Vector3[] GetPosIn(string clientInput){
         String posIn = clientInput.Split(new string[] {beginCamPosInput}, StringSplitOptions.None)[1].Split(new string[] {endCamPosInput}, StringSplitOptions.None)[0];
         String position = posIn.Split('|')[1];
-        String camRotation = posIn.Split('|')[0];
-        return StringToVector3(posIn);
+        String camPosition = posIn.Split('|')[0];
+        return new Vector3[] {StringToVector3(position), StringToVector3(camPosition)};
     }
 
     public static string GetIP(string clientInput){
