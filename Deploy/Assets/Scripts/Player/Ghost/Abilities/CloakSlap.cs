@@ -53,7 +53,7 @@ public class CloakSlap : MonoBehaviour
             stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] /= 3f; //decrease speed
 
             //Split Windup animation for here
-            anim.StartOverlayAnim("CircleSwing", 0.5f, 8f);
+            anim.StartOverlayAnim("SlapWindUp", 0.5f, 8f);
             Debug.Log("start");
             soundManager.playOneShot("CloakSlapCharge");
         }
@@ -63,7 +63,7 @@ public class CloakSlap : MonoBehaviour
             soundManager.stop();
             stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] *= 3;
             Debug.Log("end");
-            anim.StartOverlayAnim("Slap", 0.5f, 1.7f); //this tells the animator to play the right animation
+            anim.StartOverlayAnim("SlapEnd", 0.5f, 1f); //this tells the animator to play the right animation
             cloak.setActive(100);
             soundManager.playOneShot("CloakSlapRelease");
 
