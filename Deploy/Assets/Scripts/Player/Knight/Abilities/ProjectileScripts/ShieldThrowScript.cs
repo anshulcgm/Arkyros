@@ -7,17 +7,18 @@ public class ShieldThrowScript : MonoBehaviour
 {
     Stats stats;
     DateTime start;
+
     void Start() {
         start = DateTime.Now;
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.tag == "Enemy") {
-            stats.dealDamage(collision.gameObject, 20);
-        } else
+        if (collision.gameObject.tag == "Enemy")
         {
-            Destroy(this.gameObject);
-        }
+            collision.gameObject.GetComponent<StatManager>().changeHealth(-30);
+        } 
+        Destroy(this.gameObject);
+
     }
 
     void Update()

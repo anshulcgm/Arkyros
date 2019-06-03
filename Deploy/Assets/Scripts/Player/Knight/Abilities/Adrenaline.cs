@@ -1,52 +1,43 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Adrenaline : Passive
+public class Adrenaline : Passives
 {
     //ADD passive ability's tier - check from ability log
-    public int tier = 0;
-    public bool isActive;
 
     public bool used;
+    public bool divided;
 
     Stats stats;
+    DateTime start;
 
-    public override void On()
-    {
-        isActive = true;
-    }
-    public override void Off()
-    {
-        isActive = false;
-        //REVERSE EFFECTS IF NEEDED
-    }
-
-    public void Start()
+    private void Start()
     {
         stats = GetComponent<Stats>();
-
     }
-
 
     void FixedUpdate()
     {
-        if (isActive && stats.health < 20 && !used)
+        if (stats.health < 20 && !used)
         {
-            //cleanse debuffs
-            //stats.addBuff adrenaline buff, 720
-            //increase attack by 20
-            //increase speed
+            start = DateTime.Now;
+            stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] *= 1.2f;
+            stats.allStats[(int)stat.Attack, (int)statModifier.Multiplier] *= 1.2f;
             used = true;
+            divided = false;
+        }
+        if ((DateTime.Now - start).TotalSeconds < 12 && !divided)
+        {
+            stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] /= 1.2f;
+            stats.allStats[(int)stat.Attack, (int)statModifier.Multiplier] /= 1.2f;
+            divided = true;
         }
         if (stats.health == 0)
         {
             used = false;
         }
-
     }
 
-
-    
-    
 }

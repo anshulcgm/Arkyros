@@ -24,6 +24,7 @@ public class ShieldThrow : MonoBehaviour
 
     SoundManager soundManager;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +60,7 @@ public class ShieldThrow : MonoBehaviour
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
 
-            GameObject shieldObj = Instantiate(Shield, transform.position + transform.forward, Quaternion.identity);
+            GameObject shieldObj = Instantiate(Shield, model.transform.position + transform.forward * 2 + transform.up * 8, Quaternion.identity);
 
             float x = Screen.width / 2f;
             float y = Screen.height / 2f;

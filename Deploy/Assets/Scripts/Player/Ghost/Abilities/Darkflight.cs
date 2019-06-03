@@ -46,10 +46,10 @@ public class Darkflight : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            rigidbody.AddForce(transform.up * 40, ForceMode.Impulse); //jumps super high
+            rigidbody.AddForce(transform.up * 20, ForceMode.Impulse); //jumps super high
 
             soundManager.playOneShot("DarkflightTakeoff");
-            anim.PlayLoopingAnim("Fly_Forward");
+            //anim.PlayLoopingAnim("Fly_Forward");
 
             stats.buffs[(int)buff.Gravityless] += 240; //lets you fly
 
@@ -71,6 +71,7 @@ public class Darkflight : MonoBehaviour
         {
             soundManager.playOneShot("DarkflightLanding");
             anim.PlayLoopingAnim("Idle");
+            cast = false;
         }
     }
 }

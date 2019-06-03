@@ -21,8 +21,10 @@ public class BullRush : MonoBehaviour
     private bool buffActive;
     private bool cast;
 
-    private int dashNum = 500;
-    private int enemySetback = 400;
+    private int dashNum = 150;
+    private int enemySetback = 200;
+
+    bool dashing;
 
     SoundManager soundManager;
     //might not always be Ghost, need different one for each class.
@@ -50,20 +52,26 @@ public class BullRush : MonoBehaviour
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;
-            anim.StartOverlayAnim("BullRush", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
+            anim.StartOverlayAnim("Charge", 0.5f, 1f); //this tells the animator to play the right animation, what strength, what duration
 
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-
-            GetComponent<Rigidbody>().AddForce(transform.forward * dashNum); //dash forward
+            model.transform.rotation = camera.transform.rotation;
+            rigidbody.AddForce(camera.transform.forward * dashNum, ForceMode.Impulse); //dash forward
+            dashing = true;
             soundManager.playOneShot("BullRush");
 
 
             cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
             cast = true;
 
+        }
+
+        if ((DateTime.Now - start).TotalSeconds > 2 && cast)
+        {
+            dashing = false;
         }
 
 
@@ -74,10 +82,11 @@ public class BullRush : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy" && !cast)
+        if (collision.gameObject.tag == "Enemy" && dashing)
         {
-            collision.gameObject.GetComponent<StatManager>().changeHealth(20);
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * -enemySetback);
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(model.transform.forward * enemySetback, ForceMode.Impulse);
+            stats.dealDamage(collision.gameObject, 20);
+            
         }
     }
 }

@@ -36,7 +36,7 @@ public class MementoMoriProjectile : MonoBehaviour
                 soundManager.playOneShot("MementoMoriReturn");
                 comingBack = true;
             }
-            transform.position = Vector3.MoveTowards(transform.position, Source.transform.position + transform.up * 6, .5f);
+            transform.position = Vector3.MoveTowards(transform.position, Source.transform.position + transform.up * 6, 1f);
             //var ray = transform.position - startPoint;
             //rigidBody.velocity = Vector3.zero;
             //rigidBody.velocity = ray * projectileSpeed;
@@ -52,15 +52,15 @@ public class MementoMoriProjectile : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<StatManager>().changeHealth(20);
-
+            Debug.Log("Hit");
+            other.gameObject.GetComponent<StatManager>().changeHealth(-30);
         }
         
-        if(other.gameObject == Source)
+        else if(other.gameObject == Source)
         {
             Destroy(this.gameObject);
         }

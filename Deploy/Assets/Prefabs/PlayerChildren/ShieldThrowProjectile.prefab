@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4011288354646422638}
   - component: {fileID: 3720324352413606372}
   - component: {fileID: 3807787200657457729}
+  - component: {fileID: 873793240519213463}
   m_Layer: 0
   m_Name: ShieldThrowProjectile
   m_TagString: Untagged
@@ -103,5 +104,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7909b7f21ac61d3499de67d51e150175, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &873793240519213463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7221119121191098378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28ddbc1b95aa76d46a1ae946550e2d90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
