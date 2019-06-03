@@ -36,7 +36,7 @@ public class MementoMoriProjectile : MonoBehaviour
                 soundManager.playOneShot("MementoMoriReturn");
                 comingBack = true;
             }
-            transform.position = Vector3.MoveTowards(transform.position, Source.transform.position + transform.up * 6, 1f);
+            transform.position = Vector3.MoveTowards(transform.position, Source.transform.position + Source.transform.up * 5, 1f);
             //var ray = transform.position - startPoint;
             //rigidBody.velocity = Vector3.zero;
             //rigidBody.velocity = ray * projectileSpeed;

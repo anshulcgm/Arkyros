@@ -3939,7 +3939,7 @@ Transform:
   m_Children:
   - {fileID: 6024261912044075363}
   m_Father: {fileID: 4308940430666139231}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5872637255165956501
 GameObject:
@@ -4649,7 +4649,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4308940430666139231}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6465488127773979307
 GameObject:
@@ -5374,7 +5374,7 @@ MonoBehaviour:
   anim: {fileID: 7683873447285365564}
   attackTransforms: []
   attackAnims:
-  - AncestorsGift
+  - AncestorGift
   - AncestorsCurse
   - AppleADay
   - BasicAttack
@@ -5639,7 +5639,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7924217329179666094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -20}
+  m_LocalPosition: {x: 0, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3164028773983196111}
@@ -6269,8 +6269,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3164028773983196111}
-  - {fileID: 1513503290466547658}
   - {fileID: 7489302636348051303}
+  - {fileID: 1513503290466547658}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6541,10 +6541,10 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &7321157454816559324
 MonoBehaviour:
@@ -6591,7 +6591,7 @@ MonoBehaviour:
   isMoving: 0
   isAirborne: 0
   mouseSensitivity: 1
-  playerModel: {fileID: 7683873447285365562}
+  playerModel: {fileID: 5819100675244936564}
   playerDir: {fileID: 6444261994490901374}
   c: {fileID: 0}
   r: {fileID: 3591978754323762912}
@@ -6628,8 +6628,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7683873447285365563}
-  fireball: {fileID: 0}
-  model: {fileID: 0}
+  fireball: {fileID: 3239049698185698997, guid: 78454699a4b810341b3ef0a09e50273b,
+    type: 3}
+  model: {fileID: 5819100675244936564}
 --- !u!114 &9222171157336489633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6637,14 +6638,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9222171157336489624}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 656261ba6f4814a46968ec0eeb5e77c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
   anim: {fileID: 7683873447285365563}
-  model: {fileID: 7683873447285365562}
+  model: {fileID: 5819100675244936564}
   AppleTree: {fileID: 9087808191733974084, guid: 78d6ed6024aa9b74eaf375b1f97326bb,
     type: 3}
 --- !u!114 &9222171157336489632
@@ -6661,7 +6662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   anim: {fileID: 7683873447285365563}
-  model: {fileID: 7683873447285365562}
+  model: {fileID: 5819100675244936564}
 --- !u!114 &9222171157336489631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6669,14 +6670,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9222171157336489624}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfa35712da4ed3749a8322e5fba02d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
   anim: {fileID: 7683873447285365563}
-  model: {fileID: 7683873447285365562}
+  model: {fileID: 5819100675244936564}
 --- !u!114 &9222171157336489630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6691,7 +6692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   anim: {fileID: 7683873447285365563}
-  model: {fileID: 7683873447285365562}
+  model: {fileID: 5819100675244936564}
 --- !u!114 &9222171157336489629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6706,7 +6707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   anim: {fileID: 7683873447285365563}
-  model: {fileID: 7683873447285365562}
+  model: {fileID: 5819100675244936564}
 --- !u!114 &9222171157336489628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6721,7 +6722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   anim: {fileID: 7683873447285365563}
-  model: {fileID: 7683873447285365562}
+  model: {fileID: 5819100675244936564}
 --- !u!114 &9222171157336489627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6736,7 +6737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   anim: {fileID: 7683873447285365563}
-  model: {fileID: 7683873447285365562}
+  model: {fileID: 5819100675244936564}
   AppleTree: {fileID: 0}
 --- !u!114 &9222171157336489626
 MonoBehaviour:
@@ -6752,7 +6753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   anim: {fileID: 7683873447285365563}
-  model: {fileID: 7683873447285365562}
+  model: {fileID: 5819100675244936564}
   array: []
   affectedPlayers: []
 --- !u!114 &5963480313872825383
@@ -6769,4 +6770,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   anim: {fileID: 7683873447285365563}
-  model: {fileID: 7683873447285365562}
+  model: {fileID: 5819100675244936564}

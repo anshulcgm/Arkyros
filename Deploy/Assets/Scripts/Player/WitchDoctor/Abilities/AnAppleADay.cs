@@ -59,6 +59,9 @@ public class AnAppleADay : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
+            soundManager.playOneShot("1An Apple A Day");
+            anim.StartOverlayAnim("AppleADay", 0.5f, 1.0f);
+
             var mousePos = Input.mousePosition;
             var objectPos = Camera.current.ScreenToWorldPoint(mousePos);
             GameObject treeObj = Instantiate(AppleTree, objectPos, Quaternion.identity);

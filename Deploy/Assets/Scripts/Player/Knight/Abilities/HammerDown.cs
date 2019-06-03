@@ -6,12 +6,14 @@ using UnityEngine;
 public class HammerDown : MonoBehaviour
 {
     public float cooldown;
+    public float maxCooldown = 480;
     
     private GameObject camera;
     public GameObject SkyHammer;
 
     public AnimationController anim;
     public GameObject model;
+
     DateTime start;
 
 
@@ -56,7 +58,7 @@ public class HammerDown : MonoBehaviour
         {
             called = true;
             anim.StartOverlayAnim("BuffActivation", 0.5f, 1f);
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cooldown = maxCooldown;
             cast = true;
 
         }

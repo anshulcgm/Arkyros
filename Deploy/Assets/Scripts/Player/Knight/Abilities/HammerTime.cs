@@ -6,6 +6,7 @@ using UnityEngine;
 public class HammerTime : MonoBehaviour
 {
     public float cooldown;
+    public float maxCooldown = 480;
 
     private GameObject camera;
 
@@ -55,13 +56,6 @@ public class HammerTime : MonoBehaviour
             start = DateTime.Now;
             particleSpawned = false;
             done = false;
-            
-
-
-            //put any setup code here, before the ability is actually cast
-
-
-
         }
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
@@ -75,9 +69,7 @@ public class HammerTime : MonoBehaviour
             anim.StartOverlayAnim("Swing_Heavy", 0.5f, 0.8f);
             particleSpawned = false;
 
-            
-
-            cooldown = 600;                          //placeholder time, divide by 60 for cooldown in seconds
+            cooldown = maxCooldown;
             cast = true;
 
         }
@@ -102,10 +94,6 @@ public class HammerTime : MonoBehaviour
             hammerSwing = DateTime.Now;
             anim.StartOverlayAnim("Swing_Heavy", 0.5f, 0.8f);
             particleSpawned = false;
-
-            
-            
-
         }
 
         if ((DateTime.Now - hammerSwing).TotalSeconds > 0.8 && cast && !particleSpawned)//timed to explode with hammer connection
@@ -122,13 +110,9 @@ public class HammerTime : MonoBehaviour
                 {
                     stats.dealDamage(hit.gameObject, 600);
                 }
-            }
-
-            
+            }            
         }
-
-
-
+        
         if ((DateTime.Now - start).TotalSeconds > 7)
         {
             cast = false;

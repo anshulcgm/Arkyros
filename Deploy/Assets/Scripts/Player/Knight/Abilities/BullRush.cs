@@ -6,11 +6,13 @@ using UnityEngine;
 public class BullRush : MonoBehaviour
 {
     public float cooldown;
+    public float maxCooldown = 300;
 
     private GameObject camera;
 
     public AnimationController anim;
     public GameObject model;
+
     DateTime start;
 
 
@@ -61,7 +63,7 @@ public class BullRush : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            cooldown = 240;                          //placeholder time, divide by 60 for cooldown in seconds
+            cooldown = maxCooldown;
             cast = true;
             model.transform.rotation = camera.transform.rotation;
             rigidbody.AddForce(camera.transform.forward * dashNum, ForceMode.Impulse); //dash forward

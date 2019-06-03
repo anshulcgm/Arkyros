@@ -6,12 +6,12 @@ using UnityEngine;
 public class SpiritBlade : MonoBehaviour
 {
     public float cooldown;
-    public int maxCooldown = 240;
+    public float maxCooldown = 240;
 
     private GameObject camera;
 
     public AnimationController anim;
-
+    public GameObject model;
 
     private bool buffActive;
 
@@ -25,7 +25,7 @@ public class SpiritBlade : MonoBehaviour
 
     private int projectileSpeed = 40;
     private bool cast;
-    public GameObject model;
+
 
     SoundManager soundManager;
 

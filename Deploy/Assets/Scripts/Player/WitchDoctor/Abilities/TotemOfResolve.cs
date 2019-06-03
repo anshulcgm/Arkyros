@@ -58,7 +58,8 @@ public class TotemOfResolve : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            soundManager.play("Soundname");
+            soundManager.playOneShot("2Totem of Omnipresence");
+            anim.StartOverlayAnim("TotemSummon", 0.5f, 1.0f);
             Instantiate(Totem, transform.position, transform.rotation);
 
 

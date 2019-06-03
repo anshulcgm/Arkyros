@@ -7,11 +7,12 @@ using UnityStandardAssets.ImageEffects;
 public class HeartOfDarkness : MonoBehaviour
 {
     public float cooldown;
-    public int maxCooldown = 4800;
+    public float maxCooldown = 1800;
 
     private GameObject camera;
 
     public AnimationController anim;
+    public GameObject model;
 
     DateTime start;
     DateTime lastCast;
@@ -55,6 +56,7 @@ public class HeartOfDarkness : MonoBehaviour
     {
         if (Input.GetKey("r") && cooldown == 0 && !gottem_r)      //place key, any key can be pressed.
         {
+            cooldown = maxCooldown;
             gottem_r = true;
             cast = true; //ability not yet cast
             start = DateTime.Now;

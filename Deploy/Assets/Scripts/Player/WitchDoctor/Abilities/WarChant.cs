@@ -66,7 +66,9 @@ public class WarChant : MonoBehaviour
 
         if ((DateTime.Now - start).TotalSeconds < 1 && !cast)
         {
-            soundManager.play("Soundname");
+            soundManager.playOneShot("5WarChantLoopable");
+            anim.StartOverlayAnim("WarchantBeginning", 0.5f, 1.0f);
+
             buffActive = true;
             stats.allStats[(int)stat.Speed, (int)statModifier.Multiplier] /= 2f;
             /*
