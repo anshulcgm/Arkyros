@@ -8,6 +8,7 @@ public class ServerMono : MonoBehaviour
     public bool waitForClients = true;
     public bool waitForClientCreateMessages = true;
     public bool hasSentTerrainSeed = false;
+    public bool createdTerrain = false;
 
     public bool hasCreatedPlayers = false;
 
@@ -20,7 +21,7 @@ public class ServerMono : MonoBehaviour
         //start the server
         server = new Server(udp);
     }
-
+    int seed = 0;
     // Update is called once per frame
     void Update()
     {
@@ -37,17 +38,16 @@ public class ServerMono : MonoBehaviour
         else if (!hasSentTerrainSeed)
         {
             //get the terrain seed and send it to all the clients
-            int seed = (int)((UnityEngine.Random.value) * (int.MaxValue - 1));
+            seed = (int)((UnityEngine.Random.value) * (int.MaxValue - 1));
             server.SendTerrainSeed(seed);
-
+            hasSentTerrainSeed = true;
+            return;
+        }
+        else if(!createdTerrain){
             //find the planet, make it active, set the seed and generate it.
             GameObject planet = GameObject.FindGameObjectWithTag("planet");
             planet.GetComponent<PlanetMono>().Create(seed);
-
-            //activate all the pther objects
-
-            
-            hasSentTerrainSeed = true;
+            createdTerrain = true;
             return;
         }
         else if(waitForClientCreateMessages){
