@@ -64,8 +64,6 @@ public static class UnityHandler
         
         //if it's a player, just update the position.
         if(gameObjects[int.Parse(data[index])].Equals(player)){
-            Vector3 target = DataParserAndFormatter.StringToVector3(data[index + 1]);
-            player.transform.position = Vector3.Lerp(player.transform.position, target, 0.01f);
             return;
         }
 
@@ -75,7 +73,7 @@ public static class UnityHandler
         if (Object != null)
         {
             Vector3 target = DataParserAndFormatter.StringToVector3(data[index + 1]); //parse and update position
-            Object.transform.position = Vector3.MoveTowards(Object.transform.position, target, 0.01f);
+            Object.transform.gameObject.GetComponent<Rigidbody>().velocity = target - Object.transform.position;
             Object.transform.rotation = DataParserAndFormatter.StringToQuaternion(data[index + 2]); //parse and update rotation
             if (debug == true)
             {

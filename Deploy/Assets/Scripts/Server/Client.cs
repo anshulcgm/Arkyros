@@ -42,7 +42,7 @@ public class Client
             }
         }
 
-        string clientData = DataParserAndFormatter.GetClientInputFormatted(keysPressed, Input.GetMouseButtonDown(0), Input.GetMouseButtonDown(1), player.transform.rotation, camera.transform.rotation, camera.transform.position, UDP.GetLocalIPAddress());
+        string clientData = DataParserAndFormatter.GetClientInputFormatted(keysPressed, Input.GetMouseButtonDown(0), Input.GetMouseButtonDown(1), player.transform.rotation, player.transform.position, camera.transform.rotation, camera.transform.position, UDP.GetLocalIPAddress());
         udp.Send(clientData, serverIP); //send position and orientation and ipaddr of client to server for update
     }
 
