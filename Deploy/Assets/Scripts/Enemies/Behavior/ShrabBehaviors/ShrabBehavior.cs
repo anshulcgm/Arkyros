@@ -42,13 +42,17 @@ public class ShrabBehavior : MonoBehaviour
 
     private Vector3 targetPoint;
 
+    private GameObject[] leftLegList;
+    private GameObject[] rightLegList;
     // Start is called before the first frame update
     void Start()
     {
+        leftLegList = GameObject.FindGameObjectsWithTag("LeftLeg");
+        rightLegList = GameObject.FindGameObjectsWithTag("RightLeg");
         planet = GameObject.FindGameObjectWithTag("planet");
-        player = GameObject.FindGameObjectWithTag("Player");
-        leftPlayerLeg = GameObject.FindGameObjectWithTag("LeftLeg");
-        rightPlayerLeg = GameObject.FindGameObjectWithTag("RightLeg");
+        //player = GameObject.FindGameObjectWithTag("Player");
+        //leftPlayerLeg = GameObject.FindGameObjectWithTag("LeftLeg");
+        //rightPlayerLeg = GameObject.FindGameObjectWithTag("RightLeg");
         anim = GetComponent<Animator>(); 
         this.shurikenRange = 15;
         //this.shrabsInRange = new List<Shrab>();
@@ -66,6 +70,9 @@ public class ShrabBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        player = PlayerAttack.getClosestPlayer(transform, PlayerAttack.playerList).gameObject;
+        leftPlayerLeg = PlayerAttack.getClosestPlayer(transform, leftLegList).gameObject;
+        rightPlayerLeg = PlayerAttack.getClosestPlayer(transform, rightLegList).gameObject;
         shrabMovementSpeed = GetComponent<StatManager>().shrabMovementSpeed;
         float raycastDistancePlayer = Vector3.Distance(transform.position, findRaycastPointOnSphere(player.transform.position));
         //transform.LookAt(player.transform);

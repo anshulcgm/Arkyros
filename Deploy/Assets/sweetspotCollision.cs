@@ -16,7 +16,7 @@ public class sweetspotCollision : MonoBehaviour
         
     }
     private void OnCollisionEnter(Collision collision)
-    {
+    { 
         if(collision.gameObject.tag != "Planet")
         {
             transform.parent.GetComponent<StatManager>().changeHealth(GetComponent<StatManager>().ship.enemyStats.getMaxHealth() / 5.0f);

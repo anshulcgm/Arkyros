@@ -52,8 +52,8 @@ public class ShlyEnemyBehavior : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         oPelletTimer = pelletTimer;
         pelletTimer = -0.01f;
-        player = GameObject.FindGameObjectWithTag("PlayerCenter");
-        Debug.Log(player.name);
+        //player = GameObject.FindGameObjectWithTag("PlayerCenter");
+        //Debug.Log(player.name);
         finalPos = Random.insideUnitSphere * maxDisToTravel + transform.position;
         
 
@@ -62,6 +62,7 @@ public class ShlyEnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        player = PlayerAttack.getClosestPlayer(transform, GolemAttackBehavior.playerCenterlist).gameObject;
         float disToPlayer = Vector3.Distance(transform.position, player.transform.position);
         transform.rotation = Quaternion.LookRotation(rb.velocity);
         //Debug.Log("Player position is " + player.transform.position);

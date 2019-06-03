@@ -18,12 +18,15 @@ public class PlayerAttack : MonoBehaviour {
     private Vector3 final;
 
     private float diveSpeed;
+
+    public static GameObject[] playerList;
     //Use dive speed from Kamikaze IQ logic
 	// Use this for initialization
 	void Start () {
         speed = GetComponent<StatManager>().kamikazeMovementSpeed;
         r = GetComponent<Rigidbody>();
-        player = GameObject.FindGameObjectWithTag("Player");    
+        playerList = GameObject.FindGameObjectsWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");    
         anim = GetComponent<Animator>();
         oTime = timer;
         final = Random.insideUnitSphere * maxDis + transform.position;
@@ -32,8 +35,10 @@ public class PlayerAttack : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-
+    
 	void Update () {
+
+        player = getClosestPlayer(transform, playerList).gameObject;
         diveSpeed = GetComponent<StatManager>().flyingKam.getDiveSpeed();
         transform.LookAt(player.transform); //Ensures they're always looking at the player
         Vector3 playerPos = player.transform.position;
@@ -50,7 +55,22 @@ public class PlayerAttack : MonoBehaviour {
             neutralMovement();
         }
     }
-
+    public static Transform getClosestPlayer(Transform selfTransform, GameObject[] playerList)
+    {
+        Transform tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = selfTransform.position;
+        foreach(GameObject p in playerList)
+        {
+            float squaredDist = Vector3.SqrMagnitude(selfTransform.position - p.transform.position);
+            if(squaredDist < minDist)
+            {
+                tMin = p.transform;
+                minDist = squaredDist; 
+            }
+        }
+        return tMin; 
+    }
     //Kamikazes explode when they hit anything but other enemies 
     private void OnCollisionEnter(Collision collision)
     {

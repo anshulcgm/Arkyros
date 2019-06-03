@@ -122,6 +122,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1363150}
   - component: {fileID: 1363154}
+  - component: {fileID: 1363151}
+  - component: {fileID: 1363152}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -145,6 +147,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1363151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b61e56f0e44b6449a142ef3e345890b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMoving: 0
+  isAirborne: 0
+  mouseSensitivity: 1
+  playerModel: {fileID: 796385097}
+  playerDir: {fileID: 575020723}
+  c: {fileID: 434073860}
+  r: {fileID: 0}
+  slerpSpeed: 10
+  jumpForce: 10
+  gravity: 10
+  moveSpeed: 10
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1
+--- !u!114 &1363152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b22993558573e498ee15fa265d8589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regenTimer: 0
+  maxHealth: 0
+  health: 0
+  buffs: 000000000000000000000000
 --- !u!54 &1363154
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1139,7 +1183,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912642340}
-  m_LocalRotation: {x: 0.32326585, y: -0.000000032565083, z: 0.000000011124473, w: 0.94630826}
+  m_LocalRotation: {x: 0.32326585, y: 0.000000032565083, z: -0.00000001112447, w: 0.94630826}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1497,7 +1541,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2122683472}
-  m_LocalRotation: {x: 0.3232659, y: -0.00000006513016, z: 0.000000022248948, w: 0.9463082}
+  m_LocalRotation: {x: 0.3232659, y: 0.00000006513016, z: -0.000000022248948, w: 0.9463082}
   m_LocalPosition: {x: 0, y: 4836.5, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
