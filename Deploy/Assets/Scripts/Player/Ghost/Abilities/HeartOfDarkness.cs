@@ -54,7 +54,7 @@ public class HeartOfDarkness : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("r") && cooldown == 0 && !gottem_r)      //place key, any key can be pressed.
+        if (GetComponent<PlayerScript>().IsPressed("r") && cooldown == 0 && !gottem_r)      //place key, any key can be pressed.
         {
             cooldown = maxCooldown;
             gottem_r = true;

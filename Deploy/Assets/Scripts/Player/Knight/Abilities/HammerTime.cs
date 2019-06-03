@@ -50,7 +50,7 @@ public class HammerTime : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("f") && cooldown == 0)      //place key, any key can be pressed.
+        if (GetComponent<PlayerScript>().IsPressed("f") && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false; //ability not yet cast
             start = DateTime.Now;

@@ -34,7 +34,7 @@ public class KnightAnimsAndSounds : MonoBehaviour
     void Update()
     {
         //Attack
-        if (Input.GetMouseButton(0) && attackDelay == 0)
+        if (GetComponent<PlayerScript>().M1Down() && attackDelay == 0)
         {
 
             anim.StartOverlayAnim("Swing_Heavy", 0.5f, 0.8f);

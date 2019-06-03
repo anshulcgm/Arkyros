@@ -15,7 +15,7 @@ public class AOEKnockBack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey("e")){
+        if (GetComponent<PlayerScript>().IsPressed("e")){
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, transform.right, 0.0f);
             foreach (RaycastHit hit in hits)
             {

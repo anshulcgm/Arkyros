@@ -46,7 +46,7 @@ public class SpiritBlade : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetMouseButton(1) && cooldown == 0)      //place key, any key can be pressed.
+        if (GetComponent<PlayerScript>().M2Down() && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false;
             start = DateTime.Now;

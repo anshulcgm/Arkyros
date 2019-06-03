@@ -162,7 +162,7 @@ public class GhostController : MonoBehaviour
         moveAmount = Vector3.SmoothDamp(moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
 
         //Attack
-        if (Input.GetMouseButton(0) && attackDelay == 0)
+        if (GetComponent<PlayerScript>().M1Down() && attackDelay == 0)
         {
             //Debug.Log("Attack was pressed");
             //setAllTriggersFalse();

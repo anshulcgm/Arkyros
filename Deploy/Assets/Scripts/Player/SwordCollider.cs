@@ -9,7 +9,7 @@ public class SwordCollider : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetMouseButton(0) && attackDelay == 0)
+        if (GetComponent<PlayerScript>().M1Down() && attackDelay == 0)
         {
             //run the animation, will be moved to another script
             attackDelay = 60; //can attack 60 frames later

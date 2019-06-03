@@ -17,7 +17,7 @@ public class Lionheart : MonoBehaviour {
 	void Update () {
 
 
-        if (Input.GetKey("g"))
+        if (GetComponent<PlayerScript>().IsPressed("g"))
         {
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, transform.right, 0.0f);
             foreach (RaycastHit hit in hits)

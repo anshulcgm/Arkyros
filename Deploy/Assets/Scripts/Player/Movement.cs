@@ -52,25 +52,25 @@ public class Movement : MonoBehaviour
         moveAmount = Vector3.zero;
         Vector2 angleAdd = Vector2.zero;
         bool moving = false;
-        if (Input.GetKey("w"))
+        if (GetComponent<PlayerScript>().IsPressed("w"))
         {
             moving = true;
             angleAdd.y += 1;
             moveAmount += playerDir.transform.forward;
         }
-        if (Input.GetKey("a"))
+        if (GetComponent<PlayerScript>().IsPressed("a"))
         {
             moving = true;
             angleAdd.x += 1;
             moveAmount -= playerDir.transform.right;
         }
-        if (Input.GetKey("s"))
+        if (GetComponent<PlayerScript>().IsPressed("s"))
         {
             moving = true;
             angleAdd.y -= 1;
             moveAmount -= playerDir.transform.forward;
         }
-        if (Input.GetKey("d"))
+        if (GetComponent<PlayerScript>().IsPressed("d"))
         {
             moving = true;
             angleAdd.x -= 1;
@@ -93,8 +93,7 @@ public class Movement : MonoBehaviour
         if(stats.buffs[(int)buff.Gravityless] == 0)
         {
             r.AddForce(-gravity * transform.position.normalized);
-        }
-        
+        }        
 
         isMoving = moving;
         isAirborne = !Physics.Raycast(transform.position + transform.up, -transform.up, 10f, layerMask);

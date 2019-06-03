@@ -66,7 +66,7 @@ public class ServerMovement : MonoBehaviour
         }
         moveAmount = moveAmount.normalized;
 
-        if (p.IsPressed(' ') && Physics.Raycast(transform.position + transform.up, -transform.up, 10f, layerMask))
+        if (p.IsPressed(' ') && Physics.Raycast(transform.position + transform.up, -transform.up, 1f, layerMask))
         {
             r.AddForce(jumpForce * transform.position.normalized, ForceMode.Impulse);
         }

@@ -153,10 +153,8 @@ public class Server
             for(int i = 0; i < players.Count; i++){
                 if(players[i].ipAddr.Equals(ip)){
                     Quaternion[] rots = DataParserAndFormatter.GetRotationIn(message);
-                    Vector3[] posns = DataParserAndFormatter.GetPosIn(message);
-                    players[i].playerGameObject.transform.position = posns[0];
                     players[i].playerGameObject.transform.rotation = rots[0];
-                    players[i].playerGameObject.GetComponent<PlayerScript>().HandleInput(DataParserAndFormatter.GetKeysIn(message), rots[1], posns[1], DataParserAndFormatter.GetMouseIn(message));
+                    players[i].playerGameObject.GetComponent<PlayerScript>().HandleInput(DataParserAndFormatter.GetKeysIn(message), rots[1], DataParserAndFormatter.GetPosIn(message), DataParserAndFormatter.GetMouseIn(message));
                 }
             }
         }

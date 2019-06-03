@@ -39,6 +39,14 @@ public class PlayerScript : MonoBehaviour
         return keyInput.Contains(val + "");
     }
 
+    public bool IsPressed(string val){
+        return keyInput.Contains(val);
+    }
+
+    public bool IsPressedDown(string val){
+        return IsPressed(val);
+    }
+
     //abilities
     public int[] GetAbilities(){
         return abilities;

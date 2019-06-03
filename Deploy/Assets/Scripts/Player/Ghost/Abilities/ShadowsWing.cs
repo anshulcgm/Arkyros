@@ -39,7 +39,7 @@ public class ShadowsWing : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("e") && cooldown == 0)      //place key, any key can be pressed.
+        if (GetComponent<PlayerScript>().IsPressed("e") && cooldown == 0)      //place key, any key can be pressed.
         {
             cast = false;
             start = DateTime.Now;
@@ -58,7 +58,7 @@ public class ShadowsWing : MonoBehaviour
             cast = true;
             cooldown = maxCooldown;
         }
-        if((DateTime.Now - start).TotalSeconds > 5 /*&& !Input.GetKey("e")*/ && cast && buffActive)
+        if((DateTime.Now - start).TotalSeconds > 5 /*&& !GetComponent<PlayerScript>().IsPressed("e")*/ && cast && buffActive)
         {
             Debug.Log("down");
             //cooldown = (int)(DateTime.Now - start).TotalSeconds * 60;

@@ -14109,37 +14109,37 @@ Only usable on Android, Windows Phone or Windows Tablets.</para>
         <para>Returns an array of strings describing the connected joysticks.</para>
       </summary>
     </member>
-    <member name="M:UnityEngine.Input.GetKey(System.String)">
+    <member name="M:UnityEngine.GetComponent<PlayerScript>().IsPressed(System.String)">
       <summary>
         <para>Returns true while the user holds down the key identified by name. Think auto fire.</para>
       </summary>
       <param name="name"></param>
     </member>
-    <member name="M:UnityEngine.Input.GetKey(UnityEngine.KeyCode)">
+    <member name="M:UnityEngine.GetComponent<PlayerScript>().IsPressed(UnityEngine.KeyCode)">
       <summary>
         <para>Returns true while the user holds down the key identified by the key KeyCode enum parameter.</para>
       </summary>
       <param name="key"></param>
     </member>
-    <member name="M:UnityEngine.Input.GetKeyDown(System.String)">
+    <member name="M:UnityEngine.GetComponent<PlayerScript>().IsPressedDown(System.String)">
       <summary>
         <para>Returns true during the frame the user starts pressing down the key identified by name.</para>
       </summary>
       <param name="name"></param>
     </member>
-    <member name="M:UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode)">
+    <member name="M:UnityEngine.GetComponent<PlayerScript>().IsPressedDown(UnityEngine.KeyCode)">
       <summary>
         <para>Returns true during the frame the user starts pressing down the key identified by the key KeyCode enum parameter.</para>
       </summary>
       <param name="key"></param>
     </member>
-    <member name="M:UnityEngine.Input.GetKeyUp(System.String)">
+    <member name="M:UnityEngine.GetComponent<PlayerScript>().IsPressedUp(System.String)">
       <summary>
         <para>Returns true during the frame the user releases the key identified by name.</para>
       </summary>
       <param name="name"></param>
     </member>
-    <member name="M:UnityEngine.Input.GetKeyUp(UnityEngine.KeyCode)">
+    <member name="M:UnityEngine.GetComponent<PlayerScript>().IsPressedUp(UnityEngine.KeyCode)">
       <summary>
         <para>Returns true during the frame the user releases the key identified by the key KeyCode enum parameter.</para>
       </summary>

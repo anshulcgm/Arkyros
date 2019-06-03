@@ -40,7 +40,7 @@ public class WitchDoctorAnimAndSounds : MonoBehaviour
     void Update()
     {
         //Attack
-        if (Input.GetMouseButton(0) && attackDelay == 0)
+        if (GetComponent<PlayerScript>().M1Down() && attackDelay == 0)
         {
             model.transform.rotation = camera.transform.rotation;
             GameObject clone = Instantiate(fireball, model.transform.position + model.transform.forward * 5 + transform.up * 6, model.transform.rotation);
