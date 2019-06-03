@@ -1535,7 +1535,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2212a4969925709479bcac3ac1d56a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 8927683913148525849}
+  anim: {fileID: 3252196111515945593}
+  hammer: {fileID: 1349755564336488762}
 --- !u!114 &6997039946982392921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1549,7 +1550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  anim: {fileID: 8927683913148525849}
+  anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
   shieldTemp: {fileID: 7383818346270251463, guid: 53db4d4734790e6489064c444bb2a6d0,
     type: 3}
@@ -1566,7 +1567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  anim: {fileID: 8927683913148525849}
+  anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
 --- !u!114 &7979313453317872640
 MonoBehaviour:
@@ -1581,8 +1582,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  Shield: {fileID: 0}
-  anim: {fileID: 8927683913148525849}
+  Shield: {fileID: 1643946491907285633, guid: 02a44a8008dc5f44db67ec5c64793142, type: 3}
+  anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
 --- !u!114 &1844576334460709028
 MonoBehaviour:
@@ -1597,7 +1598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  anim: {fileID: 8927683913148525849}
+  anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
 --- !u!114 &5677541753909824412
 MonoBehaviour:
@@ -1612,7 +1613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  anim: {fileID: 8927683913148525849}
+  anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
 --- !u!114 &5004491684890124214
 MonoBehaviour:
@@ -1627,7 +1628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  anim: {fileID: 8927683913148525849}
+  anim: {fileID: 3252196111515945593}
   numForward: 80
   numUp: 80
   particleLanding: {fileID: 4039727760110134509, guid: b3aa5b74d95e6b5418ea39d92116aaad,
@@ -1646,7 +1647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  anim: {fileID: 8927683913148525849}
+  anim: {fileID: 0}
   model: {fileID: 8927683913148525848}
 --- !u!114 &3690964678292186687
 MonoBehaviour:
@@ -1661,7 +1662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  anim: {fileID: 8927683913148525849}
+  anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
   Banner: {fileID: 431684446, guid: d8b476724eb91394c8825e7df9db22eb, type: 3}
 --- !u!114 &5004491684890124201
@@ -1679,7 +1680,7 @@ MonoBehaviour:
   cooldown: 0
   SkyHammer: {fileID: 6981962925071982693, guid: bb269431ab0e2fe4d97f44ae3d1f05e9,
     type: 3}
-  anim: {fileID: 8927683913148525849}
+  anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
   layerMask:
     serializedVersion: 2
@@ -1697,7 +1698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  anim: {fileID: 8927683913148525849}
+  anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
   particleSmash: {fileID: 4039727760110134509, guid: b3aa5b74d95e6b5418ea39d92116aaad,
     type: 3}
@@ -1717,7 +1718,7 @@ MonoBehaviour:
   radius: 0
   speed: 0
   cooldown: 0
-  anim: {fileID: 8927683913148525849}
+  anim: {fileID: 3252196111515945593}
   model: {fileID: 8927683913148525848}
 --- !u!1 &5194022097309799633
 GameObject:
@@ -2707,7 +2708,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8927683913148525851}
   - component: {fileID: 8927683913148525850}
-  - component: {fileID: 8927683913148525849}
+  - component: {fileID: 3252196111515945593}
   m_Layer: 9
   m_Name: playerModel
   m_TagString: Untagged
@@ -2767,11 +2768,12 @@ Animation:
   - {fileID: 7400016, guid: 10a604e6edc631647a9f4fe2346e7179, type: 3}
   - {fileID: 7400004, guid: 7cdaf01252efa594d81f3437c50aa5e9, type: 3}
   - {fileID: 7400012, guid: 7cdaf01252efa594d81f3437c50aa5e9, type: 3}
+  - {fileID: 7400020, guid: a32ef8e0e88286644b4929e7dfa93f85, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &8927683913148525849
+--- !u!114 &3252196111515945593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2780,7 +2782,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8927683913148525848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab46b683a685d3e41a81aa2959c6c78f, type: 3}
+  m_Script: {fileID: 11500000, guid: f0bc1d2649fab9c4d8059880dad5fc60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 8927683913148525850}
@@ -2798,6 +2800,7 @@ MonoBehaviour:
   - Intimidate
   - Charge
   - Surf
+  - Bash
   loopingAnims:
   - Flight
   - RunForward
