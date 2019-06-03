@@ -46,7 +46,7 @@ public class ClientMono : MonoBehaviour {
 
         if (sendDefault && planet.GetComponent<PlanetMono>().created)
         {
-            SendPlayerCreateData("default", new int[] { 0, 0, 0, 0, 0, 0, 0 });
+            SendPlayerCreateData("GhostModel", new int[] { 0, 0, 0, 0, 0, 0, 0 });
             sendDefault = false;
         }
         if (hasBeenCreated){			
